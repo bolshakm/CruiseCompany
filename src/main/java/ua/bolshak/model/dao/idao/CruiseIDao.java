@@ -18,7 +18,7 @@ public interface CruiseIDao {
 
     Cruise findByTicket(Ticket ticket);
 
-    Cruise fintById(int id);
+    Cruise findById(int id);
 
     void add(Cruise cruise);
 
