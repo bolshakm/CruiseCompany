@@ -21,4 +21,7 @@ public interface ColumnName {
     String PORT_NAME = "port_name";
     String PORT_CITY = "port_city";
     String PORT_COUNTRY = "port_country";
+
+    String ID_ROLE = "id_role";
+    String ROLE_NAME = "role_name";
 }

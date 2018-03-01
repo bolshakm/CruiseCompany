@@ -42,4 +42,11 @@ public interface SqlQuery {
     String ADD_PORT = "INSERT INTO ports (port_name, port_city, port_country) VALUES (?, ?, ?)";
     String UPDATE_PORT = "UPDATE ports SET port_name= ?, port_city = ?, port_country = ? WHERE id_port = ?";
     String DELETE_PORT = "DELETE FROM ports WHERE id_port = ?";
+
+    String FIND_ALL_ROLES = "SELECT * FROM roles";
+    String FIND_ROLE_BY_ID = "SELECT * FROM roles WHERE id_role = ?";
+    String FIND_ROLE_BY_USER = "SELECT roles.* FROM roles JOIN users u ON roles.id_role = u.roles_id_role WHERE u.id_user = ?";
+    String ADD_ROLE = "INSERT INTO roles (role_name) VALUES (?)";
+    String UPDATE_ROLE = "UPDATE roles SET role_name = ? WHERE id_role = ?";
+    String DELETE_ROLE = "DELETE FROM roles WHERE id_role = ?";
 }
