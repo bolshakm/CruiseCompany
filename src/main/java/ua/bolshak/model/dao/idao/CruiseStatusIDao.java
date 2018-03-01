@@ -11,7 +11,7 @@ public interface CruiseStatusIDao {
 
     CruiseStatus findById(int id);
 
-    CruiseStatus fintByCruise(Cruise cruise);
+    CruiseStatus findByCruise(Cruise cruise);
 
     void add(CruiseStatus cruiseStatus);
 

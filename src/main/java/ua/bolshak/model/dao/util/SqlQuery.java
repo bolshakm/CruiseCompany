@@ -17,7 +17,13 @@ public interface SqlQuery {
     String FIND_CRUISE_BY_TICKET = "SELECT cruises.* FROM cruises JOIN tickets t ON cruises.id_cruise = t.cruises_id_cruise WHERE t.id_ticket = ?";
     String FIND_CRUISE_BY_ID = "SELECT cruises.* FROM cruises WHERE id_cruise = ?";
     String ADD_CRUISE = "INSERT INTO cruises (cruise_name, cruise_from, cruise_to, income_of_money, ships_id_ship, cruise_statuses_id_cruise_status) VALUES (?, ?, ?, ?, ?, ?";
-    String UPDATE_CRUISE = "UPDATE cruises SET cruise_name = ?, cruise_from = ?, cruise_to = ?, income_of_money = ?, ships_id_ship = ?, cruise_statuses_id_cruise_statuse = ? WHERE id_cruise = ?";
+    String UPDATE_CRUISE = "UPDATE cruises SET cruise_name = ?, cruise_from = ?, cruise_to = ?, income_of_money = ?, ships_id_ship = ?, cruise_statuses_id_cruise_status = ? WHERE id_cruise = ?";
     String DELETE_CRUISE = "DELETE FROM cruises WHERE id_cruise = ?";
 
+    String FIND_ALL_CRUISE_STATUS = "SELECT * FROM cruise_statuses";
+    String FIND_CRUISE_STATUS_BY_ID = "SELECT * FROM cruise_statuses WHERE id_cruise_status = ?";
+    String FIND_CRUISE_STATUS_BY_CRUISE = "SELECT cruise_statuses.* FROM cruise_statuses JOIN cruises c2 ON cruise_statuses.id_cruise_status = c2.cruise_statuses_id_cruise_status WHERE c2.id_cruise = ?";
+    String ADD_CRUISE_STATUS = "INSERT INTO cruise_statuses (cruise_status_name) VALUES (?)";
+    String UPDATE_CRUISE_STATUS = "UPDATE cruise_statuses SET cruise_status_name = ? WHERE id_cruise_status = ?";
+    String DELETE_CRUISE_STATUS = "DELETE FROM cruise_statuses WHERE id_cruise_status = ?";
 }

@@ -1,4 +1,4 @@
-package ua.bolshak.model.dao;
+package ua.bolshak.model.dao.daoImpl;
 
 import org.apache.log4j.Logger;
 import ua.bolshak.model.MysqlConnectionPool;
