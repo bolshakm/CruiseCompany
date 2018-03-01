@@ -16,4 +16,9 @@ public interface ColumnName {
     String ID_EXCURSION = "id_excursion";
     String EXCURSION_NAME = "excursion_name";
     String EXCURSION_PRICE = "excursion_price";
+
+    String ID_PORT = "id_port";
+    String PORT_NAME = "port_name";
+    String PORT_CITY = "port_city";
+    String PORT_COUNTRY = "port_country";
 }

@@ -34,4 +34,12 @@ public interface SqlQuery {
     String ADD_EXCURSION = "INSERT INTO excursions (excursion_name, excursion_price, ports_id_port) VALUES (?, ?, ?)";
     String UPDATE_EXCURSION = "UPDATE excursions SET excursion_name= ?, excursion_price = ?, ports_id_port = ? WHERE id_excursion = ? ";
     String DELETE_EXCURSION = "DELETE FROM excursions WHERE id_excursion = ?";
+
+    String FIND_ALL_PORTS = "SELECT * FROM ports";
+    String FIND_ALL_PORTS_BY_CRUISE = "SELECT ports.* FROM ports JOIN cruises_has_ports chp ON ports.id_port = chp.ports_id_port WHERE chp.cruises_id_cruise  = ?";
+    String FIND_PORT_BY_ID = "SELECT * FROM ports WHERE id_port = ?";
+    String FIND_PORT_BY_EXCURSION = "SELECT ports.* FROM ports JOIN excursions e ON ports.id_port = e.ports_id_port WHERE id_excursion = ?";
+    String ADD_PORT = "INSERT INTO ports (port_name, port_city, port_country) VALUES (?, ?, ?)";
+    String UPDATE_PORT = "UPDATE ports SET port_name= ?, port_city = ?, port_country = ? WHERE id_port = ?";
+    String DELETE_PORT = "DELETE FROM ports WHERE id_port = ?";
 }

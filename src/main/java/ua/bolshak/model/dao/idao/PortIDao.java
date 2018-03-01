@@ -6,7 +6,7 @@ import ua.bolshak.model.entity.Port;
 
 import java.util.List;
 
-public interface PordIDao {
+public interface PortIDao {
 
     List<Port> findAll();
 
