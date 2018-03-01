@@ -30,7 +30,7 @@ public class CruiseDao implements CruiseIDao{
         return cruise;
     }
 
-    public static CruiseDao getInstance() {
+    public synchronized static CruiseDao getInstance() {
         if (instance == null){
             instance = new CruiseDao();
         }

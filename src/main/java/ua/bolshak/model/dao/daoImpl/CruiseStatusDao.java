@@ -18,7 +18,7 @@ public class CruiseStatusDao implements CruiseStatusIDao{
 
     private CruiseStatusDao(){}
 
-    public static CruiseStatusDao getInstance() {
+    public synchronized static CruiseStatusDao getInstance() {
         if (instance == null){
             instance = new CruiseStatusDao();
         }
@@ -108,7 +108,7 @@ public class CruiseStatusDao implements CruiseStatusIDao{
     public void delete(CruiseStatus cruiseStatus) {
         try(Connection connection = MysqlConnectionPool.getConnection();
             PreparedStatement preparedStatement = connection.prepareStatement(SqlQuery.DELETE_CRUISE_STATUS)){
-            preparedStatement.setString(1, cruiseStatus.getName());
+            preparedStatement.setInt(1, cruiseStatus.getId());
             preparedStatement.executeUpdate();
         } catch (SQLException e) {
             LOGGER.error(e.getMessage());

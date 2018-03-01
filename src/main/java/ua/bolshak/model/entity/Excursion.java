@@ -7,7 +7,7 @@ public class Excursion {
     private int id;
     private String name;
     private double price;
-    private List<Port> ports;
+    private Port ports;
 
     public int getId() {
         return id;
@@ -33,11 +33,11 @@ public class Excursion {
         this.price = price;
     }
 
-    public List<Port> getPorts() {
+    public Port getPorts() {
         return ports;
     }
 
-    public void setPorts(List<Port> ports) {
+    public void setPorts(Port ports) {
         this.ports = ports;
     }
 

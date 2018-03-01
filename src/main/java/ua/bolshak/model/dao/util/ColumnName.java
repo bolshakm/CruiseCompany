@@ -12,4 +12,8 @@ public interface ColumnName {
 
     String ID_CRUISE_STATUS = "id_cruise_status";
     String CRUISE_STATUS_NAME = "cruise_status_name";
+
+    String ID_EXCURSION = "id_excursion";
+    String EXCURSION_NAME = "excursion_name";
+    String EXCURSION_PRICE = "excursion_price";
 }

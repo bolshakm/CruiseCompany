@@ -8,11 +8,11 @@ import java.util.List;
 
 public interface ExcursionIDao {
 
-    List<Exception> findAll();
+    List<Excursion> findAll();
 
-    List<Exception> findAllByPort(Port port);
+    List<Excursion> findAllByPort(Port port);
 
-    List<Exception> findAllByTicket(Ticket ticket);
+    List<Excursion> findAllByTicket(Ticket ticket);
 
     Excursion findById(int id);
 

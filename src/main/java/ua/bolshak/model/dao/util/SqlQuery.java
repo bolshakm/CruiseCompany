@@ -26,4 +26,12 @@ public interface SqlQuery {
     String ADD_CRUISE_STATUS = "INSERT INTO cruise_statuses (cruise_status_name) VALUES (?)";
     String UPDATE_CRUISE_STATUS = "UPDATE cruise_statuses SET cruise_status_name = ? WHERE id_cruise_status = ?";
     String DELETE_CRUISE_STATUS = "DELETE FROM cruise_statuses WHERE id_cruise_status = ?";
+
+    String FIND_ALL_EXCURSION = "SELECT * FROM excursions";
+    String FIND_ALL_EXCURSION_BY_PORT = "SELECT * FROM excursions WHERE ports_id_port = ?";
+    String FIND_ALL_EXCURSION_BY_TICKET = "SELECT excursions.* FROM excursions JOIN tickets_has_excursions t ON excursions.id_excursion = t.excursions_id_excursion WHERE tickets_id_ticket = ?";
+    String FIND_EXCURSION_BY_ID = "SELECT * FROM excursions WHERE  id_excursion = ?";
+    String ADD_EXCURSION = "INSERT INTO excursions (excursion_name, excursion_price, ports_id_port) VALUES (?, ?, ?)";
+    String UPDATE_EXCURSION = "UPDATE excursions SET excursion_name= ?, excursion_price = ?, ports_id_port = ? WHERE id_excursion = ? ";
+    String DELETE_EXCURSION = "DELETE FROM excursions WHERE id_excursion = ?";
 }
