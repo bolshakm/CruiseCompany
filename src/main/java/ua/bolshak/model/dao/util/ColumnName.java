@@ -34,9 +34,16 @@ public interface ColumnName {
     String ID_SHIP_TYPE = "id_ship_type";
     String SHIP_TYPE_NAME = "ship_type_name";
 
-    String ID_TICKET_TYPE = "";
-    String TICKET_TYPE_NAME = "";
-    String TICKET_TYPE_PRICE = "";
+    String ID_TICKET_TYPE = "id_ticket_type";
+    String TICKET_TYPE_NAME = "ticket_type_name";
+    String TICKET_TYPE_PRICE = "ticket_type_price";
 
+    String ID_USER = "id_user";
+    String LOGIN = "login";
+    String PASSWORD = "password";
+    String USER_NAME = "user_name";
+    String USER_LAST_NAME = "user_last_name";
+    String EMAIL = "email";
+    String MONAY = "money";
 
 }

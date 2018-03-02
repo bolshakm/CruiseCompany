@@ -12,11 +12,11 @@ public interface UserIDao {
 
     List<User> findAllByCruise(Cruise cruise);
 
-    List<User> findAllCruiseAndRole(Cruise cruise, Role role);
+    List<User> findAllByCruiseAndRole(Cruise cruise, Role role);
 
     List<User> findAllByTicketType(TicketType ticketType);
 
-    List<User> findAllCruiseAndTicketType(TicketType ticketType);
+    List<User> findAllByCruiseAndTicketType(Cruise cruise,TicketType ticketType);
 
     User findById(int id);
 

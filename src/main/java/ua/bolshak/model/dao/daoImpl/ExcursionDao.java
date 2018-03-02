@@ -39,7 +39,7 @@ public class ExcursionDao implements ExcursionIDao{
         List<Excursion> excursions = new ArrayList<>();
         try (Connection connection = MysqlConnectionPool.getConnection();
              Statement statement = connection.createStatement();
-             ResultSet resultSet = statement.executeQuery(SqlQuery.FIND_ALL_EXCURSION)){
+             ResultSet resultSet = statement.executeQuery(SqlQuery.FIND_ALL_EXCURSIONS)){
             while (resultSet.next()){
                 excursions.add(initialization(resultSet));
             }
@@ -53,7 +53,7 @@ public class ExcursionDao implements ExcursionIDao{
     public List<Excursion> findAllByPort(Port port) {
         List<Excursion> excursions = new ArrayList<>();
         try(Connection connection = MysqlConnectionPool.getConnection();
-            PreparedStatement preparedStatement = connection.prepareStatement(SqlQuery.FIND_ALL_EXCURSION_BY_PORT)){
+            PreparedStatement preparedStatement = connection.prepareStatement(SqlQuery.FIND_ALL_EXCURSIONS_BY_PORT)){
             preparedStatement.setInt(1, port.getId());
             try(ResultSet resultSet = preparedStatement.executeQuery()){
                 while (resultSet.next()) {
@@ -70,7 +70,7 @@ public class ExcursionDao implements ExcursionIDao{
     public List<Excursion> findAllByTicket(Ticket ticket) {
         List<Excursion> excursions = new ArrayList<>();
         try(Connection connection = MysqlConnectionPool.getConnection();
-            PreparedStatement preparedStatement = connection.prepareStatement(SqlQuery.FIND_ALL_EXCURSION_BY_TICKET)){
+            PreparedStatement preparedStatement = connection.prepareStatement(SqlQuery.FIND_ALL_EXCURSIONS_BY_TICKET)){
             preparedStatement.setInt(1, ticket.getId());
             try(ResultSet resultSet = preparedStatement.executeQuery()){
                 while (resultSet.next()) {

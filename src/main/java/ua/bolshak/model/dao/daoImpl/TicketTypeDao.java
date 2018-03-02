@@ -39,7 +39,7 @@ public class TicketTypeDao implements TicketTypeIDao{
         List<TicketType> ticketTypes = new ArrayList<>();
         try (Connection connection = MysqlConnectionPool.getConnection();
              Statement statement = connection.createStatement();
-             ResultSet resultSet = statement.executeQuery(SqlQuery.FIND_ALL_TICKET_TYPE)){
+             ResultSet resultSet = statement.executeQuery(SqlQuery.FIND_ALL_TICKET_TYPES)){
             while (resultSet.next()){
                 ticketTypes.add(initialization(resultSet));
             }

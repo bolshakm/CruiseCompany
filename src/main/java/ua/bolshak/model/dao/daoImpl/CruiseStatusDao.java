@@ -37,7 +37,7 @@ public class CruiseStatusDao implements CruiseStatusIDao{
         List<CruiseStatus> cruiseStatuses = new ArrayList<>();
         try (Connection connection = MysqlConnectionPool.getConnection();
              Statement statement = connection.createStatement();
-             ResultSet resultSet = statement.executeQuery(SqlQuery.FIND_ALL_CRUISE_STATUS)){
+             ResultSet resultSet = statement.executeQuery(SqlQuery.FIND_ALL_CRUISE_STATUSES)){
             while (resultSet.next()){
                 cruiseStatuses.add(initialization(resultSet));
             }

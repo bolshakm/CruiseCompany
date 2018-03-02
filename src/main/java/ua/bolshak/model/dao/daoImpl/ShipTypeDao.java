@@ -37,7 +37,7 @@ public class ShipTypeDao implements ShipTypeIDao{
         List<ShipType> shipTypes = new ArrayList<>();
         try (Connection connection = MysqlConnectionPool.getConnection();
              Statement statement = connection.createStatement();
-             ResultSet resultSet = statement.executeQuery(SqlQuery.FIND_ALL_SHIP_TYPE)){
+             ResultSet resultSet = statement.executeQuery(SqlQuery.FIND_ALL_SHIP_TYPES)){
             while (resultSet.next()){
                 shipTypes.add(initialization(resultSet));
             }
