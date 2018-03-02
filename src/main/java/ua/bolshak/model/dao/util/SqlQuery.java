@@ -49,4 +49,15 @@ public interface SqlQuery {
     String ADD_ROLE = "INSERT INTO roles (role_name) VALUES (?)";
     String UPDATE_ROLE = "UPDATE roles SET role_name = ? WHERE id_role = ?";
     String DELETE_ROLE = "DELETE FROM roles WHERE id_role = ?";
+
+    String FIND_ALL_SHIPS = "SELECT * FROM ships";
+    String FIND_ALL_SHIPS_BY_TYPE = "SELECT * FROM ships WHERE ship_types_id_ship_type = ?";
+    String FIND_ALL_SHIPS_BY_BONUS = "SELECT ships.* FROM ships JOIN bonuses_has_ships bhs ON ships.id_ship = bhs.ships_id_ship WHERE bonuses_id_bonus = ?";
+    String FIND_SHIP_BY_ID = "SELECT * from ships WHERE id_ship = ?";
+    String FIND_SHIP_BY_CRUISE = "SELECT ships.* from ships JOIN cruises c2 ON ships.id_ship = c2.ships_id_ship WHERE c2.id_cruise = ?";
+    String ADD_SHIP = "INSERT INTO ships (ship_name, ship_number, number_of_seats, price_per_seat, ship_types_id_ship_type) VALUES (?, ?, ?, ?, ?)";
+    String UPDATE_SHIP = "UPDATE ships SET ship_name = ?, ship_number = ?, number_of_seats = ?, price_per_seat = ?, ship_types_id_ship_type = ? WHERE id_ship = ?";
+    String DELETE_SHIP = "DELETE FROM ships WHERE id_ship = ?";
+
+
 }

@@ -24,4 +24,10 @@ public interface ColumnName {
 
     String ID_ROLE = "id_role";
     String ROLE_NAME = "role_name";
+
+    String ID_SHIP = "id_ship";
+    String SHIP_NAME = "ship_name";
+    String SHIP_NUMBER = "ship_number";
+    String NUMBER_OF_SEATS = "number_of_seats";
+    String PRICE_PER_SEAT = "price_per_seat";
 }
