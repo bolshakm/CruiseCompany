@@ -59,5 +59,10 @@ public interface SqlQuery {
     String UPDATE_SHIP = "UPDATE ships SET ship_name = ?, ship_number = ?, number_of_seats = ?, price_per_seat = ?, ship_types_id_ship_type = ? WHERE id_ship = ?";
     String DELETE_SHIP = "DELETE FROM ships WHERE id_ship = ?";
 
-
+    String FIND_ALL_SHIP_TYPE = "SELECT * FROM ship_types";
+    String FIND_SHIP_TYPE_BY_ID = "SELECT * FROM ship_types WHERE id_ship_type = ?";
+    String FIND_SHIP_TYPE_BY_SHIP = "SELECT ship_types.* FROM ship_types JOIN ships s ON ship_types.id_ship_type = s.ship_types_id_ship_type WHERE s.id_ship = ?";
+    String ADD_SHIP_TYPE = "INSERT INTO ship_types (ship_type_name) VALUES (?)";
+    String UPDATE_SHIP_TYPE = "UPDATE ship_types SET ship_type_name = ? WHERE id_ship_type = ?";
+    String DELETE_SHIP_TYPE = "DELETE FROM ship_types WHERE id_ship_type = ?";
 }

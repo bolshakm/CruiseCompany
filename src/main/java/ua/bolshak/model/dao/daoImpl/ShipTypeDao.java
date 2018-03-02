@@ -37,7 +37,7 @@ public class ShipTypeDao implements ShipTypeIDao{
         List<ShipType> shipTypes = new ArrayList<>();
         try (Connection connection = MysqlConnectionPool.getConnection();
              Statement statement = connection.createStatement();
-             ResultSet resultSet = statement.executeQuery("SELECT * FROM ship_types")){
+             ResultSet resultSet = statement.executeQuery(SqlQuery.FIND_ALL_SHIP_TYPE)){
             while (resultSet.next()){
                 shipTypes.add(initialization(resultSet));
             }
@@ -51,7 +51,7 @@ public class ShipTypeDao implements ShipTypeIDao{
     public ShipType findById(int id) {
         ShipType shipType = null;
         try(Connection connection = MysqlConnectionPool.getConnection();
-            PreparedStatement preparedStatement = connection.prepareStatement("SELECT * FROM ship_types WHERE id_ship_type = ?")){
+            PreparedStatement preparedStatement = connection.prepareStatement(SqlQuery.FIND_SHIP_TYPE_BY_ID)){
             preparedStatement.setInt(1, id);
             try(ResultSet resultSet = preparedStatement.executeQuery()){
                 while (resultSet.next()) {
@@ -68,7 +68,7 @@ public class ShipTypeDao implements ShipTypeIDao{
     public ShipType findByShip(Ship ship) {
         ShipType shipType = null;
         try(Connection connection = MysqlConnectionPool.getConnection();
-            PreparedStatement preparedStatement = connection.prepareStatement("SELECT ship_types.* FROM ship_types JOIN ships s ON ship_types.id_ship_type = s.ship_types_id_ship_type WHERE s.id_ship = ?")){
+            PreparedStatement preparedStatement = connection.prepareStatement(SqlQuery.FIND_SHIP_TYPE_BY_SHIP)){
             preparedStatement.setInt(1, ship.getId());
             try(ResultSet resultSet = preparedStatement.executeQuery()){
                 while (resultSet.next()) {
@@ -84,7 +84,7 @@ public class ShipTypeDao implements ShipTypeIDao{
     @Override
     public void add(ShipType shipType) {
         try(Connection connection = MysqlConnectionPool.getConnection();
-            PreparedStatement preparedStatement = connection.prepareStatement("INSERT INTO ship_types (ship_type_name) VALUES (?)")){
+            PreparedStatement preparedStatement = connection.prepareStatement(SqlQuery.ADD_SHIP_TYPE)){
             preparedStatement.setString(1, shipType.getName());
             preparedStatement.executeUpdate();
         } catch (SQLException e) {
@@ -95,7 +95,7 @@ public class ShipTypeDao implements ShipTypeIDao{
     @Override
     public void update(ShipType shipType) {
         try(Connection connection = MysqlConnectionPool.getConnection();
-            PreparedStatement preparedStatement = connection.prepareStatement("UPDATE ship_types SET ship_type_name = ? WHERE id_ship_type = ?")){
+            PreparedStatement preparedStatement = connection.prepareStatement(SqlQuery.UPDATE_SHIP_TYPE)){
             preparedStatement.setString(1, shipType.getName());
             preparedStatement.setInt(2, shipType.getId());
             preparedStatement.executeUpdate();
@@ -107,7 +107,7 @@ public class ShipTypeDao implements ShipTypeIDao{
     @Override
     public void delete(ShipType shipType) {
         try(Connection connection = MysqlConnectionPool.getConnection();
-            PreparedStatement preparedStatement = connection.prepareStatement("DELETE FROM ship_types WHERE id_ship_type = ?")){
+            PreparedStatement preparedStatement = connection.prepareStatement(SqlQuery.DELETE_SHIP_TYPE)){
             preparedStatement.setInt(1, shipType.getId());
             preparedStatement.executeUpdate();
         } catch (SQLException e) {
