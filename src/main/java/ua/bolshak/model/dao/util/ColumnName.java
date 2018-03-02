@@ -30,4 +30,7 @@ public interface ColumnName {
     String SHIP_NUMBER = "ship_number";
     String NUMBER_OF_SEATS = "number_of_seats";
     String PRICE_PER_SEAT = "price_per_seat";
+
+    String ID_SHIP_TYPE = "id_ship_type";
+    String SHIP_TYPE_NAME = "ship_type_name";
 }
