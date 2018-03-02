@@ -33,4 +33,10 @@ public interface ColumnName {
 
     String ID_SHIP_TYPE = "id_ship_type";
     String SHIP_TYPE_NAME = "ship_type_name";
+
+    String ID_TICKET_TYPE = "";
+    String TICKET_TYPE_NAME = "";
+    String TICKET_TYPE_PRICE = "";
+
+
 }

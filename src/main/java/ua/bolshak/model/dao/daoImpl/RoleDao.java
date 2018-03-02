@@ -18,7 +18,7 @@ public class RoleDao implements RoleIDao{
 
     private RoleDao(){}
 
-    public static RoleDao getInstance() {
+    public synchronized static RoleDao getInstance() {
         if (instance == null){
             instance = new RoleDao();
         }

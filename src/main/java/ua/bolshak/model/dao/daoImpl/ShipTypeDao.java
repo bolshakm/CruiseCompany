@@ -18,7 +18,7 @@ public class ShipTypeDao implements ShipTypeIDao{
 
     private ShipTypeDao(){}
 
-    public static ShipTypeDao getInstance() {
+    public synchronized static ShipTypeDao getInstance() {
         if (instance == null){
             instance = new ShipTypeDao();
         }
@@ -28,7 +28,7 @@ public class ShipTypeDao implements ShipTypeIDao{
     private ShipType initialization(ResultSet resultSet) throws SQLException {
         ShipType shipType = new ShipType();
         shipType.setId(resultSet.getInt(ColumnName.ID_SHIP_TYPE));
-        shipType.setName(resultSet.getString(ColumnName.SHIP_NAME));
+        shipType.setName(resultSet.getString(ColumnName.SHIP_TYPE_NAME));
         return shipType;
     }
 

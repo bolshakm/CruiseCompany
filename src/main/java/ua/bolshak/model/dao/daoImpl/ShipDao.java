@@ -22,7 +22,7 @@ public class ShipDao implements ShipIDao{
     private ShipDao(){
     }
 
-    public static ShipDao getInstance() {
+    public synchronized static ShipDao getInstance() {
         if (instance == null){
             instance = new ShipDao();
         }
