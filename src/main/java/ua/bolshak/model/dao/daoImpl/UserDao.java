@@ -33,7 +33,7 @@ public class UserDao implements UserIDao{
         user.setName(resultSet.getString(ColumnName.USER_NAME));
         user.setLastName(resultSet.getString(ColumnName.USER_LAST_NAME));
         user.setEmail(resultSet.getString(ColumnName.EMAIL));
-        user.setMoney(resultSet.getDouble(ColumnName.MONAY));
+        user.setMoney(resultSet.getDouble(ColumnName.MONEY));
         return user;
     }
 

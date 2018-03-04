@@ -44,6 +44,8 @@ public interface ColumnName {
     String USER_NAME = "user_name";
     String USER_LAST_NAME = "user_last_name";
     String EMAIL = "email";
-    String MONAY = "money";
+    String MONEY = "money";
+
+    String ID_TICKET = "id_ticket";
 
 }

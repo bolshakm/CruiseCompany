@@ -85,4 +85,16 @@ public interface SqlQuery {
     String ADD_USER = "INSERT INTO users (login, password, user_name, user_last_name, email, money, roles_id_role) VALUES (?, ?, ?, ?, ?, ?, ?)";
     String UPDATE_USER = "UPDATE users SET login = ?, password = ?, user_name = ?, user_last_name = ?, email = ?, money = ?, roles_id_role = ? WHERE id_user = ?";
     String DELETE_USER = "DELETE FROM users WHERE id_user = ?";
+
+    String FIND_ALL_TICKETS = "SELECT * FROM tickets";
+    String FIND_ALL_TICKETS_BY_USER = "SELECT * FROM tickets WHERE users_id_user = ?";
+    String FIND_ALL_TICKETS_BY_CRUISE = "SELECT * FROM tickets WHERE cruises_id_cruise = ?";
+    String FIND_ALL_TICKETS_BY_TICKET_TYPES = "SELECT tickets.* FROM tickets JOIN ticket_types t2 ON tickets.ticket_types_id_ticket_type = t2.id_ticket_type WHERE t2.id_ticket_type = ?";
+    String FIND_ALL_TICKETS_BY_BONUS = "SELECT tickets.* FROM tickets JOIN tickets_has_bonuses thb ON tickets.id_ticket = thb.tickets_id_ticket WHERE thb.bonuses_id_bonus = ?";
+    String FIND_ALL_TICKETS_BY_EXCURSION = "SELECT tickets.* FROM tickets JOIN tickets_has_excursions t ON tickets.id_ticket = t.tickets_id_ticket WHERE t.excursions_id_excursion = ?";
+    String FIND_TICKET_BY_ID = "SELECT * FROM tickets WHERE id_ticket = ?";
+    String ADD_TICKET = "INSERT INTO tickets (users_id_user, ticket_types_id_ticket_type, cruises_id_cruise) VALUES (?, ?, ?)";
+    String UPDATE_TICKET = "UPDATE tickets SET users_id_user = ?, ticket_types_id_ticket_type = ?, cruises_id_cruise = ? WHERE id_ticket = ?";
+    String DELETE_TICKET = "DELETE FROM tickets WHERE id_ticket = ?";
+
 }
