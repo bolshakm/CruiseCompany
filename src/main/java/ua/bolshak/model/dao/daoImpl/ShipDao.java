@@ -72,7 +72,7 @@ public class ShipDao implements ShipIDao{
     }
 
     @Override
-    public List<Ship> findAllBonus(Bonus bonus) {
+    public List<Ship> findAllByBonus(Bonus bonus) {
         List<Ship> ships = new ArrayList<>();
         try(Connection connection = MysqlConnectionPool.getConnection();
             PreparedStatement preparedStatement = connection.prepareStatement(SqlQuery.FIND_ALL_SHIPS_BY_BONUS)){

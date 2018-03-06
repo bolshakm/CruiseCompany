@@ -13,7 +13,7 @@ public interface ShipIDao {
 
     List<Ship> findAllByShipType(ShipType shipType);
 
-    List<Ship> findAllBonus(Bonus bonus);
+    List<Ship> findAllByBonus(Bonus bonus);
 
     Ship findById(int id);
 
