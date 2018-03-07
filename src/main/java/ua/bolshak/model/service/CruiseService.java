@@ -35,7 +35,7 @@ public class CruiseService {
         return DaoFactory.getCruiseDao().findById(id);
     }
 
-    public static void add (Cruise cruise){
+        public static void add (Cruise cruise){
         DaoFactory.getCruiseDao().add(cruise);
     }
 
@@ -45,5 +45,24 @@ public class CruiseService {
 
     public static void delete(Cruise cruise){
         DaoFactory.getCruiseDao().delete(cruise);
+    }
+
+    public static List<Cruise> getFullCruises(List<Cruise> cruises){
+        for (Cruise cruise :
+                cruises) {
+            cruise.setPorts(PortService.findAllLazyByCruise(cruise));
+            cruise.setShip(ShipService.findLazyByCruise(cruise));
+            cruise.setStatus(CruiseStatusService.findLazyByCruise(cruise));
+            cruise.setTickets(TicketService.findAllLazyByCruise(cruise));
+        }
+        return cruises;
+    }
+
+    public static Cruise getFullCruise(Cruise cruise){
+        cruise.setPorts(PortService.findAllLazyByCruise(cruise));
+        cruise.setShip(ShipService.findLazyByCruise(cruise));
+        cruise.setStatus(CruiseStatusService.findLazyByCruise(cruise));
+        cruise.setTickets(TicketService.findAllLazyByCruise(cruise));
+        return cruise;
     }
 }

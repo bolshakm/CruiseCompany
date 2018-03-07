@@ -74,4 +74,16 @@ public class Port {
 
         return Objects.hash(name, city, country);
     }
+
+    @Override
+    public String toString() {
+        return "Port{" +
+                "id=" + id +
+                ", name='" + name + '\'' +
+                ", city='" + city + '\'' +
+                ", country='" + country + '\'' +
+                ", cruises=" + cruises +
+                ", excursions=" + excursions +
+                '}';
+    }
 }

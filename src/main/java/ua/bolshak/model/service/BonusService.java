@@ -37,4 +37,19 @@ public class BonusService {
     public static void delete(Bonus bonus){
         DaoFactory.getBonusDao().delete(bonus);
     }
+
+    public static List<Bonus> getFullBonuses(List<Bonus> bonuses){
+        for (Bonus bonus :
+                bonuses) {
+            bonus.setTickets(TicketService.findAllLazyByBonus(bonus));
+            bonus.setShips(ShipService.findAllLazyByBonus(bonus));
+        }
+        return bonuses;
+    }
+
+    public static Bonus getFullBonus(Bonus bonus){
+        bonus.setTickets(TicketService.findAllLazyByBonus(bonus));
+        bonus.setShips(ShipService.findAllLazyByBonus(bonus));
+        return bonus;
+    }
 }

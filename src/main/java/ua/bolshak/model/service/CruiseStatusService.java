@@ -31,4 +31,17 @@ public class CruiseStatusService {
     public static void delete(CruiseStatus cruiseStatus){
         DaoFactory.getCruiseStatusDao().delete(cruiseStatus);
     }
+
+    public static List<CruiseStatus> getFullCruiseStatuses(List<CruiseStatus> cruiseStatuses){
+        for (CruiseStatus cruseStatus :
+                cruiseStatuses) {
+            cruseStatus.setCruises(CruiseService.findAllLazyByStatus(cruseStatus));
+        }
+        return cruiseStatuses;
+    }
+
+    public static CruiseStatus getFullCruiseStatus(CruiseStatus cruiseStatus){
+        cruiseStatus.setCruises(CruiseService.findAllLazyByStatus(cruiseStatus));
+        return cruiseStatus;
+    }
 }

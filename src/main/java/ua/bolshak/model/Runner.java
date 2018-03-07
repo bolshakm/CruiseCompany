@@ -2,7 +2,9 @@ package ua.bolshak.model;
 
 import ua.bolshak.model.dao.daoImpl.CruiseDao;
 import ua.bolshak.model.entity.Cruise;
+import ua.bolshak.model.entity.CruiseStatus;
 import ua.bolshak.model.entity.User;
+import ua.bolshak.model.service.CruiseService;
 
 import java.util.List;
 
@@ -11,7 +13,7 @@ public class Runner {
 
         User user = new User();
         user.setId(1);
-        List<Cruise> cruises = CruiseDao.getInstance().findAllByUser(user);
+        List<Cruise> cruises = CruiseService.findAll();
         for (Cruise c :
                 cruises) {
             System.out.println(c);

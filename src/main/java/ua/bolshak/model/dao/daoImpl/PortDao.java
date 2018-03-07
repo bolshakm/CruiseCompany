@@ -53,7 +53,7 @@ public class PortDao implements PortIDao {
     @Override
     public List<Port> findAllByCruise(Cruise cruise) {
         List<Port> ports = new ArrayList<>();
-        try(Connection connection = MysqlConnectionPool.getConnection();
+        try(Connection connection = MysqlConnectionPool.getJDBCConnection();
             PreparedStatement preparedStatement = connection.prepareStatement(SqlQuery.FIND_ALL_PORTS_BY_CRUISE)){
             preparedStatement.setInt(1, cruise.getId());
             try(ResultSet resultSet = preparedStatement.executeQuery()){
