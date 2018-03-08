@@ -6,7 +6,7 @@ import ua.bolshak.model.entity.TicketType;
 
 import java.util.List;
 
-public class TicketTypeDao {
+public class TicketTypeService {
 
     public static List<TicketType> findAllLazy(){
         return DaoFactory.getTicketTypeDao().findAll();
@@ -30,5 +30,17 @@ public class TicketTypeDao {
 
     public static void delete(TicketType ticketType){
         DaoFactory.getTicketTypeDao().delete(ticketType);
+    }
+
+    public static List<TicketType> getFullTicketType(List<TicketType> ticketTypes){
+        for (TicketType ticketType : ticketTypes) {
+            ticketType.setTickets(TicketService.findAllLazyByTicketType(ticketType));
+        }
+        return ticketTypes;
+    }
+
+    public static TicketType getFullTicketType(TicketType ticketType){
+        ticketType.setTickets(TicketService.findAllLazyByTicketType(ticketType));
+        return ticketType;
     }
 }

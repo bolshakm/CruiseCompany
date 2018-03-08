@@ -6,7 +6,7 @@ import ua.bolshak.model.entity.ShipType;
 
 import java.util.List;
 
-public class ShipTypeDao {
+public class ShipTypeService {
 
     public static List<ShipType> findAllLazy(){
         return DaoFactory.getShipTypeDao().findAll();
@@ -30,5 +30,17 @@ public class ShipTypeDao {
 
     public static void delete(ShipType shipType){
         DaoFactory.getShipTypeDao().delete(shipType);
+    }
+
+    public static List<ShipType> getFullShipTypes(List<ShipType> shipTypes){
+        for (ShipType shipType : shipTypes) {
+            shipType.setShips(ShipService.findAllLazyByShipType(shipType));
+        }
+        return shipTypes;
+    }
+
+    public static ShipType getFullShipType(ShipType shipType){
+        shipType.setShips(ShipService.findAllLazyByShipType(shipType));
+        return shipType;
     }
 }

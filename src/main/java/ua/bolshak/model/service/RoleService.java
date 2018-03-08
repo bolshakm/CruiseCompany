@@ -31,4 +31,17 @@ public class RoleService {
     public static void delete(Role role){
         DaoFactory.getRoleDao().delete(role);
     }
+
+    public static List<Role> getFullRoles(List<Role> roles){
+        for (Role role : roles) {
+            role.setUsers(UserService.findAllLazyByRole(role));
+        }
+        return roles;
+    }
+
+    public static Role getFullRole(Role role){
+        role.setUsers(UserService.findAllLazyByRole(role));
+        return role;
+    }
+
 }

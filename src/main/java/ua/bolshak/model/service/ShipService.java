@@ -41,4 +41,20 @@ public class ShipService {
     public static void delete(Ship ship){
         DaoFactory.getShipDao().delete(ship);
     }
+
+    public static List<Ship> getFullShips(List<Ship> ships){
+        for (Ship ship : ships) {
+            ship.setType(ShipTypeService.findLazyByShip(ship));
+            ship.setBonuses(BonusService.findAllLazyByShip(ship));
+            ship.setCruises(CruiseService.findAllLazyByShip(ship));
+        }
+        return ships;
+    }
+
+    public static Ship getFullShip(Ship ship){
+        ship.setType(ShipTypeService.findLazyByShip(ship));
+        ship.setBonuses(BonusService.findAllLazyByShip(ship));
+        ship.setCruises(CruiseService.findAllLazyByShip(ship));
+        return ship;
+    }
 }

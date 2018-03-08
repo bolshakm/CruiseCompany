@@ -54,4 +54,18 @@ public class UserService {
     public static void delete(User user){
         DaoFactory.getUserDao().delete(user);
     }
+
+    public static List<User> getFullUsers(List<User> users){
+        for (User user : users) {
+            user.setRole(RoleService.findLazyByUser(user));
+            user.setTickets(TicketService.findAllLazyByUser(user));
+        }
+        return users;
+    }
+
+    public static User getFullUser(User user){
+        user.setRole(RoleService.findLazyByUser(user));
+        user.setTickets(TicketService.findAllLazyByUser(user));
+        return user;
+    }
 }

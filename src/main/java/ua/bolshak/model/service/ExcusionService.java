@@ -1,6 +1,7 @@
 package ua.bolshak.model.service;
 
 import ua.bolshak.model.dao.DaoFactory;
+import ua.bolshak.model.dao.daoImpl.PortDao;
 import ua.bolshak.model.entity.Excursion;
 import ua.bolshak.model.entity.Port;
 import ua.bolshak.model.entity.Ticket;
@@ -35,5 +36,18 @@ public class ExcusionService {
 
     public static void delete(Excursion excursion){
         DaoFactory.getExcursionDao().delete(excursion);
+    }
+
+    public static List<Excursion> getFullExcursions(List<Excursion> excursions){
+        for (Excursion excursion :
+                excursions) {
+            excursion.setPorts(PortService.findLazyByExcursion(excursion));
+        }
+        return excursions;
+    }
+
+    public static Excursion getFullExcursion(Excursion excursion){
+        excursion.setPorts(PortService.findLazyByExcursion(excursion));
+        return excursion;
     }
 }
