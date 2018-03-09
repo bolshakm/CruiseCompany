@@ -11,9 +11,9 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
-@WebServlet("CruiseCompany")
+@WebServlet("/CruiseCompany")
 public class Controller extends HttpServlet{
-        private static Logger LOGGER = Logger.getLogger(Controller.class);
+    private static Logger LOGGER = Logger.getLogger(Controller.class);
     private ControllerHelper controllerHelper = ControllerHelper.getInstance();
 
     public Controller() {
