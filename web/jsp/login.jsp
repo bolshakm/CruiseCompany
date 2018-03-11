@@ -18,25 +18,21 @@
     <title>Login</title>
 </head>
 <body>
-Hello World!
-<%--<form action="CruiseCompany" method="post">--%>
-    <%--<input type="hidden" name="command" value="Login"/>--%>
-    <%--&lt;%&ndash;<fmt:message key="login"/><br/>&ndash;%&gt;--%>
-    <%--Login<br/>--%>
-    <%--<input name="Login" value="${Login}">--%>
-    <%--<br/>--%>
-    <%--&lt;%&ndash;<fmt:message key="password"/><br/>&ndash;%&gt;--%>
-    <%--Password<br/>.--%>
-    <%--<input type="password" name="Password" value="${Password}">--%>
-    <%--<br/>--%>
-    <%--${InfoMassage}--%>
-    <%--<br/>--%>
-    <%--<input type="submit" value="<fmt:message key="log.in"/>">--%>
-
-<%--</form>--%>
-<%--<form action="SelectionCommittee" method="post">--%>
-    <%--<input type="hidden" name="command" value="toRegistration">--%>
-    <%--<input type="submit" name="" value="Registration">--%>
-<%--</form>--%>
+<form action="${pageContext.request.contextPath}/CruiseCompany" method="post">
+    <input type="hidden" name="command" value="login"/>
+    <%--<fmt:message key="login"/><br/>--%>
+    Login<br/>
+    <input name="Login" value="${Login}">
+    <br/>
+    <%--<fmt:message key="password"/><br/>--%>
+    Password<br/>
+    <input type="password" name="Password" value="${Password}">
+    <br/>
+    ${InfoMassage}
+    <br/>
+    <input type="submit" name="login" value="Login"/>
+    <input type="submit" name="registration" value="Registration">
+</form>
+${massage}
 </body>
 </html>
