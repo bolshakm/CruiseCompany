@@ -5,8 +5,8 @@
     <title>Index</title>
 </head>
 <body>
-<%--<c:set var="Login" value="admin" scope="request"/>--%>
-<%--<c:set var="Password" value="1234" scope="request"/>--%>
+<c:set var="Login" value="admin" scope="request"/>
+<c:set var="Password" value="1234" scope="request"/>
 <jsp:forward page="jsp/login.jsp"/>
 </body>
 </html>

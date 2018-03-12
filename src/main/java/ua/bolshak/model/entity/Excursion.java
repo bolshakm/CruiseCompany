@@ -1,5 +1,7 @@
 package ua.bolshak.model.entity;
 
+import ua.bolshak.model.service.PortService;
+
 import java.util.List;
 import java.util.Objects;
 
@@ -34,7 +36,7 @@ public class Excursion {
     }
 
     public Port getPorts() {
-        return ports;
+        return PortService.findByExcursion(this);
     }
 
     public void setPorts(Port ports) {
@@ -62,7 +64,6 @@ public class Excursion {
                 "id=" + id +
                 ", name='" + name + '\'' +
                 ", price=" + price +
-                ", ports=" + ports +
                 '}';
     }
 }

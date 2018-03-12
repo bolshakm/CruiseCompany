@@ -1,5 +1,8 @@
 package ua.bolshak.model.entity;
 
+import ua.bolshak.model.service.RoleService;
+import ua.bolshak.model.service.TicketService;
+
 import java.util.List;
 import java.util.Objects;
 
@@ -71,7 +74,7 @@ public class User {
     }
 
     public Role getRole() {
-        return role;
+        return RoleService.findByUser(this);
     }
 
     public void setRole(Role role) {
@@ -79,7 +82,7 @@ public class User {
     }
 
     public List<Ticket> getTickets() {
-        return tickets;
+        return TicketService.findAllByUser(this);
     }
 
     public void setTickets(List<Ticket> tickets) {
@@ -115,8 +118,6 @@ public class User {
                 ", lastName='" + lastName + '\'' +
                 ", email='" + email + '\'' +
                 ", money=" + money +
-                ", role=" + role +
-                ", tickets=" + tickets +
                 '}';
     }
 }

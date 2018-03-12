@@ -7,39 +7,39 @@ import java.util.List;
 
 public class UserService {
 
-    public static List<User> findAllLazy(){
+    public static List<User> findAll(){
         return DaoFactory.getUserDao().findAll();
     }
 
-    public static List<User> findAllLazyByRole(Role role){
+    public static List<User> findAllByRole(Role role){
         return DaoFactory.getUserDao().findAllByRole(role);
     }
 
-    public static List<User> findAllLazyByCruise(Cruise cruise){
+    public static List<User> findAllByCruise(Cruise cruise){
         return DaoFactory.getUserDao().findAllByCruise(cruise);
     }
 
-    public static List<User> findAllLazyByCruiseAndRole(Cruise cruise, Role role){
+    public static List<User> findAllByCruiseAndRole(Cruise cruise, Role role){
         return DaoFactory.getUserDao().findAllByCruiseAndRole(cruise, role);
     }
 
-    public static List<User> findAllLazyTicketType(TicketType ticketType){
+    public static List<User> findAllTicketType(TicketType ticketType){
         return DaoFactory.getUserDao().findAllByTicketType(ticketType);
     }
 
-    public static List<User> findAllLazyByCruiseAndTicketType(Cruise cruise, TicketType ticketType){
+    public static List<User> findAllByCruiseAndTicketType(Cruise cruise, TicketType ticketType){
         return DaoFactory.getUserDao().findAllByCruiseAndTicketType(cruise, ticketType);
     }
 
-    public static User findLazyById(int id){
+    public static User findById(int id){
         return DaoFactory.getUserDao().findById(id);
     }
 
-    public static User findLazyByTicket(Ticket ticket){
+    public static User findByTicket(Ticket ticket){
         return DaoFactory.getUserDao().findByTicket(ticket);
     }
 
-    public static User findLazyByLogin(String login){
+    public static User findByLogin(String login){
         return DaoFactory.getUserDao().findByLogin(login);
     }
 
@@ -57,15 +57,15 @@ public class UserService {
 
     public static List<User> getFullUsers(List<User> users){
         for (User user : users) {
-            user.setRole(RoleService.findLazyByUser(user));
-            user.setTickets(TicketService.findAllLazyByUser(user));
+            user.setRole(RoleService.findByUser(user));
+            user.setTickets(TicketService.findAllByUser(user));
         }
         return users;
     }
 
     public static User getFullUser(User user){
-        user.setRole(RoleService.findLazyByUser(user));
-        user.setTickets(TicketService.findAllLazyByUser(user));
+        user.setRole(RoleService.findByUser(user));
+        user.setTickets(TicketService.findAllByUser(user));
         return user;
     }
 }

@@ -1,5 +1,7 @@
 package ua.bolshak.model.entity;
 
+import ua.bolshak.model.service.TicketService;
+
 import java.util.List;
 import java.util.Objects;
 
@@ -34,7 +36,7 @@ public class TicketType {
     }
 
     public List<Ticket> getTickets() {
-        return tickets;
+        return TicketService.findAllByTicketType(this);
     }
 
     public void setTickets(List<Ticket> tickets) {
@@ -62,7 +64,6 @@ public class TicketType {
                 "id=" + id +
                 ", name='" + name + '\'' +
                 ", price=" + price +
-                ", tickets=" + tickets +
                 '}';
     }
 }

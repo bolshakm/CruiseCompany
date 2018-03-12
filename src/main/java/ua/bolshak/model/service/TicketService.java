@@ -7,31 +7,31 @@ import java.util.List;
 
 public class TicketService {
 
-    public static List<Ticket> findAllLazy(){
+    public static List<Ticket> findAll(){
         return DaoFactory.getTicketDao().findAll();
     }
 
-    public static List<Ticket> findAllLazyByUser(User user){
+    public static List<Ticket> findAllByUser(User user){
         return DaoFactory.getTicketDao().findAllByUser(user);
     }
 
-    public static List<Ticket> findAllLazyByCruise(Cruise cruise){
+    public static List<Ticket> findAllByCruise(Cruise cruise){
         return DaoFactory.getTicketDao().findAllByCruise(cruise);
     }
 
-    public static List<Ticket> findAllLazyByTicketType(TicketType ticketType){
+    public static List<Ticket> findAllByTicketType(TicketType ticketType){
         return DaoFactory.getTicketDao().findAllByTicketType(ticketType);
     }
 
-    public static List<Ticket> findAllLazyByBonus(Bonus bonus){
+    public static List<Ticket> findAllByBonus(Bonus bonus){
         return DaoFactory.getTicketDao().findAllByBonus(bonus);
     }
 
-    public static List<Ticket> findAllLazyByExcursion(Excursion excursion){
+    public static List<Ticket> findAllByExcursion(Excursion excursion){
         return DaoFactory.getTicketDao().findAllByExcursion(excursion);
     }
 
-    public static Ticket findLazyById(int id){
+    public static Ticket findById(int id){
         return DaoFactory.getTicketDao().findById(id);
     }
 
@@ -49,15 +49,15 @@ public class TicketService {
 
     public static List<Ticket> getFullTickets(List<Ticket> tickets){
         for (Ticket ticket : tickets) {
-            ticket.setTicketType(TicketTypeService.findLazyByTicket(ticket));
-            ticket.setBonuses(BonusService.findAllLazyByTicket(ticket));
+            ticket.setTicketType(TicketTypeService.findByTicket(ticket));
+            ticket.setBonuses(BonusService.findAllByTicket(ticket));
         }
         return tickets;
     }
 
     public static Ticket getFullTicket(Ticket ticket){
-        ticket.setTicketType(TicketTypeService.findLazyByTicket(ticket));
-        ticket.setBonuses(BonusService.findAllLazyByTicket(ticket));
+        ticket.setTicketType(TicketTypeService.findByTicket(ticket));
+        ticket.setBonuses(BonusService.findAllByTicket(ticket));
         return ticket;
     }
 }

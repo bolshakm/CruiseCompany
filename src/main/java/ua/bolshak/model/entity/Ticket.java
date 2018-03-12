@@ -1,5 +1,10 @@
 package ua.bolshak.model.entity;
 
+import ua.bolshak.model.service.BonusService;
+import ua.bolshak.model.service.CruiseService;
+import ua.bolshak.model.service.TicketTypeService;
+import ua.bolshak.model.service.UserService;
+
 import java.util.List;
 import java.util.Objects;
 
@@ -19,7 +24,7 @@ public class Ticket {
     }
 
     public User getUser() {
-        return user;
+        return UserService.findByTicket(this);
     }
 
     public void setUser(User user) {
@@ -27,7 +32,7 @@ public class Ticket {
     }
 
     public Cruise getCruise() {
-        return cruise;
+        return CruiseService.findByTicket(this);
     }
 
     public void setCruise(Cruise cruise) {
@@ -35,7 +40,7 @@ public class Ticket {
     }
 
     public TicketType getTicketType() {
-        return ticketType;
+        return TicketTypeService.findByTicket(this);
     }
 
     public void setTicketType(TicketType ticketType) {
@@ -43,7 +48,7 @@ public class Ticket {
     }
 
     public List<Bonus> getBonuses() {
-        return bonuses;
+        return BonusService.findAllByTicket(this);
     }
 
     public void setBonuses(List<Bonus> bonuses) {
@@ -65,16 +70,5 @@ public class Ticket {
     public int hashCode() {
 
         return Objects.hash(user, cruise, ticketType, bonuses);
-    }
-
-    @Override
-    public String toString() {
-        return "Ticket{" +
-                "id=" + id +
-                ", user=" + user +
-                ", cruise=" + cruise +
-                ", ticketType=" + ticketType +
-                ", bonuses=" + bonuses +
-                '}';
     }
 }

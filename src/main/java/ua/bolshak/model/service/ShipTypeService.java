@@ -8,15 +8,15 @@ import java.util.List;
 
 public class ShipTypeService {
 
-    public static List<ShipType> findAllLazy(){
+    public static List<ShipType> findAll(){
         return DaoFactory.getShipTypeDao().findAll();
     }
 
-    public static ShipType findLazyById(int id){
+    public static ShipType findById(int id){
         return DaoFactory.getShipTypeDao().findById(id);
     }
 
-    public static ShipType findLazyByShip(Ship ship){
+    public static ShipType findByShip(Ship ship){
         return DaoFactory.getShipTypeDao().findByShip(ship);
     }
 
@@ -34,13 +34,13 @@ public class ShipTypeService {
 
     public static List<ShipType> getFullShipTypes(List<ShipType> shipTypes){
         for (ShipType shipType : shipTypes) {
-            shipType.setShips(ShipService.findAllLazyByShipType(shipType));
+            shipType.setShips(ShipService.findAllByShipType(shipType));
         }
         return shipTypes;
     }
 
     public static ShipType getFullShipType(ShipType shipType){
-        shipType.setShips(ShipService.findAllLazyByShipType(shipType));
+        shipType.setShips(ShipService.findAllByShipType(shipType));
         return shipType;
     }
 }

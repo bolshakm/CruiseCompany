@@ -1,5 +1,10 @@
 package ua.bolshak.model.entity;
 
+import ua.bolshak.model.service.CruiseStatusService;
+import ua.bolshak.model.service.PortService;
+import ua.bolshak.model.service.ShipService;
+import ua.bolshak.model.service.TicketService;
+
 import java.sql.Date;
 import java.util.List;
 import java.util.Objects;
@@ -57,7 +62,7 @@ public class Cruise {
     }
 
     public Ship getShip() {
-        return ship;
+        return ShipService.findByCruise(this);
     }
 
     public void setShip(Ship ship) {
@@ -65,7 +70,7 @@ public class Cruise {
     }
 
     public CruiseStatus getStatus() {
-        return status;
+        return CruiseStatusService.findByCruise(this);
     }
 
     public void setStatus(CruiseStatus status) {
@@ -73,7 +78,7 @@ public class Cruise {
     }
 
     public List<Ticket> getTickets() {
-        return tickets;
+        return TicketService.findAllByCruise(this);
     }
 
     public void setTickets(List<Ticket> tickets) {
@@ -81,7 +86,7 @@ public class Cruise {
     }
 
     public List<Port> getPorts() {
-        return ports;
+        return PortService.findAllByCruise(this);
     }
 
     public void setPorts(List<Port> ports) {
@@ -113,10 +118,6 @@ public class Cruise {
                 ", from=" + from +
                 ", to=" + to +
                 ", money=" + money +
-                ", ship=" + ship +
-                ", status=" + status +
-                ", tickets=" + tickets +
-                ", ports=" + ports +
                 '}';
     }
 }

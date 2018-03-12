@@ -10,19 +10,19 @@ import java.util.List;
 
 public class BonusService {
 
-    public static List<Bonus> findAllLazy(){
+    public static List<Bonus> findAll(){
         return DaoFactory.getBonusDao().findAll();
     }
 
-    public static List<Bonus> findAllLazyByTicket(Ticket ticket){
+    public static List<Bonus> findAllByTicket(Ticket ticket){
         return DaoFactory.getBonusDao().findAllByTicket(ticket);
     }
 
-    public static List<Bonus> findAllLazyByShip(Ship ship){
+    public static List<Bonus> findAllByShip(Ship ship){
         return DaoFactory.getBonusDao().findAllShip(ship);
     }
 
-    public static Bonus findLazyById(int id){
+    public static Bonus findById(int id){
         return DaoFactory.getBonusDao().findById(id);
     }
 
@@ -38,18 +38,18 @@ public class BonusService {
         DaoFactory.getBonusDao().delete(bonus);
     }
 
-    public static List<Bonus> getFullBonuses(List<Bonus> bonuses){
+    private static List<Bonus> getFullBonuses(List<Bonus> bonuses){
         for (Bonus bonus :
                 bonuses) {
-            bonus.setTickets(TicketService.findAllLazyByBonus(bonus));
-            bonus.setShips(ShipService.findAllLazyByBonus(bonus));
+            bonus.setTickets(TicketService.findAllByBonus(bonus));
+            bonus.setShips(ShipService.findAllByBonus(bonus));
         }
         return bonuses;
     }
 
-    public static Bonus getFullBonus(Bonus bonus){
-        bonus.setTickets(TicketService.findAllLazyByBonus(bonus));
-        bonus.setShips(ShipService.findAllLazyByBonus(bonus));
+    private static Bonus getFullBonus(Bonus bonus){
+        bonus.setTickets(TicketService.findAllByBonus(bonus));
+        bonus.setShips(ShipService.findAllByBonus(bonus));
         return bonus;
     }
 }

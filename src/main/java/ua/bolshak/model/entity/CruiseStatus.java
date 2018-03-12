@@ -1,5 +1,7 @@
 package ua.bolshak.model.entity;
 
+import ua.bolshak.model.service.CruiseService;
+
 import java.util.List;
 import java.util.Objects;
 
@@ -25,7 +27,7 @@ public class CruiseStatus {
     }
 
     public List<Cruise> getCruises() {
-        return cruises;
+        return CruiseService.findAllByStatus(this);
     }
 
     public void setCruises(List<Cruise> cruises) {
@@ -50,8 +52,7 @@ public class CruiseStatus {
     public String toString() {
         return "CruiseStatus{" +
                 "id=" + id +
-                ", name='" + name + '\'' +
-                ", cruises=" + cruises +
+                ", name='" + name +
                 '}';
     }
 }

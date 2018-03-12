@@ -1,28 +1,27 @@
 package ua.bolshak.model.service;
 
 import ua.bolshak.model.dao.DaoFactory;
-import ua.bolshak.model.dao.daoImpl.PortDao;
 import ua.bolshak.model.entity.Excursion;
 import ua.bolshak.model.entity.Port;
 import ua.bolshak.model.entity.Ticket;
 
 import java.util.List;
 
-public class ExcusionService {
+public class ExcursionService {
 
-    public static List<Excursion> findAllLazy(){
-        return DaoFactory.getExcursionDao().findAll();
+    public static List<Excursion> findAll(){
+        return getFullExcursions(DaoFactory.getExcursionDao().findAll());
     }
 
-    public static List<Excursion> findAllLazyByPort(Port port){
+    public static List<Excursion> findAllByPort(Port port){
         return DaoFactory.getExcursionDao().findAllByPort(port);
     }
 
-    public static List<Excursion> findAllLazyByTicket(Ticket ticket){
+    public static List<Excursion> findAllByTicket(Ticket ticket){
         return DaoFactory.getExcursionDao().findAllByTicket(ticket);
     }
 
-    public static Excursion findLazyById(int id){
+    public static Excursion findById(int id){
         return DaoFactory.getExcursionDao().findById(id);
     }
 
@@ -38,16 +37,16 @@ public class ExcusionService {
         DaoFactory.getExcursionDao().delete(excursion);
     }
 
-    public static List<Excursion> getFullExcursions(List<Excursion> excursions){
+    private static List<Excursion> getFullExcursions(List<Excursion> excursions){
         for (Excursion excursion :
                 excursions) {
-            excursion.setPorts(PortService.findLazyByExcursion(excursion));
+            excursion.setPorts(PortService.findByExcursion(excursion));
         }
         return excursions;
     }
 
-    public static Excursion getFullExcursion(Excursion excursion){
-        excursion.setPorts(PortService.findLazyByExcursion(excursion));
+    private static Excursion getFullExcursion(Excursion excursion){
+        excursion.setPorts(PortService.findByExcursion(excursion));
         return excursion;
     }
 }

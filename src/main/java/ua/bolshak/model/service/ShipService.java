@@ -10,23 +10,23 @@ import java.util.List;
 
 public class ShipService {
 
-    public static List<Ship> findAllLazy(){
+    public static List<Ship> findAll(){
         return DaoFactory.getShipDao().findAll();
     }
 
-    public static List<Ship> findAllLazyByShipType(ShipType shipType){
+    public static List<Ship> findAllByShipType(ShipType shipType){
         return DaoFactory.getShipDao().findAllByShipType(shipType);
     }
 
-    public static List<Ship> findAllLazyByBonus(Bonus bonus){
+    public static List<Ship> findAllByBonus(Bonus bonus){
         return DaoFactory.getShipDao().findAllByBonus(bonus);
     }
 
-    public static Ship findLazyById(int id){
+    public static Ship findById(int id){
         return DaoFactory.getShipDao().findById(id);
     }
 
-    public static Ship findLazyByCruise(Cruise cruise){
+    public static Ship findByCruise(Cruise cruise){
         return DaoFactory.getShipDao().findByCruise(cruise);
     }
 
@@ -44,17 +44,17 @@ public class ShipService {
 
     public static List<Ship> getFullShips(List<Ship> ships){
         for (Ship ship : ships) {
-            ship.setType(ShipTypeService.findLazyByShip(ship));
-            ship.setBonuses(BonusService.findAllLazyByShip(ship));
-            ship.setCruises(CruiseService.findAllLazyByShip(ship));
+            ship.setType(ShipTypeService.findByShip(ship));
+            ship.setBonuses(BonusService.findAllByShip(ship));
+            ship.setCruises(CruiseService.findAllByShip(ship));
         }
         return ships;
     }
 
     public static Ship getFullShip(Ship ship){
-        ship.setType(ShipTypeService.findLazyByShip(ship));
-        ship.setBonuses(BonusService.findAllLazyByShip(ship));
-        ship.setCruises(CruiseService.findAllLazyByShip(ship));
+        ship.setType(ShipTypeService.findByShip(ship));
+        ship.setBonuses(BonusService.findAllByShip(ship));
+        ship.setCruises(CruiseService.findAllByShip(ship));
         return ship;
     }
 }

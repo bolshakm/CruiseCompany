@@ -1,5 +1,7 @@
 package ua.bolshak.model.entity;
 
+import ua.bolshak.model.service.ShipService;
+
 import java.util.List;
 import java.util.Objects;
 
@@ -25,7 +27,7 @@ public class ShipType {
     }
 
     public List<Ship> getShips() {
-        return ships;
+        return ShipService.findAllByShipType(this);
     }
 
     public void setShips(List<Ship> ships) {
@@ -50,8 +52,7 @@ public class ShipType {
     public String toString() {
         return "ShipType{" +
                 "id=" + id +
-                ", name='" + name + '\'' +
-                ", ships=" + ships +
+                ", name='" + name +
                 '}';
     }
 }

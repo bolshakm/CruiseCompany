@@ -1,5 +1,7 @@
 package ua.bolshak.model.entity;
 
+import ua.bolshak.model.service.UserService;
+
 import java.util.List;
 import java.util.Objects;
 
@@ -25,7 +27,7 @@ public class Role {
     }
 
     public List<User> getUsers() {
-        return users;
+        return UserService.findAllByRole(this);
     }
 
     public void setUsers(List<User> users) {
@@ -50,8 +52,7 @@ public class Role {
     public String toString() {
         return "Role{" +
                 "id=" + id +
-                ", name='" + name + '\'' +
-                ", users=" + users +
+                ", name='" + name +
                 '}';
     }
 }

@@ -1,5 +1,8 @@
 package ua.bolshak.model.entity;
 
+import ua.bolshak.model.service.CruiseService;
+import ua.bolshak.model.service.ExcursionService;
+
 import java.util.List;
 import java.util.Objects;
 
@@ -44,7 +47,7 @@ public class Port {
     }
 
     public List<Cruise> getCruises() {
-        return cruises;
+        return CruiseService.findAllBYPort(this);
     }
 
     public void setCruises(List<Cruise> cruises) {
@@ -52,7 +55,7 @@ public class Port {
     }
 
     public List<Excursion> getExcursions() {
-        return excursions;
+        return ExcursionService.findAllByPort(this);
     }
 
     public void setExcursions(List<Excursion> excursions) {
@@ -81,9 +84,7 @@ public class Port {
                 "id=" + id +
                 ", name='" + name + '\'' +
                 ", city='" + city + '\'' +
-                ", country='" + country + '\'' +
-                ", cruises=" + cruises +
-                ", excursions=" + excursions +
+                ", country='" + country +
                 '}';
     }
 }

@@ -8,15 +8,15 @@ import java.util.List;
 
 public class CruiseStatusService {
 
-    public static List<CruiseStatus> findAllLazy(){
+    public static List<CruiseStatus> findAll(){
         return DaoFactory.getCruiseStatusDao().findAll();
     }
 
-    public static CruiseStatus findLazyById(int id){
+    public static CruiseStatus findById(int id){
         return DaoFactory.getCruiseStatusDao().findById(id);
     }
 
-    public static CruiseStatus findLazyByCruise(Cruise cruise){
+    public static CruiseStatus findByCruise(Cruise cruise){
         return DaoFactory.getCruiseStatusDao().findByCruise(cruise);
     }
 
@@ -32,16 +32,16 @@ public class CruiseStatusService {
         DaoFactory.getCruiseStatusDao().delete(cruiseStatus);
     }
 
-    public static List<CruiseStatus> getFullCruiseStatuses(List<CruiseStatus> cruiseStatuses){
+    private static List<CruiseStatus> getFullCruiseStatuses(List<CruiseStatus> cruiseStatuses){
         for (CruiseStatus cruseStatus :
                 cruiseStatuses) {
-            cruseStatus.setCruises(CruiseService.findAllLazyByStatus(cruseStatus));
+            cruseStatus.setCruises(CruiseService.findAllByStatus(cruseStatus));
         }
         return cruiseStatuses;
     }
 
-    public static CruiseStatus getFullCruiseStatus(CruiseStatus cruiseStatus){
-        cruiseStatus.setCruises(CruiseService.findAllLazyByStatus(cruiseStatus));
+    private static CruiseStatus getFullCruiseStatus(CruiseStatus cruiseStatus){
+        cruiseStatus.setCruises(CruiseService.findAllByStatus(cruiseStatus));
         return cruiseStatus;
     }
 }

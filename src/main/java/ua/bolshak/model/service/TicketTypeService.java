@@ -8,15 +8,15 @@ import java.util.List;
 
 public class TicketTypeService {
 
-    public static List<TicketType> findAllLazy(){
+    public static List<TicketType> findAll(){
         return DaoFactory.getTicketTypeDao().findAll();
     }
 
-    public static TicketType findLazyById(int id){
+    public static TicketType findById(int id){
         return DaoFactory.getTicketTypeDao().findById(id);
     }
 
-    public static TicketType findLazyByTicket(Ticket ticket){
+    public static TicketType findByTicket(Ticket ticket){
         return DaoFactory.getTicketTypeDao().findByTicket(ticket);
     }
 
@@ -34,13 +34,13 @@ public class TicketTypeService {
 
     public static List<TicketType> getFullTicketType(List<TicketType> ticketTypes){
         for (TicketType ticketType : ticketTypes) {
-            ticketType.setTickets(TicketService.findAllLazyByTicketType(ticketType));
+            ticketType.setTickets(TicketService.findAllByTicketType(ticketType));
         }
         return ticketTypes;
     }
 
     public static TicketType getFullTicketType(TicketType ticketType){
-        ticketType.setTickets(TicketService.findAllLazyByTicketType(ticketType));
+        ticketType.setTickets(TicketService.findAllByTicketType(ticketType));
         return ticketType;
     }
 }

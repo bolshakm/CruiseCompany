@@ -40,7 +40,7 @@ public class CruiseDao implements CruiseIDao{
     @Override
     public List<Cruise> findAll() {
         List<Cruise> cruises = new ArrayList<>();
-        try (Connection connection = MysqlConnectionPool.getJDBCConnection();
+        try (Connection connection = MysqlConnectionPool.getConnection();
              Statement statement = connection.createStatement();
              ResultSet resultSet = statement.executeQuery(SqlQuery.FIND_ALL_CRUISES)){
             while (resultSet.next()){
