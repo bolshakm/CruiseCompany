@@ -1,4 +1,4 @@
-package ua.bolshak.controller;
+package ua.bolshak.controller.commands;
 
 import ua.bolshak.controller.commands.ICommand;
 

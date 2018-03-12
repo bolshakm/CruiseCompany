@@ -17,6 +17,6 @@
     <title>Error</title>
 </head>
 <body>
-<h1 align="center"><fmt:message key="wrong.massage"/></h1>
+<h1 align="center">Wrong massage</h1>
 </body>
 </html>
