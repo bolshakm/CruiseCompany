@@ -24,7 +24,10 @@
 <br/>
 <c:choose>
     <c:when test="${page == 'ship'}">
-        <c:import url="main.jsp"/>
+        <c:import url="ship.jsp"/>
+    </c:when>
+    <c:when test="${page == 'cruise'}">
+        <c:import url="cruise.jsp"/>
     </c:when>
     <c:otherwise>
         <c:import url="cruise.jsp"/>
