@@ -14,6 +14,7 @@ public class Ticket {
     private Cruise cruise;
     private TicketType ticketType;
     private List<Bonus> bonuses;
+    private double price;
 
     public int getId() {
         return id;
@@ -55,20 +56,26 @@ public class Ticket {
         this.bonuses = bonuses;
     }
 
+    public double getPrice() {
+        return price;
+    }
+
+    public void setPrice(double price) {
+        this.price = price;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Ticket ticket = (Ticket) o;
-        return Objects.equals(user, ticket.user) &&
-                Objects.equals(cruise, ticket.cruise) &&
-                Objects.equals(ticketType, ticket.ticketType) &&
-                Objects.equals(bonuses, ticket.bonuses);
+        return id == ticket.id &&
+                Double.compare(ticket.price, price) == 0;
     }
 
     @Override
     public int hashCode() {
 
-        return Objects.hash(user, cruise, ticketType, bonuses);
+        return Objects.hash(id, price);
     }
 }

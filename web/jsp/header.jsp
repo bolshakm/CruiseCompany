@@ -12,7 +12,7 @@
 <form action="${pageContext.request.contextPath}/CruiseCompany" method="post" align = "center">
     <input type="hidden" name="command" value="redirect">
     <input type="submit" name="redirectTo" value="Cruises">
-    <input type="submit" name="redirectTo" value="Ship">
+    <input type="submit" name="redirectTo" value="Ships">
     <input type="submit" name="redirectTo" value="Ports">
     <input type="submit" name="redirectTo" value="Users">
     <input type="submit" name="redirectTo" value="Tickets">

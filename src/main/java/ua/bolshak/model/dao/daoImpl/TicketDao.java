@@ -21,6 +21,7 @@ public class TicketDao implements TicketIDao{
     private Ticket initialization(ResultSet resultSet) throws SQLException {
         Ticket ticket = new Ticket();
         ticket.setId(resultSet.getInt(ColumnName.ID_TICKET));
+        ticket.setPrice(resultSet.getDouble(ColumnName.TICKET_PRICE));
         return ticket;
     }
 
@@ -155,6 +156,7 @@ public class TicketDao implements TicketIDao{
             preparedStatement.setInt(1, ticket.getUser().getId());
             preparedStatement.setInt(2, ticket.getTicketType().getId());
             preparedStatement.setInt(3, ticket.getCruise().getId());
+            preparedStatement.setDouble(4, ticket.getPrice());
         } catch (SQLException e) {
             LOGGER.error(e.getMessage());
         }
@@ -167,7 +169,8 @@ public class TicketDao implements TicketIDao{
             preparedStatement.setInt(1, ticket.getUser().getId());
             preparedStatement.setInt(2, ticket.getTicketType().getId());
             preparedStatement.setInt(3, ticket.getCruise().getId());
-            preparedStatement.setInt(4, ticket.getId());
+            preparedStatement.setDouble(4, ticket.getPrice());
+            preparedStatement.setInt(5, ticket.getId());
         } catch (SQLException e) {
             LOGGER.error(e.getMessage());
         }

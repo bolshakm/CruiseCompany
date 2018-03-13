@@ -47,5 +47,6 @@ public interface ColumnName {
     String MONEY = "money";
 
     String ID_TICKET = "id_ticket";
+    String TICKET_PRICE = "price";
 
 }
