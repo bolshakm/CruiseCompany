@@ -6,37 +6,6 @@
     <title>Cruises</title>
 </head>
 <body>
-<%--<table border="1" align="center">--%>
-    <%--<caption>Cruises</caption>--%>
-    <%--<tr>--%>
-        <%--<th>Name</th>--%>
-        <%--<th>From</th>--%>
-        <%--<th>To</th>--%>
-        <%--&lt;%&ndash;Only for administrator&ndash;%&gt;--%>
-        <%--<th>Income money</th>--%>
-        <%--<th>Ship number</th>--%>
-        <%--<th>Cruise status</th>--%>
-        <%--<th>Ticket/Seats</th>--%>
-        <%--<th>Ports</th>--%>
-        <%--<th>Actions</th>--%>
-    <%--</tr>--%>
-    <%--<c:forEach var="Cruise" items="${Cruises}">--%>
-        <%--<tr>--%>
-            <%--<td>${Cruise.name}</td>--%>
-            <%--<td>${Cruise.from}</td>--%>
-            <%--<td>${Cruise.to}</td>--%>
-            <%--&lt;%&ndash;Only for administrator&ndash;%&gt;--%>
-            <%--<td>${Cruise.money}</td>--%>
-            <%--<td>${Cruise.ship.number}</td>--%>
-            <%--<td>${Cruise.status.name}</td>--%>
-            <%--<td>${fn:length(Cruise.tickets)}/${Cruise.ship.numberOfSeats}</td>--%>
-            <%--<td><c:forEach var="port" items="${Cruise.ports}">--%>
-                <%--${port.name}<br/>--%>
-            <%--</c:forEach></td>--%>
-            <%--<td></td>--%>
-        <%--</tr>--%>
-    <%--</c:forEach>--%>
-<%--</table>--%>
 <table align="center">
     <tr>
         <td>
@@ -72,7 +41,8 @@
                 </c:forEach>
             </table>
         </td>
-        <td width="100">
+        <td width="100"></td>
+        <td>
             <table border="1" bgcolor="#f0ffff">
                 <caption>Cruise Status</caption>
                 <tr>
