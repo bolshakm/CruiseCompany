@@ -48,10 +48,18 @@
                     <th>Name</th>
                     <th>Actions</th>
                 </tr>
+                <form action="${pageContext.request.contextPath}/CruiseCompany" method="post">
+                    <tr>
+                        <td><input name="roleName"></td>
+                        <td><input type="submit" name="Add" value="Add">
+                            <%--<input type="submit" name="Found" value="Found"></td>--%>
+                    </tr>
+                </form>
                 <c:forEach var="Role" items="${Roles}">
                     <tr>
                         <td>${Role.name}</td>
-                        <td>Actions</td>
+                        <td><a href="CruiseCompany?command=updateRole&selectedRole=${Role.id}">Update</a>
+                            <a href="CruiseCompany?command=deleteRole&selectedRole=${Role.id}">Delete</a></td>
                     </tr>
                 </c:forEach>
             </table>

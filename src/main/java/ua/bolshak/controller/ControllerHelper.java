@@ -1,9 +1,6 @@
 package ua.bolshak.controller;
 
-import ua.bolshak.controller.commands.EmptyCommand;
-import ua.bolshak.controller.commands.ICommand;
-import ua.bolshak.controller.commands.LoginCommand;
-import ua.bolshak.controller.commands.RedirectCommand;
+import ua.bolshak.controller.commands.*;
 
 import javax.servlet.http.HttpServletRequest;
 import java.util.LinkedHashMap;
@@ -16,6 +13,7 @@ public class ControllerHelper {
     private ControllerHelper() {
         commands.put("login", new LoginCommand());
         commands.put("redirect", new RedirectCommand());
+        commands.put("updateRole", new UpdateRoleCommand());
     }
 
     public static ControllerHelper getInstance() {
