@@ -20,6 +20,7 @@
     <title>Administrator</title>
 </head>
 <body>
+<p align="center">Hello ${user.name}</p>
 <c:import url="header.jsp"/>
 <br/>
 <c:choose>

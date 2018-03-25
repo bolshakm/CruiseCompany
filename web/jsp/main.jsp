@@ -15,7 +15,8 @@
 <head>
     <title>Welcome</title>
 </head>
-<body>Hello ${User}!
+<body> <p align="center"> Hello ${user.name}!</p>
+<c:import url="cruise.jsp"/>
 
 </body>
 </html>

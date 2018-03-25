@@ -43,6 +43,7 @@
         </td>
         <td width="100"></td>
         <td>
+            <c:if test="${user.role.id == 1}">
             <table border="1" bgcolor="#f0ffff">
                 <caption>Cruise Status</caption>
                 <tr>
@@ -56,6 +57,7 @@
                     </tr>
                 </c:forEach>
             </table>
+            </c:if>
         </td>
     </tr>
 </table>

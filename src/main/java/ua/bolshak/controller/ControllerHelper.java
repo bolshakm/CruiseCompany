@@ -12,6 +12,7 @@ public class ControllerHelper {
 
     private ControllerHelper() {
         commands.put("login", new LoginCommand());
+        commands.put("logout", new LogoutCommand());
         commands.put("redirect", new RedirectCommand());
         commands.put("updateRole", new UpdateRoleCommand());
         commands.put("registration", new RegistrationCommand());

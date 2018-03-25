@@ -16,6 +16,7 @@
     <input type="submit" name="redirectTo" value="Ports">
     <input type="submit" name="redirectTo" value="Users">
     <input type="submit" name="redirectTo" value="Tickets">
+    <input type="submit" name="redirectTo" value="Logout">
 </form>
 </body>
 </html>

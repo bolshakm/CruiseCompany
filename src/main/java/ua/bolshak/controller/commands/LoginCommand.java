@@ -6,10 +6,12 @@ import ua.bolshak.model.service.UserService;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 public class LoginCommand implements ICommand {
     @Override
-    public String execute(HttpServletRequest request, HttpServletResponse response) {
+    public String execute(HttpServletRequest request, HttpServletResponse response){
+        HttpSession session = request.getSession();
         String page = "/jsp/main.jsp";
         String login = request.getParameter("Login");
         String password = request.getParameter("Password");
@@ -17,14 +19,19 @@ public class LoginCommand implements ICommand {
         switch (button) {
             case "Login":
                 User user = UserService.findByLogin(login);
-                request.setAttribute("name", user.getName());
-                if (!user.getPassword().equals(password)) {
+                if (user == null || !user.getPassword().equals(password)) {
                     request.setAttribute("massage", "Wrong Login or Password");
                     page = "/jsp/login.jsp";
+                    break;
                 }
+                session.setAttribute("user", user);
+                request.setAttribute("name", user.getName());
                 if (user.getRole().equals(RoleService.findById(1))) {
-//            page = "/jsp/administrator.jsp";
+
                     page = new ToAdministratorPage().execute(request, response);
+                }
+                if (user.getRole().equals(RoleService.findById(2))){
+                    page = new ToMainPage().execute(request,response);
                 }
                 break;
             case "Registration":
