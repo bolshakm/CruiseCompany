@@ -59,7 +59,7 @@
                     <tr>
                         <td>${Role.name}</td>
                         <td><a href="CruiseCompany?command=updateRole&selectedRole=${Role.id}">Update</a>
-                            <a href="CruiseCompany?command=deleteRole&selectedRole=${Role.id}">Delete</a></td>
+                            <a href="CruiseCompany?command=deleteRole&selectedRole=${Role.id }">Delete</a></td>
                     </tr>
                 </c:forEach>
             </table>

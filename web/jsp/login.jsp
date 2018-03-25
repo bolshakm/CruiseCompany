@@ -20,18 +20,13 @@
 <body>
 <form action="${pageContext.request.contextPath}/CruiseCompany" method="post">
     <input type="hidden" name="command" value="login"/>
-    <%--<fmt:message key="login"/><br/>--%>
-    Login<br/>
-    <input name="Login" value="${Login}">
-    <br/>
-    <%--<fmt:message key="password"/><br/>--%>
-    Password<br/>
-    <input type="password" name="Password" value="${Password}">
-    <br/>
+    <table align="center">
+        <tr><td>Login</td><td><input name="Login" value="${Login}"></td></tr>
+        <tr><td>Password</td><td><input type="password" name="Password" value="${Password}"></td></tr>
+        <tr><td><input type="submit" name="button" value="Login"/></td><td><input type="submit" name="button" value="Registration"></td></tr>
+    </table>
     ${InfoMassage}
     <br/>
-    <input type="submit" name="login" value="Login"/>
-    <input type="submit" name="registration" value="Registration">
 </form>
 ${massage}
 </body>

@@ -13,15 +13,22 @@ public class LoginCommand implements ICommand {
         String page = "/jsp/main.jsp";
         String login = request.getParameter("Login");
         String password = request.getParameter("Password");
-        User user = UserService.getFullUser(UserService.findByLogin(login));
-        request.setAttribute("name", user.getName());
-        if (!user.getPassword().equals(password)){
-            request.setAttribute("massage","Wrong Login or Password");
-            page = "/jsp/login.jsp";
-        }
-        if (user.getRole().equals(RoleService.findById(1))){
+        String button = request.getParameter("button");
+        switch (button) {
+            case "Login":
+                User user = UserService.findByLogin(login);
+                request.setAttribute("name", user.getName());
+                if (!user.getPassword().equals(password)) {
+                    request.setAttribute("massage", "Wrong Login or Password");
+                    page = "/jsp/login.jsp";
+                }
+                if (user.getRole().equals(RoleService.findById(1))) {
 //            page = "/jsp/administrator.jsp";
-            page = new ToAdministratorPage().execute(request, response);
+                    page = new ToAdministratorPage().execute(request, response);
+                }
+                break;
+            case "Registration":
+                page = "/jsp/registration.jsp";
         }
         return page;
     }

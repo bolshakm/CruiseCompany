@@ -191,7 +191,7 @@ public class UserDao implements UserIDao{
     }
 
     @Override
-    public void add(User user) {
+    public void add(User user, Role role) {
         try(Connection connection = MysqlConnectionPool.getConnection();
             PreparedStatement preparedStatement = connection.prepareStatement(SqlQuery.ADD_USER)){
             preparedStatement.setString(1, user.getLogin());
@@ -200,7 +200,7 @@ public class UserDao implements UserIDao{
             preparedStatement.setString(4, user.getLastName());
             preparedStatement.setString(5, user.getEmail());
             preparedStatement.setDouble(6, user.getMoney());
-            preparedStatement.setInt(7, user.getRole().getId());
+            preparedStatement.setInt(7, role.getId());
             preparedStatement.executeUpdate();
         } catch (SQLException e) {
             LOGGER.error(e.getMessage());
@@ -208,7 +208,7 @@ public class UserDao implements UserIDao{
     }
 
     @Override
-    public void update(User user) {
+    public void update(User user, Role role) {
         try(Connection connection = MysqlConnectionPool.getConnection();
             PreparedStatement preparedStatement = connection.prepareStatement(SqlQuery.UPDATE_USER)){
             preparedStatement.setString(1, user.getLogin());
@@ -217,7 +217,7 @@ public class UserDao implements UserIDao{
             preparedStatement.setString(4, user.getLastName());
             preparedStatement.setString(5, user.getEmail());
             preparedStatement.setDouble(6, user.getMoney());
-            preparedStatement.setInt(7, user.getRole().getId());
+            preparedStatement.setInt(7, role.getId());
             preparedStatement.setInt(8, user.getId());
             preparedStatement.executeUpdate();
         } catch (SQLException e) {

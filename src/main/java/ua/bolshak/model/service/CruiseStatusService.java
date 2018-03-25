@@ -32,16 +32,4 @@ public class CruiseStatusService {
         DaoFactory.getCruiseStatusDao().delete(cruiseStatus);
     }
 
-    private static List<CruiseStatus> getFullCruiseStatuses(List<CruiseStatus> cruiseStatuses){
-        for (CruiseStatus cruseStatus :
-                cruiseStatuses) {
-            cruseStatus.setCruises(CruiseService.findAllByStatus(cruseStatus));
-        }
-        return cruiseStatuses;
-    }
-
-    private static CruiseStatus getFullCruiseStatus(CruiseStatus cruiseStatus){
-        cruiseStatus.setCruises(CruiseService.findAllByStatus(cruiseStatus));
-        return cruiseStatus;
-    }
 }

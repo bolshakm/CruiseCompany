@@ -32,15 +32,4 @@ public class ShipTypeService {
         DaoFactory.getShipTypeDao().delete(shipType);
     }
 
-    public static List<ShipType> getFullShipTypes(List<ShipType> shipTypes){
-        for (ShipType shipType : shipTypes) {
-            shipType.setShips(ShipService.findAllByShipType(shipType));
-        }
-        return shipTypes;
-    }
-
-    public static ShipType getFullShipType(ShipType shipType){
-        shipType.setShips(ShipService.findAllByShipType(shipType));
-        return shipType;
-    }
 }

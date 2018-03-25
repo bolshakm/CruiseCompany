@@ -8,39 +8,27 @@ import java.util.List;
 
 public class TicketTypeService {
 
-    public static List<TicketType> findAll(){
+    public static List<TicketType> findAll() {
         return DaoFactory.getTicketTypeDao().findAll();
     }
 
-    public static TicketType findById(int id){
+    public static TicketType findById(int id) {
         return DaoFactory.getTicketTypeDao().findById(id);
     }
 
-    public static TicketType findByTicket(Ticket ticket){
+    public static TicketType findByTicket(Ticket ticket) {
         return DaoFactory.getTicketTypeDao().findByTicket(ticket);
     }
 
-    public static void add(TicketType ticketType){
+    public static void add(TicketType ticketType) {
         DaoFactory.getTicketTypeDao().add(ticketType);
     }
 
-    public static void update(TicketType ticketType){
+    public static void update(TicketType ticketType) {
         DaoFactory.getTicketTypeDao().update(ticketType);
     }
 
-    public static void delete(TicketType ticketType){
+    public static void delete(TicketType ticketType) {
         DaoFactory.getTicketTypeDao().delete(ticketType);
-    }
-
-    public static List<TicketType> getFullTicketType(List<TicketType> ticketTypes){
-        for (TicketType ticketType : ticketTypes) {
-            ticketType.setTickets(TicketService.findAllByTicketType(ticketType));
-        }
-        return ticketTypes;
-    }
-
-    public static TicketType getFullTicketType(TicketType ticketType){
-        ticketType.setTickets(TicketService.findAllByTicketType(ticketType));
-        return ticketType;
     }
 }

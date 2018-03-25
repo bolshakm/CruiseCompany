@@ -32,16 +32,4 @@ public class RoleService {
         DaoFactory.getRoleDao().delete(role);
     }
 
-    public static List<Role> getFullRoles(List<Role> roles){
-        for (Role role : roles) {
-            role.setUsers(UserService.findAllByRole(role));
-        }
-        return roles;
-    }
-
-    public static Role getFullRole(Role role){
-        role.setUsers(UserService.findAllByRole(role));
-        return role;
-    }
-
 }

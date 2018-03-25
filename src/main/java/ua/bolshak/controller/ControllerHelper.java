@@ -14,6 +14,7 @@ public class ControllerHelper {
         commands.put("login", new LoginCommand());
         commands.put("redirect", new RedirectCommand());
         commands.put("updateRole", new UpdateRoleCommand());
+        commands.put("registration", new RegistrationCommand());
     }
 
     public static ControllerHelper getInstance() {

@@ -10,7 +10,7 @@ import java.util.List;
 public class ExcursionService {
 
     public static List<Excursion> findAll(){
-        return getFullExcursions(DaoFactory.getExcursionDao().findAll());
+        return DaoFactory.getExcursionDao().findAll();
     }
 
     public static List<Excursion> findAllByPort(Port port){
@@ -37,16 +37,4 @@ public class ExcursionService {
         DaoFactory.getExcursionDao().delete(excursion);
     }
 
-    private static List<Excursion> getFullExcursions(List<Excursion> excursions){
-        for (Excursion excursion :
-                excursions) {
-            excursion.setPorts(PortService.findByExcursion(excursion));
-        }
-        return excursions;
-    }
-
-    private static Excursion getFullExcursion(Excursion excursion){
-        excursion.setPorts(PortService.findByExcursion(excursion));
-        return excursion;
-    }
 }

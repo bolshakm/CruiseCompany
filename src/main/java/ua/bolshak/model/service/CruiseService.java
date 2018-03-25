@@ -47,22 +47,4 @@ public class CruiseService {
         DaoFactory.getCruiseDao().delete(cruise);
     }
 
-    private static List<Cruise> getFullCruises(List<Cruise> cruises){
-        for (Cruise cruise :
-                cruises) {
-            cruise.setPorts(PortService.findAllByCruise(cruise));
-            cruise.setShip(ShipService.findByCruise(cruise));
-            cruise.setStatus(CruiseStatusService.findByCruise(cruise));
-            cruise.setTickets(TicketService.findAllByCruise(cruise));
-        }
-        return cruises;
-    }
-
-    private static Cruise getFullCruise(Cruise cruise){
-        cruise.setPorts(PortService.findAllByCruise(cruise));
-        cruise.setShip(ShipService.findByCruise(cruise));
-        cruise.setStatus(CruiseStatusService.findByCruise(cruise));
-        cruise.setTickets(TicketService.findAllByCruise(cruise));
-        return cruise;
-    }
 }

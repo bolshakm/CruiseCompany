@@ -37,18 +37,4 @@ public class PortService {
     private static void delete(Port port){
         DaoFactory.getPortDao().delete(port);
     }
-
-    public static List<Port> getFullPorts(List<Port> ports){
-        for (Port port : ports) {
-            port.setCruises(CruiseService.findAllBYPort(port));
-            port.setExcursions(ExcursionService.findAllByPort(port));
-        }
-        return ports;
-    }
-
-    public static Port getFullPort(Port port){
-        port.setCruises(CruiseService.findAllBYPort(port));
-        port.setExcursions(ExcursionService.findAllByPort(port));
-        return port;
-    }
 }

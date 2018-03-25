@@ -47,17 +47,4 @@ public class TicketService {
         DaoFactory.getTicketDao().delete(ticket);
     }
 
-    public static List<Ticket> getFullTickets(List<Ticket> tickets){
-        for (Ticket ticket : tickets) {
-            ticket.setTicketType(TicketTypeService.findByTicket(ticket));
-            ticket.setBonuses(BonusService.findAllByTicket(ticket));
-        }
-        return tickets;
-    }
-
-    public static Ticket getFullTicket(Ticket ticket){
-        ticket.setTicketType(TicketTypeService.findByTicket(ticket));
-        ticket.setBonuses(BonusService.findAllByTicket(ticket));
-        return ticket;
-    }
 }

@@ -43,29 +43,16 @@ public class UserService {
         return DaoFactory.getUserDao().findByLogin(login);
     }
 
-    public static void add(User user){
-        DaoFactory.getUserDao().add(user);
+    public static void add(User user, Role role){
+        DaoFactory.getUserDao().add(user, role);
     }
 
-    public static void update(User user){
-        DaoFactory.getUserDao().update(user);
+    public static void update(User user, Role role){
+        DaoFactory.getUserDao().update(user, role);
     }
 
     public static void delete(User user){
         DaoFactory.getUserDao().delete(user);
     }
 
-    public static List<User> getFullUsers(List<User> users){
-        for (User user : users) {
-            user.setRole(RoleService.findByUser(user));
-            user.setTickets(TicketService.findAllByUser(user));
-        }
-        return users;
-    }
-
-    public static User getFullUser(User user){
-        user.setRole(RoleService.findByUser(user));
-        user.setTickets(TicketService.findAllByUser(user));
-        return user;
-    }
 }

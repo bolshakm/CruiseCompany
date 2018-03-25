@@ -42,19 +42,4 @@ public class ShipService {
         DaoFactory.getShipDao().delete(ship);
     }
 
-    public static List<Ship> getFullShips(List<Ship> ships){
-        for (Ship ship : ships) {
-            ship.setType(ShipTypeService.findByShip(ship));
-            ship.setBonuses(BonusService.findAllByShip(ship));
-            ship.setCruises(CruiseService.findAllByShip(ship));
-        }
-        return ships;
-    }
-
-    public static Ship getFullShip(Ship ship){
-        ship.setType(ShipTypeService.findByShip(ship));
-        ship.setBonuses(BonusService.findAllByShip(ship));
-        ship.setCruises(CruiseService.findAllByShip(ship));
-        return ship;
-    }
 }
