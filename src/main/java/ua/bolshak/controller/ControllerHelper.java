@@ -13,9 +13,17 @@ public class ControllerHelper {
     private ControllerHelper() {
         commands.put("login", new LoginCommand());
         commands.put("logout", new LogoutCommand());
-        commands.put("redirect", new RedirectCommand());
+//        commands.put("redirect", new RedirectCommand());
         commands.put("updateRole", new UpdateRoleCommand());
         commands.put("registration", new RegistrationCommand());
+        commands.put("toCruisesPage", new ToCruisesPage());
+        commands.put("toShipsPage", new ToShipsPage());
+        commands.put("toPortsPage", new ToPortsPage());
+        commands.put("toUsersPage", new ToUserPage());
+        commands.put("toTicketsPage", new ToTicketsPage());
+        commands.put("addCruiseStatus", new AddCruiseStatus());
+        commands.put("deleteCruiseStatus", new DeleteCruiseStatus());
+        commands.put("updateCruiseStatus", new UpdateCruiseStatus());
     }
 
     public static ControllerHelper getInstance() {

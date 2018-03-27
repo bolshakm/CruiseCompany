@@ -27,7 +27,6 @@ public class LoginCommand implements ICommand {
                 session.setAttribute("user", user);
                 request.setAttribute("name", user.getName());
                 if (user.getRole().equals(RoleService.findById(1))) {
-
                     page = new ToAdministratorPage().execute(request, response);
                 }
                 if (user.getRole().equals(RoleService.findById(2))){

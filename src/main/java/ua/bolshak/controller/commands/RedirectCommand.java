@@ -6,14 +6,14 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
-
+//delete!!!!!!
 public class RedirectCommand implements ICommand {
     @Override
     public String execute(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException {
 //        String page = "/jsp/" + request.getParameter("page") + ".jsp";
         String page = "/jsp/administrator.jsp";
         String to = request.getParameter("redirectTo");
-        request.setAttribute("Cruises", CruiseService.findAll());
+//        request.setAttribute("Cruises", CruiseService.findAll());
         switch (to){
             case "Ships": request.setAttribute("ShipTypes", ShipTypeService.findAll());
                 request.setAttribute("Bonuses", BonusService.findAll());

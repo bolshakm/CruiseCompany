@@ -13,7 +13,8 @@
     <title>Ships</title>
 </head>
 <body>
-
+<p align="center">Hello ${user.name}</p>
+<c:import url="header.jsp"/>
 <table align="center">
     <tr>
         <td>

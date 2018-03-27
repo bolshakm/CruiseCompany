@@ -9,14 +9,23 @@
     <title>Header</title>
 </head>
 <body>
-<form action="${pageContext.request.contextPath}/CruiseCompany" method="post" align = "center">
-    <input type="hidden" name="command" value="redirect">
-    <input type="submit" name="redirectTo" value="Cruises">
-    <input type="submit" name="redirectTo" value="Ships">
-    <input type="submit" name="redirectTo" value="Ports">
-    <input type="submit" name="redirectTo" value="Users">
-    <input type="submit" name="redirectTo" value="Tickets">
-    <input type="submit" name="redirectTo" value="Logout">
-</form>
+<%--<form action="${pageContext.request.contextPath}/CruiseCompany" method="post" align = "center">--%>
+    <%--<input type="hidden" name="command" value="redirect">--%>
+    <%--<input type="submit" name="redirectTo" value="Cruises">--%>
+    <%--<input type="submit" name="redirectTo" value="Ships">--%>
+    <%--<input type="submit" name="redirectTo" value="Ports">--%>
+    <%--<input type="submit" name="redirectTo" value="Users">--%>
+    <%--<input type="submit" name="redirectTo" value="Tickets">--%>
+    <%--<input type="submit" name="redirectTo" value="Logout">--%>
+<%--</form>--%>
+
+<p align="center">
+<a href="/CruiseCompany?command=toCruisesPage"><button>Cruises</button></a>
+<a href="/CruiseCompany?command=toShipsPage"><button>Ships</button></a>
+<a href="/CruiseCompany?command=toPortsPage"><button>Ports</button></a>
+<a href="/CruiseCompany?command=toUsersPage"><button>Users</button></a>
+<a href="/CruiseCompany?command=toTicketsPage"><button>Tickets</button></a>
+<a href="/CruiseCompany?command=logout"><button>Logout</button></a>
+</p>
 </body>
 </html>

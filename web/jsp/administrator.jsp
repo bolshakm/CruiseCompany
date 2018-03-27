@@ -20,29 +20,28 @@
     <title>Administrator</title>
 </head>
 <body>
-<p align="center">Hello ${user.name}</p>
-<c:import url="header.jsp"/>
 <br/>
-<c:choose>
-    <c:when test="${page == 'ship'}">
-        <c:import url="ship.jsp"/>
-    </c:when>
-    <c:when test="${page == 'cruise'}">
-        <c:import url="cruise.jsp"/>
-    </c:when>
-    <c:when test="${page == 'port'}">
-        <c:import url="port.jsp"/>
-    </c:when>
-    <c:when test="${page == 'users'}">
-        <c:import url="users.jsp"/>
-    </c:when>
-    <c:when test="${page == 'tickets'}">
-        <c:import url="tickets.jsp"/>
-    </c:when>
-    <c:otherwise>
-        <c:import url="cruise.jsp"/>
-    </c:otherwise>
-</c:choose>
+<c:import url="cruise.jsp"/>
+<%--<c:choose>--%>
+    <%--<c:when test="${page == 'ship'}">--%>
+        <%--<c:import url="ship.jsp"/>--%>
+    <%--</c:when>--%>
+    <%--<c:when test="${page == 'cruise'}">--%>
+        <%--<c:import url="cruise.jsp"/>--%>
+    <%--</c:when>--%>
+    <%--<c:when test="${page == 'port'}">--%>
+        <%--<c:import url="port.jsp"/>--%>
+    <%--</c:when>--%>
+    <%--<c:when test="${page == 'users'}">--%>
+        <%--<c:import url="users.jsp"/>--%>
+    <%--</c:when>--%>
+    <%--<c:when test="${page == 'tickets'}">--%>
+        <%--<c:import url="tickets.jsp"/>--%>
+    <%--</c:when>--%>
+    <%--<c:otherwise>--%>
+        <%--<c:import url="cruise.jsp"/>--%>
+    <%--</c:otherwise>--%>
+<%--</c:choose>--%>
 
 <%--<table border="1">--%>
     <%--<caption><fmt:message key="entrants"/></caption>--%>

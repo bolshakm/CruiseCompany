@@ -12,6 +12,8 @@
     <title>Ports</title>
 </head>
 <body>
+<p align="center">Hello ${user.name}</p>
+<c:import url="header.jsp"/>
 <table border="1" align="center">
     <caption>Ports</caption>
     <tr>
