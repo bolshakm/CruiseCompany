@@ -32,6 +32,9 @@ public class ControllerHelper {
         commands.put("updateBonus", new UpdateBonusCommand());
         commands.put("addRole", new AddRoleCommand());
         commands.put("deleteRole", new DeleteRoleCommand());
+        commands.put("addTicketType", new AddTicketTypeCommand());
+        commands.put("deleteTicketType", new DeleteTicketTypeCommand());
+        commands.put("updateTicketType", new UpdateTicketTypeCommand());
     }
 
     public static ControllerHelper getInstance() {

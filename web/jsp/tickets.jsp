@@ -16,7 +16,7 @@
 <c:import url="header.jsp"/>
 <table align="center">
     <tr>
-        <td>
+        <td valign="top">
             <table border="1" bgcolor="#f5f5dc">
                 <caption>Tickets</caption>
                 <tr>
@@ -31,6 +31,7 @@
 
                     <th>Actions</th>
                 </tr>
+
                 <c:forEach var="Ticket" items="${Tickets}">
                     <tr>
                         <td>${Ticket.id}</td>
@@ -47,17 +48,45 @@
             </table>
         </td>
         <td width="100"></td>
-        <td>
+        <td valign="top">
             <table border="1" bgcolor="#f0ffff">
                 <caption>Ticket Type</caption>
                 <tr>
                     <th>Name</th>
                     <th>Actions</th>
                 </tr>
+                <c:if test="${TicketTypeName == null}">
+                    <tr>
+                        <form action="/CruiseCompany" method="post">
+                            <td>
+                                <input type="hidden" name="command" value="addTicketType">
+                                <input type="text" name="TicketTypeName">
+                            </td>
+                            <td>
+                                <input type="submit" name="Add" value="Add">
+                            </td>
+                        </form>
+                    </tr>
+                </c:if>
+                <c:if test="${TicketTypeName != null}">
+                    <tr>
+                        <form action="/CruiseCompany" method="post">
+                            <td>
+                                <input type="hidden" name="command" value="updateTicketType">
+                                <input type="hidden" name="idTicketType" value="${idTicketType}">
+                                <input type="text" name="TicketTypeName" value="${TicketTypeName}">
+                            </td>
+                            <td>
+                                <input type="submit" name="Update" value="Update">
+                            </td>
+                        </form>
+                    </tr>
+                </c:if>
                 <c:forEach var="TicketType" items="${TicketTypes}">
                     <tr>
                         <td>${TicketType.name}</td>
-                        <td>Actions</td>
+                        <td><a href="/CruiseCompany?command=updateTicketType&idTicketType=${TicketType.id}"><button>Update</button></a>
+                            <a href="/CruiseCompany?command=deleteTicketType&idTicketType=${TicketType.id}"><button>Delete</button></a></td>
                     </tr>
                 </c:forEach>
             </table>
