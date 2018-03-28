@@ -55,10 +55,39 @@
                     <th>Name</th>
                     <th>Actions</th>
                 </tr>
+                <c:if test="${ShipTypeName == null}">
+                <tr>
+                    <form action="/CruiseCompany" method="post">
+                        <td>
+                        <input type="hidden" name="command" value="addShipType">
+                        <input type="text" name="ShipTypeName">
+                        </td>
+                        <td>
+                            <input type="submit" name="Add" value="Add">
+                        </td>
+                    </form>
+                </tr>
+                </c:if>
+                <c:if test="${ShipTypeName != null}">
+                    <tr>
+                        <form action="/CruiseCompany" method="post">
+                            <td>
+                                <input type="hidden" name="command" value="updateShipType">
+                                <input type="hidden" name="ShipTypeId" value="${ShipTypeId}">
+                                <input type="text" name="ShipTypeName" value="${ShipTypeName}">
+                            </td>
+                            <td>
+                                <input type="submit" name="Update" value="Update">
+                            </td>
+                        </form>
+                    </tr>
+                </c:if>
                 <c:forEach var="ShipType" items="${ShipTypes}">
                     <tr>
                         <td>${ShipType.name}</td>
-                        <td>Actions</td>
+                        <td><a href="/CruiseCompany?command=updateShipType&ShipTypeId=${ShipType.id}"><button>Update</button></a>
+                        <a href="/CruiseCompany?command=deleteShipType&ShipTypeId=${ShipType.id}"><button>Delete</button></a>
+                        </td>
                     </tr>
                 </c:forEach>
             </table>
