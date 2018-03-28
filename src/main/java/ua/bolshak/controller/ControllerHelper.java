@@ -27,6 +27,9 @@ public class ControllerHelper {
         commands.put("addShipType", new AddShipTypeCommand());
         commands.put("deleteShipType", new DeleteShipTypeCommand());
         commands.put("updateShipType", new UpdateShipType());
+        commands.put("addBonus", new AddBonusCommand());
+        commands.put("deleteBonus", new DeleteBonusCommand());
+        commands.put("updateBonus", new UpdateBonusCommand());
     }
 
     public static ControllerHelper getInstance() {

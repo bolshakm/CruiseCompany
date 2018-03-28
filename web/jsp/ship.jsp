@@ -98,10 +98,38 @@
                     <th>Name</th>
                     <th>Actions</th>
                 </tr>
+                <c:if test="${BonusName == null}">
+                    <tr>
+                        <form action="/CruiseCompany" method="post">
+                            <td>
+                                <input type="hidden" name="command" value="addBonus">
+                                <input type="text" name="BonusName">
+                            </td>
+                            <td>
+                                <input type="submit" name="Add" value="Add">
+                            </td>
+                        </form>
+                    </tr>
+                </c:if>
+                <c:if test="${BonusName != null}">
+                    <tr>
+                        <form action="/CruiseCompany" method="post">
+                            <td>
+                                <input type="hidden" name="command" value="updateBonus">
+                                <input type="hidden" name="idBonus" value="${idBonus}">
+                                <input type="text" name="BonusName" value="${BonusName}">
+                            </td>
+                            <td>
+                                <input type="submit" name="Update" value="Update">
+                            </td>
+                        </form>
+                    </tr>
+                </c:if>
                 <c:forEach var="Bonus" items="${Bonuses}">
                     <tr>
                         <td>${Bonus.name}</td>
-                        <td>Actions</td>
+                        <td><a href="/CruiseCompany?command=updateBonus&idBonus=${Bonus.id}"><button>Update</button></a>
+                            <a href="/CruiseCompany?command=deleteBonus&idBonus=${Bonus.id}"><button>Delete</button></a> </td>
                     </tr>
                 </c:forEach>
             </table>
