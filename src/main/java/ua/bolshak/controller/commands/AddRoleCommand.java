@@ -8,18 +8,12 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
-public class UpdateRoleCommand implements ICommand{
+public class AddRoleCommand implements ICommand {
     @Override
     public String execute(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException {
-        Role role = RoleService.findById(Integer.parseInt(request.getParameter("idRole")));
-        String name = request.getParameter("RoleName");
-        if (name == null){
-            request.setAttribute("idRole", role.getId());
-            request.setAttribute("RoleName", role.getName());
-        } else {
-            role.setName(name);
-            RoleService.update(role);
-        }
+        Role role = new Role();
+        role.setName(request.getParameter("RoleName"));
+        RoleService.add(role);
         return new ToUserPage().execute(request, response);
     }
 }

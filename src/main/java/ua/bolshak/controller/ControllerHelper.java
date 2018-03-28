@@ -30,6 +30,8 @@ public class ControllerHelper {
         commands.put("addBonus", new AddBonusCommand());
         commands.put("deleteBonus", new DeleteBonusCommand());
         commands.put("updateBonus", new UpdateBonusCommand());
+        commands.put("addRole", new AddRoleCommand());
+        commands.put("deleteRole", new DeleteRoleCommand());
     }
 
     public static ControllerHelper getInstance() {

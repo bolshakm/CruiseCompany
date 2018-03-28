@@ -48,18 +48,38 @@
                     <th>Name</th>
                     <th>Actions</th>
                 </tr>
-                <form action="${pageContext.request.contextPath}/CruiseCompany" method="post">
+                <c:if test="${RoleName == null}">
                     <tr>
-                        <td><input name="roleName"></td>
-                        <td><input type="submit" name="Add" value="Add">
-                            <%--<input type="submit" name="Found" value="Found"></td>--%>
+                        <form action="/CruiseCompany" method="post">
+                            <td>
+                                <input type="hidden" name="command" value="addRole">
+                                <input type="text" name="RoleName">
+                            </td>
+                            <td>
+                                <input type="submit" name="Add" value="Add">
+                            </td>
+                        </form>
                     </tr>
-                </form>
+                </c:if>
+                <c:if test="${RoleName != null}">
+                    <tr>
+                        <form action="/CruiseCompany" method="post">
+                            <td>
+                                <input type="hidden" name="command" value="updateRole">
+                                <input type="hidden" name="idRole" value="${idRole}">
+                                <input type="text" name="RoleName" value="${RoleName}">
+                            </td>
+                            <td>
+                                <input type="submit" name="Update" value="Update">
+                            </td>
+                        </form>
+                    </tr>
+                </c:if>
                 <c:forEach var="Role" items="${Roles}">
                     <tr>
                         <td>${Role.name}</td>
-                        <td><a href="CruiseCompany?command=updateRole&selectedRole=${Role.id}">Update</a>
-                            <a href="CruiseCompany?command=deleteRole&selectedRole=${Role.id }">Delete</a></td>
+                        <td><a href="CruiseCompany?command=updateRole&idRole=${Role.id}"><button>Update</button></a>
+                            <a href="CruiseCompany?command=deleteRole&idRole=${Role.id }"><button>Delete</button></a></td>
                     </tr>
                 </c:forEach>
             </table>
