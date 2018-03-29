@@ -25,12 +25,12 @@ public class ExcursionService {
         return DaoFactory.getExcursionDao().findById(id);
     }
 
-    public static void add(Excursion excursion){
-        DaoFactory.getExcursionDao().add(excursion);
+    public static void add(Excursion excursion, Port port){
+        DaoFactory.getExcursionDao().add(excursion, port);
     }
 
-    public static void update(Excursion excursion){
-        DaoFactory.getExcursionDao().update(excursion);
+    public static void update(Excursion excursion, Port port){
+        DaoFactory.getExcursionDao().update(excursion, port);
     }
 
     public static void delete(Excursion excursion){

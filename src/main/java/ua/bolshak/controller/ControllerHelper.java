@@ -13,7 +13,6 @@ public class ControllerHelper {
     private ControllerHelper() {
         commands.put("login", new LoginCommand());
         commands.put("logout", new LogoutCommand());
-//        commands.put("redirect", new RedirectCommand());
         commands.put("updateRole", new UpdateRoleCommand());
         commands.put("registration", new RegistrationCommand());
         commands.put("toCruisesPage", new ToCruisesPage());
@@ -38,6 +37,9 @@ public class ControllerHelper {
         commands.put("addPort", new AddPortCommand());
         commands.put("deletePort", new DeletePortCommand());
         commands.put("updatePort", new UpdatePortCommand());
+        commands.put("addExcursion", new AddExcursionCommand());
+        commands.put("deleteExcursion", new DeleteExcursionCommand());
+        commands.put("updateExcursion", new UpdateExcursionCommand());
     }
 
     public static ControllerHelper getInstance() {

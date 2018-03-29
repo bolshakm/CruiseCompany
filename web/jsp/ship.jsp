@@ -20,13 +20,13 @@
         <td>
             <table border="1">
                 <caption>Ships</caption>
+                <tr bgcolor="#7fffd4" align="right"><a href="/CruiseCompany?command=toShipCard"><button>Add</button></a></tr>
                 <tr>
                     <th>Name</th>
                     <th>Number</th>
                     <th>Number of seats</th>
                     <th>Price per seats</th>
                     <th>Ship type</th>
-                    <th>Bonuses</th>
                     <th>Cruises</th>
                     <th>Actions</th>
                 </tr>
@@ -37,12 +37,11 @@
                         <td>${Ship.numberOfSeats}</td>
                         <td>${Ship.pricePerSeat}</td>
                         <td>${Ship.type.name}</td>
-                        <td><c:forEach var="bonus" items="${Ship.bonuses}">
-                            ${bonus.name}<br/>
-                        </c:forEach></td>
                         <td><c:forEach var="cruise" items="${Ship.cruises}">
                             ${cruise.name}<br/>
                         </c:forEach></td>
+                        <td><a href="/CruiseCompany?command=updateShip&idShip=${Ship.id}"><button>Update</button></a>
+                            <a href="/CruiseCompany?command=deleteShip&idShip=${Ship.id}"><button>Delete</button></a></td>
                     </tr>
                 </c:forEach>
             </table>

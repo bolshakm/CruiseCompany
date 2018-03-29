@@ -16,9 +16,9 @@ public interface ExcursionIDao {
 
     Excursion findById(int id);
 
-    void add(Excursion excursion);
+    void add(Excursion excursion, Port port);
 
-    void update(Excursion excursion);
+    void update(Excursion excursion, Port port);
 
     void delete(Excursion excursion);
 }

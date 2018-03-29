@@ -101,12 +101,12 @@ public class ExcursionDao implements ExcursionIDao{
     }
 
     @Override
-    public void add(Excursion excursion) {
+    public void add(Excursion excursion, Port port) {
         try(Connection connection = MysqlConnectionPool.getConnection();
             PreparedStatement preparedStatement = connection.prepareStatement(SqlQuery.ADD_EXCURSION)){
             preparedStatement.setString(1, excursion.getName());
             preparedStatement.setDouble(2, excursion.getPrice());
-            preparedStatement.setInt(3, excursion.getPort().getId());
+            preparedStatement.setInt(3, port.getId());
             preparedStatement.executeUpdate();
         } catch (SQLException e) {
             LOGGER.error(e.getMessage());
@@ -114,12 +114,12 @@ public class ExcursionDao implements ExcursionIDao{
     }
 
     @Override
-    public void update(Excursion excursion) {
+    public void update(Excursion excursion, Port port) {
         try(Connection connection = MysqlConnectionPool.getConnection();
             PreparedStatement preparedStatement = connection.prepareStatement(SqlQuery.UPDATE_EXCURSION)){
             preparedStatement.setString(1, excursion.getName());
             preparedStatement.setDouble(2, excursion.getPrice());
-            preparedStatement.setInt(3, excursion.getPort().getId());
+            preparedStatement.setInt(3, port.getId());
             preparedStatement.setInt(4, excursion.getId());
             preparedStatement.executeUpdate();
         } catch (SQLException e) {
