@@ -26,15 +26,15 @@ public class PortService {
         return DaoFactory.getPortDao().findByExcursion(excursion);
     }
 
-    private static void add (Port port){
+    public static void add (Port port){
         DaoFactory.getPortDao().add(port);
     }
 
-    private static void update(Port port){
+    public static void update(Port port){
         DaoFactory.getPortDao().update(port);
     }
 
-    private static void delete(Port port){
+    public static void delete(Port port){
         DaoFactory.getPortDao().delete(port);
     }
 }

@@ -9,7 +9,7 @@ public class Excursion {
     private int id;
     private String name;
     private double price;
-    private Port ports;
+    private Port port;
 
     public int getId() {
         return id;
@@ -35,12 +35,12 @@ public class Excursion {
         this.price = price;
     }
 
-    public Port getPorts() {
+    public Port getPort() {
         return PortService.findByExcursion(this);
     }
 
-    public void setPorts(Port ports) {
-        this.ports = ports;
+    public void setPort(Port port) {
+        this.port = port;
     }
 
     @Override

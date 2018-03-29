@@ -35,6 +35,9 @@ public class ControllerHelper {
         commands.put("addTicketType", new AddTicketTypeCommand());
         commands.put("deleteTicketType", new DeleteTicketTypeCommand());
         commands.put("updateTicketType", new UpdateTicketTypeCommand());
+        commands.put("addPort", new AddPortCommand());
+        commands.put("deletePort", new DeletePortCommand());
+        commands.put("updatePort", new UpdatePortCommand());
     }
 
     public static ControllerHelper getInstance() {
