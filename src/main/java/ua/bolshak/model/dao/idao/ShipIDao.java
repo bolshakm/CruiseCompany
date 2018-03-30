@@ -17,11 +17,19 @@ public interface ShipIDao {
 
     Ship findById(int id);
 
+    Ship findByNumber(String number);
+
     Ship findByCruise(Cruise cruise);
 
-    void add(Ship ship);
+    void add(Ship ship, ShipType shipType);
 
-    void update(Ship ship);
+    void addBonusesForShip(Ship ship, List<Bonus> bonuses);
+
+    void update(Ship ship, ShipType shipType);
+
+    void updateBonuses(Ship ship, List<Bonus> bonuses);
 
     void delete(Ship ship);
+
+    void deleteBonuses(Ship ship);
 }

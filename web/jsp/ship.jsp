@@ -17,7 +17,7 @@
 <c:import url="header.jsp"/>
 <table align="center">
     <tr>
-        <td>
+        <td valign="top">
             <table border="1">
                 <caption>Ships</caption>
                 <tr bgcolor="#7fffd4" align="right"><a href="/CruiseCompany?command=toShipCard"><button>Add</button></a></tr>
@@ -27,6 +27,7 @@
                     <th>Number of seats</th>
                     <th>Price per seats</th>
                     <th>Ship type</th>
+                    <th>Bonuses</th>
                     <th>Cruises</th>
                     <th>Actions</th>
                 </tr>
@@ -37,17 +38,20 @@
                         <td>${Ship.numberOfSeats}</td>
                         <td>${Ship.pricePerSeat}</td>
                         <td>${Ship.type.name}</td>
+                        <td><c:forEach var="bonus" items="${Ship.bonuses}">
+                            ${bonus.name}<br/>
+                        </c:forEach> </td>
                         <td><c:forEach var="cruise" items="${Ship.cruises}">
                             ${cruise.name}<br/>
                         </c:forEach></td>
-                        <td><a href="/CruiseCompany?command=updateShip&idShip=${Ship.id}"><button>Update</button></a>
+                        <td><a href="/CruiseCompany?command=toUpdateShipCard&idShip=${Ship.id}"><button>Update</button></a>
                             <a href="/CruiseCompany?command=deleteShip&idShip=${Ship.id}"><button>Delete</button></a></td>
                     </tr>
                 </c:forEach>
             </table>
         </td>
         <td width="100"></td>
-        <td>
+        <td valign="top">
             <table border="1" bgcolor="#f0ffff">
                 <caption>Ship Type</caption>
                 <tr>

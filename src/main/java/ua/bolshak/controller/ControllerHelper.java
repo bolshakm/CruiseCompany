@@ -40,6 +40,11 @@ public class ControllerHelper {
         commands.put("addExcursion", new AddExcursionCommand());
         commands.put("deleteExcursion", new DeleteExcursionCommand());
         commands.put("updateExcursion", new UpdateExcursionCommand());
+        commands.put("toShipCard", new ToShipCardCommand());
+        commands.put("addShip", new AddShipCommand());
+        commands.put("deleteShip", new DeleteShipCommand());
+        commands.put("toUpdateShipCard", new ToUpdateShipCard());
+        commands.put("updateShip", new UpdateShipCommand());
     }
 
     public static ControllerHelper getInstance() {
