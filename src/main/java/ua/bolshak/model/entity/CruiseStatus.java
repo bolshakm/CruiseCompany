@@ -1,6 +1,5 @@
 package ua.bolshak.model.entity;
 
-import ua.bolshak.model.service.CruiseService;
 
 import java.util.List;
 import java.util.Objects;
@@ -27,7 +26,7 @@ public class CruiseStatus {
     }
 
     public List<Cruise> getCruises() {
-        return CruiseService.findAllByStatus(this);
+        return cruises;
     }
 
     public void setCruises(List<Cruise> cruises) {

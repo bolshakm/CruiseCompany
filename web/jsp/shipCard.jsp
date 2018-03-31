@@ -63,10 +63,8 @@
         <td>
             <c:forEach var="Bonus" items="${Bonuses}">
                 <c:if test="${fn:contains(selectedBonuses, Bonus)}">
-                <%--<c:if test="${fn:contains(Bonus, selectedBonuses)}">--%>
                     <input type="checkbox" checked name="selectedBonuses" value="${Bonus.id}">${Bonus.name}<br/>
                 </c:if>
-                <%--<c:if test="${!fn:contains(Bonus, selectedBonuses)}">--%>
                 <c:if test="${!fn:contains(selectedBonuses, Bonus)}">
                     <input type="checkbox" name="selectedBonuses" value="${Bonus.id}">${Bonus.name}<br/>
                 </c:if>

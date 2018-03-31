@@ -9,14 +9,18 @@ import java.util.List;
 public class RoleService {
 
     public static List<Role> findAll(){
-        return DaoFactory.getRoleDao().findAll();
+        return getFull(DaoFactory.getRoleDao().findAll());
     }
 
     public static Role findById(int id){
-        return DaoFactory.getRoleDao().findById(id);
+        return getFull(DaoFactory.getRoleDao().findById(id));
     }
 
     public static Role findByUser(User user){
+        return getFull(DaoFactory.getRoleDao().findByUser(user));
+    }
+
+    public static Role findLazyByUser(User user){
         return DaoFactory.getRoleDao().findByUser(user);
     }
 
@@ -32,4 +36,15 @@ public class RoleService {
         DaoFactory.getRoleDao().delete(role);
     }
 
+    public static Role getFull(Role role){
+        role.setUsers(UserService.findAllLazyByRole(role));
+        return role;
+    }
+
+    public static List<Role> getFull(List<Role> roles){
+        for (Role role : roles) {
+            role.setUsers(UserService.findAllLazyByRole(role));
+        }
+        return roles;
+    }
 }

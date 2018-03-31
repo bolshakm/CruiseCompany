@@ -1,9 +1,5 @@
 package ua.bolshak.model.entity;
 
-import ua.bolshak.model.service.CruiseStatusService;
-import ua.bolshak.model.service.PortService;
-import ua.bolshak.model.service.ShipService;
-import ua.bolshak.model.service.TicketService;
 
 import java.sql.Date;
 import java.util.List;
@@ -15,11 +11,11 @@ public class Cruise {
     private String name;
     private Date from;
     private Date to;
-    private double money;
     private Ship ship;
     private CruiseStatus status;
     private List<Ticket> tickets;
     private List<Port> ports;
+    private List<User> users;
 
     public int getId() {
         return id;
@@ -53,16 +49,8 @@ public class Cruise {
         this.to = to;
     }
 
-    public double getMoney() {
-        return money;
-    }
-
-    public void setMoney(double money) {
-        this.money = money;
-    }
-
     public Ship getShip() {
-        return ShipService.findByCruise(this);
+        return ship;
     }
 
     public void setShip(Ship ship) {
@@ -70,7 +58,7 @@ public class Cruise {
     }
 
     public CruiseStatus getStatus() {
-        return CruiseStatusService.findByCruise(this);
+        return status;
     }
 
     public void setStatus(CruiseStatus status) {
@@ -78,7 +66,7 @@ public class Cruise {
     }
 
     public List<Ticket> getTickets() {
-        return TicketService.findAllByCruise(this);
+        return tickets;
     }
 
     public void setTickets(List<Ticket> tickets) {
@@ -86,11 +74,19 @@ public class Cruise {
     }
 
     public List<Port> getPorts() {
-        return PortService.findAllByCruise(this);
+        return ports;
     }
 
     public void setPorts(List<Port> ports) {
         this.ports = ports;
+    }
+
+    public List<User> getUsers() {
+        return users;
+    }
+
+    public void setUsers(List<User> users) {
+        this.users = users;
     }
 
     @Override
@@ -98,8 +94,7 @@ public class Cruise {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Cruise cruise = (Cruise) o;
-        return Double.compare(cruise.money, money) == 0 &&
-                Objects.equals(name, cruise.name) &&
+        return Objects.equals(name, cruise.name) &&
                 Objects.equals(from, cruise.from) &&
                 Objects.equals(to, cruise.to);
     }
@@ -107,7 +102,7 @@ public class Cruise {
     @Override
     public int hashCode() {
 
-        return Objects.hash(name, from, to, money);
+        return Objects.hash(name, from, to);
     }
 
     @Override
@@ -117,7 +112,6 @@ public class Cruise {
                 ", name='" + name + '\'' +
                 ", from=" + from +
                 ", to=" + to +
-                ", money=" + money +
                 '}';
     }
 }

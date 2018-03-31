@@ -1,8 +1,5 @@
 package ua.bolshak.model.entity;
 
-import ua.bolshak.model.service.ShipService;
-import ua.bolshak.model.service.TicketService;
-
 import java.util.List;
 import java.util.Objects;
 
@@ -30,7 +27,7 @@ public class Bonus {
     }
 
     public List<Ticket> getTickets() {
-        return TicketService.findAllByBonus(this);
+        return tickets;
     }
 
     public void setTickets(List<Ticket> tickets) {
@@ -38,7 +35,7 @@ public class Bonus {
     }
 
     public List<Ship> getShips() {
-        return ShipService.findAllByBonus(this);
+        return ships;
     }
 
     public void setShips(List<Ship> ships) {

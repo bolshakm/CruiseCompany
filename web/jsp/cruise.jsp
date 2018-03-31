@@ -9,16 +9,16 @@
 <p align="center">Hello ${user.name}</p>
 <c:import url="header.jsp"/>
 <table align="center">
+
     <tr>
         <td valign="top">
             <table border="1" bgcolor="#7fffd4">
                 <caption>Cruises</caption>
+                <tr bgcolor="#7fffd4" align="right"><a href="/CruiseCompany?command=toCruiseCard"><button>Add</button></a></tr>
                 <tr>
                     <th>Name</th>
                     <th>From</th>
                     <th>To</th>
-                    <%--Only for administrator--%>
-                    <th>Income money</th>
                     <th>Ship number</th>
                     <th>Cruise status</th>
                     <th>Ticket/Seats</th>
@@ -30,8 +30,6 @@
                         <td>${Cruise.name}</td>
                         <td>${Cruise.from}</td>
                         <td>${Cruise.to}</td>
-                            <%--Only for administrator--%>
-                        <td>${Cruise.money}</td>
                         <td>${Cruise.ship.number}</td>
                         <td>${Cruise.status.name}</td>
                         <td>${fn:length(Cruise.tickets)}/${Cruise.ship.numberOfSeats}</td>

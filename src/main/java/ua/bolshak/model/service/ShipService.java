@@ -12,26 +12,38 @@ import java.util.List;
 public class ShipService {
 
     public static List<Ship> findAll(){
-        return DaoFactory.getShipDao().findAll();
+        return  getFull(DaoFactory.getShipDao().findAll());
     }
 
     public static List<Ship> findAllByShipType(ShipType shipType){
-        return DaoFactory.getShipDao().findAllByShipType(shipType);
+        return getFull(DaoFactory.getShipDao().findAllByShipType(shipType));
     }
 
     public static List<Ship> findAllByBonus(Bonus bonus){
-        return DaoFactory.getShipDao().findAllByBonus(bonus);
+        return  getFull(DaoFactory.getShipDao().findAllByBonus(bonus));
     }
 
     public static Ship findById(int id){
-        return DaoFactory.getShipDao().findById(id);
+        return  getFull(DaoFactory.getShipDao().findById(id));
     }
 
     public static Ship findByNumber(String number){
-        return DaoFactory.getShipDao().findByNumber(number);
+        return  getFull(DaoFactory.getShipDao().findByNumber(number));
     }
 
     public static Ship findByCruise(Cruise cruise){
+        return  getFull(DaoFactory.getShipDao().findByCruise(cruise));
+    }
+
+    public static List<Ship> findAllLazyByShipType(ShipType shipType){
+        return DaoFactory.getShipDao().findAllByShipType(shipType);
+    }
+
+    public static List<Ship> findAllLazyByBonus(Bonus bonus){
+        return DaoFactory.getShipDao().findAllByBonus(bonus);
+    }
+
+    public static Ship findLazyByCruise(Cruise cruise){
         return DaoFactory.getShipDao().findByCruise(cruise);
     }
 
@@ -64,4 +76,21 @@ public class ShipService {
         DaoFactory.getShipDao().delete(ship);
     }
 
+
+    public static Ship getFull(Ship ship){
+        ship.setBonuses(BonusService.findAllLazyByShip(ship));
+        ship.setCruises(CruiseService.findAllLazyByShip(ship));
+        ship.setType(ShipTypeService.findLazyByShip(ship));
+        return ship;
+    }
+
+    public static List<Ship> getFull(List<Ship> ships){
+        for (Ship ship :
+                ships) {
+            ship.setBonuses(BonusService.findAllLazyByShip(ship));
+            ship.setCruises(CruiseService.findAllLazyByShip(ship));
+            ship.setType(ShipTypeService.findLazyByShip(ship));
+        }
+        return ships;
+    }
 }

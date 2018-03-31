@@ -10,14 +10,22 @@ import java.util.List;
 public class ExcursionService {
 
     public static List<Excursion> findAll(){
-        return DaoFactory.getExcursionDao().findAll();
+        return getFull(DaoFactory.getExcursionDao().findAll());
     }
 
     public static List<Excursion> findAllByPort(Port port){
-        return DaoFactory.getExcursionDao().findAllByPort(port);
+        return getFull(DaoFactory.getExcursionDao().findAllByPort(port));
     }
 
     public static List<Excursion> findAllByTicket(Ticket ticket){
+        return getFull(DaoFactory.getExcursionDao().findAllByTicket(ticket));
+    }
+
+    public static List<Excursion> findAllLazyByPort(Port port){
+        return DaoFactory.getExcursionDao().findAllByPort(port);
+    }
+
+    public static List<Excursion> findAllLazyByTicket(Ticket ticket){
         return DaoFactory.getExcursionDao().findAllByTicket(ticket);
     }
 
@@ -35,6 +43,20 @@ public class ExcursionService {
 
     public static void delete(Excursion excursion){
         DaoFactory.getExcursionDao().delete(excursion);
+    }
+
+    public static Excursion getFull(Excursion excursion){
+        excursion.setPort(PortService.findLazyByExcursion(excursion));
+        excursion.setTickets(TicketService.findAllLazyByExcursion(excursion));
+        return excursion;
+    }
+
+    public static List<Excursion> getFull(List<Excursion> excursions){
+        for (Excursion excursion : excursions) {
+            excursion.setPort(PortService.findLazyByExcursion(excursion));
+            excursion.setTickets(TicketService.findAllLazyByExcursion(excursion));
+        }
+        return excursions;
     }
 
 }

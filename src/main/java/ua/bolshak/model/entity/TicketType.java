@@ -1,7 +1,5 @@
 package ua.bolshak.model.entity;
 
-import ua.bolshak.model.service.TicketService;
-
 import java.util.List;
 import java.util.Objects;
 
@@ -10,6 +8,7 @@ public class TicketType {
     private String name;
     private double price;
     private List<Ticket> tickets;
+    private List<User> users;
 
     public int getId() {
         return id;
@@ -36,11 +35,19 @@ public class TicketType {
     }
 
     public List<Ticket> getTickets() {
-        return TicketService.findAllByTicketType(this);
+        return tickets;
     }
 
     public void setTickets(List<Ticket> tickets) {
         this.tickets = tickets;
+    }
+
+    public List<User> getUsers() {
+        return users;
+    }
+
+    public void setUsers(List<User> users) {
+        this.users = users;
     }
 
     @Override

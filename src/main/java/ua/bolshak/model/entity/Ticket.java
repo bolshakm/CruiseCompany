@@ -1,10 +1,5 @@
 package ua.bolshak.model.entity;
 
-import ua.bolshak.model.service.BonusService;
-import ua.bolshak.model.service.CruiseService;
-import ua.bolshak.model.service.TicketTypeService;
-import ua.bolshak.model.service.UserService;
-
 import java.util.List;
 import java.util.Objects;
 
@@ -14,7 +9,7 @@ public class Ticket {
     private Cruise cruise;
     private TicketType ticketType;
     private List<Bonus> bonuses;
-    private double price;
+    private List<Excursion> excursions;
 
     public int getId() {
         return id;
@@ -25,7 +20,7 @@ public class Ticket {
     }
 
     public User getUser() {
-        return UserService.findByTicket(this);
+        return user;
     }
 
     public void setUser(User user) {
@@ -33,7 +28,7 @@ public class Ticket {
     }
 
     public Cruise getCruise() {
-        return CruiseService.findByTicket(this);
+        return cruise;
     }
 
     public void setCruise(Cruise cruise) {
@@ -41,7 +36,7 @@ public class Ticket {
     }
 
     public TicketType getTicketType() {
-        return TicketTypeService.findByTicket(this);
+        return ticketType;
     }
 
     public void setTicketType(TicketType ticketType) {
@@ -49,19 +44,19 @@ public class Ticket {
     }
 
     public List<Bonus> getBonuses() {
-        return BonusService.findAllByTicket(this);
+        return bonuses;
     }
 
     public void setBonuses(List<Bonus> bonuses) {
         this.bonuses = bonuses;
     }
 
-    public double getPrice() {
-        return price;
+    public List<Excursion> getExcursions() {
+        return excursions;
     }
 
-    public void setPrice(double price) {
-        this.price = price;
+    public void setExcursions(List<Excursion> excursions) {
+        this.excursions = excursions;
     }
 
     @Override
@@ -69,13 +64,12 @@ public class Ticket {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Ticket ticket = (Ticket) o;
-        return id == ticket.id &&
-                Double.compare(ticket.price, price) == 0;
+        return id == ticket.id;
     }
 
     @Override
     public int hashCode() {
 
-        return Objects.hash(id, price);
+        return Objects.hash(id);
     }
 }

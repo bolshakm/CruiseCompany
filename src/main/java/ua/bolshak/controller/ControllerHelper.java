@@ -45,6 +45,9 @@ public class ControllerHelper {
         commands.put("deleteShip", new DeleteShipCommand());
         commands.put("toUpdateShipCard", new ToUpdateShipCard());
         commands.put("updateShip", new UpdateShipCommand());
+        commands.put("toCruiseCard", new ToCruiseCard());
+        commands.put("addCruise", new AddCruiseCommand());
+        commands.put("updateCruise", new UpdateCruiseCommand());
     }
 
     public static ControllerHelper getInstance() {

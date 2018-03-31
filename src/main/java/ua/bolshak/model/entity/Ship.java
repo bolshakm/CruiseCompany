@@ -1,9 +1,5 @@
 package ua.bolshak.model.entity;
 
-import ua.bolshak.model.service.BonusService;
-import ua.bolshak.model.service.CruiseService;
-import ua.bolshak.model.service.ShipTypeService;
-
 import java.util.List;
 import java.util.Objects;
 
@@ -58,7 +54,7 @@ public class Ship {
     }
 
     public ShipType getType() {
-        return ShipTypeService.findByShip(this);
+        return type;
     }
 
     public void setType(ShipType type) {
@@ -66,7 +62,7 @@ public class Ship {
     }
 
     public List<Bonus> getBonuses() {
-        return BonusService.findAllByShip(this);
+        return bonuses;
     }
 
     public void setBonuses(List<Bonus> bonuses) {
@@ -74,7 +70,7 @@ public class Ship {
     }
 
     public List<Cruise> getCruises() {
-        return CruiseService.findAllByShip(this);
+        return cruises;
     }
 
     public void setCruises(List<Cruise> cruises) {

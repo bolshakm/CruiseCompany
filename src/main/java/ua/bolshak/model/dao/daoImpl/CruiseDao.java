@@ -26,7 +26,6 @@ public class CruiseDao implements CruiseIDao{
         cruise.setName(resultSet.getString(ColumnName.CRUISE_NAME));
         cruise.setFrom(resultSet.getDate(ColumnName.CRUISE_FROM));
         cruise.setTo(resultSet.getDate(ColumnName.CRUISE_TO));
-        cruise.setMoney(resultSet.getDouble(ColumnName.INCOME_OF_MONEY));
         return cruise;
     }
 
@@ -161,9 +160,8 @@ public class CruiseDao implements CruiseIDao{
             preparedStatement.setString(1, cruise.getName());
             preparedStatement.setDate(2,cruise.getFrom());
             preparedStatement.setDate(3, cruise.getTo());
-            preparedStatement.setDouble(4, cruise.getMoney());
-            preparedStatement.setInt(5, cruise.getShip().getId());
-            preparedStatement.setInt(6, cruise.getStatus().getId());
+            preparedStatement.setInt(4, cruise.getShip().getId());
+            preparedStatement.setInt(5, cruise.getStatus().getId());
             preparedStatement.executeUpdate();
         } catch (SQLException e) {
             LOGGER.error(e.getMessage());
@@ -177,10 +175,9 @@ public class CruiseDao implements CruiseIDao{
             preparedStatement.setString(1, cruise.getName());
             preparedStatement.setDate(2,cruise.getFrom());
             preparedStatement.setDate(3, cruise.getTo());
-            preparedStatement.setDouble(4, cruise.getMoney());
-            preparedStatement.setInt(5, cruise.getShip().getId());
-            preparedStatement.setInt(6, cruise.getStatus().getId());
-            preparedStatement.setInt(7, cruise.getId());
+            preparedStatement.setInt(4, cruise.getShip().getId());
+            preparedStatement.setInt(5, cruise.getStatus().getId());
+            preparedStatement.setInt(6, cruise.getId());
             preparedStatement.executeUpdate();
         } catch (SQLException e) {
             LOGGER.error(e.getMessage());
