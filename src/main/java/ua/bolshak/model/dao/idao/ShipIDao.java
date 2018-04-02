@@ -21,15 +21,10 @@ public interface ShipIDao {
 
     Ship findByCruise(Cruise cruise);
 
-    void add(Ship ship, ShipType shipType);
+    void add(Ship ship);
 
-    void addBonusesForShip(Ship ship, List<Bonus> bonuses);
-
-    void update(Ship ship, ShipType shipType);
-
-    void updateBonuses(Ship ship, List<Bonus> bonuses);
+    void update(Ship ship);
 
     void delete(Ship ship);
 
-    void deleteBonuses(Ship ship);
 }

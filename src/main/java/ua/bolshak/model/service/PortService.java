@@ -5,6 +5,7 @@ import ua.bolshak.model.entity.Cruise;
 import ua.bolshak.model.entity.Excursion;
 import ua.bolshak.model.entity.Port;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class PortService {
@@ -58,4 +59,13 @@ public class PortService {
         }
         return ports;
     }
+
+    public static List<Port> getListPort(String[] idPorts){
+        List<Port> ports = new ArrayList<>();
+        for (String id : idPorts) {
+            ports.add(findById(Integer.parseInt(id)));
+        }
+        return ports;
+    }
+
 }

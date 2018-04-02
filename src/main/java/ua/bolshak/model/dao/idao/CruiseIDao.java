@@ -20,6 +20,8 @@ public interface CruiseIDao {
 
     Cruise findById(int id);
 
+    Cruise findByName(String name);
+
     void add(Cruise cruise);
 
     void update(Cruise cruise);

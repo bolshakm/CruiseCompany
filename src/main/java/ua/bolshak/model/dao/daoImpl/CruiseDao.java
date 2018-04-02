@@ -154,15 +154,34 @@ public class CruiseDao implements CruiseIDao{
     }
 
     @Override
+    public Cruise findByName(String name) {
+        Cruise cruise = null;
+        try(Connection connection = MysqlConnectionPool.getConnection();
+            PreparedStatement preparedStatement = connection.prepareStatement(SqlQuery.FIND_CRUISE_BY_NAME)){
+            preparedStatement.setString(1, name);
+            try(ResultSet resultSet = preparedStatement.executeQuery()){
+                while (resultSet.next()) {
+                    cruise = initialization(resultSet);
+                }
+            }
+        } catch (SQLException e) {
+            LOGGER.error(e);
+        }
+        return cruise;
+    }
+
+    @Override
     public void add(Cruise cruise) {
         try(Connection connection = MysqlConnectionPool.getConnection();
-            PreparedStatement preparedStatement = connection.prepareStatement(SqlQuery.ADD_CRUISE)){
-            preparedStatement.setString(1, cruise.getName());
-            preparedStatement.setDate(2,cruise.getFrom());
-            preparedStatement.setDate(3, cruise.getTo());
-            preparedStatement.setInt(4, cruise.getShip().getId());
-            preparedStatement.setInt(5, cruise.getStatus().getId());
-            preparedStatement.executeUpdate();
+            PreparedStatement psForCruiseTable = connection.prepareStatement(SqlQuery.ADD_CRUISE)){
+            psForCruiseTable.setString(1, cruise.getName());
+            psForCruiseTable.setDate(2,cruise.getFrom());
+            psForCruiseTable.setDate(3, cruise.getTo());
+            psForCruiseTable.setInt(4, cruise.getShip().getId());
+            psForCruiseTable.setInt(5, cruise.getStatus().getId());
+            psForCruiseTable.executeUpdate();
+            cruise.setId(findByName(cruise.getName()).getId());
+            addPorts(cruise);
         } catch (SQLException e) {
             LOGGER.error(e.getMessage());
         }
@@ -170,8 +189,8 @@ public class CruiseDao implements CruiseIDao{
 
     @Override
     public void update(Cruise cruise) {
-        try(Connection connection = MysqlConnectionPool.getConnection();
-            PreparedStatement preparedStatement = connection.prepareStatement(SqlQuery.UPDATE_CRUISE)){
+        try(Connection connection = MysqlConnectionPool.getConnection()){
+            PreparedStatement preparedStatement = connection.prepareStatement(SqlQuery.UPDATE_CRUISE);
             preparedStatement.setString(1, cruise.getName());
             preparedStatement.setDate(2,cruise.getFrom());
             preparedStatement.setDate(3, cruise.getTo());
@@ -179,6 +198,12 @@ public class CruiseDao implements CruiseIDao{
             preparedStatement.setInt(5, cruise.getStatus().getId());
             preparedStatement.setInt(6, cruise.getId());
             preparedStatement.executeUpdate();
+            preparedStatement.close();
+            PreparedStatement psForDeletePorts = connection.prepareStatement(SqlQuery.DELETE_CRUISE_HAS_PORTS);
+            psForDeletePorts.setInt(1, cruise.getId());
+            psForDeletePorts.executeUpdate();
+            psForDeletePorts.close();
+            addPorts(cruise);
         } catch (SQLException e) {
             LOGGER.error(e.getMessage());
         }
@@ -187,10 +212,29 @@ public class CruiseDao implements CruiseIDao{
 
     @Override
     public void delete(Cruise cruise) {
-        try(Connection connection = MysqlConnectionPool.getConnection();
-            PreparedStatement preparedStatement = connection.prepareStatement(SqlQuery.DELETE_CRUISE)){
+        try(Connection connection = MysqlConnectionPool.getConnection()){
+            PreparedStatement preparedStatement = connection.prepareStatement(SqlQuery.DELETE_CRUISE_HAS_PORTS);
             preparedStatement.setInt(1, cruise.getId());
             preparedStatement.executeUpdate();
+            preparedStatement.close();
+            PreparedStatement psForDeleteCruise = connection.prepareStatement(SqlQuery.DELETE_CRUISE);
+            psForDeleteCruise.setInt(1, cruise.getId());
+            psForDeleteCruise.executeUpdate();
+            psForDeleteCruise.close();
+        } catch (SQLException e) {
+            LOGGER.error(e.getMessage());
+        }
+    }
+
+    private static void addPorts(Cruise cruise){
+        try(Connection connection = MysqlConnectionPool.getConnection();
+            PreparedStatement psForCruiseHasPortTable = connection.prepareStatement(SqlQuery.ADD_PORTS_FOR_CRUISE)){
+            for (Port port : cruise.getPorts()) {
+                psForCruiseHasPortTable.setInt(1, port.getId());
+                psForCruiseHasPortTable.setInt(2, cruise.getId());
+                psForCruiseHasPortTable.addBatch();
+            }
+            psForCruiseHasPortTable.executeBatch();
         } catch (SQLException e) {
             LOGGER.error(e.getMessage());
         }

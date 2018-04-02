@@ -15,7 +15,8 @@ public class AddExcursionCommand implements ICommand {
         Excursion excursion = new Excursion();
         excursion.setName(request.getParameter("name"));
         excursion.setPrice(Double.parseDouble(request.getParameter("price")));
-        ExcursionService.add(excursion, PortService.findById(Integer.parseInt(request.getParameter("idPort"))));
+        excursion.setPort(PortService.findById(Integer.parseInt(request.getParameter("idPort"))));
+        ExcursionService.add(excursion);
         return new ToPortsPage().execute(request, response);
     }
 }

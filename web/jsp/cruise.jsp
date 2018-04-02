@@ -36,7 +36,8 @@
                         <td><c:forEach var="port" items="${Cruise.ports}">
                             ${port.name}<br/>
                         </c:forEach></td>
-                        <td></td>
+                        <td><a href="/CruiseCompany?command=toUpdateCruise&idCruise=${Cruise.id}"><button>Update</button></a>
+                            <a href="/CruiseCompany?command=deleteCruise&idCruise=${Cruise.id}"><button>Delete</button></a></td>
                     </tr>
                 </c:forEach>
             </table>

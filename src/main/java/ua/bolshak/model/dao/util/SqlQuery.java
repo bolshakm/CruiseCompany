@@ -17,9 +17,12 @@ public interface SqlQuery {
     String FIND_ALL_CRUISES_BY_USER = "SELECT cruises.* from cruises JOIN tickets t ON cruises.id_cruise = t.cruises_id_cruise WHERE users_id_user = ?";
     String FIND_CRUISE_BY_TICKET = "SELECT cruises.* FROM cruises JOIN tickets t ON cruises.id_cruise = t.cruises_id_cruise WHERE t.id_ticket = ?";
     String FIND_CRUISE_BY_ID = "SELECT cruises.* FROM cruises WHERE id_cruise = ?";
-    String ADD_CRUISE = "INSERT INTO cruises (cruise_name, cruise_from, cruise_to, income_of_money, ships_id_ship, cruise_statuses_id_cruise_status) VALUES (?, ?, ?, ?, ?, ?";
-    String UPDATE_CRUISE = "UPDATE cruises SET cruise_name = ?, cruise_from = ?, cruise_to = ?, income_of_money = ?, ships_id_ship = ?, cruise_statuses_id_cruise_status = ? WHERE id_cruise = ?";
+    String FIND_CRUISE_BY_NAME = "SELECT * from cruises where cruise_name = ?";
+    String ADD_CRUISE = "INSERT INTO cruises (cruise_name, cruise_from, cruise_to, ships_id_ship, cruise_statuses_id_cruise_status) VALUES (?, ?, ?, ?, ?)";
+    String ADD_PORTS_FOR_CRUISE = "INSERT INTO cruises_has_ports (ports_id_port, cruises_id_cruise) VALUES (?, ?)";
+    String UPDATE_CRUISE = "UPDATE cruises SET cruise_name = ?, cruise_from = ?, cruise_to = ?, ships_id_ship = ?, cruise_statuses_id_cruise_status = ? WHERE id_cruise = ?";
     String DELETE_CRUISE = "DELETE FROM cruises WHERE id_cruise = ?";
+    String DELETE_CRUISE_HAS_PORTS = "DELETE FROM cruises_has_ports WHERE cruises_id_cruise=?";
     //cruisesStatus table
     String FIND_ALL_CRUISE_STATUSES = "SELECT * FROM cruise_statuses";
     String FIND_CRUISE_STATUS_BY_ID = "SELECT * FROM cruise_statuses WHERE id_cruise_status = ?";
@@ -97,7 +100,7 @@ public interface SqlQuery {
     String FIND_ALL_TICKETS_BY_BONUS = "SELECT tickets.* FROM tickets JOIN tickets_has_bonuses thb ON tickets.id_ticket = thb.tickets_id_ticket WHERE thb.bonuses_id_bonus = ?";
     String FIND_ALL_TICKETS_BY_EXCURSION = "SELECT tickets.* FROM tickets JOIN tickets_has_excursions t ON tickets.id_ticket = t.tickets_id_ticket WHERE t.excursions_id_excursion = ?";
     String FIND_TICKET_BY_ID = "SELECT * FROM tickets WHERE id_ticket = ?";
-    String ADD_TICKET = "INSERT INTO tickets (users_id_user, ticket_types_id_ticket_type, cruises_id_cruise, price) VALUES (?, ?, ?, ?)";
-    String UPDATE_TICKET = "UPDATE tickets SET users_id_user = ?, ticket_types_id_ticket_type = ?, cruises_id_cruise = ?, price = ? WHERE id_ticket = ?";
+    String ADD_TICKET = "INSERT INTO tickets (users_id_user, ticket_types_id_ticket_type, cruises_id_cruise) VALUES (?, ?, ?)";
+    String UPDATE_TICKET = "UPDATE tickets SET users_id_user = ?, ticket_types_id_ticket_type = ?, cruises_id_cruise = ? WHERE id_ticket = ?";
     String DELETE_TICKET = "DELETE FROM tickets WHERE id_ticket = ?";
 }

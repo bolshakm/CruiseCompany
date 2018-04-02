@@ -6,6 +6,7 @@ import ua.bolshak.model.entity.Bonus;
 import ua.bolshak.model.entity.Ship;
 import ua.bolshak.model.entity.Ticket;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class BonusService {
@@ -62,5 +63,11 @@ public class BonusService {
         return bonuses;
     }
 
-
+    public static List<Bonus> getListBonuses(String[] idBonus){
+        List<Bonus> bonuses = new ArrayList<>();
+        for (String id : idBonus) {
+            bonuses.add(BonusService.findById(Integer.parseInt(id)));
+        }
+        return bonuses;
+    }
 }

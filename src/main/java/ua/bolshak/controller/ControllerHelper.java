@@ -48,6 +48,8 @@ public class ControllerHelper {
         commands.put("toCruiseCard", new ToCruiseCard());
         commands.put("addCruise", new AddCruiseCommand());
         commands.put("updateCruise", new UpdateCruiseCommand());
+        commands.put("deleteCruise", new DeleteCruiseCommand());
+        commands.put("toUpdateCruise", new ToUpdateCruiseCommand());
     }
 
     public static ControllerHelper getInstance() {

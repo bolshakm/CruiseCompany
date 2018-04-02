@@ -2,6 +2,7 @@ package ua.bolshak.controller.commands;
 
 import ua.bolshak.model.entity.Ship;
 import ua.bolshak.model.entity.ShipType;
+import ua.bolshak.model.service.BonusService;
 import ua.bolshak.model.service.ShipService;
 import ua.bolshak.model.service.ShipTypeService;
 
@@ -24,8 +25,9 @@ public class UpdateShipCommand implements ICommand {
         ship.setNumber(number);
         ship.setNumberOfSeats(Integer.parseInt(numberOfSeats));
         ship.setPricePerSeat(Double.parseDouble(pricePerSeat));
-        ShipType shipType = ShipTypeService.findById(Integer.parseInt(shipTypeId));
-        ShipService.updateWithBonuses(ship, shipType, bonusesId);
+        ship.setType(ShipTypeService.findById(Integer.parseInt(shipTypeId)));
+        ship.setBonuses(BonusService.getListBonuses(bonusesId));
+        ShipService.update(ship);
         return new ToShipsPage().execute(request, response);
     }
 }

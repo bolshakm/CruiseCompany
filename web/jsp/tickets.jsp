@@ -27,7 +27,7 @@
                     <th>Cruise from</th>
                     <th>Cruise to</th>
                     <th>Ticket type</th>
-                    <th>Price</th>
+                    <%--<th>Price</th>--%>
 
                     <th>Actions</th>
                 </tr>
@@ -41,7 +41,7 @@
                         <td>${Ticket.cruise.from}</td>
                         <td>${Ticket.cruise.to}</td>
                         <td>${Ticket.ticketType.name}</td>
-                        <td>${Ticket.price}</td>
+                        <%--<td>${Ticket.price}</td>--%>
                         <td>Actions</td>
                     </tr>
                 </c:forEach>

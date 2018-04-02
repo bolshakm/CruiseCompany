@@ -22,7 +22,8 @@ public class UpdateExcursionCommand implements ICommand {
         } else {
             excursion.setName(name);
             excursion.setPrice(Double.parseDouble(request.getParameter("price")));
-            ExcursionService.update(excursion,PortService.findById(Integer.parseInt(request.getParameter("idPort"))));
+            excursion.setPort(PortService.findById(Integer.parseInt(request.getParameter("idPort"))));
+            ExcursionService.update(excursion);
         }
         return new ToPortsPage().execute(request, response);
     }
