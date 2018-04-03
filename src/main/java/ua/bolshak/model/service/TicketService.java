@@ -3,12 +3,22 @@ package ua.bolshak.model.service;
 import ua.bolshak.model.dao.DaoFactory;
 import ua.bolshak.model.entity.*;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class TicketService {
 
     public static List<Ticket> findAll(){
         return getFull(DaoFactory.getTicketDao().findAll());
+    }
+
+    public static List<Ticket> findAllWithFullCruise(){
+        List <Ticket> tickets = new ArrayList<>();
+        for (Ticket ticket : getFull(DaoFactory.getTicketDao().findAll())) {
+            ticket.setCruise(CruiseService.getFull(ticket.getCruise()));
+            tickets.add(ticket);
+        }
+        return tickets;
     }
 
     public static List<Ticket> findAllByUser(User user){

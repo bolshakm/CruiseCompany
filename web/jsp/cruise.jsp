@@ -72,8 +72,8 @@
                     <c:forEach var="CruiseStatus" items="${CruiseStatuses}">
                         <tr>
                             <td>${CruiseStatus.name}</td>
-                            <td><a href="/CruiseCompany?command=updateCruiseStatus&cruiseStatusId=${CruiseStatus.id}">Update</a>
-                                <a href="/CruiseCompany?command=deleteCruiseStatus&cruiseStatusId=${CruiseStatus.id}">Delete</a>
+                            <td><a href="/CruiseCompany?command=updateCruiseStatus&cruiseStatusId=${CruiseStatus.id}"><button>Update</button></a>
+                                <a href="/CruiseCompany?command=deleteCruiseStatus&cruiseStatusId=${CruiseStatus.id}"><button>Delete</button></a>
                             </td>
                         </tr>
                     </c:forEach>
