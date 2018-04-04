@@ -5,6 +5,8 @@ import java.util.Objects;
 
 public class Ticket {
     private int id;
+    private String name;
+    private String lastName;
     private User user;
     private Cruise cruise;
     private TicketType ticketType;
@@ -17,6 +19,22 @@ public class Ticket {
 
     public void setId(int id) {
         this.id = id;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public String getLastName() {
+        return lastName;
+    }
+
+    public void setLastName(String lastName) {
+        this.lastName = lastName;
     }
 
     public User getUser() {
@@ -64,12 +82,22 @@ public class Ticket {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Ticket ticket = (Ticket) o;
-        return id == ticket.id;
+        return id == ticket.id &&
+                Objects.equals(name, ticket.name) &&
+                Objects.equals(lastName, ticket.lastName);
     }
 
     @Override
     public int hashCode() {
+        return Objects.hash(id, name, lastName);
+    }
 
-        return Objects.hash(id);
+    @Override
+    public String toString() {
+        return "Ticket{" +
+                "id=" + id +
+                ", name='" + name + '\'' +
+                ", lastName='" + lastName + '\'' +
+                '}';
     }
 }

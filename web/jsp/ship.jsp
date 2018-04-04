@@ -31,21 +31,21 @@
                     <th>Cruises</th>
                     <th>Actions</th>
                 </tr>
-                <c:forEach var="Ship" items="${Ships}">
+                <c:forEach var="Cruise" items="${Ships}">
                     <tr>
-                        <td>${Ship.name}</td>
-                        <td>${Ship.number}</td>
-                        <td>${Ship.numberOfSeats}</td>
-                        <td>${Ship.pricePerSeat}</td>
-                        <td>${Ship.type.name}</td>
-                        <td><c:forEach var="bonus" items="${Ship.bonuses}">
+                        <td>${Cruise.name}</td>
+                        <td>${Cruise.number}</td>
+                        <td>${Cruise.numberOfSeats}</td>
+                        <td>${Cruise.pricePerSeat}</td>
+                        <td>${Cruise.type.name}</td>
+                        <td><c:forEach var="bonus" items="${Cruise.bonuses}">
                             ${bonus.name}<br/>
                         </c:forEach> </td>
-                        <td><c:forEach var="cruise" items="${Ship.cruises}">
+                        <td><c:forEach var="cruise" items="${Cruise.cruises}">
                             ${cruise.name}<br/>
                         </c:forEach></td>
-                        <td><a href="/CruiseCompany?command=toUpdateShipCard&idShip=${Ship.id}"><button>Update</button></a>
-                            <a href="/CruiseCompany?command=deleteShip&idShip=${Ship.id}"><button>Delete</button></a></td>
+                        <td><a href="/CruiseCompany?command=toUpdateShipCard&idShip=${Cruise.id}"><button>Update</button></a>
+                            <a href="/CruiseCompany?command=deleteShip&idShip=${Cruise.id}"><button>Delete</button></a></td>
                     </tr>
                 </c:forEach>
             </table>

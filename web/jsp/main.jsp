@@ -58,10 +58,10 @@
                     <th>Ship type</th>
                     <th>Actions</th>
                 </tr>
-                <c:forEach var="Ship" items="${Ships}">
+                <c:forEach var="Cruise" items="${Ships}">
                     <tr>
-                        <td>${Ship.name}(${Ship.number})</td>
-                        <td>${Ship.type.name}</td>
+                        <td>${Cruise.name}(${Cruise.number})</td>
+                        <td>${Cruise.type.name}</td>
                         <td>actions</td>
                     </tr>
                 </c:forEach>

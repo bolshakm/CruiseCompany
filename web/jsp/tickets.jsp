@@ -34,8 +34,8 @@
                 <c:forEach var="Ticket" items="${Tickets}">
                     <tr>
                         <td>${Ticket.id}</td>
-                        <td>${Ticket.user.name}</td>
-                        <td>${Ticket.user.lastName}</td>
+                        <td>${Ticket.name}</td>
+                        <td>${Ticket.lastName}</td>
                         <td>${Ticket.cruise.name}</td>
                         <td>${Ticket.cruise.from}</td>
                         <td>${Ticket.cruise.to}</td>

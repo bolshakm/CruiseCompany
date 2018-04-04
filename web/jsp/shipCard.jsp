@@ -44,10 +44,9 @@
             <c:if test="${idShip == null}">
                 <option disabled selected>Select ship type</option>
             </c:if>
-            <c:if test="${idShip != null}">
-                <option disabled>Select ship type</option>
-            </c:if>
-
+            <%--<c:if test="${idShip != null}">--%>
+                <%--<option disabled>Select ship type</option>--%>
+            <%--</c:if>--%>
             <c:forEach var="ShipType" items="${ShipTypes}">
                 <c:if test="${ShipType.id == idShipType}">
                     <option selected value="${ShipType.id}">${ShipType.name}</option>

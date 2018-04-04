@@ -19,6 +19,14 @@ public class BonusService {
         return getFull(DaoFactory.getBonusDao().findAllByTicket(ticket));
     }
 
+    public static List<Bonus> getListById(String[] selectedId){
+        List<Bonus> bonuses = new ArrayList<>();
+        for (String id : selectedId) {
+            bonuses.add(findById(Integer.parseInt(id)));
+        }
+        return bonuses;
+    }
+
     public static List<Bonus> findAllByShip(Ship ship){
         return getFull(DaoFactory.getBonusDao().findAllShip(ship));
     }
@@ -66,7 +74,7 @@ public class BonusService {
     public static List<Bonus> getListBonuses(String[] idBonus){
         List<Bonus> bonuses = new ArrayList<>();
         for (String id : idBonus) {
-            bonuses.add(BonusService.findById(Integer.parseInt(id)));
+            bonuses.add(findById(Integer.parseInt(id)));
         }
         return bonuses;
     }

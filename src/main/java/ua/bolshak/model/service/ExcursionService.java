@@ -1,10 +1,12 @@
 package ua.bolshak.model.service;
 
 import ua.bolshak.model.dao.DaoFactory;
+import ua.bolshak.model.entity.Cruise;
 import ua.bolshak.model.entity.Excursion;
 import ua.bolshak.model.entity.Port;
 import ua.bolshak.model.entity.Ticket;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class ExcursionService {
@@ -15,6 +17,26 @@ public class ExcursionService {
 
     public static List<Excursion> findAllByPort(Port port){
         return getFull(DaoFactory.getExcursionDao().findAllByPort(port));
+    }
+
+    public static List<Excursion> findAllByLazyCruse(Cruise cruise){
+        List<Excursion> excursions = new ArrayList<>();
+        cruise = CruiseService.getFull(cruise);
+        for (Port port : cruise.getPorts()) {
+            port = PortService.getFull(port);
+            for (Excursion excursion : port.getExcursions()) {
+                excursions.add(excursion);
+            }
+        }
+        return excursions;
+    }
+
+    public static List<Excursion> getListById(String[] selectedId){
+        List<Excursion> excursions = new ArrayList<>();
+        for (String id : selectedId ) {
+            excursions.add(findById(Integer.parseInt(id)));
+        }
+        return excursions;
     }
 
     public static List<Excursion> findAllByTicket(Ticket ticket){

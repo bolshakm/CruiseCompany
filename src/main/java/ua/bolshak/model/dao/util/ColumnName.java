@@ -46,5 +46,7 @@ public interface ColumnName {
     String MONEY = "money";
 
     String ID_TICKET = "id_ticket";
+    String NAME = "name";
+    String LAST_NAME = "last_name";
 
 }

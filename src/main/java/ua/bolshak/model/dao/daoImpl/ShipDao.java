@@ -159,8 +159,8 @@ public class ShipDao implements ShipIDao {
 
     @Override
     public void update(Ship ship) {
-        try (Connection connection = MysqlConnectionPool.getConnection()){
-             PreparedStatement psForUpdateUser = connection.prepareStatement(SqlQuery.UPDATE_SHIP);
+        try (Connection connection = MysqlConnectionPool.getConnection()) {
+            PreparedStatement psForUpdateUser = connection.prepareStatement(SqlQuery.UPDATE_SHIP);
             psForUpdateUser.setString(1, ship.getName());
             psForUpdateUser.setString(2, ship.getNumber());
             psForUpdateUser.setInt(3, ship.getNumberOfSeats());
@@ -169,20 +169,18 @@ public class ShipDao implements ShipIDao {
             psForUpdateUser.setInt(6, ship.getId());
             psForUpdateUser.executeUpdate();
             psForUpdateUser.close();
-            if (ship.getBonuses() != null) {
-                PreparedStatement psForDeleteBonuses = connection.prepareStatement(SqlQuery.DELETE_ALL_SHIP_HAS_BONUSES);
-                psForDeleteBonuses.setInt(1, ship.getId());
-                psForDeleteBonuses.executeUpdate();
-                psForDeleteBonuses.close();
-                PreparedStatement psForAddBonuses = connection.prepareStatement(SqlQuery.ADD_BONUS_FOR_SHIP);
-                for (Bonus bonus : ship.getBonuses()) {
-                    psForAddBonuses.setInt(1, ship.getId());
-                    psForAddBonuses.setInt(2, bonus.getId());
-                    psForAddBonuses.addBatch();
-                }
-                psForAddBonuses.executeBatch();
-                psForAddBonuses.close();
+            PreparedStatement psForDeleteBonuses = connection.prepareStatement(SqlQuery.DELETE_ALL_SHIP_HAS_BONUSES);
+            psForDeleteBonuses.setInt(1, ship.getId());
+            psForDeleteBonuses.executeUpdate();
+            psForDeleteBonuses.close();
+            PreparedStatement psForAddBonuses = connection.prepareStatement(SqlQuery.ADD_BONUS_FOR_SHIP);
+            for (Bonus bonus : ship.getBonuses()) {
+                psForAddBonuses.setInt(1, ship.getId());
+                psForAddBonuses.setInt(2, bonus.getId());
+                psForAddBonuses.addBatch();
             }
+            psForAddBonuses.executeBatch();
+            psForAddBonuses.close();
 
         } catch (SQLException e) {
             LOGGER.error(e.getMessage());
