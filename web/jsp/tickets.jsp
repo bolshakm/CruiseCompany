@@ -40,7 +40,6 @@
                         <td>${Ticket.cruise.from}</td>
                         <td>${Ticket.cruise.to}</td>
                         <td>${Ticket.ticketType.name}</td>
-                        <%--<td>${Ticket.ticketType.price + Ticket.cruise.ship.pricePerSeat}</td>--%>
                         <td>${Ticket.price}</td>
                         <td><a href="/CruiseCompany?command=toUpdateTicket&idTicket=${Ticket.id}"><button>Update</button></a>
                             <a href="/CruiseCompany?command=deleteTicket&idTicket=${Ticket.id}"><button>Delete</button></a></td>

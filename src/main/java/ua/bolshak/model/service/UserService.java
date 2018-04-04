@@ -72,15 +72,20 @@ public class UserService {
         return DaoFactory.getUserDao().findByLogin(login);
     }
 
-    public static void add(User user, Role role){
-        DaoFactory.getUserDao().add(user, role);
+    public static void add(User user){
+        DaoFactory.getUserDao().add(user);
     }
 
-    public static void update(User user, Role role){
-        DaoFactory.getUserDao().update(user, role);
+    public static void update(User user){
+        DaoFactory.getUserDao().update(user);
     }
 
     public static void delete(User user){
+        if (user.getTickets() != null){
+            for (Ticket ticket : user.getTickets()) {
+                TicketService.delete(ticket);
+            }
+        }
         DaoFactory.getUserDao().delete(user);
     }
 

@@ -20,10 +20,8 @@ public class RegistrationCommand implements ICommand{
         user.setLastName(request.getParameter("lastName"));
         user.setEmail(request.getParameter("email"));
         user.setMoney(10000);
-        user.setRole(RoleService.findById(1));
-//        System.out.println(user);
-//        System.out.println(RoleService.findById(2));
-        UserService.add(user, RoleService.findById(2));
+        user.setRole(RoleService.findById(2));
+        UserService.add(user);
         request.setAttribute("User", user);
         return page;
     }

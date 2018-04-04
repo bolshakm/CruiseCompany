@@ -24,9 +24,9 @@ public interface UserIDao {
 
     User findByLogin(String login);
 
-    void add(User user, Role role);
+    void add(User user);
 
-    void update(User user,Role role);
+    void update(User user);
 
     void delete(User user);
 }

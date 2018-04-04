@@ -34,7 +34,8 @@
                         <td>${User.lastName}</td>
                         <td>${User.email}</td>
                         <td>${User.role.name}</td>
-                        <td></td>
+                        <td><a href="/CruiseCompany?command=toUpdateUserCard&idUser=${User.id}"><button>Update</button></a>
+                            <a href="/CruiseCompany?command=deleteUser&idUser=${User.id}"><button>Delete</button></a></td>
 
                     </tr>
                 </c:forEach>

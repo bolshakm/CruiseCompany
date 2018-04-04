@@ -36,12 +36,6 @@
             <td>Cruise</td>
             <td>
                 <select name="CruiseId">
-                    <%--<c:if test="${idTicket == null}">--%>
-                        <%--<option disabled selected>Select cruise</option>--%>
-                    <%--</c:if>--%>
-                    <%--<c:if test="${idTicket != null}">--%>
-                        <%--<option disabled>Select cruise</option>--%>
-                    <%--</c:if>--%>
                     <c:forEach var="Cruise" items="${Cruises}">
                         <c:if test="${Cruise.id == idCruise}">
                             <option selected value="${Cruise.id}">${Cruise.name}</option>
@@ -56,12 +50,6 @@
             <td>Ticket type</td>
             <td>
                 <select name="TicketTypeId">
-                    <%--<c:if test="${idTicket == null}">--%>
-                        <%--<option disabled selected>Select ship</option>--%>
-                    <%--</c:if>--%>
-                    <%--<c:if test="${idTicket != null}">--%>
-                        <%--<option disabled>Select ship</option>--%>
-                    <%--</c:if>--%>
                     <c:forEach var="TicketType" items="${TicketTypes}">
                         <c:if test="${TicketType.id == idTicketType}">
                             <option selected value="${TicketType.id}">${TicketType.name}</option>

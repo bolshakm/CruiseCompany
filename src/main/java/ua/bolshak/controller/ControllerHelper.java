@@ -53,6 +53,9 @@ public class ControllerHelper {
         commands.put("toUpdateTicket", new ToUpdateTicketCommand());
         commands.put("updateTicket", new UpdateTicketCommand());
         commands.put("deleteTicket", new DeleteTicketCommand());
+        commands.put("toUpdateUserCard", new ToUserCardCommand());
+        commands.put("updateUser", new UpdateUserCommand());
+        commands.put("deleteUser", new DeleteUserCommand());
     }
 
     public static ControllerHelper getInstance() {
