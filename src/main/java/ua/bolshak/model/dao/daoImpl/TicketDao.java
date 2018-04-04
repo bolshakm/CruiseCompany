@@ -23,6 +23,7 @@ public class TicketDao implements TicketIDao{
         ticket.setId(resultSet.getInt(ColumnName.ID_TICKET));
         ticket.setName(resultSet.getString(ColumnName.NAME));
         ticket.setLastName(resultSet.getString(ColumnName.LAST_NAME));
+        ticket.setPrice(resultSet.getDouble(ColumnName.TICKET_PRICE));
         return ticket;
     }
 
@@ -171,7 +172,8 @@ public class TicketDao implements TicketIDao{
             psForUpdateTicket.setString(3, ticket.getLastName());
             psForUpdateTicket.setInt(4, ticket.getTicketType().getId());
             psForUpdateTicket.setInt(5, ticket.getCruise().getId());
-            psForUpdateTicket.setInt(6, ticket.getId());
+            psForUpdateTicket.setDouble(6, ticket.getPrice());
+            psForUpdateTicket.setInt(7, ticket.getId());
             psForUpdateTicket.executeUpdate();
             psForUpdateTicket.close();
             PreparedStatement psForDeleteBonuses = connection.prepareStatement(SqlQuery.DELETE_TICKET_HAS_BONUSES);

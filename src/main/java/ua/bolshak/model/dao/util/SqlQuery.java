@@ -101,7 +101,7 @@ public interface SqlQuery {
     String FIND_ALL_TICKETS_BY_EXCURSION = "SELECT tickets.* FROM tickets JOIN tickets_has_excursions t ON tickets.id_ticket = t.tickets_id_ticket WHERE t.excursions_id_excursion = ?";
     String FIND_TICKET_BY_ID = "SELECT * FROM tickets WHERE id_ticket = ?";
     String ADD_TICKET = "INSERT INTO tickets (users_id_user, ticket_types_id_ticket_type, cruises_id_cruise) VALUES (?, ?, ?)";
-    String UPDATE_TICKET = "UPDATE tickets SET users_id_user = ?, name = ?, last_name = ? , ticket_types_id_ticket_type = ?, cruises_id_cruise = ? WHERE id_ticket = ?";
+    String UPDATE_TICKET = "UPDATE tickets SET users_id_user = ?, name = ?, last_name = ?, ticket_types_id_ticket_type = ?, cruises_id_cruise = ?, price = ? WHERE id_ticket = ?";
     String DELETE_TICKET_HAS_BONUSES = "delete from tickets_has_bonuses where tickets_id_ticket = ?";
     String DELETE_TICKET_HAS_EXCURSIONS = "delete from tickets_has_excursions where tickets_id_ticket = ?";
     String ADD_TICKET_HAS_BONUSES = "INSERT INTO tickets_has_bonuses (tickets_id_ticket, bonuses_id_bonus) VALUES (?, ?);";

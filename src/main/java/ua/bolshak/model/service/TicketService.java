@@ -21,6 +21,8 @@ public class TicketService {
         return tickets;
     }
 
+
+
     public static List<Ticket> findAllByUser(User user){
         return getFull(DaoFactory.getTicketDao().findAllByUser(user));
     }
@@ -39,6 +41,18 @@ public class TicketService {
 
     public static List<Ticket> findAllByExcursion(Excursion excursion){
         return getFull(DaoFactory.getTicketDao().findAllByExcursion(excursion));
+    }
+
+    public static Ticket checkPrice(Ticket ticket){
+        double price = ticket.getCruise().getShip().getPricePerSeat() + ticket.getTicketType().getPrice();
+        if (ticket.getExcursions() != null) {
+            for (Excursion excursion :
+                    ticket.getExcursions()) {
+                price += excursion.getPrice();
+            }
+        }
+        ticket.setPrice(price);
+       return ticket;
     }
 
     public static Ticket findById(int id){
@@ -66,11 +80,11 @@ public class TicketService {
     }
 
     public static void add(Ticket ticket){
-        DaoFactory.getTicketDao().add(ticket);
+        DaoFactory.getTicketDao().add(checkPrice(ticket));
     }
 
     public static void update(Ticket ticket){
-        DaoFactory.getTicketDao().update(ticket);
+        DaoFactory.getTicketDao().update(checkPrice(ticket));
     }
 
     public static void delete(Ticket ticket){

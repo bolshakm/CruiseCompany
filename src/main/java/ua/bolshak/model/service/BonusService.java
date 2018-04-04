@@ -73,8 +73,10 @@ public class BonusService {
 
     public static List<Bonus> getListBonuses(String[] idBonus){
         List<Bonus> bonuses = new ArrayList<>();
-        for (String id : idBonus) {
-            bonuses.add(findById(Integer.parseInt(id)));
+        if (idBonus != null) {
+            for (String id : idBonus) {
+                bonuses.add(findById(Integer.parseInt(id)));
+            }
         }
         return bonuses;
     }

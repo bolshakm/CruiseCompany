@@ -48,5 +48,6 @@ public interface ColumnName {
     String ID_TICKET = "id_ticket";
     String NAME = "name";
     String LAST_NAME = "last_name";
+    String TICKET_PRICE = "price";
 
 }

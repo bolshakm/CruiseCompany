@@ -33,8 +33,10 @@ public class ExcursionService {
 
     public static List<Excursion> getListById(String[] selectedId){
         List<Excursion> excursions = new ArrayList<>();
-        for (String id : selectedId ) {
-            excursions.add(findById(Integer.parseInt(id)));
+        if (selectedId != null) {
+            for (String id : selectedId) {
+                excursions.add(findById(Integer.parseInt(id)));
+            }
         }
         return excursions;
     }
