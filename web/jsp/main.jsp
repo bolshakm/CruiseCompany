@@ -18,56 +18,33 @@
 </head>
 <body>
 <p align="center">Welcome ${user.name}</p>
-<p align="right"> ${user.login}| <a href="CruiseCompany?command=logout">Logout</a></p>
-<table align="center">
+<p align="center"> <a href="/CruiseCompany?command=toUpdateUserCard&idUser=${user.id}">${user.login}</a>| <a href="CruiseCompany?command=logout">Logout</a></p><br/>
+<table border="1" bgcolor="#7fffd4" align="center">
+    <caption>Cruises</caption>
     <tr>
-        <td valign="top">
-            <table border="1" align="center">
-                <caption>Cruises</caption>
-                <tr>
-                    <th>Name</th>
-                    <th>From - To</th>
-                    <%--Only for administrator--%>
-                    <th>Ship name (number)</th>
-                    <th>Ports</th>
-                    <th>Status</th>
-                    <th>Actions</th>
-                </tr>
-                <c:forEach var="Cruise" items="${Cruises}">
-                <tr bgcolor="#7fffd4">
-                    <td height="50px">${Cruise.name}</td>
-                    <td>From ${Cruise.from} to ${Cruise.to}</td>
-                    <td>${Cruise.ship.name} (${Cruise.ship.number})</td>
-                        <%--<td>${fn:length(Cruise.tickets)}/${Cruise.ship.numberOfSeats}</td>--%>
-                    <td><c:forEach var="port" items="${Cruise.ports}">
-                        ${port.name},
-                    </c:forEach></td>
-                    <td>${Cruise.status.name}</td>
-                    <td>Price: ${Cruise.ship.pricePerSeat + TicketStandardPrice.price}</td>
-                    <td>actions</td>
-                    </c:forEach>
-                </tr>
-            </table>
-        </td>
-        <td width="100px"></td>
-        <td valign="top">
-            <table border="1">
-                <caption>Ships</caption>
-                <tr>
-                    <th>Name(Number)</th>
-                    <th>Ship type</th>
-                    <th>Actions</th>
-                </tr>
-                <c:forEach var="Cruise" items="${Ships}">
-                    <tr>
-                        <td>${Cruise.name}(${Cruise.number})</td>
-                        <td>${Cruise.type.name}</td>
-                        <td>actions</td>
-                    </tr>
-                </c:forEach>
-            </table>
-        </td>
+        <th>Name</th>
+        <th>From</th>
+        <th>To</th>
+        <th>Ship number</th>
+        <th>Cruise status</th>
+        <th>Ticket/Seats</th>
+        <th>Ports</th>
+        <th>Actions</th>
     </tr>
+    <c:forEach var="Cruise" items="${Cruises}">
+        <tr>
+            <td>${Cruise.name}</td>
+            <td>${Cruise.from}</td>
+            <td>${Cruise.to}</td>
+            <td>${Cruise.ship.number}</td>
+            <td>${Cruise.status.name}</td>
+            <td>${fn:length(Cruise.tickets)}/${Cruise.ship.numberOfSeats}</td>
+            <td><c:forEach var="port" items="${Cruise.ports}">
+                ${port.name}<br/>
+            </c:forEach></td>
+            <td>actions</td>
+        </tr>
+    </c:forEach>
 </table>
 </body>
 </html>

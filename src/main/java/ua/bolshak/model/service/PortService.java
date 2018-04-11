@@ -47,15 +47,19 @@ public class PortService {
     }
 
     public static Port getFull(Port port){
-        port.setCruises(CruiseService.findAllLazyBYPort(port));
-        port.setExcursions(ExcursionService.findAllLazyByPort(port));
+        if (port != null) {
+            port.setCruises(CruiseService.findAllLazyBYPort(port));
+            port.setExcursions(ExcursionService.findAllLazyByPort(port));
+        }
         return port;
     }
 
     public static List<Port> getFull(List<Port> ports){
-        for (Port port : ports) {
-            port.setCruises(CruiseService.findAllLazyBYPort(port));
-            port.setExcursions(ExcursionService.findAllLazyByPort(port));
+        if (ports != null) {
+            for (Port port : ports) {
+                port.setCruises(CruiseService.findAllLazyBYPort(port));
+                port.setExcursions(ExcursionService.findAllLazyByPort(port));
+            }
         }
         return ports;
     }

@@ -191,6 +191,23 @@ public class UserDao implements UserIDao{
     }
 
     @Override
+    public User findByEmail(String email) {
+        User user = null;
+        try(Connection connection = MysqlConnectionPool.getConnection();
+            PreparedStatement preparedStatement = connection.prepareStatement(SqlQuery.FIND_USER_BY_EMAIL)){
+            preparedStatement.setString(1, email);
+            try(ResultSet resultSet = preparedStatement.executeQuery()){
+                while (resultSet.next()) {
+                    user = initialization(resultSet);
+                }
+            }
+        } catch (SQLException e) {
+            LOGGER.error(e);
+        }
+        return user;
+    }
+
+    @Override
     public void add(User user) {
         try(Connection connection = MysqlConnectionPool.getConnection();
             PreparedStatement preparedStatement = connection.prepareStatement(SqlQuery.ADD_USER)){

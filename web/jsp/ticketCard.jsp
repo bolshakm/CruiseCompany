@@ -13,7 +13,6 @@
     <title>Ticket Card</title>
 </head>
 <body>
-<p align="center">Hello ${user.name}</p>
 <c:import url="header.jsp"/>
 <table align="center" bgcolor="#fff0f5" border="1px ">
     <caption>Ticket #${idTicket}</caption>
@@ -36,12 +35,12 @@
             <td>Cruise</td>
             <td>
                 <select name="CruiseId">
-                    <c:forEach var="Cruise" items="${Cruises}">
-                        <c:if test="${Cruise.id == idCruise}">
-                            <option selected value="${Cruise.id}">${Cruise.name}</option>
+                    <c:forEach var="Ship" items="${Cruises}">
+                        <c:if test="${Ship.id == idCruise}">
+                            <option selected value="${Ship.id}">${Ship.name}</option>
                         </c:if>
-                        <c:if test="${Cruise.id != idCruise}">
-                            <option value="${Cruise.id}">${Cruise.name}</option>
+                        <c:if test="${Ship.id != idCruise}">
+                            <option value="${Ship.id}">${Ship.name}</option>
                         </c:if>
                     </c:forEach>
                 </select></td>

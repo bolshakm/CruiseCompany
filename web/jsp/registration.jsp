@@ -18,7 +18,7 @@
 <body>
 <form action="CruiseCompany" method="post">
     <input type="hidden" name="command" value="registration">
-    <table>
+    <table align="center" bgcolor="yellow">
         <tr><td>Login</td><td><input type="text" name="login"></td></tr>
         <tr><td>Password</td><td><input type="password" name="password"></td></tr>
         <tr><td>Name</td><td><input type="text" name="name"></td></tr>

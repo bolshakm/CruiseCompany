@@ -68,21 +68,25 @@ public class CruiseService {
     }
 
     public static Cruise getFull(Cruise cruise){
-        cruise.setPorts(PortService.findAllLazyByCruise(cruise));
-        cruise.setShip(ShipService.findLazyByCruise(cruise));
-        cruise.setStatus(CruiseStatusService.findLazyByCruise(cruise));
-        cruise.setTickets(TicketService.findAllLazyByCruise(cruise));
-        cruise.setUsers(UserService.findAllLazyByCruise(cruise));
-        return cruise;
-    }
-
-    public static List<Cruise> getFull(List<Cruise> cruises){
-        for (Cruise cruise : cruises) {
+        if (cruise != null) {
             cruise.setPorts(PortService.findAllLazyByCruise(cruise));
             cruise.setShip(ShipService.findLazyByCruise(cruise));
             cruise.setStatus(CruiseStatusService.findLazyByCruise(cruise));
             cruise.setTickets(TicketService.findAllLazyByCruise(cruise));
             cruise.setUsers(UserService.findAllLazyByCruise(cruise));
+        }
+        return cruise;
+    }
+
+    public static List<Cruise> getFull(List<Cruise> cruises){
+        if (cruises != null) {
+            for (Cruise cruise : cruises) {
+                cruise.setPorts(PortService.findAllLazyByCruise(cruise));
+                cruise.setShip(ShipService.findLazyByCruise(cruise));
+                cruise.setStatus(CruiseStatusService.findLazyByCruise(cruise));
+                cruise.setTickets(TicketService.findAllLazyByCruise(cruise));
+                cruise.setUsers(UserService.findAllLazyByCruise(cruise));
+            }
         }
         return cruises;
     }

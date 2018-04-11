@@ -70,15 +70,19 @@ public class ExcursionService {
     }
 
     public static Excursion getFull(Excursion excursion){
-        excursion.setPort(PortService.findLazyByExcursion(excursion));
-        excursion.setTickets(TicketService.findAllLazyByExcursion(excursion));
+        if (excursion != null) {
+            excursion.setPort(PortService.findLazyByExcursion(excursion));
+            excursion.setTickets(TicketService.findAllLazyByExcursion(excursion));
+        }
         return excursion;
     }
 
     public static List<Excursion> getFull(List<Excursion> excursions){
-        for (Excursion excursion : excursions) {
-            excursion.setPort(PortService.findLazyByExcursion(excursion));
-            excursion.setTickets(TicketService.findAllLazyByExcursion(excursion));
+        if (excursions != null) {
+            for (Excursion excursion : excursions) {
+                excursion.setPort(PortService.findLazyByExcursion(excursion));
+                excursion.setTickets(TicketService.findAllLazyByExcursion(excursion));
+            }
         }
         return excursions;
     }

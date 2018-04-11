@@ -25,9 +25,8 @@
         <tr><td>Password</td><td><input type="password" name="Password" value="${Password}"></td></tr>
         <tr><td><input type="submit" name="button" value="Login"/></td><td><input type="submit" name="button" value="Registration"></td></tr>
     </table>
-   <p align="center"> ${InfoMassage}</p>
     <br/>
+   <p align="center"> ${InfoMassage}</p>
 </form>
-${massage}
 </body>
 </html>

@@ -63,18 +63,22 @@ public class ShipService {
 
 
     public static Ship getFull(Ship ship){
-        ship.setBonuses(BonusService.findAllLazyByShip(ship));
-        ship.setCruises(CruiseService.findAllLazyByShip(ship));
-        ship.setType(ShipTypeService.findLazyByShip(ship));
+        if (ship != null) {
+            ship.setBonuses(BonusService.findAllLazyByShip(ship));
+            ship.setCruises(CruiseService.findAllLazyByShip(ship));
+            ship.setType(ShipTypeService.findLazyByShip(ship));
+        }
         return ship;
     }
 
     public static List<Ship> getFull(List<Ship> ships){
-        for (Ship ship :
-                ships) {
-            ship.setBonuses(BonusService.findAllLazyByShip(ship));
-            ship.setCruises(CruiseService.findAllLazyByShip(ship));
-            ship.setType(ShipTypeService.findLazyByShip(ship));
+        if (ships != null) {
+            for (Ship ship :
+                    ships) {
+                ship.setBonuses(BonusService.findAllLazyByShip(ship));
+                ship.setCruises(CruiseService.findAllLazyByShip(ship));
+                ship.setType(ShipTypeService.findLazyByShip(ship));
+            }
         }
         return ships;
     }

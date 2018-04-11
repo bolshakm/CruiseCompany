@@ -20,7 +20,8 @@ public class LoginCommand implements ICommand {
             case "Login":
                 User user = UserService.findByLogin(login);
                 if (user == null || !user.getPassword().equals(password)) {
-                    request.setAttribute("massage", "Wrong Login or Password");
+                    request.setAttribute("Login", login);
+                    request.setAttribute("Password", password);
                     page = "/jsp/login.jsp";
                     break;
                 }

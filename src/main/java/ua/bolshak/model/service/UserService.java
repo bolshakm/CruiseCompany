@@ -43,6 +43,10 @@ public class UserService {
         return getFull(DaoFactory.getUserDao().findByLogin(login));
     }
 
+    public static User findByEmail(String email){
+        return getFull(DaoFactory.getUserDao().findByEmail(email));
+    }
+
 
     public static List<User> findAllLazyByRole(Role role){
         return DaoFactory.getUserDao().findAllByRole(role);
@@ -90,15 +94,19 @@ public class UserService {
     }
 
     public static User getFull(User user){
-        user.setRole(RoleService.findLazyByUser(user));
-        user.setTickets(TicketService.findAllLazyByUser(user));
+        if (user != null) {
+            user.setRole(RoleService.findLazyByUser(user));
+            user.setTickets(TicketService.findAllLazyByUser(user));
+        }
         return user;
     }
 
     public static List<User> getFull(List<User> users){
-        for (User user : users) {
-            user.setRole(RoleService.findLazyByUser(user));
-            user.setTickets(TicketService.findAllLazyByUser(user));
+        if (users != null) {
+            for (User user : users) {
+                user.setRole(RoleService.findLazyByUser(user));
+                user.setTickets(TicketService.findAllLazyByUser(user));
+            }
         }
         return users;
     }

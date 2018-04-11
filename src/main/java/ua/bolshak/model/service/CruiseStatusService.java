@@ -37,13 +37,17 @@ public class CruiseStatusService {
     }
 
     public static CruiseStatus getFull(CruiseStatus cruiseStatus){
-        cruiseStatus.setCruises(CruiseService.findAllLazyByStatus(cruiseStatus));
+        if (cruiseStatus != null) {
+            cruiseStatus.setCruises(CruiseService.findAllLazyByStatus(cruiseStatus));
+        }
         return cruiseStatus;
     }
 
     public static List<CruiseStatus> getFull(List<CruiseStatus> cruiseStatuses){
-        for (CruiseStatus cruiseStatus : cruiseStatuses) {
-            cruiseStatus.setCruises(CruiseService.findAllLazyByStatus(cruiseStatus));
+        if (cruiseStatuses != null) {
+            for (CruiseStatus cruiseStatus : cruiseStatuses) {
+                cruiseStatus.setCruises(CruiseService.findAllLazyByStatus(cruiseStatus));
+            }
         }
         return cruiseStatuses;
     }

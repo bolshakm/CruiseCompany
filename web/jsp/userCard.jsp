@@ -12,7 +12,6 @@
     <title>User card</title>
 </head>
 <body>
-<p align="center">Hello ${user.name}</p>
 <c:import url="header.jsp"/>
 <table align="center" bgcolor="#fff0f5" border="1px ">
     <caption>User Card</caption>
@@ -21,17 +20,31 @@
             <input type="hidden" name="command" value="updateUser"/>
             <input type="hidden" name="idUser" value="${idUser}">
 
-            <td>Login</td>
-            <td>${login}</td>
+        <td>Login</td>
+        <td><c:if test="${user.login != login}">${login}</c:if>
+            <c:if test="${user.login == login}"><input type="text" name="login" value="${login}"></c:if></td>
     </tr>
+        <c:if test="${user.login == login}">
+            <tr>
+                <td>Password</td>
+                <td><input type="password" name="password"/></td>
+            </tr>
+            <tr>
+                <td>Confirm password</td>
+                <td><input type="password" name="passwordConfirm"/></td>
+            </tr>
+        </c:if>
         <tr>
             <td>Email</td>
-            <td>${email}</td>
+            <td><c:if test="${user.login != login}">${email} </c:if>
+                <c:if test="${user.login == login}"><input type="text" name="email" value="${email}"></c:if></td>
         </tr>
-        <tr>
-            <td>Money</td>
-            <td><input type="number" name="money" value="${money}"/></td>
-        </tr>
+        <%--<c:if test="${user.role.id != 1}">--%>
+        <%--<tr>--%>
+            <%--<td>Money</td>--%>
+            <%--<td><input type="number" name="money" value="${money}"/></td>--%>
+        <%--</tr>--%>
+        <%--</c:if>--%>
         <tr>
             <td>Name</td>
             <td><input type="text" name="name" value="${name}"/></td>
@@ -40,6 +53,7 @@
         <td>Last name</td>
         <td><input type="text" name="lastName" value="${lastName}"/></td>
     </tr>
+<c:if test="${user.role.id == 1}">
     <tr>
         <td>Role</td>
         <td><select name="idRole">
@@ -53,6 +67,7 @@
             </c:forEach>
         </select></td>
     </tr>
+</c:if>
     <tr>
         <td>Tickets</td>
         <td>
@@ -67,5 +82,6 @@
     </tr>
     </form>
 </table>
+<p align="center">${ErrorMassage}</p>
 </body>
 </html>

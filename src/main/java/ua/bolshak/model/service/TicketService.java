@@ -44,14 +44,16 @@ public class TicketService {
     }
 
     public static Ticket checkPrice(Ticket ticket){
-        double price = ticket.getCruise().getShip().getPricePerSeat() + ticket.getTicketType().getPrice();
-        if (ticket.getExcursions() != null) {
-            for (Excursion excursion :
-                    ticket.getExcursions()) {
-                price += excursion.getPrice();
+        if (ticket != null){
+            double price = ticket.getCruise().getShip().getPricePerSeat() + ticket.getTicketType().getPrice();
+            if (ticket.getExcursions() != null) {
+                for (Excursion excursion :
+                        ticket.getExcursions()) {
+                    price += excursion.getPrice();
+                }
             }
+            ticket.setPrice(price);
         }
-        ticket.setPrice(price);
        return ticket;
     }
 
@@ -92,21 +94,25 @@ public class TicketService {
     }
 
     public static Ticket getFull(Ticket ticket){
-        ticket.setUser(UserService.findLazyByTicket(ticket));
-        ticket.setBonuses(BonusService.findAllLazyByTicket(ticket));
-        ticket.setCruise(CruiseService.findLazyByTicket(ticket));
-        ticket.setTicketType(TicketTypeService.findLazyByTicket(ticket));
-        ticket.setExcursions(ExcursionService.findAllLazyByTicket(ticket));
-        return ticket;
-    }
-
-    public static List<Ticket> getFull(List<Ticket> tickets){
-        for (Ticket ticket : tickets) {
+        if (ticket != null) {
             ticket.setUser(UserService.findLazyByTicket(ticket));
             ticket.setBonuses(BonusService.findAllLazyByTicket(ticket));
             ticket.setCruise(CruiseService.findLazyByTicket(ticket));
             ticket.setTicketType(TicketTypeService.findLazyByTicket(ticket));
             ticket.setExcursions(ExcursionService.findAllLazyByTicket(ticket));
+        }
+        return ticket;
+    }
+
+    public static List<Ticket> getFull(List<Ticket> tickets){
+        if (tickets != null) {
+            for (Ticket ticket : tickets) {
+                ticket.setUser(UserService.findLazyByTicket(ticket));
+                ticket.setBonuses(BonusService.findAllLazyByTicket(ticket));
+                ticket.setCruise(CruiseService.findLazyByTicket(ticket));
+                ticket.setTicketType(TicketTypeService.findLazyByTicket(ticket));
+                ticket.setExcursions(ExcursionService.findAllLazyByTicket(ticket));
+            }
         }
         return tickets;
     }

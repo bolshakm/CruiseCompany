@@ -38,15 +38,19 @@ public class TicketTypeService {
     }
 
     public static TicketType getFull(TicketType ticketType){
-        ticketType.setTickets(TicketService.findAllLazyByTicketType(ticketType));
-        ticketType.setUsers(UserService.findAllLazyTicketType(ticketType));
+        if (ticketType != null) {
+            ticketType.setTickets(TicketService.findAllLazyByTicketType(ticketType));
+            ticketType.setUsers(UserService.findAllLazyTicketType(ticketType));
+        }
         return ticketType;
     }
 
-    public static List<TicketType> getFull(List<TicketType> ticketTypes){
-        for (TicketType ticketType : ticketTypes) {
-            ticketType.setTickets(TicketService.findAllLazyByTicketType(ticketType));
-            ticketType.setUsers(UserService.findAllLazyTicketType(ticketType));
+    public static List<TicketType> getFull(List<TicketType> ticketTypes) {
+        if (ticketTypes != null) {
+            for (TicketType ticketType : ticketTypes) {
+                ticketType.setTickets(TicketService.findAllLazyByTicketType(ticketType));
+                ticketType.setUsers(UserService.findAllLazyTicketType(ticketType));
+            }
         }
         return ticketTypes;
     }

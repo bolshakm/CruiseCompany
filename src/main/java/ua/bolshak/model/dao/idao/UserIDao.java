@@ -24,6 +24,8 @@ public interface UserIDao {
 
     User findByLogin(String login);
 
+    User findByEmail(String email);
+
     void add(User user);
 
     void update(User user);

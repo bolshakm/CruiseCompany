@@ -58,15 +58,19 @@ public class BonusService {
     }
 
     public static Bonus getFull(Bonus bonus){
-        bonus.setShips(ShipService.findAllLazyByBonus(bonus));
-        bonus.setTickets(TicketService.findAllLazyByBonus(bonus));
+        if (bonus !=null) {
+            bonus.setShips(ShipService.findAllLazyByBonus(bonus));
+            bonus.setTickets(TicketService.findAllLazyByBonus(bonus));
+        }
         return bonus;
     }
 
     public static List<Bonus> getFull(List<Bonus> bonuses){
-        for (Bonus bonus : bonuses) {
-            bonus.setShips(ShipService.findAllLazyByBonus(bonus));
-            bonus.setTickets(TicketService.findAllLazyByBonus(bonus));
+        if (bonuses != null) {
+            for (Bonus bonus : bonuses) {
+                bonus.setShips(ShipService.findAllLazyByBonus(bonus));
+                bonus.setTickets(TicketService.findAllLazyByBonus(bonus));
+            }
         }
         return bonuses;
     }

@@ -37,13 +37,17 @@ public class RoleService {
     }
 
     public static Role getFull(Role role){
-        role.setUsers(UserService.findAllLazyByRole(role));
+        if (role != null) {
+            role.setUsers(UserService.findAllLazyByRole(role));
+        }
         return role;
     }
 
     public static List<Role> getFull(List<Role> roles){
-        for (Role role : roles) {
-            role.setUsers(UserService.findAllLazyByRole(role));
+        if (roles != null) {
+            for (Role role : roles) {
+                role.setUsers(UserService.findAllLazyByRole(role));
+            }
         }
         return roles;
     }

@@ -89,6 +89,7 @@ public interface SqlQuery {
     String FIND_USER_BY_ID = "SELECT * FROM users WHERE id_user = ?";
     String FIND_USER_BY_TICKET = "SELECT users.* FROM users JOIN tickets t ON users.id_user = t.users_id_user WHERE t.id_ticket = ?";
     String FIND_USER_BY_LOGIN = "SELECT * FROM users WHERE login = ?";
+    String FIND_USER_BY_EMAIL = "SELECT * FROM users WHERE email = ?";
     String ADD_USER = "INSERT INTO users (login, password, user_name, user_last_name, email, money, roles_id_role) VALUES (?, ?, ?, ?, ?, ?, ?)";
     String UPDATE_USER = "UPDATE users SET login = ?, password = ?, user_name = ?, user_last_name = ?, email = ?, money = ?, roles_id_role = ? WHERE id_user = ?";
     String DELETE_USER = "DELETE FROM users WHERE id_user = ?";

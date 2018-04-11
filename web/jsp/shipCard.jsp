@@ -13,7 +13,6 @@
     <title>Ship Card</title>
 </head>
 <body>
-<p align="center">Hello ${user.name}</p>
 <c:import url="header.jsp"/>
 <table align="center" bgcolor="#fff0f5" border="1px ">
     <caption>Ship Card</caption>

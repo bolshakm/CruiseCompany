@@ -1,6 +1,5 @@
 package ua.bolshak.controller.commands;
 
-import ua.bolshak.model.entity.Role;
 import ua.bolshak.model.entity.User;
 import ua.bolshak.model.service.RoleService;
 import ua.bolshak.model.service.UserService;
@@ -13,16 +12,59 @@ import java.io.IOException;
 public class UpdateUserCommand implements ICommand {
     @Override
     public String execute(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException {
+        String page;
+        User sessionUser = (User) request.getSession().getAttribute("user");
         User user = UserService.findById(Integer.parseInt(request.getParameter("idUser")));
+        String login = request.getParameter("login");
+        String password = request.getParameter("password");
+        String passwordConfirm = request.getParameter("passwordConfirm");
+        String email = request.getParameter("email");
         String name = request.getParameter("name");
         String lastName = request.getParameter("lastName");
-        Double money = Double.parseDouble(request.getParameter("money"));
-        Role role = RoleService.findById(Integer.parseInt(request.getParameter("idRole")));
+        String money = request.getParameter("money");
+        String role = request.getParameter("idRole");
         user.setName(name);
         user.setLastName(lastName);
-        user.setRole(role);
-        user.setMoney(money);
+        if (role != null) {
+            user.setRole(RoleService.findById(Integer.parseInt(role)));
+        }
+        if (money != null) {
+            user.setMoney(Double.parseDouble(money));
+        }
+        if (password != null && passwordConfirm != null && !password.equals("") && !passwordConfirm.equals("")){
+            if (password.equals(passwordConfirm)){
+                user.setPassword(password);
+            } else {
+                request.setAttribute("ErrorMassage", "Wrong password");
+                request.setAttribute("idUser", user.getId());
+                return new ToUserCardCommand().execute(request, response);
+            }
+        }
+        if (login != null && !login.equals(user.getLogin())){
+            if (UserService.findByLogin(login) == null){
+                user.setLogin(login);
+            } else {
+                request.setAttribute("ErrorMassage", "Wrong login or email");
+                request.setAttribute("idUser", user.getId());
+                return new ToUserCardCommand().execute(request, response);
+            }
+        }
+        if (email != null && !email.equals(user.getEmail())){
+            if (UserService.findByEmail(email) == null){
+                user.setEmail(email);
+            } else {
+                request.setAttribute("ErrorMassage", "Wrong login or email");
+                request.setAttribute("idUser", user.getId());
+                return new ToUserCardCommand().execute(request, response);
+            }
+        }
         UserService.update(user);
-        return new ToUserPage().execute(request, response);
+        if (sessionUser.getRole().getId() == 1){
+            page = new ToUserPage().execute(request, response);
+        } else {
+            page = new ToMainPage().execute(request, response);
+        }
+
+        return page;
     }
 }

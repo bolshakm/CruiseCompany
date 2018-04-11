@@ -37,13 +37,17 @@ public class ShipTypeService {
     }
 
     public static ShipType getFull(ShipType shipType){
-        shipType.setShips(ShipService.findAllLazyByShipType(shipType));
+        if (shipType != null) {
+            shipType.setShips(ShipService.findAllLazyByShipType(shipType));
+        }
         return shipType;
     }
 
     public static List<ShipType> getFull(List<ShipType> shipTypes){
-        for (ShipType shipType : shipTypes) {
-            shipType.setShips(ShipService.findAllLazyByShipType(shipType));
+        if (shipTypes != null) {
+            for (ShipType shipType : shipTypes) {
+                shipType.setShips(ShipService.findAllLazyByShipType(shipType));
+            }
         }
         return shipTypes;
     }
