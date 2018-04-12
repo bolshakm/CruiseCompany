@@ -17,8 +17,7 @@
     <title>Welcome</title>
 </head>
 <body>
-<p align="center">Welcome ${user.name}</p>
-<p align="center"> <a href="/CruiseCompany?command=toUpdateUserCard&idUser=${user.id}">${user.login}</a>| <a href="CruiseCompany?command=logout">Logout</a></p><br/>
+<c:import url="header.jsp"/>
 <table border="1" bgcolor="#7fffd4" align="center">
     <caption>Cruises</caption>
     <tr>
@@ -42,7 +41,7 @@
             <td><c:forEach var="port" items="${Cruise.ports}">
                 ${port.name}<br/>
             </c:forEach></td>
-            <td>actions</td>
+            <td><a href="/CruiseCompany?command=buyTicket&idCruise=${Cruise.id}"><button>Buy</button></a> </td>
         </tr>
     </c:forEach>
 </table>

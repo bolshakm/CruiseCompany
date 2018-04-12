@@ -15,6 +15,7 @@ public class UpdateUserCommand implements ICommand {
         String page;
         User sessionUser = (User) request.getSession().getAttribute("user");
         User user = UserService.findById(Integer.parseInt(request.getParameter("idUser")));
+        String action = request.getParameter("action");
         String login = request.getParameter("login");
         String password = request.getParameter("password");
         String passwordConfirm = request.getParameter("passwordConfirm");
@@ -25,6 +26,9 @@ public class UpdateUserCommand implements ICommand {
         String role = request.getParameter("idRole");
         user.setName(name);
         user.setLastName(lastName);
+        if (action.equals("Delete")){
+            return new DeleteTicketCommand().execute(request, response);
+        }
         if (role != null) {
             user.setRole(RoleService.findById(Integer.parseInt(role)));
         }
@@ -58,6 +62,7 @@ public class UpdateUserCommand implements ICommand {
                 return new ToUserCardCommand().execute(request, response);
             }
         }
+
         UserService.update(user);
         if (sessionUser.getRole().getId() == 1){
             page = new ToUserPage().execute(request, response);

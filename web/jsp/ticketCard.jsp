@@ -15,79 +15,152 @@
 <body>
 <c:import url="header.jsp"/>
 <table align="center" bgcolor="#fff0f5" border="1px ">
-    <caption>Ticket #${idTicket}</caption>
+    <c:if test="${idTicket != null}">
+        <caption>Ticket #${idTicket}</caption>
+    </c:if>
     <form action="${pageContext.request.contextPath}/CruiseCompany" method="post">
-        <input type="hidden" name="command" value="updateTicket"/>
+        <c:if test="${idTicket != null}">
+            <input type="hidden" name="command" value="updateTicket"/>
+        </c:if>
+        <c:if test="${idTicket == null}">
+            <c:if test="${price == null}">
+                <input type="hidden" name="command" value="getPrice"/>
+            </c:if>
+            <c:if test="${price != null}">
+                <input type="hidden" name="command" value="addTicket"/>
+            </c:if>
+        </c:if>
         <tr>
             <input type="hidden" name="idTicket" value="${idTicket}">
             <td>Login</td>
-            <td>${login}</td>
+            <td>${login}
+                <input type="hidden" name="login" value="${login}">
+            </td>
         </tr>
         <tr>
             <td>Name</td>
-            <td><input type="text" name="name" value="${name}"/></td>
+            <td>
+                <c:if test="${price == null}">
+                    <input type="text" name="name" value="${name}"/>
+                </c:if>
+                <c:if test="${price != null}">
+                    ${name}
+                    <input type="hidden" name="name" value="${name}">
+                </c:if>
+            </td>
         </tr>
         <tr>
             <td>Last name</td>
-            <td><input type="text" name="lastName" value="${lastName}"/></td>
+            <td>
+                <c:if test="${price == null}">
+                    <input type="text" name="lastName" value="${lastName}"/>
+                </c:if>
+                <c:if test="${price != null}">
+                    ${lastName}
+                    <input type="hidden" name="lastName" value="${lastName}">
+                </c:if>
+            </td>
         </tr>
         <tr>
             <td>Cruise</td>
-            <td>
-                <select name="CruiseId">
-                    <c:forEach var="Ship" items="${Cruises}">
-                        <c:if test="${Ship.id == idCruise}">
-                            <option selected value="${Ship.id}">${Ship.name}</option>
-                        </c:if>
-                        <c:if test="${Ship.id != idCruise}">
-                            <option value="${Ship.id}">${Ship.name}</option>
-                        </c:if>
-                    </c:forEach>
-                </select></td>
+            <c:if test="${user.role.id == 1}">
+                <td>
+                    <select name="CruiseId">
+                        <c:forEach var="Cruise" items="${Cruises}">
+                            <c:if test="${Cruise.id == idCruise}">
+                                <option selected value="${Cruise.id}">${Cruise.name}</option>
+                            </c:if>
+                            <c:if test="${Cruise.id != idCruise}">
+                                <option value="${Cruise.id}">${Cruise.name}</option>
+                            </c:if>
+                        </c:forEach>
+                    </select></td>
+            </c:if>
+            <c:if test="${user.role.id != 1}">
+                <td>${cruise.name}</td>
+                <input type="hidden" name="idCruise" value="${cruise.id}">
+            </c:if>
         </tr>
         <tr>
             <td>Ticket type</td>
             <td>
-                <select name="TicketTypeId">
-                    <c:forEach var="TicketType" items="${TicketTypes}">
-                        <c:if test="${TicketType.id == idTicketType}">
-                            <option selected value="${TicketType.id}">${TicketType.name}</option>
-                        </c:if>
-                        <c:if test="${TicketType.id != idTicketType}">
-                            <option value="${TicketType.id}">${TicketType.name}</option>
-                        </c:if>
-                    </c:forEach>
-                </select></td>
-        </tr>
-        <tr>
-            <td>Bonuses</td>
-            <td>
-                <c:forEach var="Bonus" items="${Bonuses}">
-                    <c:if test="${fn:contains(selectedBonuses, Bonus)}">
-                        <input type="checkbox" checked name="selectedBonuses" value="${Bonus.id}">${Bonus.name}<br/>
-                    </c:if>
-                    <c:if test="${!fn:contains(selectedBonuses, Bonus)}">
-                        <input type="checkbox" name="selectedBonuses" value="${Bonus.id}">${Bonus.name}<br/>
-                    </c:if>
-                </c:forEach>
+                <c:if test="${price == null}">
+                    <select name="TicketTypeId">
+                        <c:forEach var="TicketType" items="${TicketTypes}">
+                            <c:if test="${TicketType.id == idTicketType}">
+                                <option selected value="${TicketType.id}">${TicketType.name}</option>
+                            </c:if>
+                            <c:if test="${TicketType.id != idTicketType}">
+                                <option value="${TicketType.id}">${TicketType.name}</option>
+                            </c:if>
+                        </c:forEach>
+                    </select>
+                </c:if>
+                <c:if test="${price != null}">
+                    ${selectedTicketType.name}
+                    <input type="hidden" name="selectedTicketTypeId" value="${selectedTicketType.id}">
+                </c:if>
             </td>
         </tr>
+        <c:if test="${user.role.id == 1}">
+            <tr>
+                <td>Bonuses</td>
+                <td>
+                    <c:forEach var="Bonus" items="${Bonuses}">
+                        <c:if test="${fn:contains(selectedBonuses, Bonus)}">
+                            <input type="checkbox" checked name="selectedBonuses" value="${Bonus.id}">${Bonus.name}<br/>
+                        </c:if>
+                        <c:if test="${!fn:contains(selectedBonuses, Bonus)}">
+                            <input type="checkbox" name="selectedBonuses" value="${Bonus.id}">${Bonus.name}<br/>
+                        </c:if>
+                    </c:forEach>
+                </td>
+            </tr>
+        </c:if>
         <tr>
             <td>Excursions</td>
             <td>
-                <c:forEach var="Excursion" items="${Excursions}">
-                    <c:if test="${fn:contains(selectedExcursions, Excursion)}">
-                        <input type="checkbox" checked name="selectedExcursions" value="${Excursion.id}">${Excursion.name}<br/>
-                    </c:if>
-                    <c:if test="${!fn:contains(selectedExcursions, Excursion)}">
-                        <input type="checkbox" name="selectedExcursions" value="${Excursion.id}">${Excursion.name}<br/>
-                    </c:if>
+                <c:if test="${price == null}">
+                    <c:forEach var="Excursion" items="${Excursions}">
+                        <c:if test="${fn:contains(selectedExcursions, Excursion)}">
+                    <input type="checkbox" checked name="selectedExcursions"
+                           value="${Excursion.id}">${Excursion.name}<br/>
+                </c:if>
+                <c:if test="${!fn:contains(selectedExcursions, Excursion)}">
+                    <input type="checkbox" name="selectedExcursions" value="${Excursion.id}">${Excursion.name}
+                    <br/>
+                </c:if>
                 </c:forEach>
+                </c:if>
+                <c:if test="${price != null}">
+                    <c:forEach var="Excursion" items="${Excursions}">
+                        <input type="hidden" name="selectedExcursions" value="${Excursion.id}">${Excursion.name}<br/>
+                    </c:forEach>
+
+                </c:if>
             </td>
         </tr>
+        <c:if test="${price != null}">
+
+        <tr>
+            <td>Price</td>
+            <td>${price}</td>
+        </tr>
+        </c:if>
         <tr>
             <td></td>
-            <td><input type="submit" value="Update"></td>
+            <td>
+                <c:if test="${idTicket != null}">
+                    <input type="submit" value="Update">
+                </c:if>
+                <c:if test="${idTicket == null}">
+                    <c:if test="${price == null}">
+                        <input type="submit" value="Get Price">
+                    </c:if>
+                    <c:if test="${price != null}">
+                        <input type="submit" value="Buy">
+                    </c:if>
+                </c:if></td>
         </tr>
     </form>
 </table>

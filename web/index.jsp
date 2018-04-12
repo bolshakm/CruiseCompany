@@ -5,7 +5,7 @@
     <title>Index</title>
 </head>
 <body>
-<c:set var="Login" value="user4" scope="request"/>
+<c:set var="Login" value="user2" scope="request"/>
 <c:set var="Password" value="1234" scope="request"/>
 <jsp:forward page="jsp/login.jsp"/>
 </body>

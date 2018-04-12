@@ -20,6 +20,7 @@
                 <caption>Tickets</caption>
                 <tr>
                     <th>Id</th>
+                    <th>Login</th>
                     <th>Name</th>
                     <th>Last name</th>
                     <th>Cruise</th>
@@ -33,6 +34,7 @@
                 <c:forEach var="Ticket" items="${Tickets}">
                     <tr>
                         <td>${Ticket.id}</td>
+                        <td>${Ticket.user.login}</td>
                         <td>${Ticket.name}</td>
                         <td>${Ticket.lastName}</td>
                         <td>${Ticket.cruise.name}</td>

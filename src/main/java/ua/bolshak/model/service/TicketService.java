@@ -21,8 +21,6 @@ public class TicketService {
         return tickets;
     }
 
-
-
     public static List<Ticket> findAllByUser(User user){
         return getFull(DaoFactory.getTicketDao().findAllByUser(user));
     }
@@ -83,6 +81,10 @@ public class TicketService {
 
     public static void add(Ticket ticket){
         DaoFactory.getTicketDao().add(checkPrice(ticket));
+    }
+
+    public static void buy(Ticket ticket){
+        DaoFactory.getTicketDao().buy(checkPrice(ticket));
     }
 
     public static void update(Ticket ticket){

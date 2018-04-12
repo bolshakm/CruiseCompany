@@ -20,6 +20,8 @@ public interface TicketIDao {
 
     Ticket findById(int id);
 
+    Ticket findByName(String name);
+
     void add(Ticket ticket);
 
     void update(Ticket ticket);

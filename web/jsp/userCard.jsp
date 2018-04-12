@@ -12,7 +12,7 @@
     <title>User card</title>
 </head>
 <body>
-<c:import url="header.jsp"/>
+    <c:import url="header.jsp"/>
 <table align="center" bgcolor="#fff0f5" border="1px ">
     <caption>User Card</caption>
     <form action="${pageContext.request.contextPath}/CruiseCompany" method="post">
@@ -39,12 +39,6 @@
             <td><c:if test="${user.login != login}">${email} </c:if>
                 <c:if test="${user.login == login}"><input type="text" name="email" value="${email}"></c:if></td>
         </tr>
-        <%--<c:if test="${user.role.id != 1}">--%>
-        <%--<tr>--%>
-            <%--<td>Money</td>--%>
-            <%--<td><input type="number" name="money" value="${money}"/></td>--%>
-        <%--</tr>--%>
-        <%--</c:if>--%>
         <tr>
             <td>Name</td>
             <td><input type="text" name="name" value="${name}"/></td>
@@ -53,6 +47,12 @@
         <td>Last name</td>
         <td><input type="text" name="lastName" value="${lastName}"/></td>
     </tr>
+        <c:if test="${user.role.id == 1}">
+            <tr>
+                <td>Money</td>
+                <td><input type="number" name="money" value="${money}"></td>
+            </tr>
+        </c:if>
 <c:if test="${user.role.id == 1}">
     <tr>
         <td>Role</td>
@@ -68,17 +68,8 @@
         </select></td>
     </tr>
 </c:if>
-    <tr>
-        <td>Tickets</td>
-        <td>
-            <c:forEach var="Ticket" items="${Tickets}">
-                <a href="/CruiseCompany?command=toUpdateTicket&idTicket=${Ticket.id}"># ${Ticket.id}</a>
-                <a href="/CruiseCompany?command=deleteTicket&idTicket=${Ticket.id}"><button>Delete</button></a><br/>
-            </c:forEach>
-        </td>
-    </tr>
     <tr><td></td><td>
-        <input type="submit" value="Update"></td></tr>
+        <input type="submit" name="action" value="Update"></td></tr>
     </tr>
     </form>
 </table>
