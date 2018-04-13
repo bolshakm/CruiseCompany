@@ -16,7 +16,6 @@
     <tr><td><a href="/CruiseCompany?command=toUpdateUserCard&idUser=${user.id}">${user.login}</a></td>
         <td><a href="CruiseCompany?command=logout">Logout</a></td></tr>
 </table>
-
 <p align="center">
     <c:if test="${user.role.id == 1}">
         <a href="/CruiseCompany?command=toCruisesPage">
@@ -30,6 +29,22 @@
         </a>
         <a href="/CruiseCompany?command=toUsersPage">
             <button>Users</button>
+        </a>
+        <a href="/CruiseCompany?command=toTicketsPage">
+            <button>Tickets</button>
+        </a>
+    </c:if>
+</p>
+<p align="center">
+    <c:if test="${user.role.id != 1}">
+        <a href="/CruiseCompany?command=toCruisesPage">
+            <button>Cruises</button>
+        </a>
+        <a href="/CruiseCompany?command=toShipsPage">
+            <button>Ships</button>
+        </a>
+        <a href="/CruiseCompany?command=toPortsPage">
+            <button>Ports</button>
         </a>
         <a href="/CruiseCompany?command=toTicketsPage">
             <button>Tickets</button>

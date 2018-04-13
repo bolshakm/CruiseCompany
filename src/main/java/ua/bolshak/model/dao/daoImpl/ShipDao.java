@@ -159,8 +159,11 @@ public class ShipDao implements ShipIDao {
 
     @Override
     public void update(Ship ship) {
+        PreparedStatement psForUpdateUser = null;
+        PreparedStatement psForDeleteBonuses = null;
+        PreparedStatement psForAddBonuses = null;
         try (Connection connection = MysqlConnectionPool.getConnection()) {
-            PreparedStatement psForUpdateUser = connection.prepareStatement(SqlQuery.UPDATE_SHIP);
+            psForUpdateUser = connection.prepareStatement(SqlQuery.UPDATE_SHIP);
             psForUpdateUser.setString(1, ship.getName());
             psForUpdateUser.setString(2, ship.getNumber());
             psForUpdateUser.setInt(3, ship.getNumberOfSeats());
@@ -168,54 +171,75 @@ public class ShipDao implements ShipIDao {
             psForUpdateUser.setInt(5, ship.getType().getId());
             psForUpdateUser.setInt(6, ship.getId());
             psForUpdateUser.executeUpdate();
-            psForUpdateUser.close();
-            PreparedStatement psForDeleteBonuses = connection.prepareStatement(SqlQuery.DELETE_ALL_SHIP_HAS_BONUSES);
+            psForDeleteBonuses = connection.prepareStatement(SqlQuery.DELETE_ALL_SHIP_HAS_BONUSES);
             psForDeleteBonuses.setInt(1, ship.getId());
             psForDeleteBonuses.executeUpdate();
-            psForDeleteBonuses.close();
-            PreparedStatement psForAddBonuses = connection.prepareStatement(SqlQuery.ADD_BONUS_FOR_SHIP);
+            psForAddBonuses = connection.prepareStatement(SqlQuery.ADD_BONUS_FOR_SHIP);
             for (Bonus bonus : ship.getBonuses()) {
                 psForAddBonuses.setInt(1, ship.getId());
                 psForAddBonuses.setInt(2, bonus.getId());
                 psForAddBonuses.addBatch();
             }
             psForAddBonuses.executeBatch();
-            psForAddBonuses.close();
 
         } catch (SQLException e) {
             LOGGER.error(e.getMessage());
+        } finally {
+            try {
+                if (psForUpdateUser != null) {
+                    psForUpdateUser.close();
+                }
+                if (psForDeleteBonuses != null) {
+                    psForDeleteBonuses.close();
+                }
+                if (psForAddBonuses != null) {
+                    psForAddBonuses.close();
+                }
+            } catch (SQLException e) {
+                LOGGER.error(e.getMessage());
+            }
         }
     }
 
     @Override
     public void delete(Ship ship) {
+        PreparedStatement psForDeleteBonuses = null;
+        PreparedStatement psDeleteShip = null;
         try (Connection connection = MysqlConnectionPool.getConnection()) {
             if (ship.getBonuses() != null) {
-                PreparedStatement psForDeleteBonuses = connection.prepareStatement(SqlQuery.DELETE_ALL_SHIP_HAS_BONUSES);
+                psForDeleteBonuses = connection.prepareStatement(SqlQuery.DELETE_ALL_SHIP_HAS_BONUSES);
                 psForDeleteBonuses.setInt(1, ship.getId());
                 psForDeleteBonuses.executeUpdate();
-                psForDeleteBonuses.close();
             }
-            PreparedStatement psDeleteShip = connection.prepareStatement(SqlQuery.DELETE_SHIP);
+            psDeleteShip = connection.prepareStatement(SqlQuery.DELETE_SHIP);
             psDeleteShip.setInt(1, ship.getId());
             psDeleteShip.executeUpdate();
-            psDeleteShip.close();
 
         } catch (SQLException e) {
             LOGGER.error(e.getMessage());
+        } finally {
+            try {
+                if (psForDeleteBonuses != null) {
+                    psForDeleteBonuses.close();
+                }
+                if (psDeleteShip != null) {
+                    psDeleteShip.close();
+                }
+            } catch (SQLException e) {
+                LOGGER.error(e.getMessage());
+            }
         }
     }
 
     private static void addBonuses(Ship ship) {
-        try (Connection connection = MysqlConnectionPool.getConnection()) {
-            PreparedStatement psForAddBonuses = connection.prepareStatement(SqlQuery.ADD_BONUS_FOR_SHIP);
+        try (Connection connection = MysqlConnectionPool.getConnection();
+            PreparedStatement psForAddBonuses = connection.prepareStatement(SqlQuery.ADD_BONUS_FOR_SHIP)){
             for (Bonus bonus : ship.getBonuses()) {
                 psForAddBonuses.setInt(1, ship.getId());
                 psForAddBonuses.setInt(2, bonus.getId());
                 psForAddBonuses.addBatch();
             }
             psForAddBonuses.executeBatch();
-            psForAddBonuses.close();
         } catch (SQLException e) {
             LOGGER.error(e.getMessage());
         }

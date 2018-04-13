@@ -22,7 +22,7 @@ public class UpdateUserCommand implements ICommand {
         String email = request.getParameter("email");
         String name = request.getParameter("name");
         String lastName = request.getParameter("lastName");
-        String money = request.getParameter("money");
+        String money = request.getParameter("mo `ney");
         String role = request.getParameter("idRole");
         user.setName(name);
         user.setLastName(lastName);
