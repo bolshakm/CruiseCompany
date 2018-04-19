@@ -22,7 +22,10 @@
                     <th>Name</th>
                     <th>Port</th>
                     <th>Price</th>
+                    <c:if test="${user.role.id == 1}">
                     <th>Actions</th>
+                    </c:if>
+<c:if test="${user.role.id == 1}">
                 </tr>
                 <c:if test="${ExcursionName == null}">
                 <form action="/CruiseCompany" method="post">
@@ -63,11 +66,13 @@
                         </tr>
                     </form>
                 </c:if>
+                </c:if>
                 <c:forEach var="Excursion" items="${Excursions}">
                     <tr>
                         <td>${Excursion.name}</td>
                         <td>${Excursion.port.name}</td>
                         <td>${Excursion.price}</td>
+                        <c:if test="${user.role.id == 1}">
                         <td>
                             <a href="${pageContext.request.contextPath}/CruiseCompany?command=updateExcursion&idExcursion=${Excursion.id}">
                                 <button>Update</button>
@@ -75,10 +80,12 @@
                             <a href="${pageContext.request.contextPath}/CruiseCompany?command=deleteExcursion&idExcursion=${Excursion.id}">
                                 <button>Delete</button>
                             </a></td>
+                        </c:if>
                     </tr>
                 </c:forEach>
             </table>
         </td>
+<c:if test="${user.role.id == 1}">
         <td width="50px"></td>
         <td valign="top">
             <table border="1" align="center">
@@ -134,6 +141,7 @@
                 </c:forEach>
             </table>
         </td>
+</c:if>
     </tr>
 </table>
 

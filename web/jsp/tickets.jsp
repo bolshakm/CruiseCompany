@@ -13,6 +13,7 @@
 </head>
 <body>
 <c:import url="header.jsp"/>
+<p align="center">${InfoMassage}</p>
 <table align="center">
     <tr>
         <td valign="top">
@@ -30,7 +31,6 @@
                     <th>Price</th>
                     <th>Actions</th>
                 </tr>
-
                 <c:forEach var="Ticket" items="${Tickets}">
                     <tr>
                         <td>${Ticket.id}</td>
@@ -42,13 +42,17 @@
                         <td>${Ticket.cruise.to}</td>
                         <td>${Ticket.ticketType.name}</td>
                         <td>${Ticket.price}</td>
-                        <td><a href="/CruiseCompany?command=toUpdateTicket&idTicket=${Ticket.id}"><button>Update</button></a>
+                        <td>
+                            <c:if test="${user.role.id == 1}">
+                            <a href="/CruiseCompany?command=toUpdateTicket&idTicket=${Ticket.id}"><button>Update</button></a>
+                            </c:if>
                             <a href="/CruiseCompany?command=deleteTicket&idTicket=${Ticket.id}"><button>Delete</button></a></td>
                     </tr>
                 </c:forEach>
             </table>
         </td>
         <td width="100"></td>
+<c:if test="${user.role.id == 1}">
         <td valign="top">
             <table border="1" bgcolor="#f0ffff">
                 <caption>Ticket Type</caption>
@@ -92,6 +96,7 @@
                 </c:forEach>
             </table>
         </td>
+</c:if>
     </tr>
 </table>
 </body>

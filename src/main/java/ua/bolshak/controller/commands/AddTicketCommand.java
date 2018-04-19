@@ -30,7 +30,6 @@ public class AddTicketCommand implements ICommand {
         TicketService.buy(ticket);
         user = UserService.findByLogin(user.getLogin());
         request.getSession().setAttribute("user", user);
-//        add user with new money to session
         return new ToMainPage().execute(request, response);
     }
 }

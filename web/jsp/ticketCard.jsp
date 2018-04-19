@@ -81,6 +81,18 @@
                 <input type="hidden" name="idCruise" value="${cruise.id}">
             </c:if>
         </tr>
+        <c:if test="${user.role.id != 1}">
+        <tr>
+            <td>Cruise from</td>
+                <td>${cruise.from}</td>
+        </tr>
+        </c:if>
+        <c:if test="${user.role.id != 1}">
+            <tr>
+                <td>Cruise to</td>
+                <td>${cruise.to}</td>
+            </tr>
+        </c:if>
         <tr>
             <td>Ticket type</td>
             <td>

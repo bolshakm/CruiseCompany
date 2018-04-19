@@ -14,8 +14,6 @@ public interface TicketIDao {
 
     List<Ticket> findAllByTicketType(TicketType ticketType);
 
-    List<Ticket> findAllByBonus(Bonus bonus);
-
     List<Ticket> findAllByExcursion(Excursion excursion);
 
     Ticket findById(int id);

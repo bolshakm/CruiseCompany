@@ -19,7 +19,7 @@ public class ControllerHelper {
         commands.put("toShipsPage", new ToShipsPage());
         commands.put("toPortsPage", new ToPortsPage());
         commands.put("toUsersPage", new ToUserPage());
-        commands.put("toTicketsPage", new ToTicketsPage());
+        commands.put("toTicketsPage", new ToTicketsPageCommand());
         commands.put("addCruiseStatus", new AddCruiseStatus());
         commands.put("deleteCruiseStatus", new DeleteCruiseStatus());
         commands.put("updateCruiseStatus", new UpdateCruiseStatus());
@@ -59,6 +59,8 @@ public class ControllerHelper {
         commands.put("buyTicket", new ToTicketCardCommand());
         commands.put("addTicket", new AddTicketCommand());
         commands.put("getPrice", new ToAddTicketCommand());
+        commands.put("toMainPage", new ToMainPage());
+        commands.put("toStaffPage", new ToStaffPageCommand());
     }
 
     public static ControllerHelper getInstance() {

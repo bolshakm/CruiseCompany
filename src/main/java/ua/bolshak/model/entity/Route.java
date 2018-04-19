@@ -3,12 +3,11 @@ package ua.bolshak.model.entity;
 import java.util.List;
 import java.util.Objects;
 
-public class Bonus {
-
+public class Route {
     private int id;
     private String name;
-    private List<Ship> ships;
-    private List<TicketType> ticketTypes;
+    private List<Port> ports;
+    private List<Cruise> cruises;
 
     public int getId() {
         return id;
@@ -26,38 +25,39 @@ public class Bonus {
         this.name = name;
     }
 
-    public List<Ship> getShips() {
-        return ships;
+    public List<Port> getPorts() {
+        return ports;
     }
 
-    public void setShips(List<Ship> ships) {
-        this.ships = ships;
+    public void setPorts(List<Port> ports) {
+        this.ports = ports;
     }
 
-    public List<TicketType> getTicketTypes() {
-        return ticketTypes;
+    public List<Cruise> getCruises() {
+        return cruises;
     }
 
-    public void setTicketTypes(List<TicketType> ticketTypes) {
-        this.ticketTypes = ticketTypes;
+    public void setCruises(List<Cruise> cruises) {
+        this.cruises = cruises;
     }
 
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
-        Bonus bonus = (Bonus) o;
-        return Objects.equals(name, bonus.name);
+        Route route = (Route) o;
+        return id == route.id &&
+                Objects.equals(name, route.name);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(name);
+        return Objects.hash(id, name);
     }
 
     @Override
     public String toString() {
-        return "Bonus{" +
+        return "Route{" +
                 "id=" + id +
                 ", name='" + name + '\'' +
                 '}';

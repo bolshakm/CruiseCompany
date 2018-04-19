@@ -1,17 +1,16 @@
 package ua.bolshak.controller.commands;
 
+import ua.bolshak.model.entity.User;
 import ua.bolshak.model.service.CruiseService;
-import ua.bolshak.model.service.ShipService;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-public class ToMainPage implements ICommand{
+public class ToStaffPageCommand implements ICommand {
     @Override
     public String execute(HttpServletRequest request, HttpServletResponse response){
-        String page = "/jsp/main.jsp";
-        request.setAttribute("Cruises", CruiseService.findAll());
-//        request.setAttribute("Ships", ShipService.findAll());
-        return page;
+        User user = (User) request.getSession().getAttribute("user");
+        request.setAttribute("Cruises", CruiseService.findAllBuUser(user));
+        return "/jsp/staffPage.jsp";
     }
 }

@@ -1,9 +1,6 @@
 package ua.bolshak.model.dao.idao;
 
-import ua.bolshak.model.entity.Bonus;
-import ua.bolshak.model.entity.Cruise;
-import ua.bolshak.model.entity.Ship;
-import ua.bolshak.model.entity.ShipType;
+import ua.bolshak.model.entity.*;
 
 import java.util.List;
 
@@ -14,6 +11,8 @@ public interface ShipIDao {
     List<Ship> findAllByShipType(ShipType shipType);
 
     List<Ship> findAllByBonus(Bonus bonus);
+
+    List<Ship> findAllByTicketTypes(TicketType ticketType);
 
     Ship findById(int id);
 

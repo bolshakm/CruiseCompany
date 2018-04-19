@@ -8,6 +8,7 @@ import ua.bolshak.model.dao.util.SqlQuery;
 import ua.bolshak.model.entity.Bonus;
 import ua.bolshak.model.entity.Ship;
 import ua.bolshak.model.entity.Ticket;
+import ua.bolshak.model.entity.TicketType;
 
 import java.sql.*;
 import java.util.ArrayList;
@@ -29,7 +30,7 @@ public class BonusDao  implements BonusIDao {
 
     public synchronized static BonusDao getInstance() {
         if (instance == null){
-            return new BonusDao();
+            instance =  new BonusDao();
         }
         return instance;
     }
@@ -50,11 +51,11 @@ public class BonusDao  implements BonusIDao {
     }
 
     @Override
-    public List<Bonus> findAllByTicket(Ticket ticket) {
+    public List<Bonus> findAllByTicketType(TicketType ticketType) {
         List<Bonus> bonuses = new ArrayList<>();
         try(Connection connection = MysqlConnectionPool.getConnection();
-            PreparedStatement preparedStatement = connection.prepareStatement(SqlQuery.SELECT_ALL_BONUSES_BY_TICKET)){
-            preparedStatement.setInt(1, ticket.getId());
+            PreparedStatement preparedStatement = connection.prepareStatement(SqlQuery.SELECT_ALL_BONUSES_BY_TICKET_TYPES)){
+            preparedStatement.setInt(1, ticketType.getId());
             try(ResultSet resultSet = preparedStatement.executeQuery()){
                 while (resultSet.next()) {
                     bonuses.add(initialization(resultSet));
@@ -66,8 +67,9 @@ public class BonusDao  implements BonusIDao {
         return bonuses;
     }
 
+
     @Override
-    public List<Bonus> findAllShip(Ship ship) {
+    public List<Bonus> findAllByShip(Ship ship) {
         List<Bonus> bonuses = new ArrayList<>();
         try(Connection connection = MysqlConnectionPool.getConnection();
             PreparedStatement preparedStatement = connection.prepareStatement(SqlQuery.SELECT_ALL_BONUSES_BY_SHIP)){

@@ -20,6 +20,6 @@ public class UpdateTicketTypeCommand implements ICommand {
             ticketType.setName(name);
             TicketTypeService.update(ticketType);
         }
-        return new ToTicketsPage().execute(request, response);
+        return new ToTicketsPageCommand().execute(request, response);
     }
 }

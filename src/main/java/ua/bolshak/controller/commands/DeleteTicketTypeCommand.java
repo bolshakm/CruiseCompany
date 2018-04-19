@@ -13,6 +13,6 @@ public class DeleteTicketTypeCommand implements ICommand {
     public String execute(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException {
         TicketType ticketType = TicketTypeService.findById(Integer.parseInt(request.getParameter("idTicketType")));
         TicketTypeService.delete(ticketType);
-        return new ToTicketsPage().execute(request, response);
+        return new ToTicketsPageCommand().execute(request, response);
     }
 }

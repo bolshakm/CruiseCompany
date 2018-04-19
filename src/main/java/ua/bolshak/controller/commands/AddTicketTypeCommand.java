@@ -14,6 +14,6 @@ public class AddTicketTypeCommand implements ICommand {
         TicketType ticketType = new TicketType();
         ticketType.setName(request.getParameter("TicketTypeName"));
         TicketTypeService.add(ticketType);
-        return new ToTicketsPage().execute(request, response);
+        return new ToTicketsPageCommand().execute(request, response);
     }
 }

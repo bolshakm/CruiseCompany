@@ -6,10 +6,7 @@ import ua.bolshak.model.MysqlConnectionPool;
 import ua.bolshak.model.dao.idao.ShipIDao;
 import ua.bolshak.model.dao.util.ColumnName;
 import ua.bolshak.model.dao.util.SqlQuery;
-import ua.bolshak.model.entity.Bonus;
-import ua.bolshak.model.entity.Cruise;
-import ua.bolshak.model.entity.Ship;
-import ua.bolshak.model.entity.ShipType;
+import ua.bolshak.model.entity.*;
 
 import java.sql.*;
 import java.util.ArrayList;
@@ -77,6 +74,23 @@ public class ShipDao implements ShipIDao {
         try (Connection connection = MysqlConnectionPool.getConnection();
              PreparedStatement preparedStatement = connection.prepareStatement(SqlQuery.FIND_ALL_SHIPS_BY_BONUS)) {
             preparedStatement.setInt(1, bonus.getId());
+            try (ResultSet resultSet = preparedStatement.executeQuery()) {
+                while (resultSet.next()) {
+                    ships.add(initialization(resultSet));
+                }
+            }
+        } catch (SQLException e) {
+            LOGGER.error(e);
+        }
+        return ships;
+    }
+
+    @Override
+    public List<Ship> findAllByTicketTypes(TicketType ticketType) {
+        List<Ship> ships = new ArrayList<>();
+        try (Connection connection = MysqlConnectionPool.getConnection();
+             PreparedStatement preparedStatement = connection.prepareStatement(SqlQuery.FIND_ALL_SHIPS_BY_TICKET_TYPE)) {
+            preparedStatement.setInt(1, ticketType.getId());
             try (ResultSet resultSet = preparedStatement.executeQuery()) {
                 while (resultSet.next()) {
                     ships.add(initialization(resultSet));

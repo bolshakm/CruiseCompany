@@ -47,4 +47,8 @@ public abstract class DaoFactory {
     public static UserDao getUserDao(){
         return UserDao.getInstance();
     }
+
+    public static RouteDaoImpl getRouteDaoImpl(){
+        return RouteDaoImpl.getInstance();
+    }
 }

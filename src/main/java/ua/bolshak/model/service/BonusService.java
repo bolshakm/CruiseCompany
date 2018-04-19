@@ -5,6 +5,7 @@ import ua.bolshak.model.dao.DaoFactory;
 import ua.bolshak.model.entity.Bonus;
 import ua.bolshak.model.entity.Ship;
 import ua.bolshak.model.entity.Ticket;
+import ua.bolshak.model.entity.TicketType;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -15,8 +16,8 @@ public class BonusService {
         return getFull(DaoFactory.getBonusDao().findAll());
     }
 
-    public static List<Bonus> findAllByTicket(Ticket ticket){
-        return getFull(DaoFactory.getBonusDao().findAllByTicket(ticket));
+    public static List<Bonus> findAllByTicketType(TicketType ticketType){
+        return getFull(DaoFactory.getBonusDao().findAllByTicketType(ticketType));
     }
 
     public static List<Bonus> getListById(String[] selectedId){
@@ -28,22 +29,20 @@ public class BonusService {
     }
 
     public static List<Bonus> findAllByShip(Ship ship){
-        return getFull(DaoFactory.getBonusDao().findAllShip(ship));
+        return getFull(DaoFactory.getBonusDao().findAllByShip(ship));
     }
 
     public static Bonus findById(int id){
         return getFull(DaoFactory.getBonusDao().findById(id));
     }
 
-    public static List<Bonus> findAllLazyByTicket(Ticket ticket){
-        return DaoFactory.getBonusDao().findAllByTicket(ticket);
+    public static List<Bonus> findAllLazyByTicketType(TicketType ticketType){
+        return DaoFactory.getBonusDao().findAllByTicketType(ticketType);
     }
 
     public static List<Bonus> findAllLazyByShip(Ship ship){
-        return DaoFactory.getBonusDao().findAllShip(ship);
+        return DaoFactory.getBonusDao().findAllByShip(ship);
     }
-
-
 
     public static void add(Bonus bonus){
         DaoFactory.getBonusDao().add(bonus);
@@ -60,7 +59,7 @@ public class BonusService {
     public static Bonus getFull(Bonus bonus){
         if (bonus !=null) {
             bonus.setShips(ShipService.findAllLazyByBonus(bonus));
-            bonus.setTickets(TicketService.findAllLazyByBonus(bonus));
+            bonus.setTicketTypes(TicketTypeService.findAllLazyByBonus(bonus));
         }
         return bonus;
     }
@@ -69,7 +68,7 @@ public class BonusService {
         if (bonuses != null) {
             for (Bonus bonus : bonuses) {
                 bonus.setShips(ShipService.findAllLazyByBonus(bonus));
-                bonus.setTickets(TicketService.findAllLazyByBonus(bonus));
+                bonus.setTicketTypes(TicketTypeService.findAllLazyByBonus(bonus));
             }
         }
         return bonuses;

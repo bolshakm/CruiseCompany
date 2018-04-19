@@ -17,35 +17,35 @@
         <td><a href="CruiseCompany?command=logout">Logout</a></td></tr>
 </table>
 <p align="center">
+    <c:if test="${user.role.id == 1 || user.role.id == 2}">
     <c:if test="${user.role.id == 1}">
         <a href="/CruiseCompany?command=toCruisesPage">
             <button>Cruises</button>
         </a>
+    </c:if>
+    <c:if test="${user.role.id != 1}">
+        <a href="/CruiseCompany?command=toMainPage">
+            <button>Cruises</button>
+        </a>
+    </c:if>
         <a href="/CruiseCompany?command=toShipsPage">
             <button>Ships</button>
         </a>
+    <c:if test="${user.role.id == 1}">
         <a href="/CruiseCompany?command=toPortsPage">
             <button>Ports</button>
         </a>
+    </c:if>
+    <c:if test="${user.role.id != 1}">
+        <a href="/CruiseCompany?command=toPortsPage">
+            <button>Excursions</button>
+        </a>
+    </c:if>
+<c:if test="${user.role.id == 1}">
         <a href="/CruiseCompany?command=toUsersPage">
             <button>Users</button>
         </a>
-        <a href="/CruiseCompany?command=toTicketsPage">
-            <button>Tickets</button>
-        </a>
-    </c:if>
-</p>
-<p align="center">
-    <c:if test="${user.role.id != 1}">
-        <a href="/CruiseCompany?command=toCruisesPage">
-            <button>Cruises</button>
-        </a>
-        <a href="/CruiseCompany?command=toShipsPage">
-            <button>Ships</button>
-        </a>
-        <a href="/CruiseCompany?command=toPortsPage">
-            <button>Ports</button>
-        </a>
+</c:if>
         <a href="/CruiseCompany?command=toTicketsPage">
             <button>Tickets</button>
         </a>

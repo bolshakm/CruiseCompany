@@ -19,36 +19,47 @@
         <td valign="top">
             <table border="1">
                 <caption>Ships</caption>
-                <tr bgcolor="#7fffd4" align="right"><a href="/CruiseCompany?command=toShipCard"><button>Add</button></a></tr>
+                <c:if test="${user.role.id == 1}">
+                    <tr align="right"><a href="/CruiseCompany?command=toShipCard"><button>Add</button></a></tr>
+                </c:if>
                 <tr>
                     <th>Name</th>
                     <th>Number</th>
+                    <c:if test="${user.role.id == 1}">
                     <th>Number of seats</th>
+                    </c:if>
                     <th>Price per seats</th>
                     <th>Ship type</th>
                     <th>Bonuses</th>
                     <th>Cruises</th>
+<c:if test="${user.role.id == 1}">
                     <th>Actions</th>
+</c:if>
                 </tr>
                 <c:forEach var="Ship" items="${Ships}">
                     <tr>
                         <td>${Ship.name}</td>
                         <td>${Ship.number}</td>
+                        <c:if test="${user.role.id == 1}">
                         <td>${Ship.numberOfSeats}</td>
+                        </c:if>
                         <td>${Ship.pricePerSeat}</td>
                         <td>${Ship.type.name}</td>
                         <td><c:forEach var="bonus" items="${Ship.bonuses}">
                             ${bonus.name}<br/>
                         </c:forEach> </td>
                         <td><c:forEach var="cruise" items="${Ship.cruises}">
-                            ${cruise.name}<br/>
+                            <a href="/CruiseCompany?command=buyTicket&idCruise=${cruise.id}">${cruise.name}</a><br/>
                         </c:forEach></td>
+                        <c:if test="${user.role.id == 1}">
                         <td><a href="/CruiseCompany?command=toUpdateShipCard&idShip=${Ship.id}"><button>Update</button></a>
                             <a href="/CruiseCompany?command=deleteShip&idShip=${Ship.id}"><button>Delete</button></a></td>
+                        </c:if>
+                        </c:forEach>
                     </tr>
-                </c:forEach>
             </table>
         </td>
+<c:if test="${user.role.id == 1}">
         <td width="100"></td>
         <td valign="top">
             <table border="1" bgcolor="#f0ffff">
@@ -136,6 +147,7 @@
                 </c:forEach>
             </table>
         </td>
+</c:if>
     </tr>
 </table>
 </body>

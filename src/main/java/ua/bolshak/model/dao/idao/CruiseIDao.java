@@ -14,6 +14,8 @@ public interface CruiseIDao {
 
     List<Cruise> findAllByShip(Ship ship);
 
+    List<Cruise> findAllByRoute(Route route);
+
     List<Cruise> findAllByUser(User user);
 
     Cruise findByTicket(Ticket ticket);

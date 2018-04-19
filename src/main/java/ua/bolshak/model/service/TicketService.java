@@ -33,10 +33,6 @@ public class TicketService {
         return getFull(DaoFactory.getTicketDao().findAllByTicketType(ticketType));
     }
 
-    public static List<Ticket> findAllByBonus(Bonus bonus){
-        return getFull(DaoFactory.getTicketDao().findAllByBonus(bonus));
-    }
-
     public static List<Ticket> findAllByExcursion(Excursion excursion){
         return getFull(DaoFactory.getTicketDao().findAllByExcursion(excursion));
     }
@@ -71,10 +67,6 @@ public class TicketService {
         return DaoFactory.getTicketDao().findAllByTicketType(ticketType);
     }
 
-    public static List<Ticket> findAllLazyByBonus(Bonus bonus){
-        return DaoFactory.getTicketDao().findAllByBonus(bonus);
-    }
-
     public static List<Ticket> findAllLazyByExcursion(Excursion excursion){
         return DaoFactory.getTicketDao().findAllByExcursion(excursion);
     }
@@ -98,7 +90,6 @@ public class TicketService {
     public static Ticket getFull(Ticket ticket){
         if (ticket != null) {
             ticket.setUser(UserService.findLazyByTicket(ticket));
-            ticket.setBonuses(BonusService.findAllLazyByTicket(ticket));
             ticket.setCruise(CruiseService.findLazyByTicket(ticket));
             ticket.setTicketType(TicketTypeService.findLazyByTicket(ticket));
             ticket.setExcursions(ExcursionService.findAllLazyByTicket(ticket));
@@ -110,7 +101,6 @@ public class TicketService {
         if (tickets != null) {
             for (Ticket ticket : tickets) {
                 ticket.setUser(UserService.findLazyByTicket(ticket));
-                ticket.setBonuses(BonusService.findAllLazyByTicket(ticket));
                 ticket.setCruise(CruiseService.findLazyByTicket(ticket));
                 ticket.setTicketType(TicketTypeService.findLazyByTicket(ticket));
                 ticket.setExcursions(ExcursionService.findAllLazyByTicket(ticket));

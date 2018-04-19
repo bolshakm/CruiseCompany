@@ -50,4 +50,6 @@ public interface ColumnName {
     String LAST_NAME = "last_name";
     String TICKET_PRICE = "price";
 
+    String ID_ROUTE = "id_route";
+    String ROUTE_NAME = "route_name";
 }

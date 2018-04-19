@@ -12,6 +12,7 @@ public class Cruise {
     private Date from;
     private Date to;
     private Ship ship;
+    private Route route;
     private CruiseStatus status;
     private List<Ticket> tickets;
     private List<Port> ports;
@@ -55,6 +56,14 @@ public class Cruise {
 
     public void setShip(Ship ship) {
         this.ship = ship;
+    }
+
+    public Route getRoute() {
+        return route;
+    }
+
+    public void setRoute(Route route) {
+        this.route = route;
     }
 
     public CruiseStatus getStatus() {

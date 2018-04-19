@@ -10,6 +10,7 @@ public class Port {
     private String country;
     private List<Cruise> cruises;
     private List<Excursion> excursions;
+    private List<Route> routes;
 
     public int getId() {
         return id;
@@ -58,6 +59,14 @@ public class Port {
 
     public void setExcursions(List<Excursion> excursions) {
         this.excursions = excursions;
+    }
+
+    public List<Route> getRoutes() {
+        return routes;
+    }
+
+    public void setRoutes(List<Route> routes) {
+        this.routes = routes;
     }
 
     @Override

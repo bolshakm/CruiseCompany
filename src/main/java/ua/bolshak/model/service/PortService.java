@@ -4,6 +4,7 @@ import ua.bolshak.model.dao.DaoFactory;
 import ua.bolshak.model.entity.Cruise;
 import ua.bolshak.model.entity.Excursion;
 import ua.bolshak.model.entity.Port;
+import ua.bolshak.model.entity.Route;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -22,6 +23,10 @@ public class PortService {
         return getFull(DaoFactory.getPortDao().findAllByCruise(cruise));
     }
 
+    public static List<Port> findAllByRoute(Route route){
+        return getFull(DaoFactory.getPortDao().findAllByRoute(route));
+    }
+
     public static Port findByExcursion(Excursion excursion){
         return getFull(DaoFactory.getPortDao().findByExcursion(excursion));
     }
@@ -32,6 +37,10 @@ public class PortService {
 
     public static Port findLazyByExcursion(Excursion excursion){
         return DaoFactory.getPortDao().findByExcursion(excursion);
+    }
+
+    public static List<Port> findAllLazyByRoute(Route route){
+        return DaoFactory.getPortDao().findAllByRoute(route);
     }
 
     public static void add (Port port){
@@ -50,6 +59,7 @@ public class PortService {
         if (port != null) {
             port.setCruises(CruiseService.findAllLazyBYPort(port));
             port.setExcursions(ExcursionService.findAllLazyByPort(port));
+            port.setRoutes(RouteService.findAllLazyByPort(port));
         }
         return port;
     }
@@ -59,6 +69,7 @@ public class PortService {
             for (Port port : ports) {
                 port.setCruises(CruiseService.findAllLazyBYPort(port));
                 port.setExcursions(ExcursionService.findAllLazyByPort(port));
+                port.setRoutes(RouteService.findAllLazyByPort(port));
             }
         }
         return ports;

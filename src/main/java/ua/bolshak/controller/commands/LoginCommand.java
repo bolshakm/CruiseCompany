@@ -1,5 +1,6 @@
 package ua.bolshak.controller.commands;
 
+import ua.bolshak.model.entity.Role;
 import ua.bolshak.model.entity.User;
 import ua.bolshak.model.service.RoleService;
 import ua.bolshak.model.service.UserService;
@@ -19,6 +20,8 @@ public class LoginCommand implements ICommand {
         switch (button) {
             case "Login":
                 User user = UserService.findByLogin(login);
+                Role adminRole = RoleService.findById(1);
+                Role userRole = RoleService.findById(2);
                 if (user == null || !user.getPassword().equals(password)) {
                     request.setAttribute("Login", login);
                     request.setAttribute("Password", password);
@@ -27,11 +30,15 @@ public class LoginCommand implements ICommand {
                 }
                 session.setAttribute("user", user);
                 request.setAttribute("name", user.getName());
-                if (user.getRole().equals(RoleService.findById(1))) {
-                    page = new ToAdministratorPage().execute(request, response);
-                }
-                if (user.getRole().equals(RoleService.findById(2))){
-                    page = new ToMainPage().execute(request,response);
+                if (user.getRole().equals(adminRole) || user.getRole().equals(userRole)) {
+                    if (user.getRole().equals(RoleService.findById(1))) {
+                        page = new ToAdministratorPage().execute(request, response);
+                    }
+                    if (user.getRole().equals(RoleService.findById(2))) {
+                        page = new ToMainPage().execute(request, response);
+                    }
+                } else {
+                    page = new ToStaffPageCommand().execute(request, response);
                 }
                 break;
             case "Registration":

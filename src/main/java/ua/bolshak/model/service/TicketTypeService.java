@@ -1,6 +1,8 @@
 package ua.bolshak.model.service;
 
 import ua.bolshak.model.dao.DaoFactory;
+import ua.bolshak.model.entity.Bonus;
+import ua.bolshak.model.entity.Ship;
 import ua.bolshak.model.entity.Ticket;
 import ua.bolshak.model.entity.TicketType;
 
@@ -10,6 +12,20 @@ public class TicketTypeService {
 
     public static List<TicketType> findAll() {
         return getFull(DaoFactory.getTicketTypeDao().findAll());
+    }
+
+    public static List<TicketType> findAllByBonus(Bonus bonus) {
+        return getFull(DaoFactory.getTicketTypeDao().findAllByBonus(bonus));
+    }
+    public static List<TicketType> findAllByShip(Ship ship) {
+        return getFull(DaoFactory.getTicketTypeDao().findAllByShip(ship));
+    }
+
+    public static List<TicketType> findAllLazyByBonus(Bonus bonus) {
+        return DaoFactory.getTicketTypeDao().findAllByBonus(bonus);
+    }
+    public static List<TicketType> findAllLazyByShip(Ship ship) {
+        return DaoFactory.getTicketTypeDao().findAllByShip(ship);
     }
 
     public static TicketType findById(int id) {
@@ -23,7 +39,6 @@ public class TicketTypeService {
     public static TicketType findLazyByTicket(Ticket ticket) {
         return DaoFactory.getTicketTypeDao().findByTicket(ticket);
     }
-
 
     public static void add(TicketType ticketType) {
         DaoFactory.getTicketTypeDao().add(ticketType);
@@ -41,6 +56,8 @@ public class TicketTypeService {
         if (ticketType != null) {
             ticketType.setTickets(TicketService.findAllLazyByTicketType(ticketType));
             ticketType.setUsers(UserService.findAllLazyTicketType(ticketType));
+            ticketType.setBonuses(BonusService.findAllLazyByTicketType(ticketType));
+            ticketType.setShips(ShipService.findAllLazyByTicketType(ticketType));
         }
         return ticketType;
     }
@@ -50,6 +67,8 @@ public class TicketTypeService {
             for (TicketType ticketType : ticketTypes) {
                 ticketType.setTickets(TicketService.findAllLazyByTicketType(ticketType));
                 ticketType.setUsers(UserService.findAllLazyTicketType(ticketType));
+                ticketType.setBonuses(BonusService.findAllLazyByTicketType(ticketType));
+                ticketType.setShips(ShipService.findAllLazyByTicketType(ticketType));
             }
         }
         return ticketTypes;

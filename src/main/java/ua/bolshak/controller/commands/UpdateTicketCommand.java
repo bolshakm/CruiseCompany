@@ -25,6 +25,6 @@ public class UpdateTicketCommand implements ICommand {
         ticket.setBonuses(BonusService.getListBonuses(selectedBonuses));
         ticket.setExcursions(ExcursionService.getListById(selectedExcursion));
         TicketService.update(ticket);
-        return new ToTicketsPage().execute(request, response);
+        return new ToTicketsPageCommand().execute(request, response);
     }
 }

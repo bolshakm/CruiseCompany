@@ -1,5 +1,6 @@
 package ua.bolshak.model.entity;
 
+
 import java.util.List;
 import java.util.Objects;
 
@@ -10,8 +11,9 @@ public class Ship {
     private int numberOfSeats;
     private double pricePerSeat;
     private ShipType type;
-    private List<Bonus> bonuses;
     private List<Cruise> cruises;
+    private List<TicketType> ticketTypes;
+    private List<Bonus> bonuses;
 
     public int getId() {
         return id;
@@ -61,20 +63,28 @@ public class Ship {
         this.type = type;
     }
 
-    public List<Bonus> getBonuses() {
-        return bonuses;
-    }
-
-    public void setBonuses(List<Bonus> bonuses) {
-        this.bonuses = bonuses;
-    }
-
     public List<Cruise> getCruises() {
         return cruises;
     }
 
     public void setCruises(List<Cruise> cruises) {
         this.cruises = cruises;
+    }
+
+    public List<TicketType> getTicketTypes() {
+        return ticketTypes;
+    }
+
+    public void setTicketTypes(List<TicketType> ticketTypes) {
+        this.ticketTypes = ticketTypes;
+    }
+
+    public List<Bonus> getBonuses() {
+        return bonuses;
+    }
+
+    public void setBonuses(List<Bonus> bonuses) {
+        this.bonuses = bonuses;
     }
 
     @Override

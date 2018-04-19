@@ -1,10 +1,7 @@
 package ua.bolshak.model.service;
 
 import ua.bolshak.model.dao.DaoFactory;
-import ua.bolshak.model.entity.Bonus;
-import ua.bolshak.model.entity.Cruise;
-import ua.bolshak.model.entity.Ship;
-import ua.bolshak.model.entity.ShipType;
+import ua.bolshak.model.entity.*;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -21,6 +18,10 @@ public class ShipService {
 
     public static List<Ship> findAllByBonus(Bonus bonus){
         return  getFull(DaoFactory.getShipDao().findAllByBonus(bonus));
+    }
+
+    public static List<Ship> findAllByTicketType(TicketType ticketType){
+        return  getFull(DaoFactory.getShipDao().findAllByTicketTypes(ticketType));
     }
 
     public static Ship findById(int id){
@@ -47,6 +48,9 @@ public class ShipService {
         return DaoFactory.getShipDao().findByCruise(cruise);
     }
 
+    public static List<Ship> findAllLazyByTicketType(TicketType ticketType){
+        return  DaoFactory.getShipDao().findAllByTicketTypes(ticketType);
+    }
 
     public static void add(Ship ship){
         DaoFactory.getShipDao().add(ship);
@@ -67,6 +71,7 @@ public class ShipService {
             ship.setBonuses(BonusService.findAllLazyByShip(ship));
             ship.setCruises(CruiseService.findAllLazyByShip(ship));
             ship.setType(ShipTypeService.findLazyByShip(ship));
+            ship.setTicketTypes(TicketTypeService.findAllLazyByShip(ship));
         }
         return ship;
     }
@@ -78,6 +83,7 @@ public class ShipService {
                 ship.setBonuses(BonusService.findAllLazyByShip(ship));
                 ship.setCruises(CruiseService.findAllLazyByShip(ship));
                 ship.setType(ShipTypeService.findLazyByShip(ship));
+                ship.setTicketTypes(TicketTypeService.findAllLazyByShip(ship));
             }
         }
         return ships;
