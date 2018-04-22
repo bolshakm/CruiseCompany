@@ -11,8 +11,6 @@ public interface PortIDao {
 
     List<Port> findAll();
 
-    List<Port> findAllByCruise(Cruise cruise);
-
     List<Port> findAllByRoute(Route route);
 
     Port findById(int id);

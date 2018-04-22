@@ -8,8 +8,6 @@ public interface CruiseIDao {
 
     List<Cruise> findAll();
 
-    List<Cruise> findAllByPort(Port port);
-
     List<Cruise> findAllByStatus(CruiseStatus cruiseStatus);
 
     List<Cruise> findAllByShip(Ship ship);

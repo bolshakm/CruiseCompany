@@ -52,23 +52,6 @@ public class PortDao implements PortIDao {
     }
 
     @Override
-    public List<Port> findAllByCruise(Cruise cruise) {
-        List<Port> ports = new ArrayList<>();
-        try(Connection connection = MysqlConnectionPool.getConnection();
-            PreparedStatement preparedStatement = connection.prepareStatement(SqlQuery.FIND_ALL_PORTS_BY_CRUISE)){
-            preparedStatement.setInt(1, cruise.getId());
-            try(ResultSet resultSet = preparedStatement.executeQuery()){
-                while (resultSet.next()) {
-                    ports.add(initialization(resultSet));
-                }
-            }
-        } catch (SQLException e) {
-            LOGGER.error(e);
-        }
-        return ports;
-    }
-
-    @Override
     public List<Port> findAllByRoute(Route route) {
         List<Port> ports = new ArrayList<>();
         try(Connection connection = MysqlConnectionPool.getConnection();

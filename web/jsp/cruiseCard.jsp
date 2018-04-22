@@ -40,10 +40,6 @@
             <c:if test="${idCruise == null}">
                 <option disabled selected>Select ship</option>
             </c:if>
-            <%--<c:if test="${idCruise != null}">--%>
-                <%--<option disabled>Select ship</option>--%>
-            <%--</c:if>--%>
-
             <c:forEach var="Ship" items="${Ships}">
                 <c:if test="${Ship.id == idShip}">
                     <option selected value="${Ship.id}">${Ship.name}</option>
@@ -74,19 +70,23 @@
             </c:forEach>
         </select></td>
     </tr>
-    <tr>
-        <td>Ports</td>
-        <td>
-            <c:forEach var="Port" items="${Ports}">
-                <c:if test="${fn:contains(selectedPorts, Port)}">
-                    <input type="checkbox" checked name="selectedPorts" value="${Port.id}">${Port.name}<br/>
-                </c:if>
-                <c:if test="${!fn:contains(selectedPorts, Port)}">
-                    <input type="checkbox" name="selectedPorts" value="${Port.id}">${Port.name}<br/>
-                </c:if>
-            </c:forEach>
-        </td>
-    </tr>
+            <tr>
+                <td>Routes </td>
+                <td>
+                    <select name="RouteId">
+                        <c:if test="${idRoute == null}">
+                            <option disabled selected>Select route</option>
+                        </c:if>
+                        <c:forEach var="Route" items="${Routes}">
+                            <c:if test="${Route.id == idRoute}">
+                                <option selected value="${Route.id}">${Route.name}</option>
+                            </c:if>
+                            <c:if test="${Route.id != idRoute}">
+                                <option value="${Route.id}">${Route.name}</option>
+                            </c:if>
+                        </c:forEach>
+                    </select></td>
+            </tr>
     <tr>
         <td></td>
         <td><c:if test="${idCruise == null}"><input type="submit" value="Add"></c:if>

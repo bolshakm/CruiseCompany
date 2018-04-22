@@ -61,6 +61,11 @@ public class ControllerHelper {
         commands.put("getPrice", new ToAddTicketCommand());
         commands.put("toMainPage", new ToMainPage());
         commands.put("toStaffPage", new ToStaffPageCommand());
+        commands.put("toRouteCard", new ToRouteCardCommand());
+        commands.put("addRoute", new AddRouteCommand());
+        commands.put("deleteRoute", new DeleteRouteCommand());
+        commands.put("toUpdateRoute", new ToUpdateRouteCommand());
+        commands.put("updateRoute", new UpdateRouteCommand());
     }
 
     public static ControllerHelper getInstance() {

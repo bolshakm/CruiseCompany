@@ -14,6 +14,8 @@ public interface IRouteDao {
 
     Route findById(int id);
 
+    Route findByName(String name);
+
     Route findByCruise(Cruise cruise);
 
     void add(Route route);

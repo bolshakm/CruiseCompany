@@ -52,23 +52,6 @@ public class CruiseDao implements CruiseIDao{
     }
 
     @Override
-    public List<Cruise> findAllByPort(Port port) {
-        List<Cruise> cruises = new ArrayList<>();
-        try(Connection connection = MysqlConnectionPool.getConnection();
-            PreparedStatement preparedStatement = connection.prepareStatement(SqlQuery.FIND_ALL_CRUISES_BY_PORT)){
-            preparedStatement.setInt(1, port.getId());
-            try(ResultSet resultSet = preparedStatement.executeQuery()){
-                while (resultSet.next()) {
-                    cruises.add(initialization(resultSet));
-                }
-            }
-        } catch (SQLException e) {
-            LOGGER.error(e);
-        }
-        return cruises;
-    }
-
-    @Override
     public List<Cruise> findAllByStatus(CruiseStatus cruiseStatus) {
         List<Cruise> cruises = new ArrayList<>();
         try(Connection connection = MysqlConnectionPool.getConnection();
@@ -197,8 +180,7 @@ public class CruiseDao implements CruiseIDao{
             psForCruiseTable.setInt(4, cruise.getShip().getId());
             psForCruiseTable.setInt(5, cruise.getStatus().getId());
             psForCruiseTable.executeUpdate();
-            cruise.setId(findByName(cruise.getName()).getId());
-            addPorts(cruise);
+//            cruise.setId(findByName(cruise.getName()).getId());
         } catch (SQLException e) {
             LOGGER.error(e.getMessage());
         }
@@ -206,36 +188,19 @@ public class CruiseDao implements CruiseIDao{
 
     @Override
     public void update(Cruise cruise) {
-        PreparedStatement psForUpdateCruise = null;
-        PreparedStatement psForDeletePorts = null;
-        try(Connection connection = MysqlConnectionPool.getConnection()){
-            psForUpdateCruise = connection.prepareStatement(SqlQuery.UPDATE_CRUISE);
+        try(Connection connection = MysqlConnectionPool.getConnection();
+            PreparedStatement psForUpdateCruise = connection.prepareStatement(SqlQuery.UPDATE_CRUISE)){
             psForUpdateCruise.setString(1, cruise.getName());
             psForUpdateCruise.setDate(2,cruise.getFrom());
             psForUpdateCruise.setDate(3, cruise.getTo());
             psForUpdateCruise.setInt(4, cruise.getShip().getId());
             psForUpdateCruise.setInt(5, cruise.getStatus().getId());
-            psForUpdateCruise.setInt(6, cruise.getId());
+            psForUpdateCruise.setInt(6, cruise.getRoute().getId());
+            psForUpdateCruise.setInt(7, cruise.getId());
             psForUpdateCruise.executeUpdate();
-            psForDeletePorts = connection.prepareStatement(SqlQuery.DELETE_CRUISE_HAS_PORTS);
-            psForDeletePorts.setInt(1, cruise.getId());
-            psForDeletePorts.executeUpdate();
-            addPorts(cruise);
         } catch (SQLException e) {
             LOGGER.error(e.getMessage());
-        } finally {
-            try {
-                if (psForDeletePorts != null) {
-                    psForDeletePorts.close();
-                }
-                if (psForUpdateCruise != null) {
-                    psForUpdateCruise.close();
-                }
-            } catch (SQLException e) {
-                LOGGER.error(e.getMessage());
-            }
         }
-
     }
 
     @Override
@@ -264,20 +229,6 @@ public class CruiseDao implements CruiseIDao{
             } catch (SQLException e) {
                 LOGGER.error(e.getMessage());
             }
-        }
-    }
-
-    private static void addPorts(Cruise cruise){
-        try(Connection connection = MysqlConnectionPool.getConnection();
-            PreparedStatement psForCruiseHasPortTable = connection.prepareStatement(SqlQuery.ADD_PORTS_FOR_CRUISE)){
-            for (Port port : cruise.getPorts()) {
-                psForCruiseHasPortTable.setInt(1, port.getId());
-                psForCruiseHasPortTable.setInt(2, cruise.getId());
-                psForCruiseHasPortTable.addBatch();
-            }
-            psForCruiseHasPortTable.executeBatch();
-        } catch (SQLException e) {
-            LOGGER.error(e.getMessage());
         }
     }
 }

@@ -8,12 +8,11 @@
 <body>
 <c:import url="header.jsp"/>
 <table align="center">
-
     <tr>
         <td valign="top">
             <table border="1" bgcolor="#7fffd4">
                 <caption>Cruises</caption>
-                <tr bgcolor="#7fffd4" align="right"><a href="/CruiseCompany?command=toCruiseCard"><button>Add</button></a></tr>
+                <tr align="right"><a href="/CruiseCompany?command=toCruiseCard"><button>Add</button></a></tr>
                 <tr>
                     <th>Name</th>
                     <th>From</th>
@@ -21,7 +20,7 @@
                     <th>Ship number</th>
                     <th>Cruise status</th>
                     <th>Ticket/Seats</th>
-                    <th>Ports</th>
+                    <th>Routes</th>
                     <th>Actions</th>
                 </tr>
                 <c:forEach var="Cruise" items="${Cruises}">
@@ -32,9 +31,7 @@
                         <td>${Cruise.ship.number}</td>
                         <td>${Cruise.status.name}</td>
                         <td>${fn:length(Cruise.tickets)}/${Cruise.ship.numberOfSeats}</td>
-                        <td><c:forEach var="port" items="${Cruise.ports}">
-                            ${port.name}<br/>
-                        </c:forEach></td>
+                        <td>${Cruise.route.name}</td>
                         <td><a href="/CruiseCompany?command=toUpdateCruise&idCruise=${Cruise.id}"><button>Update</button></a>
                             <a href="/CruiseCompany?command=deleteCruise&idCruise=${Cruise.id}"><button>Delete</button></a></td>
                     </tr>

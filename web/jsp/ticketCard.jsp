@@ -114,21 +114,6 @@
                 </c:if>
             </td>
         </tr>
-        <c:if test="${user.role.id == 1}">
-            <tr>
-                <td>Bonuses</td>
-                <td>
-                    <c:forEach var="Bonus" items="${Bonuses}">
-                        <c:if test="${fn:contains(selectedBonuses, Bonus)}">
-                            <input type="checkbox" checked name="selectedBonuses" value="${Bonus.id}">${Bonus.name}<br/>
-                        </c:if>
-                        <c:if test="${!fn:contains(selectedBonuses, Bonus)}">
-                            <input type="checkbox" name="selectedBonuses" value="${Bonus.id}">${Bonus.name}<br/>
-                        </c:if>
-                    </c:forEach>
-                </td>
-            </tr>
-        </c:if>
         <tr>
             <td>Excursions</td>
             <td>

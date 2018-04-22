@@ -16,13 +16,11 @@ public class UpdateTicketCommand implements ICommand {
         String lastName = request.getParameter("lastName");
         String cruiseId = request.getParameter("CruiseId");
         String ticketTypeId = request.getParameter("TicketTypeId");
-        String[] selectedBonuses = request.getParameterValues("selectedBonuses");
         String[] selectedExcursion = request.getParameterValues("selectedExcursions");
         ticket.setName(name);
         ticket.setLastName(lastName);
         ticket.setCruise(CruiseService.findById(Integer.parseInt(cruiseId)));
         ticket.setTicketType(TicketTypeService.findById(Integer.parseInt(ticketTypeId)));
-        ticket.setBonuses(BonusService.getListBonuses(selectedBonuses));
         ticket.setExcursions(ExcursionService.getListById(selectedExcursion));
         TicketService.update(ticket);
         return new ToTicketsPageCommand().execute(request, response);

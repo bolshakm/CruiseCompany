@@ -20,8 +20,6 @@ public class ToUpdateTicketCommand implements ICommand {
        request.setAttribute("idCruise", ticket.getCruise().getId());
        request.setAttribute("TicketTypes", TicketTypeService.findAll());
        request.setAttribute("idTicketType", ticket.getTicketType().getId());
-       request.setAttribute("Bonuses", BonusService.findAll());
-       request.setAttribute("selectedBonuses", ticket.getBonuses());
        request.setAttribute("Excursions", ExcursionService.findAllByLazyCruse(ticket.getCruise()));
        request.setAttribute("selectedExcursions", ExcursionService.findAllByTicket(ticket));
         return "/jsp/ticketCard.jsp";

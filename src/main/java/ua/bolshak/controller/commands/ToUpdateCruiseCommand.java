@@ -1,10 +1,7 @@
 package ua.bolshak.controller.commands;
 
 import ua.bolshak.model.entity.Cruise;
-import ua.bolshak.model.service.CruiseService;
-import ua.bolshak.model.service.CruiseStatusService;
-import ua.bolshak.model.service.PortService;
-import ua.bolshak.model.service.ShipService;
+import ua.bolshak.model.service.*;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
@@ -24,7 +21,8 @@ public class ToUpdateCruiseCommand implements ICommand {
         request.setAttribute("idCruiseStatus", cruise.getStatus().getId());
         request.setAttribute("CruiseStatuses", CruiseStatusService.findAll());
         request.setAttribute("selectedPorts", cruise.getPorts());
-        request.setAttribute("Ports", PortService.findAll());
+        request.setAttribute("idRoute", cruise.getRoute().getId());
+        request.setAttribute("Routes", RouteService.findAll());
         return "/jsp/cruiseCard.jsp";
     }
 }
