@@ -27,7 +27,7 @@
         <th>Ship number</th>
         <th>Cruise status</th>
         <th>Ticket/Seats</th>
-        <th>Ports</th>
+        <th>Routes</th>
         <th>Actions</th>
     </tr>
     <c:forEach var="Cruise" items="${Cruises}">
@@ -38,9 +38,7 @@
             <td>${Cruise.ship.number}</td>
             <td>${Cruise.status.name}</td>
             <td>${fn:length(Cruise.tickets)}/${Cruise.ship.numberOfSeats}</td>
-            <td><c:forEach var="port" items="${Cruise.ports}">
-                ${port.name}<br/>
-            </c:forEach></td>
+            <td>${Cruise.route.name}</td>
             <td><a href="/CruiseCompany?command=buyTicket&idCruise=${Cruise.id}"><button>Buy</button></a> </td>
         </tr>
     </c:forEach>

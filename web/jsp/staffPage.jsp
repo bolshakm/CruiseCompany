@@ -21,7 +21,7 @@
         <th>To</th>
         <th>Ship number</th>
         <th>Cruise status</th>
-        <th>Ports</th>
+        <th>Route</th>
     </tr>
     <c:forEach var="Cruise" items="${Cruises}">
         <tr>
@@ -30,9 +30,7 @@
             <td>${Cruise.to}</td>
             <td>${Cruise.ship.number}</td>
             <td>${Cruise.status.name}</td>
-            <td><c:forEach var="port" items="${Cruise.ports}">
-                ${port.name}<br/>
-            </c:forEach></td>
+            <td>${Cruise.route.name}</td>
         </tr>
     </c:forEach>
 </table>

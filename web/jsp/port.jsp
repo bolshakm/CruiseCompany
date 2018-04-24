@@ -144,39 +144,41 @@
         </c:if>
     </tr>
 </table>
-<table align="center"><tr><td>
-    <table border="1">
-        <caption>Routes</caption>
-        <tr><a href="/CruiseCompany?command=toRouteCard"><button>Add</button></a></tr>
-        <tr>
-            <th>Name</th>
-            <th>Cruises</th>
-            <th>Ports</th>
-            <c:if test="${user.role.id == 1}">
-                <th>Actions</th>
-            </c:if>
-        </tr>
-        <c:forEach var="Route" items="${Routes}">
-            <tr>
-                <td>${Route.name}</td>
-                <td><c:forEach var="RouteHasPort" items="${Route.cruises}">
-                    ${RouteHasPort.name}<br/>
-                </c:forEach></td>
-                <td><c:forEach var="RouteHasCruise" items="${Route.ports}">
-                    ${RouteHasCruise.name}<br/>
-                </c:forEach></td>
-                <c:if test="${user.role.id == 1}">
-                    <td>
-                        <a href="${pageContext.request.contextPath}/CruiseCompany?command=toUpdateRoute&idRoute=${Route.id}">
-                            <button>Update</button>
-                        </a>
-                        <a href="${pageContext.request.contextPath}/CruiseCompany?command=deleteRoute&idRoute=${Route.id}">
-                            <button>Delete</button>
-                        </a></td>
-                </c:if>
-            </tr>
-        </c:forEach>
-    </table>
-</td></tr></table>
+<%--<table align="center"><tr><td>--%>
+    <%--<table border="1">--%>
+        <%--<caption>Routes</caption>--%>
+        <%--<c:if test="${user.role.id ==1}">--%>
+        <%--<tr><a href="/CruiseCompany?command=toRouteCard"><button>Add</button></a></tr>--%>
+        <%--</c:if>--%>
+        <%--<tr>--%>
+            <%--<th>Name</th>--%>
+            <%--<th>Cruises</th>--%>
+            <%--<th>Ports</th>--%>
+            <%--<c:if test="${user.role.id == 1}">--%>
+                <%--<th>Actions</th>--%>
+            <%--</c:if>--%>
+        <%--</tr>--%>
+        <%--<c:forEach var="Route" items="${Routes}">--%>
+            <%--<tr>--%>
+                <%--<td>${Route.name}</td>--%>
+                <%--<td><c:forEach var="RouteHasPort" items="${Route.cruises}">--%>
+                    <%--${RouteHasPort.name}<br/>--%>
+                <%--</c:forEach></td>--%>
+                <%--<td><c:forEach var="RouteHasCruise" items="${Route.ports}">--%>
+                    <%--${RouteHasCruise.name}<br/>--%>
+                <%--</c:forEach></td>--%>
+                <%--<c:if test="${user.role.id == 1}">--%>
+                    <%--<td>--%>
+                        <%--<a href="${pageContext.request.contextPath}/CruiseCompany?command=toUpdateRoute&idRoute=${Route.id}">--%>
+                            <%--<button>Update</button>--%>
+                        <%--</a>--%>
+                        <%--<a href="${pageContext.request.contextPath}/CruiseCompany?command=deleteRoute&idRoute=${Route.id}">--%>
+                            <%--<button>Delete</button>--%>
+                        <%--</a></td>--%>
+                <%--</c:if>--%>
+            <%--</tr>--%>
+        <%--</c:forEach>--%>
+    <%--</table>--%>
+<%--</td></tr></table>--%>
 </body>
 </html>

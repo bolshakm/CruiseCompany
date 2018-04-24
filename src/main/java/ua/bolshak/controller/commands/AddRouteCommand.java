@@ -18,6 +18,6 @@ public class AddRouteCommand implements ICommand {
         route.setName(name);
         route.setPorts(PortService.getListPort(portsId));
         RouteService.add(route);
-        return new ToPortsPage().execute(request, response);
+        return new ToRoutePageCommand().execute(request, response);
     }
 }

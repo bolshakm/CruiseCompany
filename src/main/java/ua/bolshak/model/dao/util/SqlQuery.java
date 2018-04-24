@@ -3,7 +3,7 @@ package ua.bolshak.model.dao.util;
 public interface SqlQuery {
     //bonuses table
     String SELECT_ALL_BONUSES = "SELECT * FROM bonuses";
-    String SELECT_ALL_BONUSES_BY_TICKET_TYPES = "    String SELECT_ALL_BONUSES_BY_TICKET = \"SELECT bonuses.* FROM bonuses JOIN tickets_has_bonuses thb ON bonuses.id_bonus = thb.bonuses_id_bonus WHERE thb.tickets_id_ticket = ?;";
+    String SELECT_ALL_BONUSES_BY_TICKET_TYPES = "SELECT bonuses.* from bonuses join ticket_types_has_bonuses bonus on bonuses.id_bonus = bonus.bonuses_id_bonus where ticket_types_id_ticket_type = ?";
     String SELECT_ALL_BONUSES_BY_SHIP = "SELECT bonuses.* FROM bonuses JOIN bonuses_has_ships bhs ON bonuses.id_bonus = bhs.bonuses_id_bonus WHERE bhs.ships_id_ship = ?";
     String FIND_BONUS_BY_ID = "SELECT * FROM bonuses WHERE id_bonus = ?";
     String ADD_BONUS = "INSERT INTO bonuses (bonus_name) VALUES (?)";

@@ -22,7 +22,7 @@ public class ToTicketCardCommand implements ICommand {
         request.setAttribute("lastName", user.getLastName());
         request.setAttribute("cruise", cruise);
         request.setAttribute("TicketTypes", TicketTypeService.findAll());
-        request.setAttribute("Excursions", ExcursionService.findAllByLazyCruse(cruise));
+        request.setAttribute("Excursions", ExcursionService.findAllByCruse(cruise));
         return "/jsp/ticketCard.jsp";
     }
 }

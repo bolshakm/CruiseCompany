@@ -19,6 +19,6 @@ public class UpdateRouteCommand implements ICommand {
         route.setName(name);
         route.setPorts(PortService.getListPort(selectedPorts));
         RouteService.update(route);
-        return new ToPortsPage().execute(request, response);
+        return new ToRoutePageCommand().execute(request, response);
     }
 }

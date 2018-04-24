@@ -58,6 +58,7 @@
                 <caption>Ticket Type</caption>
                 <tr>
                     <th>Name</th>
+                    <th>Bonuses</th>
                     <th>Actions</th>
                 </tr>
                 <c:if test="${TicketTypeName == null}">
@@ -90,6 +91,9 @@
                 <c:forEach var="TicketType" items="${TicketTypes}">
                     <tr>
                         <td>${TicketType.name}</td>
+                        <td><c:forEach var="Bonus" items="${TicketType.bonuses}">
+                            ${Bonus.name}<br/>
+                        </c:forEach> </td>
                         <td><a href="/CruiseCompany?command=updateTicketType&idTicketType=${TicketType.id}"><button>Update</button></a>
                             <a href="/CruiseCompany?command=deleteTicketType&idTicketType=${TicketType.id}"><button>Delete</button></a></td>
                     </tr>

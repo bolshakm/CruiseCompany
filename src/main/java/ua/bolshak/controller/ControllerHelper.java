@@ -66,6 +66,7 @@ public class ControllerHelper {
         commands.put("deleteRoute", new DeleteRouteCommand());
         commands.put("toUpdateRoute", new ToUpdateRouteCommand());
         commands.put("updateRoute", new UpdateRouteCommand());
+        commands.put("toRoutePage", new ToRoutePageCommand());
     }
 
     public static ControllerHelper getInstance() {
