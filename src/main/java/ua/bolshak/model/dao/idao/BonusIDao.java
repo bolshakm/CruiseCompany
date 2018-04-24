@@ -2,6 +2,7 @@ package ua.bolshak.model.dao.idao;
 
 import ua.bolshak.model.entity.Bonus;
 import ua.bolshak.model.entity.Ship;
+import ua.bolshak.model.entity.Ticket;
 import ua.bolshak.model.entity.TicketType;
 
 import java.util.List;
@@ -10,7 +11,7 @@ public interface BonusIDao {
 
     List<Bonus> findAll();
 
-    List<Bonus> findAllByTicketType(TicketType ticketType);
+    List<Bonus> findAllByTicket(Ticket ticket);
 
     List<Bonus> findAllByShip(Ship ship);
 

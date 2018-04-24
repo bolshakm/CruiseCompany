@@ -33,7 +33,7 @@ public class ControllerHelper {
         commands.put("deleteRole", new DeleteRoleCommand());
         commands.put("addTicketType", new AddTicketTypeCommand());
         commands.put("deleteTicketType", new DeleteTicketTypeCommand());
-        commands.put("updateTicketType", new UpdateTicketTypeCommand());
+        commands.put("toUpdateTicketType", new ToUpdateTicketTypeCommand());
         commands.put("addPort", new AddPortCommand());
         commands.put("deletePort", new DeletePortCommand());
         commands.put("updatePort", new UpdatePortCommand());
@@ -67,6 +67,8 @@ public class ControllerHelper {
         commands.put("toUpdateRoute", new ToUpdateRouteCommand());
         commands.put("updateRoute", new UpdateRouteCommand());
         commands.put("toRoutePage", new ToRoutePageCommand());
+        commands.put("toTicketTypeCard", new ToTicketTypeCardCommand());
+        commands.put("updateTicketTypeCommand", new UpdateTicketTypeCommand());
     }
 
     public static ControllerHelper getInstance() {

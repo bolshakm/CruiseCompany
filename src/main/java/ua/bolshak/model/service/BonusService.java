@@ -16,8 +16,8 @@ public class BonusService {
         return getFull(DaoFactory.getBonusDao().findAll());
     }
 
-    public static List<Bonus> findAllByTicketType(TicketType ticketType){
-        return getFull(DaoFactory.getBonusDao().findAllByTicketType(ticketType));
+    public static List<Bonus> findAllByTicket(Ticket ticket){
+        return getFull(DaoFactory.getBonusDao().findAllByTicket(ticket));
     }
 
     public static List<Bonus> getListById(String[] selectedId){
@@ -36,8 +36,8 @@ public class BonusService {
         return getFull(DaoFactory.getBonusDao().findById(id));
     }
 
-    public static List<Bonus> findAllLazyByTicketType(TicketType ticketType){
-        return DaoFactory.getBonusDao().findAllByTicketType(ticketType);
+    public static List<Bonus> findAllLazyByTicket(Ticket ticket){
+        return DaoFactory.getBonusDao().findAllByTicket(ticket);
     }
 
     public static List<Bonus> findAllLazyByShip(Ship ship){
@@ -59,7 +59,7 @@ public class BonusService {
     public static Bonus getFull(Bonus bonus){
         if (bonus !=null) {
             bonus.setShips(ShipService.findAllLazyByBonus(bonus));
-            bonus.setTicketTypes(TicketTypeService.findAllLazyByBonus(bonus));
+            bonus.setTickets(TicketService.findAllLazyByBonus(bonus));
         }
         return bonus;
     }
@@ -68,7 +68,7 @@ public class BonusService {
         if (bonuses != null) {
             for (Bonus bonus : bonuses) {
                 bonus.setShips(ShipService.findAllLazyByBonus(bonus));
-                bonus.setTicketTypes(TicketTypeService.findAllLazyByBonus(bonus));
+                bonus.setTickets(TicketService.findAllLazyByBonus(bonus));
             }
         }
         return bonuses;

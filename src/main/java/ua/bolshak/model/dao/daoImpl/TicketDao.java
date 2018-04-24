@@ -84,6 +84,23 @@ public class TicketDao implements TicketIDao{
     }
 
     @Override
+    public List<Ticket> findAllByBonus(Bonus bonus) {
+        List<Ticket> tickets = new ArrayList<>();
+        try (Connection connection = MysqlConnectionPool.getConnection();
+             PreparedStatement preparedStatement = connection.prepareStatement(SqlQuery.FIND_ALL_TICKETS_BY_BONUS)) {
+            preparedStatement.setInt(1, bonus.getId());
+            try (ResultSet resultSet = preparedStatement.executeQuery()) {
+                while (resultSet.next()) {
+                    tickets.add(initialization(resultSet));
+                }
+            }
+        } catch (SQLException e) {
+            LOGGER.error(e);
+        }
+        return tickets;
+    }
+
+    @Override
     public List<Ticket> findAllByTicketType(TicketType ticketType) {
         List<Ticket> tickets = new ArrayList<>();
         try(Connection connection = MysqlConnectionPool.getConnection();

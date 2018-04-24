@@ -12,6 +12,7 @@ public class Ticket {
     private Cruise cruise;
     private TicketType ticketType;
     private List<Excursion> excursions;
+    private List<Bonus> bonuses;
 
     public int getId() {
         return id;
@@ -67,6 +68,14 @@ public class Ticket {
 
     public void setExcursions(List<Excursion> excursions) {
         this.excursions = excursions;
+    }
+
+    public List<Bonus> getBonuses() {
+        return bonuses;
+    }
+
+    public void setBonuses(List<Bonus> bonuses) {
+        this.bonuses = bonuses;
     }
 
     public double getPrice() {

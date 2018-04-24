@@ -9,7 +9,6 @@ public class TicketType {
     private double price;
     private List<Ticket> tickets;
     private List<User> users;
-    private List<Bonus> bonuses;
     private List<Ship> ships;
 
     public int getId() {
@@ -50,14 +49,6 @@ public class TicketType {
 
     public void setUsers(List<User> users) {
         this.users = users;
-    }
-
-    public List<Bonus> getBonuses() {
-        return bonuses;
-    }
-
-    public void setBonuses(List<Bonus> bonuses) {
-        this.bonuses = bonuses;
     }
 
     public List<Ship> getShips() {

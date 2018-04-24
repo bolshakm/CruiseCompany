@@ -2,6 +2,7 @@ package ua.bolshak.controller.commands;
 
 import ua.bolshak.model.entity.Ticket;
 import ua.bolshak.model.entity.User;
+import ua.bolshak.model.service.BonusService;
 import ua.bolshak.model.service.TicketService;
 import ua.bolshak.model.service.TicketTypeService;
 
@@ -18,6 +19,7 @@ public class ToTicketsPageCommand implements ICommand {
         if (user.getRole().getId() == 1) {
             request.setAttribute("Tickets", TicketService.findAllWithFullCruise());
             request.setAttribute("TicketTypes", TicketTypeService.findAll());
+            request.setAttribute("Bonuses", BonusService.findAll());
         } else {
             List<Ticket> tickets = TicketService.findAllByUser(user);
             if (tickets != null) {

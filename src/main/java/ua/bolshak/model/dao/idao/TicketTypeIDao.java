@@ -13,8 +13,6 @@ public interface TicketTypeIDao {
 
     List<TicketType>findAllByShip(Ship ship);
 
-    List<TicketType>findAllByBonus(Bonus bonus);
-
     TicketType findById(int id);
 
     TicketType findByTicket(Ticket ticket);

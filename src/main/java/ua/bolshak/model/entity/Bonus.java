@@ -8,7 +8,7 @@ public class Bonus {
     private int id;
     private String name;
     private List<Ship> ships;
-    private List<TicketType> ticketTypes;
+    private List<Ticket> tickets;
 
     public int getId() {
         return id;
@@ -34,12 +34,12 @@ public class Bonus {
         this.ships = ships;
     }
 
-    public List<TicketType> getTicketTypes() {
-        return ticketTypes;
+    public List<Ticket> getTickets() {
+        return tickets;
     }
 
-    public void setTicketTypes(List<TicketType> ticketTypes) {
-        this.ticketTypes = ticketTypes;
+    public void setTickets(List<Ticket> tickets) {
+        this.tickets = tickets;
     }
 
     @Override

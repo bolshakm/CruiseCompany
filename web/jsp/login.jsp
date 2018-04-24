@@ -28,5 +28,15 @@
     <br/>
    <p align="center"> ${InfoMassage}</p>
 </form>
+<form action="${pageContext.request.contextPath}/CruiseCompany" method="post">
+    <input type="hidden" name="command" value="login"/>
+    <table align="center">
+        <tr><td>Login</td><td><input name="Login" value="${adminLogin}"></td></tr>
+        <tr><td>Password</td><td><input type="password" name="Password" value="${Password}"></td></tr>
+        <tr><td><input type="submit" name="button" value="Login"/></td><td><input type="submit" name="button" value="Registration"></td></tr>
+    </table>
+    <br/>
+    <p align="center"> ${InfoMassage}</p>
+</form>
 </body>
 </html>

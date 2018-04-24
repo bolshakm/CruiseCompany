@@ -12,6 +12,8 @@ public interface TicketIDao {
 
     List<Ticket> findAllByCruise(Cruise cruise);
 
+    List<Ticket> findAllByBonus(Bonus bonus);
+
     List<Ticket> findAllByTicketType(TicketType ticketType);
 
     List<Ticket> findAllByExcursion(Excursion excursion);
