@@ -88,7 +88,7 @@ public class TicketService {
     }
 
     public static void update(Ticket ticket){
-        DaoFactory.getTicketDao().update(checkPrice(ticket));
+        DaoFactory.getTicketDao().update(ticket);
     }
 
     public static void delete(Ticket ticket){

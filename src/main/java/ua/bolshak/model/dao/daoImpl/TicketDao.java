@@ -170,7 +170,8 @@ public class TicketDao implements TicketIDao{
     @Override
     public void add(Ticket ticket) {
         try(Connection connection = MysqlConnectionPool.getConnection();
-            PreparedStatement preparedStatement = connection.prepareStatement(SqlQuery.ADD_TICKET)){
+            PreparedStatement preparedStatement = connection.prepareStatement(SqlQuery.ADD_TICKET);
+            PreparedStatement psForUpdateBonuses = connection.prepareStatement(SqlQuery.ADD_TICKET_HAS_BONUSES)){
             preparedStatement.setInt(1, ticket.getUser().getId());
             preparedStatement.setString(2, ticket.getName());
             preparedStatement.setString(3, ticket.getLastName());
@@ -184,6 +185,114 @@ public class TicketDao implements TicketIDao{
             }
         } catch (SQLException e) {
             LOGGER.error(e.getMessage());
+        }
+    }
+
+    private void addExcursions(Ticket ticket) {
+        try(Connection connection = MysqlConnectionPool.getConnection();
+            PreparedStatement preparedStatement = connection.prepareStatement(SqlQuery.ADD_TICKET_HAS_EXCURSIONS)){
+            for (Excursion excursion : ticket.getExcursions()) {
+                preparedStatement.setInt(1, excursion.getId());
+                preparedStatement.setInt(2, ticket.getId());
+                preparedStatement.addBatch();
+            }
+            preparedStatement.executeBatch();
+        } catch (SQLException e) {
+            LOGGER.error(e.getMessage());
+        }
+    }
+
+    @Override
+    public void update(Ticket ticket) {
+        PreparedStatement psForUpdateTicket = null;
+        PreparedStatement psForDeleteExcursions = null;
+        PreparedStatement psForUpdateExcursions = null;
+        PreparedStatement psForDeleteBonuses = null;
+        PreparedStatement psForUpdateBonuses = null;
+        try (Connection connection = MysqlConnectionPool.getConnection()) {
+            psForUpdateTicket = connection.prepareStatement(SqlQuery.UPDATE_TICKET);
+            psForUpdateTicket.setInt(1, ticket.getUser().getId());
+            psForUpdateTicket.setString(2, ticket.getName());
+            psForUpdateTicket.setString(3, ticket.getLastName());
+            psForUpdateTicket.setInt(4, ticket.getTicketType().getId());
+            psForUpdateTicket.setInt(5, ticket.getCruise().getId());
+            psForUpdateTicket.setDouble(6, ticket.getPrice());
+            psForUpdateTicket.setInt(7, ticket.getId());
+            psForUpdateTicket.executeUpdate();
+            if (ticket.getExcursions() != null) {
+                psForDeleteExcursions = connection.prepareStatement(SqlQuery.DELETE_TICKET_HAS_EXCURSIONS);
+                psForDeleteExcursions.setInt(1, ticket.getId());
+                psForDeleteExcursions.executeUpdate();
+                psForUpdateExcursions = connection.prepareStatement(SqlQuery.ADD_TICKET_HAS_EXCURSIONS);
+                for (Excursion excursion :
+                        ticket.getExcursions()) {
+                    psForUpdateExcursions.setInt(1, excursion.getId());
+                    psForUpdateExcursions.setInt(2, ticket.getId());
+                    psForUpdateExcursions.addBatch();
+                }
+                psForUpdateExcursions.executeBatch();
+            }
+            if (ticket.getBonuses() != null){
+                psForDeleteBonuses = connection.prepareStatement(SqlQuery.DELETE_TICKET_HAS_BONUSES);
+                psForDeleteBonuses.setInt(1, ticket.getId());
+                psForDeleteBonuses.executeUpdate();
+                psForUpdateBonuses = connection.prepareStatement(SqlQuery.ADD_TICKET_HAS_BONUSES);
+                for (Bonus bonus : ticket.getBonuses()) {
+                    psForUpdateBonuses.setInt(1, ticket.getId());
+                    psForUpdateBonuses.setInt(2, bonus.getId());
+                    psForUpdateBonuses.addBatch();
+                }
+                psForUpdateBonuses.executeBatch();
+            }
+        } catch (SQLException e) {
+            LOGGER.error(e.getMessage());
+        } finally {
+            try {
+                if (psForUpdateExcursions != null) {
+                    psForUpdateExcursions.close();
+                }
+                if (psForDeleteExcursions != null) {
+                    psForDeleteExcursions.close();
+                }
+                if (psForUpdateTicket != null) {
+                    psForUpdateTicket.close();
+                }
+                if (psForDeleteBonuses != null) {
+                    psForDeleteBonuses.close();
+                }
+                if (psForUpdateBonuses != null) {
+                    psForUpdateBonuses.close();
+                }
+            } catch (SQLException e) {
+                LOGGER.error(e.getMessage());
+            }
+        }
+    }
+
+    @Override
+    public void delete(Ticket ticket) {
+        PreparedStatement psForDeleteExcursions = null;
+        PreparedStatement psForDeleteTicket = null;
+        try(Connection connection = MysqlConnectionPool.getConnection()){
+            psForDeleteExcursions = connection.prepareStatement(SqlQuery.DELETE_TICKET_HAS_EXCURSIONS);
+            psForDeleteExcursions.setInt(1, ticket.getId());
+            psForDeleteExcursions.executeUpdate();
+            psForDeleteTicket = connection.prepareStatement(SqlQuery.DELETE_TICKET);
+            psForDeleteTicket.setInt(1, ticket.getId());
+            psForDeleteTicket.executeUpdate();
+        } catch (SQLException e) {
+            LOGGER.error(e.getMessage());
+        } finally {
+            try {
+                if (psForDeleteExcursions != null) {
+                    psForDeleteExcursions.close();
+                }
+                if (psForDeleteTicket != null) {
+                    psForDeleteTicket.close();
+                }
+            } catch (SQLException e) {
+                LOGGER.error(e.getMessage());
+            }
         }
     }
 
@@ -223,7 +332,6 @@ public class TicketDao implements TicketIDao{
             rsFrom.setDouble(1, usersMoney);
             rsFrom.setInt(2, ticket.getUser().getId());
             rsFrom.executeUpdate();
-
             rsTo = connection.prepareStatement(SqlQuery.SET_MONEY_PER_TICKET);
             rsTo.setDouble(1, adminsMoney);
             rsTo.setInt(2, 1);
@@ -260,93 +368,6 @@ public class TicketDao implements TicketIDao{
                 LOGGER.error(e.getMessage());
             }
 
-        }
-    }
-
-    private void addExcursions(Ticket ticket) {
-        try(Connection connection = MysqlConnectionPool.getConnection();
-            PreparedStatement preparedStatement = connection.prepareStatement(SqlQuery.ADD_TICKET_HAS_EXCURSIONS)){
-            for (Excursion excursion : ticket.getExcursions()) {
-                preparedStatement.setInt(1, excursion.getId());
-                preparedStatement.setInt(2, ticket.getId());
-                preparedStatement.addBatch();
-            }
-            preparedStatement.executeBatch();
-        } catch (SQLException e) {
-            LOGGER.error(e.getMessage());
-        }
-    }
-
-    @Override
-    public void update(Ticket ticket) {
-        PreparedStatement psForUpdateTicket = null;
-        PreparedStatement psForDeleteExcursions = null;
-        PreparedStatement psForUpdateExcursions = null;
-        try (Connection connection = MysqlConnectionPool.getConnection()) {
-            psForUpdateTicket = connection.prepareStatement(SqlQuery.UPDATE_TICKET);
-            psForUpdateTicket.setInt(1, ticket.getUser().getId());
-            psForUpdateTicket.setString(2, ticket.getName());
-            psForUpdateTicket.setString(3, ticket.getLastName());
-            psForUpdateTicket.setInt(4, ticket.getTicketType().getId());
-            psForUpdateTicket.setInt(5, ticket.getCruise().getId());
-            psForUpdateTicket.setDouble(6, ticket.getPrice());
-            psForUpdateTicket.setInt(7, ticket.getId());
-            psForUpdateTicket.executeUpdate();
-            psForDeleteExcursions = connection.prepareStatement(SqlQuery.DELETE_TICKET_HAS_EXCURSIONS);
-            psForDeleteExcursions.setInt(1, ticket.getId());
-            psForDeleteExcursions.executeUpdate();
-            psForUpdateExcursions = connection.prepareStatement(SqlQuery.ADD_TICKET_HAS_EXCURSIONS);
-            for (Excursion excursion :
-                    ticket.getExcursions()) {
-                psForUpdateExcursions.setInt(1, excursion.getId());
-                psForUpdateExcursions.setInt(2, ticket.getId());
-                psForUpdateExcursions.addBatch();
-            }
-            psForUpdateExcursions.executeBatch();
-
-        } catch (SQLException e) {
-            LOGGER.error(e.getMessage());
-        } finally {
-            try {
-                if (psForDeleteExcursions != null) {
-                    psForDeleteExcursions.close();
-                }
-                if (psForUpdateExcursions != null) {
-                    psForUpdateExcursions.close();
-                }
-                if (psForUpdateTicket != null) {
-                    psForUpdateTicket.close();
-                }
-            } catch (SQLException e) {
-                LOGGER.error(e.getMessage());
-            }
-        }
-    }
-
-    @Override
-    public void delete(Ticket ticket) {
-        PreparedStatement psForDeleteExcursions = null;
-        PreparedStatement psForDeleteTicket = null;
-        try(Connection connection = MysqlConnectionPool.getConnection()){
-            psForDeleteExcursions = connection.prepareStatement(SqlQuery.DELETE_TICKET_HAS_EXCURSIONS);
-            psForDeleteExcursions.setInt(1, ticket.getId());
-            psForDeleteExcursions.executeUpdate();
-            psForDeleteTicket = connection.prepareStatement(SqlQuery.DELETE_TICKET);
-            psForDeleteTicket.setInt(1, ticket.getId());
-            psForDeleteTicket.executeUpdate();
-        } catch (SQLException e) {
-            LOGGER.error(e.getMessage());
-        } finally {
-            try {
-                if (psForDeleteExcursions != null) {
-                    psForDeleteExcursions.close();
-                }
-                if (psForDeleteTicket != null) {
-                    psForDeleteTicket.close();
-                }
-            } catch (SQLException e) {
-                LOGGER.error(e.getMessage());
-            }
         }
     }
 }
