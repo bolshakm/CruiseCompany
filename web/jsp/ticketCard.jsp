@@ -114,6 +114,7 @@
                 </c:if>
             </td>
         </tr>
+        <%--fix in user page--%>
         <tr>
             <td>Bonuses</td>
             <td>

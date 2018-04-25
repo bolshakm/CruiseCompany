@@ -18,14 +18,15 @@
 <body>
 <form action="CruiseCompany" method="post">
     <input type="hidden" name="command" value="registration">
-    <table align="center" bgcolor="yellow">
+    <table align="center" bgcolor="yellow" border="1">
         <tr><td>Login</td><td><input type="text" name="login"></td></tr>
         <tr><td>Password</td><td><input type="password" name="password"></td></tr>
         <tr><td>Name</td><td><input type="text" name="name"></td></tr>
         <tr><td>Last name</td><td><input type="text" name="lastName"></td></tr>
         <tr><td>Email</td><td><input type="text" name="email"></td></tr>
+        <tr><td></td><td><input type="submit" value="Registration" name="registration"></td></tr>
     </table>
-    <input type="submit" value="Registration" name="registration">
+
 </form>
 </body>
 </html>

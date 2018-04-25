@@ -38,12 +38,8 @@
                 </c:forEach></td>
                 <c:if test="${user.role.id == 1}">
                     <td>
-                        <a href="${pageContext.request.contextPath}/CruiseCompany?command=toUpdateRoute&idRoute=${Route.id}">
-                            <button>Update</button>
-                        </a>
-                        <a href="${pageContext.request.contextPath}/CruiseCompany?command=deleteRoute&idRoute=${Route.id}">
-                            <button>Delete</button>
-                        </a></td>
+                        <a href="${pageContext.request.contextPath}/CruiseCompany?command=toUpdateRoute&idRoute=${Route.id}"><button>Update</button></a>
+                        <a href="${pageContext.request.contextPath}/CruiseCompany?command=deleteRoute&idRoute=${Route.id}"><button>Delete</button></a></td>
                 </c:if>
             </tr>
         </c:forEach>

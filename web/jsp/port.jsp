@@ -74,12 +74,8 @@
                         <td>${Excursion.price}</td>
                         <c:if test="${user.role.id == 1}">
                             <td>
-                                <a href="${pageContext.request.contextPath}/CruiseCompany?command=updateExcursion&idExcursion=${Excursion.id}">
-                                    <button>Update</button>
-                                </a>
-                                <a href="${pageContext.request.contextPath}/CruiseCompany?command=deleteExcursion&idExcursion=${Excursion.id}">
-                                    <button>Delete</button>
-                                </a></td>
+                                <a href="${pageContext.request.contextPath}/CruiseCompany?command=updateExcursion&idExcursion=${Excursion.id}"><button>Update</button></a>
+                                <a href="${pageContext.request.contextPath}/CruiseCompany?command=deleteExcursion&idExcursion=${Excursion.id}"><button>Delete</button></a></td>
                         </c:if>
                     </tr>
                 </c:forEach>
@@ -131,12 +127,8 @@
                             <td>${Port.city}</td>
                             <td>${Port.country}</td>
                             <td>
-                                <a href="${pageContext.request.contextPath}/CruiseCompany?command=updatePort&idPort=${Port.id}">
-                                    <button>Update</button>
-                                </a>
-                                <a href="${pageContext.request.contextPath}/CruiseCompany?command=deletePort&idPort=${Port.id}">
-                                    <button>Delete</button>
-                                </a></td>
+                                <a href="${pageContext.request.contextPath}/CruiseCompany?command=updatePort&idPort=${Port.id}"><button>Update</button></a>
+                                <a href="${pageContext.request.contextPath}/CruiseCompany?command=deletePort&idPort=${Port.id}"><button>Delete</button></a></td>
                         </tr>
                     </c:forEach>
                 </table>

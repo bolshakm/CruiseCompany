@@ -18,7 +18,7 @@ public class UpdateCruiseCommand implements ICommand {
         Date from = Date.valueOf(request.getParameter("from"));
         Date to = Date.valueOf(request.getParameter("to"));
         Ship ship = ShipService.findById(Integer.parseInt(request.getParameter("ShipId")));
-        CruiseStatus status = CruiseStatusService.findById(Integer.parseInt(request.getParameter("idCruiseStatus")));
+        CruiseStatus status = CruiseStatusService.findById(Integer.parseInt(request.getParameter("CruiseStatusId")));
         Route route = RouteService.findById(Integer.parseInt(request.getParameter("RouteId")));
         cruise.setName(name);
         cruise.setFrom(from);
