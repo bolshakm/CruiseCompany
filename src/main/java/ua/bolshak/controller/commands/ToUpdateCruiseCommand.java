@@ -20,7 +20,6 @@ public class ToUpdateCruiseCommand implements ICommand {
         request.setAttribute("Ships", ShipService.findAll());
         request.setAttribute("idCruiseStatus", cruise.getStatus().getId());
         request.setAttribute("CruiseStatuses", CruiseStatusService.findAll());
-        request.setAttribute("selectedPorts", cruise.getPorts());
         request.setAttribute("idRoute", cruise.getRoute().getId());
         request.setAttribute("Routes", RouteService.findAll());
         return "/jsp/cruiseCard.jsp";

@@ -15,7 +15,6 @@ public class Cruise {
     private Route route;
     private CruiseStatus status;
     private List<Ticket> tickets;
-    private List<Port> ports;
     private List<User> users;
 
     public int getId() {
@@ -80,14 +79,6 @@ public class Cruise {
 
     public void setTickets(List<Ticket> tickets) {
         this.tickets = tickets;
-    }
-
-    public List<Port> getPorts() {
-        return ports;
-    }
-
-    public void setPorts(List<Port> ports) {
-        this.ports = ports;
     }
 
     public List<User> getUsers() {

@@ -52,7 +52,7 @@
     </tr>
     <tr>
         <td>Cruise status</td>
-        <td><select name="idCruiseStatus">
+        <td><select name="CruiseStatusId">
             <c:if test="${idCruise == null}">
                 <option disabled selected>Select cruise status</option>
             </c:if>

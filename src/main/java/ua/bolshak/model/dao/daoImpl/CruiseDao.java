@@ -179,8 +179,8 @@ public class CruiseDao implements CruiseIDao{
             psForCruiseTable.setDate(3, cruise.getTo());
             psForCruiseTable.setInt(4, cruise.getShip().getId());
             psForCruiseTable.setInt(5, cruise.getStatus().getId());
+            psForCruiseTable.setInt(6, cruise.getRoute().getId());
             psForCruiseTable.executeUpdate();
-//            cruise.setId(findByName(cruise.getName()).getId());
         } catch (SQLException e) {
             LOGGER.error(e.getMessage());
         }

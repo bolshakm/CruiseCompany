@@ -2,6 +2,7 @@ package ua.bolshak.controller.commands;
 
 import ua.bolshak.model.service.CruiseStatusService;
 import ua.bolshak.model.service.PortService;
+import ua.bolshak.model.service.RouteService;
 import ua.bolshak.model.service.ShipService;
 
 import javax.servlet.ServletException;
@@ -14,7 +15,7 @@ public class ToCruiseCard implements ICommand {
     public String execute(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException {
         request.setAttribute("Ships", ShipService.findAll());
         request.setAttribute("CruiseStatuses", CruiseStatusService.findAll());
-        request.setAttribute("Ports", PortService.findAll());
+        request.setAttribute("Routes", RouteService.findAll());
         return "/jsp/cruiseCard.jsp";
     }
 }

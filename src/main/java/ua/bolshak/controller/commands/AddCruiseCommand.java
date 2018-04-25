@@ -3,10 +3,7 @@ package ua.bolshak.controller.commands;
 import ua.bolshak.model.entity.Cruise;
 import ua.bolshak.model.entity.CruiseStatus;
 import ua.bolshak.model.entity.Ship;
-import ua.bolshak.model.service.CruiseService;
-import ua.bolshak.model.service.CruiseStatusService;
-import ua.bolshak.model.service.PortService;
-import ua.bolshak.model.service.ShipService;
+import ua.bolshak.model.service.*;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
@@ -22,14 +19,14 @@ public class AddCruiseCommand implements ICommand {
         String from = request.getParameter("from");
         String to = request.getParameter("to");
         String idShip = request.getParameter("ShipId");
-        String idCruiseStatus = request.getParameter("idCruiseStatus");
-        String [] idPorts = request.getParameterValues("selectedPorts");
+        String idCruiseStatus = request.getParameter("CruiseStatusId");
+        String idRoute = request.getParameter("RouteId");
         cruise.setName(name);
         cruise.setFrom(Date.valueOf(from));
         cruise.setTo(Date.valueOf(to));
         cruise.setShip(ShipService.findById(Integer.parseInt(idShip)));
         cruise.setStatus(CruiseStatusService.findById(Integer.parseInt(idCruiseStatus)));
-        cruise.setPorts(PortService.getListPort(idPorts));
+        cruise.setRoute(RouteService.findById(Integer.parseInt(idRoute)));
         CruiseService.add(cruise);
         return new ToCruisesPage().execute(request, response);
     }
