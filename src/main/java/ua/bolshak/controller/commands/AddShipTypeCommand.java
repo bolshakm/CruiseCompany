@@ -12,7 +12,8 @@ public class AddShipTypeCommand implements ICommand {
     @Override
     public String execute(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException {
         ShipType shipType = new ShipType();
-        shipType.setName(request.getParameter("ShipTypeName"));
+        String name = request.getParameter("ShipTypeName");
+        shipType.setName(name);
         ShipTypeService.add(shipType);
         return new ToShipsPage().execute(request, response);
     }

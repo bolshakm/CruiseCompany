@@ -12,7 +12,8 @@ public class AddRoleCommand implements ICommand {
     @Override
     public String execute(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException {
         Role role = new Role();
-        role.setName(request.getParameter("RoleName"));
+        String name = request.getParameter("RoleName");
+        role.setName(name);
         RoleService.add(role);
         return new ToUserPage().execute(request, response);
     }

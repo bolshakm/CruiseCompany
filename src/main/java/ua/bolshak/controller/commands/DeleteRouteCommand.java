@@ -11,8 +11,7 @@ import java.io.IOException;
 public class DeleteRouteCommand implements ICommand {
     @Override
     public String execute(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException {
-        String idRoute = request.getParameter("idRoute");
-        Route route = RouteService.findById(Integer.parseInt(idRoute));
+        Route route = RouteService.findById(Integer.parseInt(request.getParameter("idRoute")));
         RouteService.delete(route);
         return new ToRoutePageCommand().execute(request, response);
     }

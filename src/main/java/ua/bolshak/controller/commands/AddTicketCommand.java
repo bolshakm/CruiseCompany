@@ -13,7 +13,6 @@ import java.io.IOException;
 public class AddTicketCommand implements ICommand {
     @Override
     public String execute(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException {
-//        User user = UserService.findByLogin(request.getParameter("login"));
         User user = (User) request.getSession().getAttribute("user");
         String name = request.getParameter("name");
         String lastName = request.getParameter("lastName");

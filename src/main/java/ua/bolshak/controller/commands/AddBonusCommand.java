@@ -12,7 +12,8 @@ public class AddBonusCommand implements ICommand {
     @Override
     public String execute(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException {
         Bonus bonus = new Bonus();
-        bonus.setName(request.getParameter("BonusName"));
+        String name = request.getParameter("BonusName");
+        bonus.setName(name);
         BonusService.add(bonus);
         return new ToShipsPage().execute(request, response);
     }

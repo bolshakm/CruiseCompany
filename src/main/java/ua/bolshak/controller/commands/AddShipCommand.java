@@ -15,12 +15,18 @@ public class AddShipCommand implements ICommand {
     @Override
     public String execute(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException {
         Ship ship = new Ship();
-        ship.setName(request.getParameter("name"));
-        ship.setNumber(request.getParameter("shipNumber"));
-        ship.setNumberOfSeats(Integer.parseInt(request.getParameter("numberOfSeats")));
-        ship.setPricePerSeat(Double.parseDouble(request.getParameter("pricePerSeat")));
-        ship.setType(ShipTypeService.findById(Integer.parseInt(request.getParameter("idShipType"))));
-        ship.setBonuses(BonusService.getListBonuses(request.getParameterValues("selectedBonuses")));
+        String name = request.getParameter("name");
+        String shipNumber = request.getParameter("shipNumber");
+        String numberOfSeats = request.getParameter("numberOfSeats");
+        String pricePerSeat = request.getParameter("pricePerSeat");
+        String idShipType = request.getParameter("idShipType");
+        String[] selectedBonuses = request.getParameterValues("selectedBonuses");
+        ship.setName(name);
+        ship.setNumber(shipNumber);
+        ship.setNumberOfSeats(Integer.parseInt(numberOfSeats));
+        ship.setPricePerSeat(Double.parseDouble(pricePerSeat));
+        ship.setType(ShipTypeService.findById(Integer.parseInt(idShipType)));
+        ship.setBonuses(BonusService.getListBonuses(selectedBonuses));
         ShipService.add(ship);
         return new ToShipsPage().execute(request, response);
     }

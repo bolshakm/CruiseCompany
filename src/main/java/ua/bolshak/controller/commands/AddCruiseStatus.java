@@ -12,7 +12,8 @@ public class AddCruiseStatus implements ICommand {
     @Override
     public String execute(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException {
         CruiseStatus cruiseStatus = new CruiseStatus();
-        cruiseStatus.setName(request.getParameter("CruiseStatusName"));
+        String name = request.getParameter("CruiseStatusName");
+        cruiseStatus.setName(name);
         CruiseStatusService.add(cruiseStatus);
         return new ToCruisesPage().execute(request, response);
     }

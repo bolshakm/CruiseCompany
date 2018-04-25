@@ -1,6 +1,5 @@
 package ua.bolshak.controller.commands;
 
-import ua.bolshak.controller.commands.ICommand;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;

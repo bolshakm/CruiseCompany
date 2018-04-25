@@ -13,9 +13,12 @@ public class AddExcursionCommand implements ICommand {
     @Override
     public String execute(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException {
         Excursion excursion = new Excursion();
-        excursion.setName(request.getParameter("name"));
-        excursion.setPrice(Double.parseDouble(request.getParameter("price")));
-        excursion.setPort(PortService.findById(Integer.parseInt(request.getParameter("idPort"))));
+        String name = request.getParameter("name");
+        String price = request.getParameter("price");
+        String idPort = request.getParameter("idPort");
+        excursion.setName(name);
+        excursion.setPrice(Double.parseDouble(price));
+        excursion.setPort(PortService.findById(Integer.parseInt(idPort)));
         ExcursionService.add(excursion);
         return new ToPortsPage().execute(request, response);
     }

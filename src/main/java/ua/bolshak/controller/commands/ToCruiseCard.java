@@ -1,7 +1,6 @@
 package ua.bolshak.controller.commands;
 
 import ua.bolshak.model.service.CruiseStatusService;
-import ua.bolshak.model.service.PortService;
 import ua.bolshak.model.service.RouteService;
 import ua.bolshak.model.service.ShipService;
 

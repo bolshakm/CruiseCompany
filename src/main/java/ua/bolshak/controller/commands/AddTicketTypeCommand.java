@@ -12,7 +12,8 @@ public class AddTicketTypeCommand implements ICommand {
     @Override
     public String execute(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException {
         TicketType ticketType = new TicketType();
-        ticketType.setName(request.getParameter("TicketTypeName"));
+        String name = request.getParameter("TicketTypeName");
+        ticketType.setName(name);
         TicketTypeService.add(ticketType);
         return new ToTicketsPageCommand().execute(request, response);
     }

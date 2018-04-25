@@ -1,7 +1,6 @@
 package ua.bolshak.controller.commands;
 
 import ua.bolshak.model.entity.TicketType;
-import ua.bolshak.model.service.BonusService;
 import ua.bolshak.model.service.TicketTypeService;
 
 import javax.servlet.ServletException;

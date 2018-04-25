@@ -14,12 +14,16 @@ public class RegistrationCommand implements ICommand{
     public String execute(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException {
         String page = "/jsp/main.jsp";
         User user = new User();
-        user.setLogin(request.getParameter("login"));
-        user.setPassword(request.getParameter("password"));
-        user.setName(request.getParameter("name"));
-        user.setLastName(request.getParameter("lastName"));
-        user.setEmail(request.getParameter("email"));
-        user.setMoney(10000);
+        String login = request.getParameter("login");
+        String password = request.getParameter("password");
+        String name = request.getParameter("name");
+        String lastName = request.getParameter("lastName");
+        String email = request.getParameter("email");
+        user.setLogin(login);
+        user.setPassword(password);
+        user.setName(name);
+        user.setLastName(lastName);
+        user.setEmail(email);
         user.setRole(RoleService.findById(2));
         UserService.add(user);
         request.setAttribute("User", user);
