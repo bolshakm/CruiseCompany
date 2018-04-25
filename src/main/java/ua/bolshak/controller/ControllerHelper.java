@@ -67,8 +67,7 @@ public class ControllerHelper {
         commands.put("toUpdateRoute", new ToUpdateRouteCommand());
         commands.put("updateRoute", new UpdateRouteCommand());
         commands.put("toRoutePage", new ToRoutePageCommand());
-        commands.put("toTicketTypeCard", new ToTicketTypeCardCommand());
-        commands.put("updateTicketTypeCommand", new UpdateTicketTypeCommand());
+        commands.put("updateTicketType", new UpdateTicketTypeCommand());
     }
 
     public static ControllerHelper getInstance() {

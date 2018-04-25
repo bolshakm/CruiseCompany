@@ -60,40 +60,40 @@
         <c:if test="${user.role.id == 1}">
             <td valign="top">
                 <table border="1" bgcolor="#f0ffff">
-                    <tr><a href="${pageContext.request.contextPath}/CruiseCompany?command=toTicketTypeCard"><button>Add</button></a></tr>
+                    <%--<tr><a href="${pageContext.request.contextPath}/CruiseCompany?command=toTicketTypeCard"><button>Add</button></a></tr>--%>
 
                     <caption>Ticket Type</caption>
                     <tr>
                         <th>Name</th>
-                        <th>Bonuses</th>
+                        <%--<th>Bonuses</th>--%>
                         <th>Actions</th>
                     </tr>
-                    <%--<c:if test="${TicketType == null}">--%>
-                        <%--<tr>--%>
-                            <%--<form action="${pageContext.request.contextPath}/CruiseCompany" method="post">--%>
-                                <%--<td>--%>
-                                    <%--<input type="hidden" name="command" value="addTicketType">--%>
-                                    <%--<input type="text" name="TicketTypeName">--%>
-                                <%--</td>--%>
-                                <%--<td>--%>
+                    <c:if test="${TicketType == null}">
+                        <tr>
+                            <form action="${pageContext.request.contextPath}/CruiseCompany" method="post">
+                                <td>
+                                    <input type="hidden" name="command" value="addTicketType">
+                                    <input type="text" name="TicketTypeName">
+                                </td>
+                                <td>
                                     <%--<c:forEach var="Bonus" items="${Bonuses}">--%>
                                     <%--<input type="checkbox" name="selectedExcursions" value="${Bonus.id}">${Bonus.name}--%>
                                     <%--<br/>--%>
                                     <%--</c:forEach>--%>
                                 <%--<td>--%>
-                                    <%--<input type="submit" name="Add" value="Add">--%>
-                                <%--</td>--%>
-                            <%--</form>--%>
-                        <%--</tr>--%>
-                    <%--</c:if>--%>
-                    <%--<c:if test="${TicketType != null}">--%>
-                        <%--<tr>--%>
-                            <%--<form action="${pageContext.request.contextPath}/CruiseCompany" method="post">--%>
-                                <%--<td>--%>
-                                    <%--<input type="hidden" name="command" value="updateTicketType">--%>
-                                    <%--<input type="hidden" name="idTicketType" value="${TicketType.id}">--%>
-                                    <%--<input type="text" name="TicketTypeName" value="${TicketType.name}">--%>
-                                <%--</td>--%>
+                                    <input type="submit" name="Add" value="Add">
+                                </td>
+                            </form>
+                        </tr>
+                    </c:if>
+                    <c:if test="${TicketType != null}">
+                        <tr>
+                            <form action="${pageContext.request.contextPath}/CruiseCompany" method="post">
+                                <td>
+                                    <input type="hidden" name="command" value="updateTicketType">
+                                    <input type="hidden" name="idTicketType" value="${TicketType.id}">
+                                    <input type="text" name="TicketTypeName" value="${TicketType.name}">
+                                </td>
                                 <%--<td><c:forEach var="Bonus" items="${Bonuses}">--%>
                                     <%--<c:if test="${fn:contains(TicketType.bonuses, Bonus)}">--%>
                                         <%--<input type="checkbox" checked name="selectedExcursions"--%>
@@ -105,18 +105,18 @@
                                         <%--<br/>--%>
                                     <%--</c:if>--%>
                                 <%--</c:forEach></td>--%>
-                                <%--<td>--%>
-                                    <%--<input type="submit" name="Update" value="Update">--%>
-                                <%--</td>--%>
-                            <%--</form>--%>
-                        <%--</tr>--%>
-                    <%--</c:if>--%>
+                                <td>
+                                    <input type="submit" name="Update" value="Update">
+                                </td>
+                            </form>
+                        </tr>
+                    </c:if>
                     <c:forEach var="TicketType" items="${TicketTypes}">
                         <tr>
                             <td>${TicketType.name}</td>
-                            <td><c:forEach var="Bonus" items="${TicketType.bonuses}">
-                                ${Bonus.name}<br/>
-                            </c:forEach></td>
+                            <%--<td><c:forEach var="Bonus" items="${TicketType.bonuses}">--%>
+                                <%--${Bonus.name}<br/>--%>
+                            <%--</c:forEach></td>--%>
                             <td><a href="/CruiseCompany?command=toUpdateTicketType&idTicketType=${TicketType.id}">
                                 <button>Update</button>
                             </a>

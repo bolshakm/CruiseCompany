@@ -12,8 +12,6 @@ public interface ShipIDao {
 
     List<Ship> findAllByBonus(Bonus bonus);
 
-    List<Ship> findAllByTicketTypes(TicketType ticketType);
-
     Ship findById(int id);
 
     Ship findByNumber(String number);

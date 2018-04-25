@@ -12,10 +12,10 @@ public class UpdateTicketTypeCommand implements ICommand {
     @Override
     public String execute(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException {
         String id = request.getParameter("idTicketType");
-        String name = request.getParameter("name");
-        String[] selecteBonuses = request.getParameterValues("selectedBonuses");
-
+        String name = request.getParameter("TicketTypeName");
         TicketType ticketType = TicketTypeService.findById(Integer.parseInt(id));
+        ticketType.setName(name);
+        TicketTypeService.update(ticketType);
         return new ToTicketsPageCommand().execute(request, response);
     }
 }

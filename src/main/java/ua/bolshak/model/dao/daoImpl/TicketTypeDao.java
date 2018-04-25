@@ -5,7 +5,6 @@ import ua.bolshak.model.MysqlConnectionPool;
 import ua.bolshak.model.dao.idao.TicketTypeIDao;
 import ua.bolshak.model.dao.util.ColumnName;
 import ua.bolshak.model.dao.util.SqlQuery;
-import ua.bolshak.model.entity.Bonus;
 import ua.bolshak.model.entity.Ship;
 import ua.bolshak.model.entity.Ticket;
 import ua.bolshak.model.entity.TicketType;
@@ -47,23 +46,6 @@ public class TicketTypeDao implements TicketTypeIDao{
             }
         } catch (SQLException e) {
             LOGGER.error(e.getMessage());
-        }
-        return ticketTypes;
-    }
-
-    @Override
-    public List<TicketType> findAllByShip(Ship ship) {
-        List<TicketType> ticketTypes = new ArrayList<>();
-        try(Connection connection = MysqlConnectionPool.getConnection();
-            PreparedStatement preparedStatement = connection.prepareStatement(SqlQuery.FIND_TICKET_TYPE_BY_SHIP)){
-            preparedStatement.setInt(1, ship.getId());
-            try(ResultSet resultSet = preparedStatement.executeQuery()){
-                while (resultSet.next()) {
-                    ticketTypes.add(initialization(resultSet));
-                }
-            }
-        } catch (SQLException e) {
-            LOGGER.error(e);
         }
         return ticketTypes;
     }

@@ -19,7 +19,6 @@ public interface SqlQuery {
     String FIND_CRUISE_BY_ID = "SELECT cruises.* FROM cruises WHERE id_cruise = ?";
     String FIND_CRUISE_BY_NAME = "SELECT * from cruises where cruise_name = ?";
     String ADD_CRUISE = "INSERT INTO cruises (cruise_name, cruise_from, cruise_to, ships_id_ship, cruise_statuses_id_cruise_status) VALUES (?, ?, ?, ?, ?)";
-    String ADD_PORTS_FOR_CRUISE = "INSERT INTO cruises_has_ports (ports_id_port, cruises_id_cruise) VALUES (?, ?)";
     String UPDATE_CRUISE = "UPDATE cruises SET cruise_name = ?, cruise_from = ?, cruise_to = ?, ships_id_ship = ?, cruise_statuses_id_cruise_status = ?, routes_id_route = ? WHERE id_cruise = ?;";
     String DELETE_CRUISE = "DELETE FROM cruises WHERE id_cruise = ?";
     String DELETE_CRUISE_HAS_PORTS = "DELETE FROM cruises_has_ports WHERE cruises_id_cruise=?";
@@ -40,7 +39,6 @@ public interface SqlQuery {
     String DELETE_EXCURSION = "DELETE FROM excursions WHERE id_excursion = ?";
     //ports table
     String FIND_ALL_PORTS = "SELECT * FROM ports";
-    String FIND_ALL_PORTS_BY_CRUISE = "SELECT ports.* FROM ports JOIN cruises_has_ports chp ON ports.id_port = chp.ports_id_port WHERE chp.cruises_id_cruise  = ?";
     String FIND_ALL_PORTS_BY_ROUTE = "select ports.* from ports join ports_has_routes phr on ports.id_port = phr.ports_id_port where routes_id_route = ?";
     String FIND_PORT_BY_ID = "SELECT * FROM ports WHERE id_port = ?";
     String FIND_PORT_BY_EXCURSION = "SELECT ports.* FROM ports JOIN excursions e ON ports.id_port = e.ports_id_port WHERE id_excursion = ?";

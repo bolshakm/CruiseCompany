@@ -20,10 +20,6 @@ public class ShipService {
         return  getFull(DaoFactory.getShipDao().findAllByBonus(bonus));
     }
 
-    public static List<Ship> findAllByTicketType(TicketType ticketType){
-        return  getFull(DaoFactory.getShipDao().findAllByTicketTypes(ticketType));
-    }
-
     public static Ship findById(int id){
         return  getFull(DaoFactory.getShipDao().findById(id));
     }
@@ -48,10 +44,6 @@ public class ShipService {
         return DaoFactory.getShipDao().findByCruise(cruise);
     }
 
-    public static List<Ship> findAllLazyByTicketType(TicketType ticketType){
-        return  DaoFactory.getShipDao().findAllByTicketTypes(ticketType);
-    }
-
     public static void add(Ship ship){
         DaoFactory.getShipDao().add(ship);
     }
@@ -71,7 +63,6 @@ public class ShipService {
             ship.setBonuses(BonusService.findAllLazyByShip(ship));
             ship.setCruises(CruiseService.findAllLazyByShip(ship));
             ship.setType(ShipTypeService.findLazyByShip(ship));
-            ship.setTicketTypes(TicketTypeService.findAllLazyByShip(ship));
         }
         return ship;
     }
@@ -83,7 +74,6 @@ public class ShipService {
                 ship.setBonuses(BonusService.findAllLazyByShip(ship));
                 ship.setCruises(CruiseService.findAllLazyByShip(ship));
                 ship.setType(ShipTypeService.findLazyByShip(ship));
-                ship.setTicketTypes(TicketTypeService.findAllLazyByShip(ship));
             }
         }
         return ships;

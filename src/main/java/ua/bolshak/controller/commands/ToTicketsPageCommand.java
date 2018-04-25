@@ -19,7 +19,6 @@ public class ToTicketsPageCommand implements ICommand {
         if (user.getRole().getId() == 1) {
             request.setAttribute("Tickets", TicketService.findAllWithFullCruise());
             request.setAttribute("TicketTypes", TicketTypeService.findAll());
-            request.setAttribute("Bonuses", BonusService.findAll());
         } else {
             List<Ticket> tickets = TicketService.findAllByUser(user);
             if (tickets != null) {
@@ -28,7 +27,6 @@ public class ToTicketsPageCommand implements ICommand {
                 request.setAttribute("InfoMassage", "Tickets not found!");
             }
         }
-
         return "/jsp/tickets.jsp";
     }
 }

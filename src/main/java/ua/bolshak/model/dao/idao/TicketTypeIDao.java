@@ -11,8 +11,6 @@ public interface TicketTypeIDao {
 
     List<TicketType> findAll();
 
-    List<TicketType>findAllByShip(Ship ship);
-
     TicketType findById(int id);
 
     TicketType findByTicket(Ticket ticket);
