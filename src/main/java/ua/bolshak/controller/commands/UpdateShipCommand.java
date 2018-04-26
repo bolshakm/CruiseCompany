@@ -5,6 +5,7 @@ import ua.bolshak.model.entity.ShipType;
 import ua.bolshak.model.service.BonusService;
 import ua.bolshak.model.service.ShipService;
 import ua.bolshak.model.service.ShipTypeService;
+import ua.bolshak.model.service.TicketTypeService;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
@@ -21,12 +22,14 @@ public class UpdateShipCommand implements ICommand {
         String pricePerSeat = request.getParameter("pricePerSeat");
         String shipTypeId = request.getParameter("idShipType");
         String [] bonusesId = request.getParameterValues("selectedBonuses");
+        String[] ticketTypesId = request.getParameterValues("selectedTicketTypes");
         ship.setName(name);
         ship.setNumber(number);
         ship.setNumberOfSeats(Integer.parseInt(numberOfSeats));
         ship.setPricePerSeat(Double.parseDouble(pricePerSeat));
         ship.setType(ShipTypeService.findById(Integer.parseInt(shipTypeId)));
         ship.setBonuses(BonusService.getListBonuses(bonusesId));
+        ship.setTicketTypes(TicketTypeService.getListTicketTypes(ticketTypesId));
         ShipService.update(ship);
         return new ToShipsPage().execute(request, response);
     }

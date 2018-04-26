@@ -165,6 +165,7 @@ public class ShipDao implements ShipIDao {
             psForAddShip.executeUpdate();
             ship.setId(findByNumber(ship.getNumber()).getId());
             addBonuses(ship);
+            addTicketTypes(ship);
             }
          catch (SQLException e) {
             LOGGER.error(e.getMessage());
@@ -176,6 +177,8 @@ public class ShipDao implements ShipIDao {
         PreparedStatement psForUpdateUser = null;
         PreparedStatement psForDeleteBonuses = null;
         PreparedStatement psForAddBonuses = null;
+        PreparedStatement psForDeleteTicketTypes = null;
+        PreparedStatement psForAddTicketTypes = null;
         try (Connection connection = MysqlConnectionPool.getConnection()) {
             psForUpdateUser = connection.prepareStatement(SqlQuery.UPDATE_SHIP);
             psForUpdateUser.setString(1, ship.getName());
@@ -188,14 +191,27 @@ public class ShipDao implements ShipIDao {
             psForDeleteBonuses = connection.prepareStatement(SqlQuery.DELETE_ALL_SHIP_HAS_BONUSES);
             psForDeleteBonuses.setInt(1, ship.getId());
             psForDeleteBonuses.executeUpdate();
-            psForAddBonuses = connection.prepareStatement(SqlQuery.ADD_BONUS_FOR_SHIP);
-            for (Bonus bonus : ship.getBonuses()) {
-                psForAddBonuses.setInt(1, ship.getId());
-                psForAddBonuses.setInt(2, bonus.getId());
-                psForAddBonuses.addBatch();
+            if (ship.getBonuses() != null) {
+                psForAddBonuses = connection.prepareStatement(SqlQuery.ADD_BONUS_FOR_SHIP);
+                for (Bonus bonus : ship.getBonuses()) {
+                    psForAddBonuses.setInt(1, ship.getId());
+                    psForAddBonuses.setInt(2, bonus.getId());
+                    psForAddBonuses.addBatch();
+                }
+                psForAddBonuses.executeBatch();
             }
-            psForAddBonuses.executeBatch();
-
+            psForDeleteTicketTypes = connection.prepareStatement(SqlQuery.DELETE_ALL_SHIP_HAS_TICKET_TYPE);
+            psForDeleteTicketTypes.setInt(1, ship.getId());
+            psForDeleteTicketTypes.executeUpdate();
+            if (ship.getTicketTypes() != null){
+                psForAddTicketTypes = connection.prepareStatement(SqlQuery.ADD_TICKET_TYPE_FOR_SHIP);
+                for (TicketType ticketType : ship.getTicketTypes()) {
+                    psForAddTicketTypes.setInt(1, ship.getId());
+                    psForAddTicketTypes.setInt(2, ticketType.getId());
+                    psForAddTicketTypes.addBatch();
+                }
+                psForAddTicketTypes.executeBatch();
+            }
         } catch (SQLException e) {
             LOGGER.error(e.getMessage());
         } finally {
@@ -209,6 +225,11 @@ public class ShipDao implements ShipIDao {
                 if (psForAddBonuses != null) {
                     psForAddBonuses.close();
                 }
+                if (psForDeleteTicketTypes != null){
+                    psForDeleteTicketTypes.close();
+                }
+                assert psForAddTicketTypes != null;
+                psForAddTicketTypes.close();
             } catch (SQLException e) {
                 LOGGER.error(e.getMessage());
             }
@@ -254,6 +275,20 @@ public class ShipDao implements ShipIDao {
                 psForAddBonuses.addBatch();
             }
             psForAddBonuses.executeBatch();
+        } catch (SQLException e) {
+            LOGGER.error(e.getMessage());
+        }
+    }
+
+    private static void addTicketTypes(Ship ship) {
+        try (Connection connection = MysqlConnectionPool.getConnection();
+             PreparedStatement psForAddTicketTypes = connection.prepareStatement(SqlQuery.ADD_TICKET_TYPE_FOR_SHIP)){
+            for (TicketType ticketType : ship.getTicketTypes()) {
+                psForAddTicketTypes.setInt(1, ship.getId());
+                psForAddTicketTypes.setInt(2, ticketType.getId());
+                psForAddTicketTypes.addBatch();
+            }
+            psForAddTicketTypes.executeBatch();
         } catch (SQLException e) {
             LOGGER.error(e.getMessage());
         }

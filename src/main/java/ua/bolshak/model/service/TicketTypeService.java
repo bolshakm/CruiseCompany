@@ -6,6 +6,7 @@ import ua.bolshak.model.entity.Ship;
 import ua.bolshak.model.entity.Ticket;
 import ua.bolshak.model.entity.TicketType;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class TicketTypeService {
@@ -32,6 +33,16 @@ public class TicketTypeService {
 
     public static List<TicketType> findAllLazyByShip(Ship ship){
         return DaoFactory.getTicketTypeDao().findAllByShip(ship);
+    }
+
+    public static List<TicketType> getListTicketTypes(String[] idTicketTypes){
+        List<TicketType> ticketTypes = new ArrayList<>();
+        if (idTicketTypes != null){
+            for (String id : idTicketTypes) {
+                ticketTypes.add(findById(Integer.parseInt(id)));
+            }
+        }
+        return ticketTypes;
     }
 
     public static void add(TicketType ticketType) {

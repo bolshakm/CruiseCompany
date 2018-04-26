@@ -19,6 +19,7 @@ public class ToUpdateShipCard implements ICommand {
         request.setAttribute("pricePerSeat", ship.getPricePerSeat());
         request.setAttribute("idShipType", ship.getType().getId());
         request.setAttribute("selectedBonuses", ship.getBonuses());
+        request.setAttribute("selectedTicketTypes", ship.getTicketTypes());
         return new ToShipCardCommand().execute(request, response);
     }
 }

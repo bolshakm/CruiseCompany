@@ -43,9 +43,6 @@
             <c:if test="${idShip == null}">
                 <option disabled selected>Select ship type</option>
             </c:if>
-            <%--<c:if test="${idShip != null}">--%>
-                <%--<option disabled>Select ship type</option>--%>
-            <%--</c:if>--%>
             <c:forEach var="ShipType" items="${ShipTypes}">
                 <c:if test="${ShipType.id == idShipType}">
                     <option selected value="${ShipType.id}">${ShipType.name}</option>
@@ -55,6 +52,19 @@
                 </c:if>
             </c:forEach>
         </select></td>
+    </tr>
+    <tr>
+        <td>Ticket types</td>
+        <td>
+            <c:forEach var="TicketType" items="${TicketTypes}">
+                <c:if test="${fn:contains(selectedTicketTypes, TicketType)}">
+                    <input type="checkbox" checked name="selectedTicketTypes" value="${TicketType.id}">${TicketType.name}<br/>
+                </c:if>
+                <c:if test="${!fn:contains(selectedTicketTypes, TicketType)}">
+                    <input type="checkbox" name="selectedTicketTypes" value="${TicketType.id}">${TicketType.name}<br/>
+                </c:if>
+            </c:forEach>
+        </td>
     </tr>
     <tr>
         <td>Bonuses</td>

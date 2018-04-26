@@ -30,6 +30,7 @@
                     </c:if>
                     <th>Price per seats</th>
                     <th>Ship type</th>
+                    <th>Ticket types</th>
                     <th>Bonuses</th>
                     <th>Cruises</th>
 <c:if test="${user.role.id == 1}">
@@ -45,6 +46,9 @@
                         </c:if>
                         <td>${Ship.pricePerSeat}</td>
                         <td>${Ship.type.name}</td>
+                        <td><c:forEach var="ticketType" items="${Ship.ticketTypes}">
+                            ${ticketType.name}<br/>
+                        </c:forEach> </td>
                         <td><c:forEach var="bonus" items="${Ship.bonuses}">
                             ${bonus.name}<br/>
                         </c:forEach> </td>

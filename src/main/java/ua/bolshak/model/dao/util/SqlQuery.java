@@ -65,6 +65,8 @@ public interface SqlQuery {
     String DELETE_SHIP = "DELETE FROM ships WHERE id_ship = ?";
     String DELETE_ALL_SHIP_HAS_BONUSES = "DELETE FROM bonuses_has_ships WHERE  ships_id_ship = ?";
     String ADD_BONUS_FOR_SHIP ="INSERT INTO bonuses_has_ships (ships_id_ship, bonuses_id_bonus) VALUES (?, ?)";
+    String ADD_TICKET_TYPE_FOR_SHIP = "INSERT INTO ships_has_ticket_types (ships_id_ship, ticket_types_id_ticket_type) VALUES (?, ?)";
+    String DELETE_ALL_SHIP_HAS_TICKET_TYPE = "delete from ships_has_ticket_types where ships_id_ship = ?";
     //shipTypes table
     String FIND_ALL_SHIP_TYPES = "SELECT * FROM ship_types";
     String FIND_SHIP_TYPE_BY_ID = "SELECT * FROM ship_types WHERE id_ship_type = ?";
