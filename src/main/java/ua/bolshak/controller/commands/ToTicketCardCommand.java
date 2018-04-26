@@ -21,7 +21,7 @@ public class ToTicketCardCommand implements ICommand {
         request.setAttribute("name", user.getName());
         request.setAttribute("lastName", user.getLastName());
         request.setAttribute("cruise", cruise);
-        request.setAttribute("TicketTypes", TicketTypeService.findAll());
+        request.setAttribute("TicketTypes", TicketTypeService.findAllByShip(cruise.getShip()));
         request.setAttribute("Excursions", ExcursionService.findAllByCruse(cruise));
         return "/jsp/ticketCard.jsp";
     }

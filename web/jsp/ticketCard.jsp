@@ -114,29 +114,6 @@
                 </c:if>
             </td>
         </tr>
-        <%--fix in user page--%>
-        <tr>
-            <td>Bonuses</td>
-            <td>
-                <c:if test="${price == null}">
-                    <c:forEach var="Bonus" items="${Bonuses}">
-                        <c:if test="${fn:contains(selectedBonuses, Bonus)}">
-                            <input type="checkbox" checked name="selectedBonuses"
-                                   value="${Bonus.id}">${Bonus.name}<br/>
-                        </c:if>
-                        <c:if test="${!fn:contains(selectedBonuses, Bonus)}">
-                            <input type="checkbox" name="selectedBonuses" value="${Bonus.id}">${Bonus.name}
-                            <br/>
-                        </c:if>
-                    </c:forEach>
-                </c:if>
-                <c:if test="${price != null}">
-                    <c:forEach var="Bonus" items="${Bonuses}">
-                        <input type="hidden" name="selectedBonuses" value="${Bonus.id}">${Bonus.name}<br/>
-                    </c:forEach>
-                </c:if>
-            </td>
-        </tr>
         <tr>
             <td>Excursions</td>
             <td>
