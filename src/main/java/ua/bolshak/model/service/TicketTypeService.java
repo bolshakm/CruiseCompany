@@ -14,6 +14,9 @@ public class TicketTypeService {
         return getFull(DaoFactory.getTicketTypeDao().findAll());
     }
 
+    public static List<TicketType> findAllByShip(Ship ship){
+        return getFull(DaoFactory.getTicketTypeDao().findAllByShip(ship));
+    }
 
     public static TicketType findById(int id) {
         return getFull(DaoFactory.getTicketTypeDao().findById(id));
@@ -25,6 +28,10 @@ public class TicketTypeService {
 
     public static TicketType findLazyByTicket(Ticket ticket) {
         return DaoFactory.getTicketTypeDao().findByTicket(ticket);
+    }
+
+    public static List<TicketType> findAllLazyByShip(Ship ship){
+        return DaoFactory.getTicketTypeDao().findAllByShip(ship);
     }
 
     public static void add(TicketType ticketType) {
@@ -43,6 +50,7 @@ public class TicketTypeService {
         if (ticketType != null) {
             ticketType.setTickets(TicketService.findAllLazyByTicketType(ticketType));
             ticketType.setUsers(UserService.findAllLazyTicketType(ticketType));
+            ticketType.setShips(ShipService.findAllLazyByTicketType(ticketType));
         }
         return ticketType;
     }
@@ -52,6 +60,7 @@ public class TicketTypeService {
             for (TicketType ticketType : ticketTypes) {
                 ticketType.setTickets(TicketService.findAllLazyByTicketType(ticketType));
                 ticketType.setUsers(UserService.findAllLazyTicketType(ticketType));
+                ticketType.setShips(ShipService.findAllLazyByTicketType(ticketType));
             }
         }
         return ticketTypes;

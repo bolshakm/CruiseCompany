@@ -55,7 +55,7 @@ public interface SqlQuery {
     //ships table
     String FIND_ALL_SHIPS = "SELECT * FROM ships";
     String FIND_ALL_SHIPS_BY_TYPE = "SELECT * FROM ships WHERE ship_types_id_ship_type = ?";
-    String FIND_ALL_SHIPS_BY_TICKET_TYPE = "select ships.* from ships join ticket_types_has_ships t on ships.id_ship = t.ships_id_ship where ticket_types_id_ticket_type = ?";
+    String FIND_ALL_SHIPS_BY_TICKET_TYPE = "select ships.* from ships join ships_has_ticket_types shtt on ships.id_ship = shtt.ships_id_ship where ticket_types_id_ticket_type = ?";
     String FIND_ALL_SHIPS_BY_BONUS = "SELECT ships.* FROM ships JOIN bonuses_has_ships bhs ON ships.id_ship = bhs.ships_id_ship WHERE bonuses_id_bonus = ?";
     String FIND_SHIP_BY_ID = "SELECT * from ships WHERE id_ship = ?";
     String FIND_SHIP_BY_NUMBER = "SELECT * from ships where ship_number = ?";
@@ -75,7 +75,7 @@ public interface SqlQuery {
     //ticketTypes table
     String FIND_ALL_TICKET_TYPES = "SELECT * FROM ticket_types";
     String FIND_TICKET_TYPE_BY_ID = "SELECT * FROM ticket_types WHERE id_ticket_type = ?";
-    String FIND_TICKET_TYPE_BY_SHIP = "select ticket_types.* from ticket_types join ticket_types_has_ships t on ticket_types.id_ticket_type = t.ticket_types_id_ticket_type where ships_id_ship = ?";
+    String FIND_ALL_TICKET_TYPES_BY_SHIP = "select ticket_types.* from ticket_types join ships_has_ticket_types shtt on ticket_types.id_ticket_type = shtt.ticket_types_id_ticket_type where ships_id_ship = ?";
     String FIND_TICKET_TYPE_BY_TICKET = "SELECT ticket_types.* FROM ticket_types JOIN tickets t ON ticket_types.id_ticket_type = t.ticket_types_id_ticket_type WHERE t.id_ticket = ?";
     String ADD_TICKET_TYPE = "INSERT INTO ticket_types (ticket_type_name, ticket_type_price) VALUES (?, ?)";
     String UPDATE_TICKET_TYPE = "UPDATE ticket_types SET ticket_type_name = ?, ticket_type_price = ? WHERE id_ticket_type = ?";
