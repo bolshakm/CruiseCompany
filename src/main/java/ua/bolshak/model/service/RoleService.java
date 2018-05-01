@@ -12,6 +12,10 @@ public class RoleService {
         return getFull(DaoFactory.getRoleDao().findAll());
     }
 
+    public static List<Role> findAllMutable(){
+        return getFull(DaoFactory.getRoleDao().findAllMutable());
+    }
+
     public static Role findById(int id){
         return getFull(DaoFactory.getRoleDao().findById(id));
     }

@@ -48,6 +48,21 @@ public class RoleDao implements RoleIDao{
     }
 
     @Override
+    public List<Role> findAllMutable() {
+        List<Role> roles = new ArrayList<>();
+        try (Connection connection = MysqlConnectionPool.getConnection();
+             Statement statement = connection.createStatement();
+             ResultSet resultSet = statement.executeQuery(SqlQuery.FIND_ALL_IMMUTABLE_ROLES)){
+            while (resultSet.next()){
+                roles.add(initialization(resultSet));
+            }
+        } catch (SQLException e) {
+            LOGGER.error(e.getMessage());
+        }
+        return roles;
+    }
+
+    @Override
     public Role findById(int id) {
         Role role = null;
         try(Connection connection = MysqlConnectionPool.getConnection();

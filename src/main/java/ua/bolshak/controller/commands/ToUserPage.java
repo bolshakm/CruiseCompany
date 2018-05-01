@@ -12,7 +12,7 @@ public class ToUserPage implements ICommand {
     @Override
     public String execute(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException {
         request.setAttribute("Users", UserService.findAll());
-        request.setAttribute("Roles", RoleService.findAll());
+        request.setAttribute("Roles", RoleService.findAllMutable());
         return "/jsp/users.jsp";
     }
 }

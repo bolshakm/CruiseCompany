@@ -47,6 +47,7 @@ public interface SqlQuery {
     String DELETE_PORT = "DELETE FROM ports WHERE id_port = ?";
     //roles table
     String FIND_ALL_ROLES = "SELECT * FROM roles";
+    String FIND_ALL_IMMUTABLE_ROLES = "SELECT * FROM roles where id_role > 4";
     String FIND_ROLE_BY_ID = "SELECT * FROM roles WHERE id_role = ?";
     String FIND_ROLE_BY_USER = "SELECT roles.* FROM roles JOIN users u ON roles.id_role = u.roles_id_role WHERE u.id_user = ?";
     String ADD_ROLE = "INSERT INTO roles (role_name) VALUES (?)";

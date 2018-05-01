@@ -9,6 +9,8 @@
 <c:set var="Password" value="1234" scope="request"/>
 <%--delete after testing--%>
 <c:set var="adminLogin" value="admin" scope="request"/>
+<c:set var="stuffLogin" value="user4" scope="request"/>
+<c:set var="adminShipLogin" value="user3" scope="request"/>
 <jsp:forward page="jsp/login.jsp"/>
 </body>
 </html>

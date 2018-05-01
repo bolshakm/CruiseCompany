@@ -9,6 +9,8 @@ public interface RoleIDao {
 
     List<Role> findAll();
 
+    List<Role> findAllMutable();
+
     Role findById(int id);
 
     Role findByUser(User user);
