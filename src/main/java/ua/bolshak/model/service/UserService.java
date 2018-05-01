@@ -19,6 +19,10 @@ public class UserService {
         return getFull(DaoFactory.getUserDao().findAllByCruise(cruise));
     }
 
+    public static List<User> findAllByShip(Ship ship){
+        return getFull(DaoFactory.getUserDao().findAllByShip(ship));
+    }
+
     public static List<User> findAllByCruiseAndRole(Cruise cruise, Role role){
         return getFull(DaoFactory.getUserDao().findAllByCruiseAndRole(cruise, role));
     }
@@ -54,6 +58,10 @@ public class UserService {
 
     public static List<User> findAllLazyByCruise(Cruise cruise){
         return DaoFactory.getUserDao().findAllByCruise(cruise);
+    }
+
+    public static List<User> findAllLazyByShip(Ship ship){
+        return DaoFactory.getUserDao().findAllByShip(ship);
     }
 
     public static List<User> findAllLazyByCruiseAndRole(Cruise cruise, Role role){
@@ -97,6 +105,7 @@ public class UserService {
         if (user != null) {
             user.setRole(RoleService.findLazyByUser(user));
             user.setTickets(TicketService.findAllLazyByUser(user));
+            user.setShips(ShipService.findAllLazyByUser(user));
         }
         return user;
     }
@@ -106,6 +115,7 @@ public class UserService {
             for (User user : users) {
                 user.setRole(RoleService.findLazyByUser(user));
                 user.setTickets(TicketService.findAllLazyByUser(user));
+                user.setShips(ShipService.findAllLazyByUser(user));
             }
         }
         return users;

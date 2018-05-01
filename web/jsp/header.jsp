@@ -10,6 +10,7 @@
 <%--</head>--%>
 <%--<body>--%>
 <p align="center">Welcome ${user.name}</p><br/>
+<p align="center">${ErrorMassage}</p>
 <table align="right">
     <tr><td>Money:</td>
         <td>${user.money}</td><td width="100px"></td></tr>

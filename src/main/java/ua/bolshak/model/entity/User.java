@@ -13,6 +13,7 @@ public class User {
     private double money;
     private Role role;
     private List<Ticket> tickets;
+    private List<Ship> ships;
 
     public int getId() {
         return id;
@@ -84,6 +85,14 @@ public class User {
 
     public void setTickets(List<Ticket> tickets) {
         this.tickets = tickets;
+    }
+
+    public List<Ship> getShips() {
+        return ships;
+    }
+
+    public void setShips(List<Ship> ships) {
+        this.ships = ships;
     }
 
     @Override

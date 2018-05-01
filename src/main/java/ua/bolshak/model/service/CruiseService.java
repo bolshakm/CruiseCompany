@@ -3,6 +3,7 @@ package ua.bolshak.model.service;
 import ua.bolshak.model.dao.DaoFactory;
 import ua.bolshak.model.entity.*;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class CruiseService {
@@ -17,6 +18,14 @@ public class CruiseService {
 
     public static List<Cruise> findAllByShip(Ship ship){
         return getFull(DaoFactory.getCruiseDao().findAllByShip(ship));
+    }
+
+    public static List<Cruise> findAllByShips(List<Ship> ships){
+        List<Cruise> cruises = new ArrayList<>();
+        for (Ship ship : ships) {
+            cruises.addAll(getFull(findAllByShip(ship)));
+        }
+        return cruises;
     }
 
     public static List<Cruise> findAllByRoute(Route route){
@@ -71,9 +80,10 @@ public class CruiseService {
         if (cruise != null) {
             cruise.setShip(ShipService.findLazyByCruise(cruise));
             cruise.setStatus(CruiseStatusService.findLazyByCruise(cruise));
-            cruise.setTickets(TicketService.findAllLazyByCruise(cruise));
             cruise.setUsers(UserService.findAllLazyByCruise(cruise));
             cruise.setRoute(RouteService.findLazyByCruise(cruise));
+            cruise.setTickets(TicketService.findAllLazyByCruise(cruise));
+
         }
         return cruise;
     }
@@ -82,10 +92,10 @@ public class CruiseService {
         if (cruises != null) {
             for (Cruise cruise : cruises) {
                 cruise.setShip(ShipService.findLazyByCruise(cruise));
+                cruise.setRoute(RouteService.findLazyByCruise(cruise));
                 cruise.setStatus(CruiseStatusService.findLazyByCruise(cruise));
                 cruise.setTickets(TicketService.findAllLazyByCruise(cruise));
                 cruise.setUsers(UserService.findAllLazyByCruise(cruise));
-                cruise.setRoute(RouteService.findLazyByCruise(cruise));
             }
         }
         return cruises;

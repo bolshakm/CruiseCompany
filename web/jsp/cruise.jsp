@@ -38,7 +38,7 @@
                 </c:forEach>
             </table>
         </td>
-        <td width="100"></td>
+        <td width="10"></td>
         <td valign="top">
             <c:if test="${user.role.id == 1}">
                 <table border="1" bgcolor="#f0ffff">

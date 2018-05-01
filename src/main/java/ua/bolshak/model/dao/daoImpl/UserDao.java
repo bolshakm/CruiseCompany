@@ -87,6 +87,23 @@ public class UserDao implements UserIDao{
     }
 
     @Override
+    public List<User> findAllByShip(Ship ship) {
+        List<User> users = new ArrayList<>();
+        try(Connection connection = MysqlConnectionPool.getConnection();
+            PreparedStatement preparedStatement = connection.prepareStatement(SqlQuery.FIND_ALL_USER_BY_SHIP)){
+            preparedStatement.setInt(1, ship.getId());
+            try(ResultSet resultSet = preparedStatement.executeQuery()){
+                while (resultSet.next()) {
+                    users.add(initialization(resultSet));
+                }
+            }
+        } catch (SQLException e) {
+            LOGGER.error(e);
+        }
+        return users;
+    }
+
+    @Override
     public List<User> findAllByCruiseAndRole(Cruise cruise, Role role) {
         List<User> users = new ArrayList<>();
         try(Connection connection = MysqlConnectionPool.getConnection();

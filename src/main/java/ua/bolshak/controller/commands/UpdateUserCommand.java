@@ -15,7 +15,6 @@ public class UpdateUserCommand implements ICommand {
         String page;
         User sessionUser = (User) request.getSession().getAttribute("user");
         User user = UserService.findById(Integer.parseInt(request.getParameter("idUser")));
-        String action = request.getParameter("action");
         String login = request.getParameter("login");
         String password = request.getParameter("password");
         String passwordConfirm = request.getParameter("passwordConfirm");
@@ -24,10 +23,11 @@ public class UpdateUserCommand implements ICommand {
         String lastName = request.getParameter("lastName");
         String money = request.getParameter("money");
         String role = request.getParameter("idRole");
-        user.setName(name);
-        user.setLastName(lastName);
-        if (action.equals("Delete")){
-            return new DeleteTicketCommand().execute(request, response);
+        if (name != null) {
+            user.setName(name);
+        }
+        if (lastName != null) {
+            user.setLastName(lastName);
         }
         if (role != null) {
             user.setRole(RoleService.findById(Integer.parseInt(role)));
@@ -48,7 +48,7 @@ public class UpdateUserCommand implements ICommand {
             if (UserService.findByLogin(login) == null){
                 user.setLogin(login);
             } else {
-                request.setAttribute("ErrorMassage", "Wrong login or email");
+                request.setAttribute("ErrorMassage", "Wrong login");
                 request.setAttribute("idUser", user.getId());
                 return new ToUserCardCommand().execute(request, response);
             }
@@ -57,7 +57,7 @@ public class UpdateUserCommand implements ICommand {
             if (UserService.findByEmail(email) == null){
                 user.setEmail(email);
             } else {
-                request.setAttribute("ErrorMassage", "Wrong login or email");
+                request.setAttribute("ErrorMassage", "Wrong email");
                 request.setAttribute("idUser", user.getId());
                 return new ToUserCardCommand().execute(request, response);
             }
@@ -65,8 +65,12 @@ public class UpdateUserCommand implements ICommand {
 
         UserService.update(user);
         if (sessionUser.getRole().getId() == 1){
+            if (user.getRole().getId() == 1){
+                request.setAttribute("user", user);
+            }
             page = new ToUserPage().execute(request, response);
         } else {
+            request.setAttribute("user", user);
             page = new ToMainPage().execute(request, response);
         }
 

@@ -58,6 +58,7 @@ public interface SqlQuery {
     String FIND_ALL_SHIPS_BY_TYPE = "SELECT * FROM ships WHERE ship_types_id_ship_type = ?";
     String FIND_ALL_SHIPS_BY_TICKET_TYPE = "select ships.* from ships join ships_has_ticket_types shtt on ships.id_ship = shtt.ships_id_ship where ticket_types_id_ticket_type = ?";
     String FIND_ALL_SHIPS_BY_BONUS = "SELECT ships.* FROM ships JOIN bonuses_has_ships bhs ON ships.id_ship = bhs.ships_id_ship WHERE bonuses_id_bonus = ?";
+    String FIND_ALL_SHIPS_BY_USER = "select ships.* from ships join ships_has_users u on ships.id_ship = u.ships_id_ship where users_id_user = ?";
     String FIND_SHIP_BY_ID = "SELECT * from ships WHERE id_ship = ?";
     String FIND_SHIP_BY_NUMBER = "SELECT * from ships where ship_number = ?";
     String FIND_SHIP_BY_CRUISE = "SELECT ships.* from ships JOIN cruises c2 ON ships.id_ship = c2.ships_id_ship WHERE c2.id_cruise = ?";
@@ -87,6 +88,7 @@ public interface SqlQuery {
     String FIND_ALL_USERS = "SELECT * FROM users";
     String FIND_ALL_USERS_BY_ROLE = "SELECT * FROM users WHERE roles_id_role = ?";
     String FIND_ALL_USERS_BY_CRUISE = "SELECT users.* FROM users JOIN tickets t ON users.id_user = t.users_id_user WHERE t.cruises_id_cruise = ?";
+    String FIND_ALL_USER_BY_SHIP = "select users.* from users join ships_has_users u on users.id_user = u.users_id_user where ships_id_ship = ?";
     String FIND_ALL_USERS_BY_CRUISE_AND_ROLE = "SELECT users.* FROM users JOIN tickets t ON users.id_user = t.users_id_user WHERE t.cruises_id_cruise = ? AND users.roles_id_role = ?";
     String FIND_ALL_USERS_BY_TICKET = "SELECT users.* FROM users JOIN tickets t ON users.id_user = t.users_id_user WHERE t.ticket_types_id_ticket_type = ?";
     String FIND_ALL_USERS_BY_CRUISE_AND_TICKET_TYPE = "SELECT users.* FROM users JOIN tickets t ON users.id_user = t.users_id_user WHERE t.ticket_types_id_ticket_type = ? AND t.cruises_id_cruise = ?";

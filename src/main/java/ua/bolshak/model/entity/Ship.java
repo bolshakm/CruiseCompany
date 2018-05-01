@@ -14,6 +14,7 @@ public class Ship {
     private List<Cruise> cruises;
     private List<TicketType> ticketTypes;
     private List<Bonus> bonuses;
+    private List<User> users;
 
     public int getId() {
         return id;
@@ -85,6 +86,14 @@ public class Ship {
 
     public void setBonuses(List<Bonus> bonuses) {
         this.bonuses = bonuses;
+    }
+
+    public List<User> getUsers() {
+        return users;
+    }
+
+    public void setUsers(List<User> users) {
+        this.users = users;
     }
 
     @Override

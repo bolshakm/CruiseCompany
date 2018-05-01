@@ -12,6 +12,8 @@ public interface UserIDao {
 
     List<User> findAllByCruise(Cruise cruise);
 
+    List<User> findAllByShip(Ship ship);
+
     List<User> findAllByCruiseAndRole(Cruise cruise, Role role);
 
     List<User> findAllByTicketType(TicketType ticketType);

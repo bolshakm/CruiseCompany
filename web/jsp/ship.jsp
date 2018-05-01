@@ -64,7 +64,7 @@
             </table>
         </td>
 <c:if test="${user.role.id == 1}">
-        <td width="100"></td>
+        <td width="10"></td>
         <td valign="top">
             <table border="1" bgcolor="#f0ffff">
                 <caption>Ship Type</caption>

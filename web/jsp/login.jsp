@@ -90,6 +90,6 @@
     </table>
     <br/>
 </form>
-<p align="center"> ${InfoMassage}</p>
+<p align="center"> ${ErrorMassage}</p>
 </body>
 </html>
