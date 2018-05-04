@@ -30,7 +30,9 @@
                     <th>Cruise to</th>
                     <th>Ticket type</th>
                     <th>Price</th>
-                    <th>Actions</th>
+                    <c:if test="${user.role.id == 1 || user.role.id == 2}">
+                        <th>Actions</th>
+                    </c:if>
                 </tr>
                 <c:forEach var="Ticket" items="${Tickets}">
                     <tr>
@@ -43,15 +45,14 @@
                         <td>${Ticket.cruise.to}</td>
                         <td>${Ticket.ticketType.name}</td>
                         <td>${Ticket.price}</td>
-                        <td>
-                            <c:if test="${user.role.id == 1}">
-                                <a href="/CruiseCompany?command=toUpdateTicket&idTicket=${Ticket.id}">
-                                    <button>Update</button>
-                                </a>
-                            </c:if>
-                            <a href="/CruiseCompany?command=deleteTicket&idTicket=${Ticket.id}">
-                                <button>Delete</button>
-                            </a></td>
+                        <c:if test="${user.role.id == 1 || user.role.id == 2}">
+                            <td>
+                                <c:if test="${user.role.id == 1}">
+                                    <a href="/CruiseCompany?command=toUpdateTicket&idTicket=${Ticket.id}"><button>Update</button></a>
+                                </c:if>
+                                <a href="/CruiseCompany?command=deleteTicket&idTicket=${Ticket.id}"><button>Delete</button></a>
+                            </td>
+                        </c:if>
                     </tr>
                 </c:forEach>
             </table>

@@ -3,6 +3,7 @@ package ua.bolshak.model.service;
 import ua.bolshak.model.dao.DaoFactory;
 import ua.bolshak.model.entity.*;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class UserService {
@@ -21,6 +22,14 @@ public class UserService {
 
     public static List<User> findAllByShip(Ship ship){
         return getFull(DaoFactory.getUserDao().findAllByShip(ship));
+    }
+
+    public static List<User> findAllByShips(List<Ship> ships){
+        List<User> users = new ArrayList<>();
+        for (Ship ship : ships) {
+            users.addAll(findAllByShip(ship));
+        }
+        return users;
     }
 
     public static List<User> findAllByCruiseAndRole(Cruise cruise, Role role){

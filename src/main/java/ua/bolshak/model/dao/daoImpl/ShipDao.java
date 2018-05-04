@@ -223,8 +223,8 @@ public class ShipDao implements ShipIDao {
             if (ship.getTicketTypes() != null){
                 psForAddTicketTypes = connection.prepareStatement(SqlQuery.ADD_TICKET_TYPE_FOR_SHIP);
                 for (TicketType ticketType : ship.getTicketTypes()) {
-                    psForAddTicketTypes.setInt(1, ship.getId());
-                    psForAddTicketTypes.setInt(2, ticketType.getId());
+                    psForAddTicketTypes.setInt(1, ticketType.getId());
+                    psForAddTicketTypes.setInt(2, ship.getId());
                     psForAddTicketTypes.addBatch();
                 }
                 psForAddTicketTypes.executeBatch();
@@ -301,8 +301,8 @@ public class ShipDao implements ShipIDao {
         try (Connection connection = MysqlConnectionPool.getConnection();
              PreparedStatement psForAddTicketTypes = connection.prepareStatement(SqlQuery.ADD_TICKET_TYPE_FOR_SHIP)){
             for (TicketType ticketType : ship.getTicketTypes()) {
-                psForAddTicketTypes.setInt(1, ship.getId());
-                psForAddTicketTypes.setInt(2, ticketType.getId());
+                psForAddTicketTypes.setInt(1, ticketType.getId());
+                psForAddTicketTypes.setInt(2, ship.getId());
                 psForAddTicketTypes.addBatch();
             }
             psForAddTicketTypes.executeBatch();

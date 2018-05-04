@@ -25,6 +25,16 @@ public class TicketService {
         return getFull(DaoFactory.getTicketDao().findAllByUser(user));
     }
 
+    public static List<Ticket> findAllByShips(List<Ship> ships){
+        List<Ticket> tickets = new ArrayList<>();
+        for (Ship ship : ships) {
+            for (Cruise cruise : ShipService.getFull(ship).getCruises()) {
+                tickets.addAll(findAllByCruise(cruise));
+            }
+        }
+        return tickets;
+    }
+
     public static List<Ticket> findAllByBonus(Bonus bonus) {
         return getFull(DaoFactory.getTicketDao().findAllByBonus(bonus));
     }

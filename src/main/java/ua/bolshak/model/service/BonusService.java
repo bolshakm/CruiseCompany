@@ -32,6 +32,10 @@ public class BonusService {
         return getFull(DaoFactory.getBonusDao().findAllByShip(ship));
     }
 
+    public static List<Bonus> findAllByShipAndTicketType(Ship ship, TicketType ticketType){
+        return getFull(DaoFactory.getBonusDao().findAllByShipAndTicketType(ship, ticketType));
+    }
+
     public static Bonus findById(int id){
         return getFull(DaoFactory.getBonusDao().findById(id));
     }
@@ -44,6 +48,10 @@ public class BonusService {
         return DaoFactory.getBonusDao().findAllByShip(ship);
     }
 
+
+    public static void editBonusesForShipByTicketType(List<Bonus> bonuses, TicketType ticketType, Ship ship){
+        DaoFactory.getBonusDao().editBonusesForShipByTicketType(bonuses, ship, ticketType);
+    }
     public static void add(Bonus bonus){
         DaoFactory.getBonusDao().add(bonus);
     }

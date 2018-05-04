@@ -13,6 +13,6 @@ public class DeleteShipTypeCommand implements ICommand {
     public String execute(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException {
         ShipType shipType = ShipTypeService.findById(Integer.parseInt(request.getParameter("ShipTypeId")));
         ShipTypeService.delete(shipType);
-        return new ToShipsPage().execute(request, response);
+        return new ToShipsPageCommand().execute(request, response);
     }
 }

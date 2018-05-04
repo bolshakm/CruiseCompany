@@ -1,4 +1,5 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 
 <%--
   Created by IntelliJ IDEA.
@@ -30,7 +31,7 @@
                     </c:if>
                     <th>Price per seats</th>
                     <th>Ship type</th>
-                    <th>Ticket types</th>
+                    <th colspan="2">Ticket types</th>
                     <th>Bonuses</th>
                     <th>Cruises</th>
 <c:if test="${user.role.id == 1}">
@@ -47,13 +48,22 @@
                         <td>${Ship.pricePerSeat}</td>
                         <td>${Ship.type.name}</td>
                         <td><c:forEach var="ticketType" items="${Ship.ticketTypes}">
-                            ${ticketType.name}<br/>
-                        </c:forEach> </td>
+                    ${ticketType.name}<br/>
+                        </c:forEach>
+                        </td>
+                        <c:if test="${user.role.id == 3}">
+                        <td><c:forEach var="ticketType" items="${Ship.ticketTypes}">
+                            <a href="/CruiseCompany?command=toSetBonusesForShipBiTicketType&idTicketType=${ticketType.id}&idShip=${Ship.id}"><button>Bonuses</button></a><br/>
+                        </c:forEach>
+                        </td>
+                        </c:if>
                         <td><c:forEach var="bonus" items="${Ship.bonuses}">
                             ${bonus.name}<br/>
                         </c:forEach> </td>
                         <td><c:forEach var="cruise" items="${Ship.cruises}">
-                            <a href="/CruiseCompany?command=buyTicket&idCruise=${cruise.id}">${cruise.name}</a><br/>
+                            <c:if test="${user.role.id == 2}"><a href="/CruiseCompany?command=buyTicket&idCruise=${cruise.id}">${cruise.name}</a><br/></c:if>
+                            <c:if test="${user.role.id != 2}">${cruise.name}<br/></c:if>
+
                         </c:forEach></td>
                         <c:if test="${user.role.id == 1}">
                         <td><a href="/CruiseCompany?command=toUpdateShipCard&idShip=${Ship.id}"><button>Update</button></a>

@@ -12,7 +12,6 @@
     <title>Users</title>
 </head>
 <body>
-<p align="center">Hello ${user.name}</p>
 <c:import url="header.jsp"/>
 <table align="center">
     <tr>
@@ -25,7 +24,9 @@
                     <th>Last Name</th>
                     <th>Email</th>
                     <th>Role</th>
+                    <c:if test="${user.role.id == 1}">
                     <th>Actions</th>
+                    </c:if>
                 </tr>
                 <c:forEach var="User" items="${Users}">
                     <tr>
@@ -34,13 +35,15 @@
                         <td>${User.lastName}</td>
                         <td>${User.email}</td>
                         <td>${User.role.name}</td>
+                        <c:if test="${user.role.id == 1}">
                         <td><a href="/CruiseCompany?command=toUpdateUserCard&idUser=${User.id}"><button>Update</button></a>
                             <a href="/CruiseCompany?command=deleteUser&idUser=${User.id}"><button>Delete</button></a></td>
-
+                        </c:if>
                     </tr>
                 </c:forEach>
             </table>
         </td>
+        <c:if test="${user.role.id == 1}">
         <td width="100"></td>
         <td>
             <table border="1" bgcolor="#f0ffff">
@@ -85,6 +88,7 @@
                 </c:forEach>
             </table>
         </td>
+        </c:if>
     </tr>
 </table>
 </body>

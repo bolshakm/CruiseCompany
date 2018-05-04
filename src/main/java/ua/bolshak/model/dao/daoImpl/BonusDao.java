@@ -8,6 +8,7 @@ import ua.bolshak.model.dao.util.SqlQuery;
 import ua.bolshak.model.entity.Bonus;
 import ua.bolshak.model.entity.Ship;
 import ua.bolshak.model.entity.Ticket;
+import ua.bolshak.model.entity.TicketType;
 
 import java.sql.*;
 import java.util.ArrayList;
@@ -85,6 +86,24 @@ public class BonusDao implements BonusIDao {
     }
 
     @Override
+    public List<Bonus> findAllByShipAndTicketType(Ship ship, TicketType ticketType) {
+        List<Bonus> bonuses = new ArrayList<>();
+        try(Connection connection = MysqlConnectionPool.getConnection();
+            PreparedStatement preparedStatement = connection.prepareStatement(SqlQuery.SELECT_ALL_BONUSES_BY_SHIP_AND_TIKCET_TIPE)){
+            preparedStatement.setInt(1, ship.getId());
+            preparedStatement.setInt(2, ticketType.getId());
+            try(ResultSet resultSet = preparedStatement.executeQuery()){
+                while (resultSet.next()) {
+                    bonuses.add(initialization(resultSet));
+                }
+            }
+        } catch (SQLException e) {
+            LOGGER.error(e);
+        }
+        return bonuses;
+    }
+
+    @Override
     public Bonus findById(int id) {
         Bonus bonus = null;
         try(Connection connection = MysqlConnectionPool.getConnection();
@@ -99,6 +118,39 @@ public class BonusDao implements BonusIDao {
             LOGGER.error(e);
         }
         return bonus;
+    }
+
+    public void editBonusesForShipByTicketType(List<Bonus> bonuses, Ship ship, TicketType ticketType) {
+        deleteBonusesForShipByTicketType(ship, ticketType);
+        addBonusesForShipByTicketType(bonuses,ship,ticketType);
+    }
+
+    @Override
+    public void addBonusesForShipByTicketType(List<Bonus> bonuses, Ship ship, TicketType ticketType) {
+        try(Connection connection = MysqlConnectionPool.getConnection();
+            PreparedStatement preparedStatement = connection.prepareStatement(SqlQuery.ADD_BONUSES_FOR_SHIP_BY_TIKCET_TYPE)){
+            for (Bonus bonus : bonuses) {
+                preparedStatement.setInt(1,ticketType.getId());
+                preparedStatement.setInt(2,bonus.getId());
+                preparedStatement.setInt(3,ship.getId());
+                preparedStatement.addBatch();
+            }
+            preparedStatement.executeBatch();
+        } catch (SQLException e) {
+            LOGGER.error(e.getMessage());
+        }
+    }
+
+    @Override
+    public void deleteBonusesForShipByTicketType(Ship ship, TicketType ticketType) {
+        try(Connection connection = MysqlConnectionPool.getConnection();
+            PreparedStatement preparedStatement = connection.prepareStatement(SqlQuery.DELETE_BONUSES_FOR_SHIP_BY_TIKCET_TYPE)){
+            preparedStatement.setInt(1, ship.getId());
+            preparedStatement.setInt(2, ticketType.getId());
+            preparedStatement.executeUpdate();
+        } catch (SQLException e) {
+            LOGGER.error(e.getMessage());
+        }
     }
 
     @Override

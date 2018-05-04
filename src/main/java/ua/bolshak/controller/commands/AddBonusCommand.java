@@ -15,6 +15,6 @@ public class AddBonusCommand implements ICommand {
         String name = request.getParameter("BonusName");
         bonus.setName(name);
         BonusService.add(bonus);
-        return new ToShipsPage().execute(request, response);
+        return new ToShipsPageCommand().execute(request, response);
     }
 }

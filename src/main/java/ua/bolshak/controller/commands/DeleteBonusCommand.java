@@ -13,6 +13,6 @@ public class DeleteBonusCommand implements ICommand {
     public String execute(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException {
         Bonus bonus = BonusService.findById(Integer.parseInt(request.getParameter("idBonus")));
         BonusService.delete(bonus);
-        return new ToShipsPage().execute(request, response);
+        return new ToShipsPageCommand().execute(request, response);
     }
 }

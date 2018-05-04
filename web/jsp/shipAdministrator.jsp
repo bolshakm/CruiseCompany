@@ -13,6 +13,7 @@
     <title>Ship Administrator</title>
 </head>
 <body>
+<c:import url="header.jsp"/>
 <table border="1" bgcolor="#7fffd4" align="center">
     <caption>Cruises</caption>
     <tr>

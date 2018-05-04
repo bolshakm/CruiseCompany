@@ -15,6 +15,6 @@ public class AddShipTypeCommand implements ICommand {
         String name = request.getParameter("ShipTypeName");
         shipType.setName(name);
         ShipTypeService.add(shipType);
-        return new ToShipsPage().execute(request, response);
+        return new ToShipsPageCommand().execute(request, response);
     }
 }

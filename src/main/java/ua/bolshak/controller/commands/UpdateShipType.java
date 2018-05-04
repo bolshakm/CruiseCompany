@@ -20,6 +20,6 @@ public class UpdateShipType implements ICommand {
             shipType.setName(name);
             ShipTypeService.update(shipType);
         }
-        return new ToShipsPage().execute(request, response);
+        return new ToShipsPageCommand().execute(request, response);
     }
 }

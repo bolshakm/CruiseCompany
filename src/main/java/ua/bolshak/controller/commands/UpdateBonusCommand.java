@@ -20,6 +20,6 @@ public class UpdateBonusCommand implements ICommand {
             bonus.setName(name);
             BonusService.update(bonus);
         }
-        return new ToShipsPage().execute(request, response);
+        return new ToShipsPageCommand().execute(request, response);
     }
 }

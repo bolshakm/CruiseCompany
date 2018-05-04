@@ -15,18 +15,32 @@ import java.util.List;
 public class ToTicketsPageCommand implements ICommand {
     @Override
     public String execute(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException {
+        String page = "/jsp/tickets.jsp";
         User user = (User) request.getSession().getAttribute("user");
-        if (user.getRole().getId() == 1) {
-            request.setAttribute("Tickets", TicketService.findAllWithFullCruise());
+        switch (user.getRole().getId()){
+            case 1: request.setAttribute("Tickets", TicketService.findAllWithFullCruise());
             request.setAttribute("TicketTypes", TicketTypeService.findAll());
-        } else {
-            List<Ticket> tickets = TicketService.findAllByUser(user);
+            break;
+            case 2: List<Ticket> tickets = TicketService.findAllByUser(user);
             if (tickets != null) {
                 request.setAttribute("Tickets", tickets);
             } else {
                 request.setAttribute("InfoMassage", "Tickets not found!");
             }
+            break;
+            case 3: request.setAttribute("Tickets", TicketService.findAllByShips(user.getShips()));
         }
-        return "/jsp/tickets.jsp";
+//        if (user.getRole().getId() == 1) {
+//            request.setAttribute("Tickets", TicketService.findAllWithFullCruise());
+//            request.setAttribute("TicketTypes", TicketTypeService.findAll());
+//        } else {
+//            List<Ticket> tickets = TicketService.findAllByUser(user);
+//            if (tickets != null) {
+//                request.setAttribute("Tickets", tickets);
+//            } else {
+//                request.setAttribute("InfoMassage", "Tickets not found!");
+//            }
+//        }
+        return page;
     }
 }
