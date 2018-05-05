@@ -20,7 +20,7 @@ public class ToShipsPageCommand implements ICommand {
             request.setAttribute("Bonuses", BonusService.findAll());
             request.setAttribute("Ships", ShipService.findAll());
         } else {
-            request.setAttribute("Ships", ShipService.findAllByUser(user));
+            request.setAttribute("Ships", ShipService.findByUser(user));
         }
         return page;
     }

@@ -2,7 +2,6 @@ package ua.bolshak.controller.commands;
 
 import ua.bolshak.model.entity.Ticket;
 import ua.bolshak.model.entity.User;
-import ua.bolshak.model.service.BonusService;
 import ua.bolshak.model.service.TicketService;
 import ua.bolshak.model.service.TicketTypeService;
 
@@ -28,7 +27,7 @@ public class ToTicketsPageCommand implements ICommand {
                 request.setAttribute("InfoMassage", "Tickets not found!");
             }
             break;
-            case 3: request.setAttribute("Tickets", TicketService.findAllByShips(user.getShips()));
+            case 3: request.setAttribute("Tickets", TicketService.findAllByShips(user.getShip()));
         }
 //        if (user.getRole().getId() == 1) {
 //            request.setAttribute("Tickets", TicketService.findAllWithFullCruise());

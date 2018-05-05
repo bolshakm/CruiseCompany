@@ -57,11 +57,11 @@ public interface SqlQuery {
     String UPDATE_ROLE = "UPDATE roles SET role_name = ? WHERE id_role = ?";
     String DELETE_ROLE = "DELETE FROM roles WHERE id_role = ?";
     //ships table
-    String FIND_ALL_SHIPS = "SELECT * FROM ships";
+    String FIND_ALL_SHIPS = "SELECT * FROM ships where id_ship > 1";
     String FIND_ALL_SHIPS_BY_TYPE = "SELECT * FROM ships WHERE ship_types_id_ship_type = ?";
     String FIND_ALL_SHIPS_BY_TICKET_TYPE = "SELECT ships.* from ships join ship_has_ticket_types_has_bonuses s on ships.id_ship = s.ships_id_ship where id_ship = ?";
     String FIND_ALL_SHIPS_BY_BONUS = "SELECT ships.* FROM ships JOIN bonuses_has_ships bhs ON ships.id_ship = bhs.ships_id_ship WHERE bonuses_id_bonus = ?";
-    String FIND_ALL_SHIPS_BY_USER = "select ships.* from ships join ships_has_users u on ships.id_ship = u.ships_id_ship where users_id_user = ?";
+    String FIND_SHIPS_BY_USER = "select ships.* from ships join users u on ships.id_ship = u.ships_id_ship where id_user = ?";
     String FIND_SHIP_BY_ID = "SELECT * from ships WHERE id_ship = ?";
     String FIND_SHIP_BY_NUMBER = "SELECT * from ships where ship_number = ?";
     String FIND_SHIP_BY_CRUISE = "SELECT ships.* from ships JOIN cruises c2 ON ships.id_ship = c2.ships_id_ship WHERE c2.id_cruise = ?";
@@ -73,7 +73,7 @@ public interface SqlQuery {
     String ADD_TICKET_TYPE_FOR_SHIP = "INSERT INTO ship_has_ticket_types_has_bonuses (ticket_types_id_ticket_type, bonuses_id_bonus, ships_id_ship) VALUES (?, 1, ?)";
     String DELETE_ALL_SHIP_HAS_TICKET_TYPE = "delete from ship_has_ticket_types_has_bonuses where ships_id_ship = ?";
     //shipTypes table
-    String FIND_ALL_SHIP_TYPES = "SELECT * FROM ship_types";
+    String FIND_ALL_SHIP_TYPES = "SELECT * FROM ship_types where id_ship_type > 1";
     String FIND_SHIP_TYPE_BY_ID = "SELECT * FROM ship_types WHERE id_ship_type = ?";
     String FIND_SHIP_TYPE_BY_SHIP = "SELECT ship_types.* FROM ship_types JOIN ships s ON ship_types.id_ship_type = s.ship_types_id_ship_type WHERE s.id_ship = ?";
     String ADD_SHIP_TYPE = "INSERT INTO ship_types (ship_type_name) VALUES (?)";

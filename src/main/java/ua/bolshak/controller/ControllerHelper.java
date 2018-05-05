@@ -69,9 +69,10 @@ public class ControllerHelper {
         commands.put("toRoutePage", new ToRoutePageCommand());
         commands.put("updateTicketType", new UpdateTicketTypeCommand());
         commands.put("toShipAdministratorPage", new ToShipAdministratorPageCommand());
-        commands.put("toShipAdministratorPage", new ToShipAdministratorPageCommand());
         commands.put("toSetBonusesForShipBiTicketType", new ToAddBonusesToTicketTypeByShipCommand());
         commands.put("editBonuses", new AddBonusesToTicketTypeByShipCommand());
+        commands.put("addUser", new AddUserCommand());
+        commands.put("toRegistrationPage", new ToRegistrationPage());
     }
 
     public static ControllerHelper getInstance() {

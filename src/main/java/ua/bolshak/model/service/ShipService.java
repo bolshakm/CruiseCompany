@@ -24,8 +24,8 @@ public class ShipService {
         return  getFull(DaoFactory.getShipDao().findAllByBonus(bonus));
     }
 
-    public static List<Ship> findAllByUser(User user){
-        return  getFull(DaoFactory.getShipDao().findAllByUser(user));
+    public static Ship findByUser(User user){
+        return  getFull(DaoFactory.getShipDao().findByUser(user));
     }
 
     public static Ship findById(int id){
@@ -44,8 +44,8 @@ public class ShipService {
         return DaoFactory.getShipDao().findAllByShipType(shipType);
     }
 
-    public static List<Ship> findAllLazyByUser(User user){
-        return  DaoFactory.getShipDao().findAllByUser(user);
+    public static Ship findLazyByUser(User user){
+        return  DaoFactory.getShipDao().findByUser(user);
     }
 
     public static List<Ship> findAllLazyByTicketType(TicketType ticketType ){

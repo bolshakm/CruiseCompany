@@ -31,7 +31,12 @@
                     </c:if>
                     <th>Price per seats</th>
                     <th>Ship type</th>
+                    <c:if test="${user.role.id == 3}">
                     <th colspan="2">Ticket types</th>
+                    </c:if>
+                    <c:if test="${user.role.id != 3}">
+                        <th>Ticket types</th>
+                    </c:if>
                     <th>Bonuses</th>
                     <th>Cruises</th>
 <c:if test="${user.role.id == 1}">

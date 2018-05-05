@@ -44,7 +44,7 @@ public class LoginCommand implements ICommand {
                     page = new ToStaffPageCommand().execute(request, response);
                 break;
             case "Registration":
-                page = "/jsp/registration.jsp";
+                page = new ToRegistrationPage().execute(request, response);
         }
         return page;
     }

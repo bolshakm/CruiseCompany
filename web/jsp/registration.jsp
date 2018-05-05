@@ -16,15 +16,40 @@
     <title>Registration</title>
 </head>
 <body>
+<c:if test="${user != null}">
+    <c:import url="header.jsp"/>
+</c:if>
 <form action="CruiseCompany" method="post">
-    <input type="hidden" name="command" value="registration">
+    <c:if test="${user == null}">
+        <input type="hidden" name="command" value="registration">
+    </c:if>
+    <c:if test="${user.role.id == 1}">
+        <input type="hidden" name="command" value="addUser">
+    </c:if>
     <table align="center" bgcolor="yellow" border="1">
         <tr><td>Login</td><td><input type="text" name="login"></td></tr>
         <tr><td>Password</td><td><input type="password" name="password"></td></tr>
         <tr><td>Name</td><td><input type="text" name="name"></td></tr>
         <tr><td>Last name</td><td><input type="text" name="lastName"></td></tr>
         <tr><td>Email</td><td><input type="text" name="email"></td></tr>
-        <tr><td></td><td><input type="submit" value="Registration" name="registration"></td></tr>
+        <c:if test="${user.role.id == 1}">
+            <tr>
+                <td>Role</td>
+                <td><select name="idRole">
+                    <option disabled selected>Select role</option>
+                    <c:forEach var="Role" items="${Roles}">
+                            <option value="${Role.id}">${Role.name}</option>
+                    </c:forEach>
+                </select></td>
+            </tr>
+        </c:if>
+        <tr><td></td><td>
+            <c:if test="${user.role.id == 1}">
+                <input type="submit" value="Add" >
+            </c:if>
+            <c:if test="${user == null}">
+                <input type="submit" value="Registration" >
+            </c:if></td></tr>
     </table>
 
 </form>
