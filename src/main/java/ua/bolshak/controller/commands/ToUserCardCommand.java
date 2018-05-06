@@ -2,6 +2,7 @@ package ua.bolshak.controller.commands;
 
 import ua.bolshak.model.entity.User;
 import ua.bolshak.model.service.RoleService;
+import ua.bolshak.model.service.ShipService;
 import ua.bolshak.model.service.TicketService;
 import ua.bolshak.model.service.UserService;
 
@@ -22,6 +23,8 @@ public class ToUserCardCommand implements ICommand {
         request.setAttribute("money", user.getMoney());
         request.setAttribute("Roles", RoleService.findAll());
         request.setAttribute("idRole", user.getRole().getId());
+        request.setAttribute("Ships", ShipService.findAll());
+        request.setAttribute("idShip", user.getShip().getId());
         request.setAttribute("Tickets", TicketService.findAllByUser(user));
         return "/jsp/userCard.jsp";
     }

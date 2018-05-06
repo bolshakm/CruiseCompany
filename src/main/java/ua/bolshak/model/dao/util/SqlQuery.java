@@ -91,7 +91,7 @@ public interface SqlQuery {
     String FIND_ALL_USERS = "SELECT * FROM users where id_user > 1";
     String FIND_ALL_USERS_BY_ROLE = "SELECT * FROM users WHERE roles_id_role = ?";
     String FIND_ALL_USERS_BY_CRUISE = "SELECT users.* FROM users JOIN tickets t ON users.id_user = t.users_id_user WHERE t.cruises_id_cruise = ?";
-    String FIND_ALL_USER_BY_SHIP = "select users.* from users join ships_has_users u on users.id_user = u.users_id_user where ships_id_ship = ?";
+    String FIND_ALL_USER_BY_SHIP = "select users.* from users join ships s on users.ships_id_ship = s.id_ship where id_ship = ?";
     String FIND_ALL_USERS_BY_CRUISE_AND_ROLE = "SELECT users.* FROM users JOIN tickets t ON users.id_user = t.users_id_user WHERE t.cruises_id_cruise = ? AND users.roles_id_role = ?";
     String FIND_ALL_USERS_BY_TICKET = "SELECT users.* FROM users JOIN tickets t ON users.id_user = t.users_id_user WHERE t.ticket_types_id_ticket_type = ?";
     String FIND_ALL_USERS_BY_CRUISE_AND_TICKET_TYPE = "SELECT users.* FROM users JOIN tickets t ON users.id_user = t.users_id_user WHERE t.ticket_types_id_ticket_type = ? AND t.cruises_id_cruise = ?";
@@ -99,8 +99,8 @@ public interface SqlQuery {
     String FIND_USER_BY_TICKET = "SELECT users.* FROM users JOIN tickets t ON users.id_user = t.users_id_user WHERE t.id_ticket = ?";
     String FIND_USER_BY_LOGIN = "SELECT * FROM users WHERE login = ?";
     String FIND_USER_BY_EMAIL = "SELECT * FROM users WHERE email = ?";
-    String ADD_USER = "INSERT INTO users (login, password, user_name, user_last_name, email, money, roles_id_role) VALUES (?, ?, ?, ?, ?, ?, ?)";
-    String UPDATE_USER = "UPDATE users SET login = ?, password = ?, user_name = ?, user_last_name = ?, email = ?, money = ?, roles_id_role = ? WHERE id_user = ?";
+    String ADD_USER = "INSERT INTO users (login, password, user_name, user_last_name, email, money, roles_id_role, ships_id_ship) VALUES (?, ?, ?, ?, ?, ?, ?, ?)";
+    String UPDATE_USER = "UPDATE users SET login = ?, password = ?, user_name = ?, user_last_name = ?, email = ?, money = ?, roles_id_role= ?, ships_id_ship= ? WHERE id_user = ?";
     String DELETE_USER = "DELETE FROM users WHERE id_user = ?";
     //tickets table
     String FIND_ALL_TICKETS = "SELECT * FROM tickets";

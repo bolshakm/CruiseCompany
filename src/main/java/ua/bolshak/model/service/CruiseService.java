@@ -32,7 +32,7 @@ public class CruiseService {
         return getFull(DaoFactory.getCruiseDao().findAllByRoute(route));
     }
 
-    public static List<Cruise> findAllBuUser(User user){
+    public static List<Cruise> findAllByUser(User user){
         return getFull(DaoFactory.getCruiseDao().findAllByUser(user));
     }
 

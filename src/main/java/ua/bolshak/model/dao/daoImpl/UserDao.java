@@ -235,6 +235,7 @@ public class UserDao implements UserIDao{
             preparedStatement.setString(5, user.getEmail());
             preparedStatement.setDouble(6, user.getMoney());
             preparedStatement.setInt(7, user.getRole().getId());
+            preparedStatement.setInt(8, user.getShip().getId());
             preparedStatement.executeUpdate();
         } catch (SQLException e) {
             LOGGER.error(e.getMessage());
@@ -252,7 +253,8 @@ public class UserDao implements UserIDao{
             preparedStatement.setString(5, user.getEmail());
             preparedStatement.setDouble(6, user.getMoney());
             preparedStatement.setInt(7, user.getRole().getId());
-            preparedStatement.setInt(8, user.getId());
+            preparedStatement.setInt(8, user.getShip().getId());
+            preparedStatement.setInt(9, user.getId());
             preparedStatement.executeUpdate();
         } catch (SQLException e) {
             LOGGER.error(e.getMessage());

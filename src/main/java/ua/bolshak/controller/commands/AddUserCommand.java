@@ -2,6 +2,7 @@ package ua.bolshak.controller.commands;
 
 import ua.bolshak.model.entity.User;
 import ua.bolshak.model.service.RoleService;
+import ua.bolshak.model.service.ShipService;
 import ua.bolshak.model.service.UserService;
 
 import javax.servlet.ServletException;
@@ -19,12 +20,14 @@ public class AddUserCommand implements  ICommand {
         String lastName = request.getParameter("lastName");
         String email = request.getParameter("email");
         String idRole = request.getParameter("idRole");
+        String idShip = request.getParameter("idShip");
         user.setLogin(login);
         user.setPassword(password);
         user.setName(name);
         user.setLastName(lastName);
         user.setEmail(email);
         user.setRole(RoleService.findById(Integer.parseInt(idRole)));
+        user.setShip(ShipService.findById(Integer.parseInt(idShip)));
         UserService.add(user);
         return new ToUserPage().execute(request, response);
     }

@@ -27,6 +27,7 @@
                     <th>Last Name</th>
                     <th>Email</th>
                     <th>Role</th>
+                    <th>Ship</th>
                     <c:if test="${user.role.id == 1}">
                     <th>Actions</th>
                     </c:if>
@@ -38,6 +39,7 @@
                         <td>${User.lastName}</td>
                         <td>${User.email}</td>
                         <td>${User.role.name}</td>
+                        <td>${User.ship.name}</td>
                         <c:if test="${user.role.id == 1}">
                         <td><a href="/CruiseCompany?command=toUpdateUserCard&idUser=${User.id}"><button>Update</button></a>
                             <a href="/CruiseCompany?command=deleteUser&idUser=${User.id}"><button>Delete</button></a></td>

@@ -54,8 +54,10 @@
             </tr>
         </c:if>
 <c:if test="${user.role.id == 1}">
+
     <tr>
         <td>Role</td>
+    <c:if test="${idRole != 2}">
         <td><select name="idRole">
             <c:forEach var="Role" items="${Roles}">
                 <c:if test="${Role.id == idRole}">
@@ -66,7 +68,27 @@
                 </c:if>
             </c:forEach>
         </select></td>
+    </c:if>
+        <c:if test="${idRole == 2}">
+        <td>User</td>
+        </c:if>
     </tr>
+    <c:if test="${idRole != 2}">
+        <tr>
+            <td>Ship</td>
+            <td>
+            <select name="ShipId">
+                <c:forEach var="Ship" items="${Ships}">
+                    <c:if test="${Ship.id == idShip}">
+                        <option selected value="${Ship.id}">${Ship.name}</option>
+                    </c:if>
+                    <c:if test="${Ship.id != idShip}">
+                        <option value="${Ship.id}">${Ship.name}</option>
+                    </c:if>
+                </c:forEach>
+            </select></td></td>
+        </tr>
+    </c:if>
 </c:if>
     <tr><td></td><td>
         <input type="submit" name="action" value="Update"></td></tr>

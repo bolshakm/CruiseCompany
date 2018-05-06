@@ -2,6 +2,7 @@ package ua.bolshak.controller.commands;
 
 import ua.bolshak.model.entity.User;
 import ua.bolshak.model.service.RoleService;
+import ua.bolshak.model.service.ShipService;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
@@ -14,6 +15,7 @@ public class ToRegistrationPage implements ICommand {
         User user = (User) request.getSession().getAttribute("user");
         if (user != null){
             request.setAttribute("Roles", RoleService.findAll());
+            request.setAttribute("Ships", ShipService.findAll());
         }
         return "/jsp/registration.jsp";
     }

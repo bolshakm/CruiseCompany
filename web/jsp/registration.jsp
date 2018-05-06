@@ -42,6 +42,16 @@
                     </c:forEach>
                 </select></td>
             </tr>
+            <tr>
+                <td>Ship </td>
+                <td>
+                    <select name="ShipId">
+                            <option disabled selected>Select ship</option>
+                        <c:forEach var="Ship" items="${Ships}">
+                                <option value="${Ship.id}">${Ship.name}</option>
+                        </c:forEach>
+                    </select></td>
+            </tr>
         </c:if>
         <tr><td></td><td>
             <c:if test="${user.role.id == 1}">
