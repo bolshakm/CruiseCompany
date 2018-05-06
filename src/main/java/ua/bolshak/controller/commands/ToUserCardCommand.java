@@ -19,6 +19,7 @@ public class ToUserCardCommand implements ICommand {
         request.setAttribute("login", user.getLogin());
         request.setAttribute("email", user.getEmail());
         request.setAttribute("name", user.getName());
+        request.setAttribute("password", user.getPassword());
         request.setAttribute("lastName", user.getLastName());
         request.setAttribute("money", user.getMoney());
         request.setAttribute("Roles", RoleService.findAll());

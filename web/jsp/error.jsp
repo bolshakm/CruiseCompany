@@ -9,14 +9,14 @@
   To change this template use File | Settings | File Templates.
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
-<c:set var="language" value="${not empty sessionScope.language ? sessionScope.language : pageContext.request.locale}" scope="session" />
-<fmt:setLocale value="${language}" />
-<fmt:setBundle basename="text" />
+<%--<c:set var="language" value="${not empty sessionScope.language ? sessionScope.language : pageContext.request.locale}" scope="session" />--%>
+<%--<fmt:setLocale value="${language}" />--%>
+<%--<fmt:setBundle basename="text" />--%>
 <html>
 <head>
     <title>Error</title>
 </head>
 <body>
-<h1 align="center">Wrong massage</h1>
+<h1 align="center">Oops, something went wrong!</h1>
 </body>
 </html>

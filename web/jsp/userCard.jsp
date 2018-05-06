@@ -27,11 +27,11 @@
         <c:if test="${user.login == login}">
             <tr>
                 <td>Password</td>
-                <td><input type="password" name="password"/></td>
+                <td><input type="password" name="password" value="${password}"/></td>
             </tr>
             <tr>
                 <td>Confirm password</td>
-                <td><input type="password" name="passwordConfirm"/></td>
+                <td><input type="password" name="passwordConfirm" value="${password}"/></td>
             </tr>
         </c:if>
         <tr>
@@ -54,10 +54,9 @@
             </tr>
         </c:if>
 <c:if test="${user.role.id == 1}">
-
     <tr>
         <td>Role</td>
-    <c:if test="${idRole != 2}">
+    <c:if test="${idRole != 2 && idRole != 1}">
         <td><select name="idRole">
             <c:forEach var="Role" items="${Roles}">
                 <c:if test="${Role.id == idRole}">
@@ -69,11 +68,14 @@
             </c:forEach>
         </select></td>
     </c:if>
+        <c:if test="${idRole == 1}">
+            <td>${user.role.name}</td>
+        </c:if>
         <c:if test="${idRole == 2}">
         <td>User</td>
         </c:if>
     </tr>
-    <c:if test="${idRole != 2}">
+    <c:if test="${idRole != 2 && idRole != 1}">
         <tr>
             <td>Ship</td>
             <td>

@@ -2,7 +2,7 @@ package ua.bolshak.model.dao.util;
 
 public interface SqlQuery {
     //bonuses table
-    String SELECT_ALL_BONUSES = "SELECT * FROM bonuses";
+    String SELECT_ALL_BONUSES = "SELECT * FROM bonuses where id_bonus > 1";
     String SELECT_ALL_BONUSES_BY_TICKET = "SELECT bonuses.* from bonuses join tickets_has_bonuses thb on bonuses.id_bonus = thb.bonuses_id_bonus where tickets_id_ticket = ?";
     String SELECT_ALL_BONUSES_BY_SHIP = "SELECT bonuses.* FROM bonuses JOIN bonuses_has_ships bhs ON bonuses.id_bonus = bhs.bonuses_id_bonus WHERE bhs.ships_id_ship = ?";
     String SELECT_ALL_BONUSES_BY_SHIP_AND_TIKCET_TIPE = "select bonuses.* from bonuses join ship_has_ticket_types_has_bonuses s on bonuses.id_bonus = s.bonuses_id_bonus where ships_id_ship = ? and ticket_types_id_ticket_type = ?";
@@ -24,7 +24,6 @@ public interface SqlQuery {
     String ADD_CRUISE = "INSERT INTO cruises (cruise_name, cruise_from, cruise_to, ships_id_ship, cruise_statuses_id_cruise_status, routes_id_route) VALUES ( ?, ?, ?, ?, ?, ?)";
     String UPDATE_CRUISE = "UPDATE cruises SET cruise_name = ?, cruise_from = ?, cruise_to = ?, ships_id_ship = ?, cruise_statuses_id_cruise_status = ?, routes_id_route = ? WHERE id_cruise = ?;";
     String DELETE_CRUISE = "DELETE FROM cruises WHERE id_cruise = ?";
-    String DELETE_CRUISE_HAS_PORTS = "DELETE FROM cruises_has_ports WHERE cruises_id_cruise=?";
     //cruisesStatus table
     String FIND_ALL_CRUISE_STATUSES = "SELECT * FROM cruise_statuses";
     String FIND_CRUISE_STATUS_BY_ID = "SELECT * FROM cruise_statuses WHERE id_cruise_status = ?";
@@ -50,7 +49,7 @@ public interface SqlQuery {
     String DELETE_PORT = "DELETE FROM ports WHERE id_port = ?";
     //roles table
     String FIND_ALL_ROLES = "SELECT * FROM roles";
-    String FIND_ALL_IMMUTABLE_ROLES = "SELECT * FROM roles where id_role > 4";
+    String FIND_ALL_IMMUTABLE_ROLES = "SELECT * FROM roles where id_role > 3";
     String FIND_ROLE_BY_ID = "SELECT * FROM roles WHERE id_role = ?";
     String FIND_ROLE_BY_USER = "SELECT roles.* FROM roles JOIN users u ON roles.id_role = u.roles_id_role WHERE u.id_user = ?";
     String ADD_ROLE = "INSERT INTO roles (role_name) VALUES (?)";
@@ -69,6 +68,7 @@ public interface SqlQuery {
     String UPDATE_SHIP = "UPDATE ships SET ship_name = ?, ship_number = ?, number_of_seats = ?, price_per_seat = ?, ship_types_id_ship_type = ? WHERE id_ship = ?";
     String DELETE_SHIP = "DELETE FROM ships WHERE id_ship = ?";
     String DELETE_ALL_SHIP_HAS_BONUSES = "DELETE FROM bonuses_has_ships WHERE  ships_id_ship = ?";
+    String DELETE_ALL_SHIP_HAS_TICKET_TYPES_HAS_BONUSES = "delete from ship_has_ticket_types_has_bonuses where ships_id_ship = ?";
     String ADD_BONUS_FOR_SHIP ="INSERT INTO bonuses_has_ships (ships_id_ship, bonuses_id_bonus) VALUES (?, ?)";
     String ADD_TICKET_TYPE_FOR_SHIP = "INSERT INTO ship_has_ticket_types_has_bonuses (ticket_types_id_ticket_type, bonuses_id_bonus, ships_id_ship) VALUES (?, 1, ?)";
     String DELETE_ALL_SHIP_HAS_TICKET_TYPE = "delete from ship_has_ticket_types_has_bonuses where ships_id_ship = ?";

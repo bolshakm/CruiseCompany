@@ -1,5 +1,6 @@
 package ua.bolshak.controller.commands;
 
+import ua.bolshak.model.entity.Bonus;
 import ua.bolshak.model.entity.Ship;
 import ua.bolshak.model.service.BonusService;
 import ua.bolshak.model.service.ShipService;
@@ -10,6 +11,7 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
+import java.util.List;
 
 public class AddShipCommand implements ICommand {
     @Override
@@ -27,7 +29,12 @@ public class AddShipCommand implements ICommand {
         ship.setNumberOfSeats(Integer.parseInt(numberOfSeats));
         ship.setPricePerSeat(Double.parseDouble(pricePerSeat));
         ship.setType(ShipTypeService.findById(Integer.parseInt(idShipType)));
-        ship.setBonuses(BonusService.getListBonuses(idSelectedBonuses));
+        List<Bonus> bonuses = BonusService.getListBonuses(idSelectedBonuses);
+        if (bonuses.isEmpty()){
+            ship.setBonuses(BonusService.getListWithEmptyBonus());
+        } else {
+            ship.setBonuses(bonuses);
+        }
         ship.setTicketTypes(TicketTypeService.getListTicketTypes(idSelectedTicketTypes));
         ShipService.add(ship);
         return new ToShipsPageCommand().execute(request, response);

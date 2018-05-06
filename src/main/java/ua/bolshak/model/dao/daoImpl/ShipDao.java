@@ -194,8 +194,8 @@ public class ShipDao implements ShipIDao {
         PreparedStatement psForUpdateUser = null;
         PreparedStatement psForDeleteBonuses = null;
         PreparedStatement psForAddBonuses = null;
-        PreparedStatement psForDeleteTicketTypes = null;
-        PreparedStatement psForAddTicketTypes = null;
+//        PreparedStatement psForDeleteTicketTypes = null;
+//        PreparedStatement psForAddTicketTypes = null;
         try (Connection connection = MysqlConnectionPool.getConnection()) {
             psForUpdateUser = connection.prepareStatement(SqlQuery.UPDATE_SHIP);
             psForUpdateUser.setString(1, ship.getName());
@@ -217,18 +217,18 @@ public class ShipDao implements ShipIDao {
                 }
                 psForAddBonuses.executeBatch();
             }
-            psForDeleteTicketTypes = connection.prepareStatement(SqlQuery.DELETE_ALL_SHIP_HAS_TICKET_TYPE);
-            psForDeleteTicketTypes.setInt(1, ship.getId());
-            psForDeleteTicketTypes.executeUpdate();
-            if (ship.getTicketTypes() != null){
-                psForAddTicketTypes = connection.prepareStatement(SqlQuery.ADD_TICKET_TYPE_FOR_SHIP);
-                for (TicketType ticketType : ship.getTicketTypes()) {
-                    psForAddTicketTypes.setInt(1, ticketType.getId());
-                    psForAddTicketTypes.setInt(2, ship.getId());
-                    psForAddTicketTypes.addBatch();
-                }
-                psForAddTicketTypes.executeBatch();
-            }
+//            psForDeleteTicketTypes = connection.prepareStatement(SqlQuery.DELETE_ALL_SHIP_HAS_TICKET_TYPE);
+//            psForDeleteTicketTypes.setInt(1, ship.getId());
+//            psForDeleteTicketTypes.executeUpdate();
+//            if (ship.getTicketTypes() != null){
+//                psForAddTicketTypes = connection.prepareStatement(SqlQuery.ADD_TICKET_TYPE_FOR_SHIP);
+//                for (TicketType ticketType : ship.getTicketTypes()) {
+//                    psForAddTicketTypes.setInt(1, ticketType.getId());
+//                    psForAddTicketTypes.setInt(2, ship.getId());
+//                    psForAddTicketTypes.addBatch();
+//                }
+//                psForAddTicketTypes.executeBatch();
+//            }
         } catch (SQLException e) {
             LOGGER.error(e.getMessage());
         } finally {
@@ -239,17 +239,31 @@ public class ShipDao implements ShipIDao {
                 if (psForDeleteBonuses != null) {
                     psForDeleteBonuses.close();
                 }
+//                if (psForAddTicketTypes != null) {
+//                    psForAddTicketTypes.close();
+//                }
                 if (psForAddBonuses != null) {
                     psForAddBonuses.close();
                 }
-                if (psForDeleteTicketTypes != null){
-                    psForDeleteTicketTypes.close();
-                }
-                assert psForAddTicketTypes != null;
-                psForAddTicketTypes.close();
+//                if (psForDeleteTicketTypes != null){
+//                    psForDeleteTicketTypes.close();
+//                }
+
             } catch (SQLException e) {
                 LOGGER.error(e.getMessage());
             }
+        }
+    }
+
+    public void updateTicketTypesWhithBonuses(Ship ship) {
+        Ship oldShip = findById(ship.getId());
+        PreparedStatement psForUpdateUser = null;
+        try (Connection connection = MysqlConnectionPool.getConnection()) {
+            psForUpdateUser = connection.prepareStatement("");
+            psForUpdateUser.executeUpdate();
+        } catch (SQLException e) {
+            LOGGER.error(e.getMessage());
+        } finally {
         }
     }
 
@@ -257,25 +271,33 @@ public class ShipDao implements ShipIDao {
     public void delete(Ship ship) {
         PreparedStatement psForDeleteBonuses = null;
         PreparedStatement psDeleteShip = null;
+        PreparedStatement psForDeleteTicketTypesHasBonuses = null;
         try (Connection connection = MysqlConnectionPool.getConnection()) {
             if (ship.getBonuses() != null) {
                 psForDeleteBonuses = connection.prepareStatement(SqlQuery.DELETE_ALL_SHIP_HAS_BONUSES);
                 psForDeleteBonuses.setInt(1, ship.getId());
                 psForDeleteBonuses.executeUpdate();
             }
+            if (ship.getTicketTypes() != null){
+                psForDeleteTicketTypesHasBonuses = connection.prepareStatement(SqlQuery.DELETE_ALL_SHIP_HAS_TICKET_TYPES_HAS_BONUSES);
+                psForDeleteTicketTypesHasBonuses.setInt(1, ship.getId());
+                psForDeleteTicketTypesHasBonuses.executeUpdate();
+            }
             psDeleteShip = connection.prepareStatement(SqlQuery.DELETE_SHIP);
             psDeleteShip.setInt(1, ship.getId());
             psDeleteShip.executeUpdate();
-
         } catch (SQLException e) {
             LOGGER.error(e.getMessage());
         } finally {
             try {
-                if (psForDeleteBonuses != null) {
-                    psForDeleteBonuses.close();
-                }
                 if (psDeleteShip != null) {
                     psDeleteShip.close();
+                }
+                if (psForDeleteTicketTypesHasBonuses != null) {
+                    psForDeleteTicketTypesHasBonuses.close();
+                }
+                if (psForDeleteBonuses != null) {
+                    psForDeleteBonuses.close();
                 }
             } catch (SQLException e) {
                 LOGGER.error(e.getMessage());

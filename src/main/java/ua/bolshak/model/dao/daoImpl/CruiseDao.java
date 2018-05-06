@@ -205,13 +205,8 @@ public class CruiseDao implements CruiseIDao{
 
     @Override
     public void delete(Cruise cruise) {
-        PreparedStatement psForDeleteCruiseHasPort = null;
         PreparedStatement psForDeleteCruise = null;
         try(Connection connection = MysqlConnectionPool.getConnection()){
-            psForDeleteCruiseHasPort = connection.prepareStatement(SqlQuery.DELETE_CRUISE_HAS_PORTS);
-            psForDeleteCruiseHasPort.setInt(1, cruise.getId());
-            psForDeleteCruiseHasPort.executeUpdate();
-            psForDeleteCruiseHasPort.close();
             psForDeleteCruise = connection.prepareStatement(SqlQuery.DELETE_CRUISE);
             psForDeleteCruise.setInt(1, cruise.getId());
             psForDeleteCruise.executeUpdate();
@@ -220,9 +215,6 @@ public class CruiseDao implements CruiseIDao{
             LOGGER.error(e.getMessage());
         } finally {
             try {
-                if (psForDeleteCruiseHasPort != null) {
-                    psForDeleteCruiseHasPort.close();
-                }
                 if (psForDeleteCruise != null) {
                     psForDeleteCruise.close();
                 }

@@ -28,6 +28,12 @@ public class BonusService {
         return bonuses;
     }
 
+    public static List<Bonus> getListWithEmptyBonus(){
+        List<Bonus> bonuses = new ArrayList<>();
+        bonuses.add(findById(1));
+        return bonuses;
+    }
+
     public static List<Bonus> findAllByShip(Ship ship){
         return getFull(DaoFactory.getBonusDao().findAllByShip(ship));
     }

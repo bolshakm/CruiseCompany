@@ -34,8 +34,12 @@ public class UpdateUserCommand implements ICommand {
         if (money != null) {
             user.setMoney(Double.parseDouble(money));
         }
-        user.setRole(RoleService.findById(Integer.parseInt(idRole)));
-        user.setShip(ShipService.findById(Integer.parseInt(idShip)));
+        if (idRole != null) {
+            user.setRole(RoleService.findById(Integer.parseInt(idRole)));
+        }
+        if (idShip != null) {
+            user.setShip(ShipService.findById(Integer.parseInt(idShip)));
+        }
         if (sessionUser.getRole().getId() != 1) {
             if (password != null && passwordConfirm != null && !password.equals("") && !passwordConfirm.equals("") && password.equals(passwordConfirm)) {
                 user.setPassword(password);

@@ -45,7 +45,7 @@
             <tr>
                 <td>Ship </td>
                 <td>
-                    <select name="ShipId">
+                    <select name="idShip">
                             <option disabled selected>Select ship</option>
                         <c:forEach var="Ship" items="${Ships}">
                                 <option value="${Ship.id}">${Ship.name}</option>
