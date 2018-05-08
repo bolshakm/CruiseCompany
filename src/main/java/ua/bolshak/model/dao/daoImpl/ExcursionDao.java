@@ -130,7 +130,12 @@ public class ExcursionDao implements ExcursionIDao{
     @Override
     public void delete(Excursion excursion) {
         try(Connection connection = MysqlConnectionPool.getConnection();
-            PreparedStatement preparedStatement = connection.prepareStatement(SqlQuery.DELETE_EXCURSION)){
+            PreparedStatement preparedStatement = connection.prepareStatement(SqlQuery.DELETE_EXCURSION);
+            PreparedStatement psForDeleteTicketsHasExcursion = connection.prepareStatement(SqlQuery.DELETE_EXCURSIONS_TICKETS)){
+            if (!excursion.getTickets().isEmpty()) {
+                psForDeleteTicketsHasExcursion.setInt(1, excursion.getId());
+                psForDeleteTicketsHasExcursion.executeUpdate();
+            }
             preparedStatement.setInt(1, excursion.getId());
             preparedStatement.executeUpdate();
         } catch (SQLException e) {

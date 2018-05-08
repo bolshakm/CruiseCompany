@@ -28,6 +28,9 @@
                     <th>Cruise</th>
                     <th>Cruise from</th>
                     <th>Cruise to</th>
+                    <c:if test="${user.role.id == 2}">
+                        <th>Bonuses</th>
+                    </c:if>
                     <th>Ticket type</th>
                     <th>Price</th>
                     <c:if test="${user.role.id == 1 || user.role.id == 2}">
@@ -43,6 +46,16 @@
                         <td>${Ticket.cruise.name}</td>
                         <td>${Ticket.cruise.from}</td>
                         <td>${Ticket.cruise.to}</td>
+                        <c:if test="${user.role.id == 2}">
+                            <c:if test="${!empty Ticket.bonuses}">
+                            <td><c:forEach var="Bonus" items="${Ticket.bonuses}">
+                                ${Bonus.name}<br/>
+                            </c:forEach> </td>
+                            </c:if>
+                            <c:if test="${empty Ticket.bonuses}">
+                                <td>Empty</td>
+                            </c:if>
+                        </c:if>
                         <td>${Ticket.ticketType.name}</td>
                         <td>${Ticket.price}</td>
                         <c:if test="${user.role.id == 1 || user.role.id == 2}">

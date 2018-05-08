@@ -416,20 +416,15 @@ public class ShipDao implements ShipIDao {
 
     @Override
     public void delete(Ship ship) {
-//        PreparedStatement psForDeleteBonuses = null;
-//        PreparedStatement psDeleteShip = null;
-//        PreparedStatement psForDeleteTicketTypesHasBonuses = null;
         try (Connection connection = MysqlConnectionPool.getConnection();
              PreparedStatement psForDeleteBonuses = connection.prepareStatement(SqlQuery.DELETE_ALL_SHIP_HAS_BONUSES);
              PreparedStatement psDeleteShip = connection.prepareStatement(SqlQuery.DELETE_SHIP);
              PreparedStatement psForDeleteTicketTypesHasBonuses = connection.prepareStatement(SqlQuery.DELETE_ALL_SHIP_HAS_TICKET_TYPES_HAS_BONUSES)) {
-            if (ship.getBonuses() != null) {
-
+            if (!ship.getBonuses().isEmpty()) {
                 psForDeleteBonuses.setInt(1, ship.getId());
                 psForDeleteBonuses.executeUpdate();
             }
-            if (ship.getTicketTypes() != null) {
-
+            if (!ship.getTicketTypes().isEmpty()) {
                 psForDeleteTicketTypesHasBonuses.setInt(1, ship.getId());
                 psForDeleteTicketTypesHasBonuses.executeUpdate();
             }

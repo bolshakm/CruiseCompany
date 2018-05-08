@@ -179,7 +179,20 @@ public class BonusDao implements BonusIDao {
     @Override
     public void delete(Bonus bonus) {
         try(Connection connection = MysqlConnectionPool.getConnection();
-            PreparedStatement preparedStatement = connection.prepareStatement(SqlQuery.DELETE_BONUS)){
+            PreparedStatement preparedStatement = connection.prepareStatement(SqlQuery.DELETE_BONUS);
+            PreparedStatement psForDeleteShipsBonuses = connection.prepareStatement(SqlQuery.DELETE_FROM_SHIPS_HAS_BONUSES);
+            PreparedStatement psForDeleteTicketsBonuses = connection.prepareStatement(SqlQuery.DELETE_FROM_TICKET_HAS_BONUSES);
+            PreparedStatement psForDeleteShipsBonusesByTicketType = connection.prepareStatement(SqlQuery.DELETE_FROM_SHIP_HAS_TICKET_TYPE_AND_BONUSES)){
+            if (!bonus.getShips().isEmpty()) {
+                psForDeleteShipsBonuses.setInt(1, bonus.getId());
+                psForDeleteShipsBonuses.executeUpdate();
+            }
+            if (!bonus.getTickets().isEmpty()) {
+                psForDeleteTicketsBonuses.setInt(1, bonus.getId());
+                psForDeleteTicketsBonuses.executeUpdate();
+            }
+            psForDeleteShipsBonusesByTicketType.setInt(1, bonus.getId());
+            psForDeleteShipsBonusesByTicketType.executeUpdate();
             preparedStatement.setInt(1, bonus.getId());
             preparedStatement.executeUpdate();
         } catch (SQLException e) {

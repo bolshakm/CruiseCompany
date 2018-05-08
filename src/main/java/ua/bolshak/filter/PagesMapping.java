@@ -61,6 +61,7 @@ public class PagesMapping {
         admin.add("deleteRole");
         admin.add("toUpdateTicketPage");
         admin.add("updateTicket");
+        admin.add("toUpdateTicket");
         admin.add("deleteTicket");
         admin.add("addTicketType");
         admin.add("toUpdateTicketType");
@@ -73,21 +74,21 @@ public class PagesMapping {
         user.add("buyTicket");
         user.add("getPrice");
         user.add("addTicket");
-        user.add("toShipPage");
+        user.add("toShipsPage");
         user.add("toRoutePage");
         user.add("toPortsPage");
         user.add("toTicketsPage");
         user.add("toMainPage");
         user.add("logout");
         user.add("deleteTicket");
-        user.add("toUpdateUser");
+        user.add("toUpdateUserCard");
         user.add("updateUser");
 
         shipAdministrator.add("login");
         shipAdministrator.add("toMainPage");
         shipAdministrator.add("toShipsPage");
         shipAdministrator.add("toUserPage");
-        shipAdministrator.add("toTicketPage");
+        shipAdministrator.add("toTicketsPage");
         shipAdministrator.add("toSetBonusesForShipByTicketType");
         shipAdministrator.add("editBonuses");
         shipAdministrator.add("logout");

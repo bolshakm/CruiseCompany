@@ -151,7 +151,7 @@ public class RouteDaoImpl implements IRouteDao {
 
     @Override
     public void delete(Route route) {
-        if (route.getPorts() != null){
+        if (!route.getPorts().isEmpty()){
             deletePorts(route);
         }
         try (Connection connection = MysqlConnectionPool.getConnection();

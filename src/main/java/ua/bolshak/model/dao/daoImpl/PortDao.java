@@ -5,7 +5,6 @@ import ua.bolshak.model.MysqlConnectionPool;
 import ua.bolshak.model.dao.idao.PortIDao;
 import ua.bolshak.model.dao.util.ColumnName;
 import ua.bolshak.model.dao.util.SqlQuery;
-import ua.bolshak.model.entity.Cruise;
 import ua.bolshak.model.entity.Excursion;
 import ua.bolshak.model.entity.Port;
 import ua.bolshak.model.entity.Route;
@@ -132,7 +131,12 @@ public class PortDao implements PortIDao {
     @Override
     public void delete(Port port) {
         try(Connection connection = MysqlConnectionPool.getConnection();
-            PreparedStatement preparedStatement = connection.prepareStatement(SqlQuery.DELETE_PORT)){
+            PreparedStatement preparedStatement = connection.prepareStatement(SqlQuery.DELETE_PORT);
+            PreparedStatement psForDeletePortHasRoutes = connection.prepareStatement(SqlQuery.DELETE_PORT_HAS_ROUTES)){
+            if (!port.getRoutes().isEmpty()) {
+                psForDeletePortHasRoutes.setInt(1, port.getId());
+                psForDeletePortHasRoutes.executeUpdate();
+            }
             preparedStatement.setInt(1, port.getId());
             preparedStatement.executeUpdate();
         } catch (SQLException e) {

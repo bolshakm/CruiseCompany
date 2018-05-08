@@ -1,6 +1,5 @@
 package ua.bolshak.controller.commands;
 
-import ua.bolshak.model.entity.Cruise;
 import ua.bolshak.model.entity.CruiseStatus;
 import ua.bolshak.model.service.CruiseStatusService;
 
@@ -13,7 +12,11 @@ public class DeleteCruiseStatus implements ICommand {
     @Override
     public String execute(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException {
         CruiseStatus cruiseStatus = CruiseStatusService.findById(Integer.parseInt(request.getParameter("cruiseStatusId")));
-        CruiseStatusService.delete(cruiseStatus);
+        if (!cruiseStatus.getCruises().isEmpty()){
+            CruiseStatusService.delete(cruiseStatus);
+        } else {
+            request.setAttribute("ErrorMassage", " The cruise status is used!");
+        }
         return new ToCruisesPage().execute(request, response);
     }
 }

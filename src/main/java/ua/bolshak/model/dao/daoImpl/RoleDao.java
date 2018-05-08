@@ -47,6 +47,20 @@ public class RoleDao implements RoleIDao{
         return roles;
     }
 
+    public List<Role> findAllWithoutUser() {
+        List<Role> roles = new ArrayList<>();
+        try (Connection connection = MysqlConnectionPool.getConnection();
+             Statement statement = connection.createStatement();
+             ResultSet resultSet = statement.executeQuery(SqlQuery.FIND_ALL_ROLES_WITHOUT_USER)){
+            while (resultSet.next()){
+                roles.add(initialization(resultSet));
+            }
+        } catch (SQLException e) {
+            LOGGER.error(e.getMessage());
+        }
+        return roles;
+    }
+
     @Override
     public List<Role> findAllMutable() {
         List<Role> roles = new ArrayList<>();

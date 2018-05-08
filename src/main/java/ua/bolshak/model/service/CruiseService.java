@@ -4,6 +4,7 @@ import ua.bolshak.model.dao.DaoFactory;
 import ua.bolshak.model.entity.*;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 public class CruiseService {
@@ -26,6 +27,26 @@ public class CruiseService {
             cruises.addAll(getFull(findAllByShip(ship)));
         }
         return cruises;
+    }
+
+    public static boolean checkActive(Cruise cruise){
+        boolean result = false;
+        Date now = new Date();
+        if (now.getTime() < cruise.getTo().getTime()){
+            result = true;
+        }
+        return result;
+    }
+
+    public static boolean checkActive(List<Cruise> cruises){
+        boolean result = false;
+        Date now = new Date();
+        for (Cruise cruise : cruises) {
+            if (now.getTime() < cruise.getTo().getTime()){
+                result = true;
+            }
+        }
+        return result;
     }
 
     public static List<Cruise> findAllByRoute(Route route){

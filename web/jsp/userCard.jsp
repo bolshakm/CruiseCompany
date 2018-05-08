@@ -21,10 +21,10 @@
             <input type="hidden" name="idUser" value="${idUser}">
 
         <td>Login</td>
-        <td><c:if test="${user.login != login}">${login}</c:if>
-            <c:if test="${user.login == login}"><input type="text" name="login" value="${login}"></c:if></td>
+        <td><c:if test="${user.id != idUser}">${login}</c:if>
+            <c:if test="${user.id == idUser}"><input type="text" name="login" value="${login}"></c:if></td>
     </tr>
-        <c:if test="${user.login == login}">
+        <c:if test="${user.id == idUser}">
             <tr>
                 <td>Password</td>
                 <td><input type="password" name="password" value="${password}"/></td>
@@ -36,8 +36,8 @@
         </c:if>
         <tr>
             <td>Email</td>
-            <td><c:if test="${user.login != login}">${email} </c:if>
-                <c:if test="${user.login == login}"><input type="text" name="email" value="${email}"></c:if></td>
+            <td><c:if test="${user.id != idUser}">${email} </c:if>
+                <c:if test="${user.id == idUser}"><input type="text" name="email" value="${email}"></c:if></td>
         </tr>
         <tr>
             <td>Name</td>

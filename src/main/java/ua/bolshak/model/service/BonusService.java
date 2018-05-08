@@ -2,10 +2,7 @@ package ua.bolshak.model.service;
 
 
 import ua.bolshak.model.dao.DaoFactory;
-import ua.bolshak.model.entity.Bonus;
-import ua.bolshak.model.entity.Ship;
-import ua.bolshak.model.entity.Ticket;
-import ua.bolshak.model.entity.TicketType;
+import ua.bolshak.model.entity.*;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -37,6 +34,7 @@ public class BonusService {
     public static List<Bonus> findAllByShip(Ship ship){
         return getFull(DaoFactory.getBonusDao().findAllByShip(ship));
     }
+
 
     public static List<Bonus> findAllByShipAndTicketType(Ship ship, TicketType ticketType){
         return getFull(DaoFactory.getBonusDao().findAllByShipAndTicketType(ship, ticketType));

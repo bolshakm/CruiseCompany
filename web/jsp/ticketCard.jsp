@@ -137,6 +137,19 @@
                 </c:if>
             </td>
         </tr>
+        <tr>
+            <td>Bonuses</td>
+            <td>
+                <c:if test="${!empty Bonuses}">
+                    <c:forEach var="Bonus" items="${Bonuses}">
+                ${Bonus.name}<br/>
+            </c:forEach>
+                </c:if>
+                <c:if test="${empty Bonuses}">
+                    Empty
+                </c:if>
+            </td>
+        </tr>
         <c:if test="${price != null}">
 
         <tr>

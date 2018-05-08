@@ -264,7 +264,12 @@ public class UserDao implements UserIDao{
     @Override
     public void delete(User user) {
         try(Connection connection = MysqlConnectionPool.getConnection();
-            PreparedStatement preparedStatement = connection.prepareStatement(SqlQuery.DELETE_USER)){
+            PreparedStatement preparedStatement = connection.prepareStatement(SqlQuery.DELETE_USER);
+            PreparedStatement psForDeleteTicketByUser = connection.prepareStatement(SqlQuery.DELETE_TICKET_BY_USER)){
+            if (!user.getTickets().isEmpty()) {
+                psForDeleteTicketByUser.setInt(1, user.getId());
+                psForDeleteTicketByUser.executeUpdate();
+            }
             preparedStatement.setInt(1, user.getId());
             preparedStatement.executeUpdate();
         } catch (SQLException e) {

@@ -98,11 +98,6 @@ public class UserService {
     }
 
     public static void delete(User user){
-        if (user.getTickets() != null){
-            for (Ticket ticket : user.getTickets()) {
-                TicketService.delete(ticket);
-            }
-        }
         DaoFactory.getUserDao().delete(user);
     }
 

@@ -16,7 +16,7 @@ public class DeleteRoleCommand implements ICommand {
         if (UserService.findAllByRole(role).isEmpty()) {
             RoleService.delete(role);
         } else {
-            request.setAttribute("ErrorMassage", "Yhe role has users and can not be deleted!");
+            request.setAttribute("ErrorMassage", "The role has users and can not be deleted!");
         }
         return new ToUserPage().execute(request, response);
     }

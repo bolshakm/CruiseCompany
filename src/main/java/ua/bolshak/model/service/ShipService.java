@@ -28,6 +28,10 @@ public class ShipService {
         return  getFull(DaoFactory.getShipDao().findByUser(user));
     }
 
+    public static Ship getEmptyShip(){
+        return  getFull(DaoFactory.getShipDao().findById(1));
+    }
+
     public static Ship findById(int id){
         return  getFull(DaoFactory.getShipDao().findById(id));
     }

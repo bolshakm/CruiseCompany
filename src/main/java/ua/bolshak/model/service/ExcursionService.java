@@ -4,6 +4,7 @@ import ua.bolshak.model.dao.DaoFactory;
 import ua.bolshak.model.entity.*;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 public class ExcursionService {
@@ -64,6 +65,14 @@ public class ExcursionService {
             excursion.setTickets(TicketService.findAllLazyByExcursion(excursion));
         }
         return excursion;
+    }
+
+    public static boolean checkActiveTicker(List<Excursion> excursions){
+        boolean result = false;
+        for (Excursion excursion : excursions) {
+            result = TicketService.checkActiveTicker(getFull(excursion).getTickets());
+        }
+        return result;
     }
 
     public static List<Excursion> getFull(List<Excursion> excursions){

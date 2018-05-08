@@ -12,7 +12,11 @@ public class DeleteTicketCommand implements ICommand {
     @Override
     public String execute(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException {
         Ticket ticket = TicketService.findById(Integer.parseInt(request.getParameter("idTicket")));
-        TicketService.delete(ticket);
+        if (!TicketService.checkActiveTicker(ticket)){
+            TicketService.delete(ticket);
+        } else {
+            request.setAttribute("ErrorMassage", "The ticket is active!");
+        }
         return new ToTicketsPageCommand().execute(request, response);
     }
 }

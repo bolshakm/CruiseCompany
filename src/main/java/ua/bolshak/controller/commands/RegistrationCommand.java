@@ -2,6 +2,7 @@ package ua.bolshak.controller.commands;
 
 import ua.bolshak.model.entity.User;
 import ua.bolshak.model.service.RoleService;
+import ua.bolshak.model.service.ShipService;
 import ua.bolshak.model.service.UserService;
 
 import javax.servlet.ServletException;
@@ -12,7 +13,6 @@ import java.io.IOException;
 public class RegistrationCommand implements ICommand{
     @Override
     public String execute(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException {
-        String page = "/jsp/main.jsp";
         User user = new User();
         String login = request.getParameter("login");
         String password = request.getParameter("password");
@@ -25,8 +25,9 @@ public class RegistrationCommand implements ICommand{
         user.setLastName(lastName);
         user.setEmail(email);
         user.setRole(RoleService.findById(2));
+        user.setShip(ShipService.getEmptyShip());
         UserService.add(user);
         request.getSession().setAttribute("user", user);
-        return page;
+        return new ToMainPage().execute(request, response);
     }
 }

@@ -129,7 +129,12 @@ public class TicketTypeDao implements TicketTypeIDao{
     @Override
     public void delete(TicketType ticketType) {
         try(Connection connection = MysqlConnectionPool.getConnection();
-            PreparedStatement preparedStatement = connection.prepareStatement(SqlQuery.DELETE_TICKET_TYPE)){
+            PreparedStatement preparedStatement = connection.prepareStatement(SqlQuery.DELETE_TICKET_TYPE);
+            PreparedStatement psForDeleteShipHasTicketType = connection.prepareStatement(SqlQuery.DELETE_SHIP_HAS_TICKET_TYPE_AND_BONUS_BY_TICKET_TYPE)){
+            if (!ticketType.getShips().isEmpty()) {
+                psForDeleteShipHasTicketType.setInt(1, ticketType.getId());
+                psForDeleteShipHasTicketType.executeUpdate();
+            }
             preparedStatement.setInt(1, ticketType.getId());
             preparedStatement.executeUpdate();
         } catch (SQLException e) {

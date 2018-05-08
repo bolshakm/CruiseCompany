@@ -13,6 +13,9 @@ public interface SqlQuery {
     String ADD_BONUS = "INSERT INTO bonuses (bonus_name) VALUES (?)";
     String UPDATE_BONUS = "UPDATE bonuses SET bonus_name = ? WHERE id_bonus= ?";
     String DELETE_BONUS = "DELETE FROM bonuses WHERE id_bonus = ?";
+    String DELETE_FROM_SHIPS_HAS_BONUSES = "delete from bonuses_has_ships where bonuses_id_bonus = ?";
+    String DELETE_FROM_TICKET_HAS_BONUSES = "delete from tickets_has_bonuses where bonuses_id_bonus = ?";
+    String DELETE_FROM_SHIP_HAS_TICKET_TYPE_AND_BONUSES = "delete from ship_has_ticket_types_has_bonuses where bonuses_id_bonus = ?";
     String DELETE_BONUSES_FOR_SHIP_BY_TICKET_TYPE = "delete from ship_has_ticket_types_has_bonuses where ships_id_ship = ? and ticket_types_id_ticket_type = ?";
     String DELETE_SHIPS_BONUSES_BY_TICKET_TYPE = "delete from ship_has_ticket_types_has_bonuses where ships_id_ship = ? and bonuses_id_bonus = ?";
     String DELETE_SHIPS_BONUSES_BY_TICKET_TYPE_AND_SHIP = "delete from bonuses_has_ships where ships_id_ship = ? and bonuses_id_bonus = ?";
@@ -27,6 +30,7 @@ public interface SqlQuery {
     String FIND_CRUISE_BY_NAME = "SELECT * from cruises where cruise_name = ?";
     String ADD_CRUISE = "INSERT INTO cruises (cruise_name, cruise_from, cruise_to, ships_id_ship, cruise_statuses_id_cruise_status, routes_id_route) VALUES ( ?, ?, ?, ?, ?, ?)";
     String UPDATE_CRUISE = "UPDATE cruises SET cruise_name = ?, cruise_from = ?, cruise_to = ?, ships_id_ship = ?, cruise_statuses_id_cruise_status = ?, routes_id_route = ? WHERE id_cruise = ?;";
+    String DELETE_TICKET_BY_CRUISE = "delete from tickets where cruises_id_cruise = ?";
     String DELETE_CRUISE = "DELETE FROM cruises WHERE id_cruise = ?";
     //cruisesStatus table
     String FIND_ALL_CRUISE_STATUSES = "SELECT * FROM cruise_statuses";
@@ -43,6 +47,7 @@ public interface SqlQuery {
     String ADD_EXCURSION = "INSERT INTO excursions (excursion_name, excursion_price, ports_id_port) VALUES (?, ?, ?)";
     String UPDATE_EXCURSION = "UPDATE excursions SET excursion_name= ?, excursion_price = ?, ports_id_port = ? WHERE id_excursion = ? ";
     String DELETE_EXCURSION = "DELETE FROM excursions WHERE id_excursion = ?";
+    String DELETE_EXCURSIONS_TICKETS = "delete from tickets_has_excursions where excursions_id_excursion = ?";
     //ports table
     String FIND_ALL_PORTS = "SELECT * FROM ports";
     String FIND_ALL_PORTS_BY_ROUTE = "select ports.* from ports join ports_has_routes phr on ports.id_port = phr.ports_id_port where routes_id_route = ?";
@@ -51,8 +56,10 @@ public interface SqlQuery {
     String ADD_PORT = "INSERT INTO ports (port_name, port_city, port_country) VALUES (?, ?, ?)";
     String UPDATE_PORT = "UPDATE ports SET port_name= ?, port_city = ?, port_country = ? WHERE id_port = ?";
     String DELETE_PORT = "DELETE FROM ports WHERE id_port = ?";
+    String DELETE_PORT_HAS_ROUTES = "delete from ports_has_routes where ports_id_port = ?";
     //roles table
     String FIND_ALL_ROLES = "SELECT * FROM roles";
+    String FIND_ALL_ROLES_WITHOUT_USER = "select * from roles where id_role != 2";
     String FIND_ALL_IMMUTABLE_ROLES = "SELECT * FROM roles where id_role > 3";
     String FIND_ROLE_BY_ID = "SELECT * FROM roles WHERE id_role = ?";
     String FIND_ROLE_BY_USER = "SELECT roles.* FROM roles JOIN users u ON roles.id_role = u.roles_id_role WHERE u.id_user = ?";
@@ -94,6 +101,7 @@ public interface SqlQuery {
     String ADD_TICKET_TYPE = "INSERT INTO ticket_types (ticket_type_name, ticket_type_price) VALUES (?, ?)";
     String UPDATE_TICKET_TYPE = "UPDATE ticket_types SET ticket_type_name = ?, ticket_type_price = ? WHERE id_ticket_type = ?";
     String DELETE_TICKET_TYPE = "DELETE FROM ticket_types WHERE id_ticket_type = ?";
+    String DELETE_SHIP_HAS_TICKET_TYPE_AND_BONUS_BY_TICKET_TYPE = "delete from ship_has_ticket_types_has_bonuses where ticket_types_id_ticket_type = ?";
     String DELETE_TICKET_TYPES_BY_SHIP_IN_SHIP_HAS_TICKET_TYPE = "delete from ship_has_ticket_types_has_bonuses where ships_id_ship = ? and ticket_types_id_ticket_type = ?";
     //users table
     String FIND_ALL_USERS = "SELECT * FROM users where id_user > 1";
@@ -110,6 +118,7 @@ public interface SqlQuery {
     String ADD_USER = "INSERT INTO users (login, password, user_name, user_last_name, email, money, roles_id_role, ships_id_ship) VALUES (?, ?, ?, ?, ?, ?, ?, ?)";
     String UPDATE_USER = "UPDATE users SET login = ?, password = ?, user_name = ?, user_last_name = ?, email = ?, money = ?, roles_id_role= ?, ships_id_ship= ? WHERE id_user = ?";
     String DELETE_USER = "DELETE FROM users WHERE id_user = ?";
+    String DELETE_TICKET_BY_USER = "delete from tickets where users_id_user = ?";
     //tickets table
     String FIND_ALL_TICKETS = "SELECT * FROM tickets";
     String FIND_ALL_TICKETS_BY_USER = "SELECT * FROM tickets WHERE users_id_user = ?";

@@ -3,8 +3,7 @@ package ua.bolshak.model.service;
 import ua.bolshak.model.dao.DaoFactory;
 import ua.bolshak.model.entity.*;
 
-import java.util.ArrayList;
-import java.util.List;
+import java.util.*;
 
 public class TicketService {
 
@@ -19,6 +18,41 @@ public class TicketService {
             tickets.add(ticket);
         }
         return tickets;
+    }
+
+    public static boolean checkActiveTicketByUser(User user){
+        boolean result = false;
+        Date now = new Date();
+        List<Ticket> tickets = findAllByUser(user);
+        for (Ticket ticket : tickets) {
+            java.sql.Date sqlDate = ticket.getCruise().getTo();
+            if (now.getTime() < sqlDate.getTime()){
+                result = true;
+            }
+        }
+        return result;
+    }
+
+    public static boolean checkActiveTicker(Ticket ticket){
+        boolean result = false;
+        Date now = new Date();
+            java.sql.Date sqlDate = ticket.getCruise().getTo();
+            if (now.getTime() < sqlDate.getTime()){
+                result = true;
+            }
+        return result;
+    }
+
+    public static boolean checkActiveTicker(List<Ticket> tickets){
+        boolean result = false;
+        Date now = new Date();
+        for (Ticket ticket : tickets) {
+            java.sql.Date sqlDate = getFull(ticket).getCruise().getTo();
+            if (now.getTime() < sqlDate.getTime()){
+                result = true;
+            }
+        }
+        return result;
     }
 
     public static List<Ticket> findAllByUser(User user){

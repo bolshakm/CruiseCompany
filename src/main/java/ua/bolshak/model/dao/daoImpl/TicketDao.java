@@ -7,6 +7,8 @@ import ua.bolshak.model.dao.idao.TicketIDao;
 import ua.bolshak.model.dao.util.ColumnName;
 import ua.bolshak.model.dao.util.SqlQuery;
 import ua.bolshak.model.entity.*;
+import ua.bolshak.model.service.BonusService;
+import ua.bolshak.model.service.CruiseService;
 
 import java.sql.*;
 import java.util.ArrayList;
@@ -170,8 +172,7 @@ public class TicketDao implements TicketIDao{
     @Override
     public void add(Ticket ticket) {
         try(Connection connection = MysqlConnectionPool.getConnection();
-            PreparedStatement preparedStatement = connection.prepareStatement(SqlQuery.ADD_TICKET);
-            PreparedStatement psForUpdateBonuses = connection.prepareStatement(SqlQuery.ADD_TICKET_HAS_BONUSES)){
+            PreparedStatement preparedStatement = connection.prepareStatement(SqlQuery.ADD_TICKET)){
             preparedStatement.setInt(1, ticket.getUser().getId());
             preparedStatement.setString(2, ticket.getName());
             preparedStatement.setString(3, ticket.getLastName());
@@ -180,8 +181,22 @@ public class TicketDao implements TicketIDao{
             preparedStatement.setDouble(6, ticket.getPrice());
             preparedStatement.executeUpdate();
             ticket.setId(findByName(ticket.getName()).getId());
+            addBonuses(ticket);
             if (ticket.getExcursions() != null){
                 addExcursions(ticket);
+            }
+        } catch (SQLException e) {
+            LOGGER.error(e.getMessage());
+        }
+    }
+
+    private void addBonuses(Ticket ticket) {
+        try(Connection connection = MysqlConnectionPool.getConnection();
+            PreparedStatement psForUpdateBonuses = connection.prepareStatement(SqlQuery.ADD_TICKET_HAS_BONUSES)){
+            List<Bonus> bonuses = BonusService.findAllByShipAndTicketType(CruiseService.getFull(ticket.getCruise()).getShip(), ticket.getTicketType());
+            for (Bonus bonus : bonuses) {
+                psForUpdateBonuses.setInt(1, ticket.getId());
+                psForUpdateBonuses.setInt(2, bonus.getId());
             }
         } catch (SQLException e) {
             LOGGER.error(e.getMessage());
@@ -248,9 +263,16 @@ public class TicketDao implements TicketIDao{
     public void delete(Ticket ticket) {
         try(Connection connection = MysqlConnectionPool.getConnection();
             PreparedStatement psForDeleteExcursions = connection.prepareStatement(SqlQuery.DELETE_TICKET_HAS_EXCURSIONS);
-            PreparedStatement psForDeleteTicket = connection.prepareStatement(SqlQuery.DELETE_TICKET)){
-            psForDeleteExcursions.setInt(1, ticket.getId());
-            psForDeleteExcursions.executeUpdate();
+            PreparedStatement psForDeleteTicket = connection.prepareStatement(SqlQuery.DELETE_TICKET);
+            PreparedStatement psForDeleteTicketHasBonuses = connection.prepareStatement(SqlQuery.DELETE_TICKET_HAS_BONUSES)){
+            if (!ticket.getExcursions().isEmpty()) {
+                psForDeleteExcursions.setInt(1, ticket.getId());
+                psForDeleteExcursions.executeUpdate();
+            }
+            if (!ticket.getBonuses().isEmpty()) {
+                psForDeleteTicketHasBonuses.setInt(1, ticket.getId());
+                psForDeleteTicketHasBonuses.executeUpdate();
+            }
             psForDeleteTicket.setInt(1, ticket.getId());
             psForDeleteTicket.executeUpdate();
         } catch (SQLException e) {
