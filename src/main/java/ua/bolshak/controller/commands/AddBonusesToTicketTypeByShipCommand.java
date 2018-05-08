@@ -22,7 +22,9 @@ public class AddBonusesToTicketTypeByShipCommand implements ICommand {
         TicketType ticketType = TicketTypeService.findById(Integer.parseInt(idTicketType));
         Ship ship = ShipService.findById(Integer.parseInt(idShip));
         List<Bonus> bonuses = BonusService.getListBonuses(selectedBonuses);
-        BonusService.editBonusesForShipByTicketType(bonuses, ticketType, ship);
+        if (!bonuses.isEmpty()) {
+            BonusService.editBonusesForShipByTicketType(bonuses, ticketType, ship);
+        }
         return new ToShipsPageCommand().execute(request, response);
     }
 }

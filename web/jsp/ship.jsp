@@ -58,18 +58,27 @@
                         </td>
                         <c:if test="${user.role.id == 3}">
                         <td><c:forEach var="ticketType" items="${Ship.ticketTypes}">
-                            <a href="/CruiseCompany?command=toSetBonusesForShipBiTicketType&idTicketType=${ticketType.id}&idShip=${Ship.id}"><button>Bonuses</button></a><br/>
+                            <a href="/CruiseCompany?command=toSetBonusesForShipByTicketType&idTicketType=${ticketType.id}&idShip=${Ship.id}"><button>Bonuses</button></a><br/>
                         </c:forEach>
                         </td>
                         </c:if>
+                        <c:if test="${!empty Ship.bonuses}">
                         <td><c:forEach var="bonus" items="${Ship.bonuses}">
                             ${bonus.name}<br/>
                         </c:forEach> </td>
+                        </c:if>
+                        <c:if test="${empty Ship.bonuses}">
+                            <td>Empty</td>
+                        </c:if>
+                        <c:if test="${!empty Ship.cruises}">
                         <td><c:forEach var="cruise" items="${Ship.cruises}">
                             <c:if test="${user.role.id == 2}"><a href="/CruiseCompany?command=buyTicket&idCruise=${cruise.id}">${cruise.name}</a><br/></c:if>
                             <c:if test="${user.role.id != 2}">${cruise.name}<br/></c:if>
 
                         </c:forEach></td>
+                        </c:if>
+                        <c:if test="${empty Ship.cruises}"><td>Empty</td></c:if>
+
                         <c:if test="${user.role.id == 1}">
                         <td><a href="/CruiseCompany?command=toUpdateShipCard&idShip=${Ship.id}"><button>Update</button></a>
                             <a href="/CruiseCompany?command=deleteShip&idShip=${Ship.id}"><button>Delete</button></a></td>

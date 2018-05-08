@@ -30,6 +30,10 @@
     </tr>
     <tr>
         <td>Bonuses</td>
+        <c:if test="${empty Bonuses}">
+            <td>Empty</td>
+        </c:if>
+        <c:if test="${!empty Bonuses}">
         <td>
             <c:forEach var="Bonus" items="${Bonuses}">
                 <c:if test="${fn:contains(selectedBonuses, Bonus)}">
@@ -39,9 +43,11 @@
                     <input type="checkbox" name="selectedBonuses" value="${Bonus.id}">${Bonus.name}<br/>
                 </c:if>
             </c:forEach>
+            </c:if>
         </td>
     </tr>
-    <tr><td></td><td><input type="submit" value="Edit"></td></tr>
+    <tr><td></td><c:if test="${empty Bonuses}"><td><input type="submit" value="Back"></td></c:if>
+        <c:if test="${!empty Bonuses}"><td><input type="submit" value="Edit"></td></c:if></tr>
 </table>
 </form>
 </body>

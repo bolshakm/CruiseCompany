@@ -15,6 +15,7 @@ public class PagesMapping {
         List<String> stuff = new ArrayList<>();
         List<String> unregister = new ArrayList<>();
 
+        admin.add("login");
         admin.add("toMainPage");
         admin.add("toShipsPage");
         admin.add("toPortsPage");
@@ -68,6 +69,7 @@ public class PagesMapping {
         admin.add("updateUser");
         admin.add("logout");
 
+        user.add("login");
         user.add("buyTicket");
         user.add("getPrice");
         user.add("addTicket");
@@ -81,16 +83,18 @@ public class PagesMapping {
         user.add("toUpdateUser");
         user.add("updateUser");
 
+        shipAdministrator.add("login");
         shipAdministrator.add("toMainPage");
         shipAdministrator.add("toShipsPage");
         shipAdministrator.add("toUserPage");
         shipAdministrator.add("toTicketPage");
-        shipAdministrator.add("toSetBonusesForShipBiTicketType");
+        shipAdministrator.add("toSetBonusesForShipByTicketType");
         shipAdministrator.add("editBonuses");
         shipAdministrator.add("logout");
         shipAdministrator.add("toUpdateUser");
         shipAdministrator.add("updateUser");
 
+        stuff.add("login");
         stuff.add("logout");
         stuff.add("toUpdateUser");
         stuff.add("updateUser");

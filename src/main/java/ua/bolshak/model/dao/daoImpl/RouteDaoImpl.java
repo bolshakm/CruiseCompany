@@ -112,16 +112,15 @@ public class RouteDaoImpl implements IRouteDao {
 
     @Override
     public void add(Route route) {
-        PreparedStatement psForAddRoute = null;
-        PreparedStatement psForAddRouteHasPorts = null;
-        try (Connection connection = MysqlConnectionPool.getConnection()) {
-            psForAddRoute = connection.prepareStatement(SqlQuery.ADD_ROUTES);
+        try (Connection connection = MysqlConnectionPool.getConnection();
+             PreparedStatement psForAddRoute = connection.prepareStatement(SqlQuery.ADD_ROUTES);
+             PreparedStatement  psForAddRouteHasPorts = connection.prepareStatement(SqlQuery.ADD_ROUTES_HAS_PORTS)) {
             psForAddRoute.setString(1, route.getName());
             psForAddRoute.executeUpdate();
             route.setId(findByName(route.getName()).getId());
             if (route.getPorts() != null) {
 //                addPorts(route);
-                psForAddRouteHasPorts = connection.prepareStatement(SqlQuery.ADD_ROUTES_HAS_PORTS);
+
                 for (Port port : route.getPorts()) {
                     psForAddRouteHasPorts.setInt(1, port.getId());
                     psForAddRouteHasPorts.setInt(2, route.getId());
@@ -131,17 +130,6 @@ public class RouteDaoImpl implements IRouteDao {
             }
         } catch (SQLException e) {
             LOGGER.error(e.getMessage());
-        } finally {
-            try {
-                if (psForAddRoute != null) {
-                    psForAddRoute.close();
-                }
-                if (psForAddRouteHasPorts != null) {
-                    psForAddRouteHasPorts.close();
-                }
-            } catch (SQLException e) {
-                LOGGER.error(e.getMessage());
-            }
         }
     }
 

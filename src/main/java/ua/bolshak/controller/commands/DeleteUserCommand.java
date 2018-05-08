@@ -12,6 +12,7 @@ public class DeleteUserCommand implements ICommand{
     @Override
     public String execute(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException {
         User user = UserService.findById(Integer.parseInt(request.getParameter("idUser")));
+
         UserService.delete(user);
         return new ToUserPage().execute(request, response);
     }

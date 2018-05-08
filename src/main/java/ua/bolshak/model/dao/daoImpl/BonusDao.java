@@ -89,7 +89,7 @@ public class BonusDao implements BonusIDao {
     public List<Bonus> findAllByShipAndTicketType(Ship ship, TicketType ticketType) {
         List<Bonus> bonuses = new ArrayList<>();
         try(Connection connection = MysqlConnectionPool.getConnection();
-            PreparedStatement preparedStatement = connection.prepareStatement(SqlQuery.SELECT_ALL_BONUSES_BY_SHIP_AND_TIKCET_TIPE)){
+            PreparedStatement preparedStatement = connection.prepareStatement(SqlQuery.SELECT_ALL_BONUSES_BY_SHIP_AND_TICKET_TYPE)){
             preparedStatement.setInt(1, ship.getId());
             preparedStatement.setInt(2, ticketType.getId());
             try(ResultSet resultSet = preparedStatement.executeQuery()){
@@ -128,7 +128,7 @@ public class BonusDao implements BonusIDao {
     @Override
     public void addBonusesForShipByTicketType(List<Bonus> bonuses, Ship ship, TicketType ticketType) {
         try(Connection connection = MysqlConnectionPool.getConnection();
-            PreparedStatement preparedStatement = connection.prepareStatement(SqlQuery.ADD_BONUSES_FOR_SHIP_BY_TIKCET_TYPE)){
+            PreparedStatement preparedStatement = connection.prepareStatement(SqlQuery.ADD_BONUSES_FOR_SHIP_BY_TICKET_TYPE)){
             for (Bonus bonus : bonuses) {
                 preparedStatement.setInt(1,ticketType.getId());
                 preparedStatement.setInt(2,bonus.getId());
@@ -144,7 +144,7 @@ public class BonusDao implements BonusIDao {
     @Override
     public void deleteBonusesForShipByTicketType(Ship ship, TicketType ticketType) {
         try(Connection connection = MysqlConnectionPool.getConnection();
-            PreparedStatement preparedStatement = connection.prepareStatement(SqlQuery.DELETE_BONUSES_FOR_SHIP_BY_TIKCET_TYPE)){
+            PreparedStatement preparedStatement = connection.prepareStatement(SqlQuery.DELETE_BONUSES_FOR_SHIP_BY_TICKET_TYPE)){
             preparedStatement.setInt(1, ship.getId());
             preparedStatement.setInt(2, ticketType.getId());
             preparedStatement.executeUpdate();

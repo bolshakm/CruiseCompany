@@ -45,6 +45,12 @@ public class TicketTypeService {
         return ticketTypes;
     }
 
+    public static List<TicketType> getListWhithStandartTicketTypes(){
+        List<TicketType> ticketTypes = new ArrayList<>();
+        ticketTypes.add(findById(1));
+        return ticketTypes;
+    }
+
     public static void add(TicketType ticketType) {
         DaoFactory.getTicketTypeDao().add(ticketType);
     }
