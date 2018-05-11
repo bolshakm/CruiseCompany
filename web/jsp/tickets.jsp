@@ -37,7 +37,7 @@
                         <th>Actions</th>
                     </c:if>
                 </tr>
-                <c:forEach var="Ticket" items="${Tickets}">
+                <c:forEach var="Ticket" items="${Tickets}" begin="${begin}" end="${end}">
                     <tr>
                         <td>${Ticket.id}</td>
                         <td>${Ticket.user.login}</td>
@@ -68,6 +68,12 @@
                         </c:if>
                     </tr>
                 </c:forEach>
+                <tr align="right"><td colspan="10">
+                    <c:forEach var="pageNumber" items="${pageNumbers}">
+                        <a href="CruiseCompany?command=toTicketsPage&pageNumber=${pageNumber}">${pageNumber}</a>
+                    </c:forEach>
+                </td>
+                </tr>
             </table>
         </td>
         <td width="10"></td>

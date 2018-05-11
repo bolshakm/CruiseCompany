@@ -189,12 +189,7 @@ public class CruiseDao implements CruiseIDao{
     @Override
     public void update(Cruise cruise) {
         try(Connection connection = MysqlConnectionPool.getConnection();
-            PreparedStatement psForUpdateCruise = connection.prepareStatement(SqlQuery.UPDATE_CRUISE);
-            PreparedStatement psForDeleteTicketByCruise = connection.prepareStatement(SqlQuery.DELETE_TICKET_BY_CRUISE)){
-            if (!cruise.getTickets().isEmpty()) {
-                psForDeleteTicketByCruise.setInt(1, cruise.getId());
-                psForDeleteTicketByCruise.executeUpdate();
-            }
+            PreparedStatement psForUpdateCruise = connection.prepareStatement(SqlQuery.UPDATE_CRUISE)){
             psForUpdateCruise.setString(1, cruise.getName());
             psForUpdateCruise.setDate(2,cruise.getFrom());
             psForUpdateCruise.setDate(3, cruise.getTo());

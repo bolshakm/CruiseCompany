@@ -30,7 +30,6 @@ public interface SqlQuery {
     String FIND_CRUISE_BY_NAME = "SELECT * from cruises where cruise_name = ?";
     String ADD_CRUISE = "INSERT INTO cruises (cruise_name, cruise_from, cruise_to, ships_id_ship, cruise_statuses_id_cruise_status, routes_id_route) VALUES ( ?, ?, ?, ?, ?, ?)";
     String UPDATE_CRUISE = "UPDATE cruises SET cruise_name = ?, cruise_from = ?, cruise_to = ?, ships_id_ship = ?, cruise_statuses_id_cruise_status = ?, routes_id_route = ? WHERE id_cruise = ?;";
-    String DELETE_TICKET_BY_CRUISE = "delete from tickets where cruises_id_cruise = ?";
     String DELETE_CRUISE = "DELETE FROM cruises WHERE id_cruise = ?";
     //cruisesStatus table
     String FIND_ALL_CRUISE_STATUSES = "SELECT * FROM cruise_statuses";
