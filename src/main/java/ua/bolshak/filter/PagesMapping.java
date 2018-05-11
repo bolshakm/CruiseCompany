@@ -69,6 +69,7 @@ public class PagesMapping {
         admin.add("deleteTicketType");
         admin.add("updateUser");
         admin.add("logout");
+        admin.add("searchCruise");
 
         user.add("login");
         user.add("buyTicket");
@@ -87,7 +88,7 @@ public class PagesMapping {
         shipAdministrator.add("login");
         shipAdministrator.add("toMainPage");
         shipAdministrator.add("toShipsPage");
-        shipAdministrator.add("toUserPage");
+        shipAdministrator.add("toUsersPage");
         shipAdministrator.add("toTicketsPage");
         shipAdministrator.add("toSetBonusesForShipByTicketType");
         shipAdministrator.add("editBonuses");

@@ -54,5 +54,5 @@ public interface ColumnName {
     String ROUTE_NAME = "route_name";
 
     String SHIPS_HAS_ID_TICKET_TYPE = "ticket_types_id_ticket_type";
-    String SHIPS_BONUSE_BY_TICKET_TYPE = "bonuses_id_bonus";
+    String SHIPS_BONUSES_BY_TICKET_TYPE = "bonuses_id_bonus";
 }

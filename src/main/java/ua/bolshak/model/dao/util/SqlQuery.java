@@ -83,7 +83,6 @@ public interface SqlQuery {
     String DELETE_ALL_SHIP_HAS_TICKET_TYPES_HAS_BONUSES = "delete from ship_has_ticket_types_has_bonuses where ships_id_ship = ?";
     String ADD_BONUS_FOR_SHIP ="INSERT INTO bonuses_has_ships (ships_id_ship, bonuses_id_bonus) VALUES (?, ?)";
     String ADD_TICKET_TYPE_FOR_SHIP = "INSERT INTO ship_has_ticket_types_has_bonuses (ticket_types_id_ticket_type, bonuses_id_bonus, ships_id_ship) VALUES (?, 1, ?)";
-    String DELETE_ALL_SHIP_HAS_TICKET_TYPE = "delete from ship_has_ticket_types_has_bonuses where ships_id_ship = ?";
     //shipTypes table
     String FIND_ALL_SHIP_TYPES = "SELECT * FROM ship_types where id_ship_type > 1";
     String FIND_SHIP_TYPE_BY_ID = "SELECT * FROM ship_types WHERE id_ship_type = ?";
@@ -124,6 +123,7 @@ public interface SqlQuery {
     String FIND_ALL_TICKETS_BY_USER = "SELECT * FROM tickets WHERE users_id_user = ?";
     String FIND_ALL_TICKETS_BY_CRUISE = "SELECT * FROM tickets WHERE cruises_id_cruise = ?";
     String FIND_ALL_TICKETS_BY_TICKET_TYPES = "SELECT tickets.* FROM tickets JOIN ticket_types t2 ON tickets.ticket_types_id_ticket_type = t2.id_ticket_type WHERE t2.id_ticket_type = ?";
+    String FIND_ALL_TICKETS_BY_TICKET_TYPES_AND_CRUISE = "select tickets.* from tickets where ticket_types_id_ticket_type = ? and cruises_id_cruise = ?";
     String FIND_ALL_TICKETS_BY_EXCURSION = "SELECT tickets.* FROM tickets JOIN tickets_has_excursions t ON tickets.id_ticket = t.tickets_id_ticket WHERE t.excursions_id_excursion = ?";
     String FIND_ALL_TICKETS_BY_BONUS = "SELECT tickets.* from tickets join tickets_has_bonuses thb on tickets.id_ticket = thb.tickets_id_ticket where tickets_id_ticket = ?";
     String FIND_TICKET_BY_ID = "SELECT * FROM tickets WHERE id_ticket = ?";
@@ -139,6 +139,7 @@ public interface SqlQuery {
     String DELETE_TICKET_HAS_BONUSES = "delete from tickets_has_bonuses where tickets_id_ticket = ?";
     String ADD_TICKET_HAS_BONUSES = "INSERT INTO tickets_has_bonuses (tickets_id_ticket, bonuses_id_bonus) VALUES (?, ?)";
     String DELETE_TICKET = "DELETE FROM tickets WHERE id_ticket = ?";
+    String DELETE_TICKETS_BONUSES = "delete from tickets_has_bonuses where tickets_id_ticket = ?";
 
     //routes table
     String FIND_ALL_ROUTES ="select * from routes";

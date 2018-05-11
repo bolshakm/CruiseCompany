@@ -7,6 +7,39 @@
 </head>
 <body>
 <c:import url="header.jsp"/>
+<table border="1" align="center">
+    <tr>
+        <th>Name</th>
+        <th>From</th>
+        <th>To</th>
+        <th>Ship number</th>
+        <th>Cruise status</th>
+        <th>Routes</th>
+        <th>Actions</th>
+    </tr>
+    <form action="/CruiseCompany" method="post">
+        <input type="hidden" name="command" value="searchCruise">
+        <tr>
+            <td><input type="text" name="name"></td>
+            <td><input type="date" name="from"></td>
+            <td><input type="date" name="to"></td>
+            <td><input type="text" name="shipNumber"></td>
+            <td><select name="cruiseStatusId">
+                <option disabled selected>Select cruise status</option>
+                <c:forEach var="CruiseStatus" items="${CruiseStatuses}">
+                    <option value="${CruiseStatus.id}">${CruiseStatus.name}</option>
+                </c:forEach>
+            </select></td>
+            <td><select name="routesId">
+                <option disabled selected>Select route</option>
+                <c:forEach var="Route" items="${Routes}">
+                    <option value="${Route.id}">${Route.name}</option>
+                </c:forEach>
+            </select></td>
+            <td><input type="submit" value="Search"></td>
+        </tr>
+    </form>
+</table>
 <table align="center">
     <tr>
         <td valign="top">

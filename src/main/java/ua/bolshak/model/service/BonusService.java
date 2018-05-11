@@ -52,9 +52,19 @@ public class BonusService {
         return DaoFactory.getBonusDao().findAllByShip(ship);
     }
 
-
     public static void editBonusesForShipByTicketType(List<Bonus> bonuses, TicketType ticketType, Ship ship){
         DaoFactory.getBonusDao().editBonusesForShipByTicketType(bonuses, ship, ticketType);
+    }
+
+    public static void editBonusesForTicketByShipAndTicketType(List<Bonus> bonuses, TicketType ticketType, Ship ship){
+        for (Cruise cruise : CruiseService.getFull(ship.getCruises())) {
+            for (Ticket ticket : TicketService.getFull(cruise.getTickets())) {
+                if (ticketType.equals(ticket.getTicketType())){
+                    ticket.setBonuses(bonuses);
+                    TicketService.updateTicketHasBonuses(ticket);
+                }
+            }
+        }
     }
     public static void add(Bonus bonus){
         DaoFactory.getBonusDao().add(bonus);

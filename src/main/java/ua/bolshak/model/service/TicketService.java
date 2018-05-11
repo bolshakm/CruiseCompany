@@ -75,6 +75,10 @@ public class TicketService {
         return getFull(DaoFactory.getTicketDao().findAllByCruise(cruise));
     }
 
+    public static List<Ticket> findAllByTicketTypeAndCruise(TicketType ticketType,Cruise cruise){
+        return getFull(DaoFactory.getTicketDao().findAllByTicketTypeAndCruise(ticketType, cruise));
+    }
+
     public static List<Ticket> findAllByTicketType(TicketType ticketType){
         return getFull(DaoFactory.getTicketDao().findAllByTicketType(ticketType));
     }
@@ -133,6 +137,7 @@ public class TicketService {
         DaoFactory.getTicketDao().update(ticket);
     }
 
+
     public static void delete(Ticket ticket){
         DaoFactory.getTicketDao().delete(ticket);
     }
@@ -160,4 +165,23 @@ public class TicketService {
         }
         return tickets;
     }
+
+    public static void AddTicketHasBonuses(Ticket ticket){
+        DaoFactory.getTicketDao().addBonuses(ticket);
+    }
+
+    public static void updateTicketHasBonuses(Ticket ticket){
+        DaoFactory.getTicketDao().updateBonuses(ticket);
+    }
+
+    public static void updateTicketHasBonuses(List<Ticket> tickets){
+        for (Ticket ticket : tickets) {
+            DaoFactory.getTicketDao().updateBonuses(ticket);
+        }
+    }
+
+    public static void deleteTicketHasBonuses(Ticket ticket){
+        DaoFactory.getTicketDao().deleteBonuses(ticket);
+    }
+
 }

@@ -2,6 +2,7 @@ package ua.bolshak.controller.commands;
 
 import ua.bolshak.model.service.CruiseService;
 import ua.bolshak.model.service.CruiseStatusService;
+import ua.bolshak.model.service.RouteService;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -12,6 +13,7 @@ public class ToAdministratorPage implements ICommand {
         String page = "/jsp/administrator.jsp";
         request.setAttribute("Cruises", CruiseService.findAll());
         request.setAttribute("CruiseStatuses", CruiseStatusService.findAll());
+        request.setAttribute("Routes", RouteService.findAll());
         return page;
     }
 }

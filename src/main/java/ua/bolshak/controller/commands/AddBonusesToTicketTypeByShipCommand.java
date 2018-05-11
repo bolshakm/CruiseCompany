@@ -24,6 +24,7 @@ public class AddBonusesToTicketTypeByShipCommand implements ICommand {
         List<Bonus> bonuses = BonusService.getListBonuses(selectedBonuses);
         if (!bonuses.isEmpty()) {
             BonusService.editBonusesForShipByTicketType(bonuses, ticketType, ship);
+            BonusService.editBonusesForTicketByShipAndTicketType(bonuses, ticketType, ship);
         }
         return new ToShipsPageCommand().execute(request, response);
     }

@@ -73,6 +73,7 @@ public class ControllerHelper {
         commands.put("editBonuses", new AddBonusesToTicketTypeByShipCommand());
         commands.put("addUser", new AddUserCommand());
         commands.put("toRegistrationPage", new ToRegistrationPage());
+        commands.put("searchCruise", new SearchCruiseCommand());
     }
 
     public static ControllerHelper getInstance() {

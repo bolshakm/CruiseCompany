@@ -252,7 +252,7 @@ public class ShipDao implements ShipIDao {
             psFindAllIdBonusesByShip.setInt(1, ship.getId());
             try (ResultSet resultSet = psFindAllIdBonusesByShip.executeQuery()) {
                 while (resultSet.next()) {
-                    bonuses.add(BonusService.findById(resultSet.getInt(ColumnName.SHIPS_BONUSE_BY_TICKET_TYPE)));
+                    bonuses.add(BonusService.findById(resultSet.getInt(ColumnName.SHIPS_BONUSES_BY_TICKET_TYPE)));
                 }
             }
             try (PreparedStatement psForAddBonusForShip = connection.prepareStatement(SqlQuery.ADD_BONUS_FOR_SHIP);
@@ -288,7 +288,7 @@ public class ShipDao implements ShipIDao {
                             psFindAllBonusesByTicketTypeAndShip.setInt(2, ticketType.getId());
                             try (ResultSet resultSet = psFindAllBonusesByTicketTypeAndShip.executeQuery()) {
                                 while (resultSet.next()) {
-                                    bonusesByTicketType.add(BonusService.findById(resultSet.getInt(ColumnName.SHIPS_BONUSE_BY_TICKET_TYPE)));
+                                    bonusesByTicketType.add(BonusService.findById(resultSet.getInt(ColumnName.SHIPS_BONUSES_BY_TICKET_TYPE)));
                                 }
                             }
                             if (bonusesByTicketType.size() == 1){
@@ -329,7 +329,7 @@ public class ShipDao implements ShipIDao {
 //            }
 //            try (ResultSet resultSet = psFindAllIdBonusesByShip.executeQuery()) {
 //                while (resultSet.next()) {
-//                    bonuses.add(BonusService.findById(resultSet.getInt(ColumnName.SHIPS_BONUSE_BY_TICKET_TYPE)));
+//                    bonuses.add(BonusService.findById(resultSet.getInt(ColumnName.SHIPS_BONUSES_BY_TICKET_TYPE)));
 //                }
 //            }
 //            try (PreparedStatement psForDeleteShipsTicketType = connection.prepareStatement(SqlQuery.DELETE_TICKET_TYPES_BY_SHIP_IN_SHIP_HAS_TICKET_TYPE);
@@ -387,7 +387,7 @@ public class ShipDao implements ShipIDao {
 //                            psFindAllBonusesByTicketTypeAndShip.setInt(2, ticketType.getId());
 //                            try (ResultSet resultSet = psFindAllBonusesByTicketTypeAndShip.executeQuery()) {
 //                                while (resultSet.next()) {
-//                                    bonusesByTicketType.add(BonusService.findById(resultSet.getInt(ColumnName.SHIPS_BONUSE_BY_TICKET_TYPE)));
+//                                    bonusesByTicketType.add(BonusService.findById(resultSet.getInt(ColumnName.SHIPS_BONUSES_BY_TICKET_TYPE)));
 //                                }
 //                            }
 //                            if (bonusesByTicketType.size() == 1){
