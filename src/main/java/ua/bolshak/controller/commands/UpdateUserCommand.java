@@ -71,12 +71,12 @@ public class UpdateUserCommand implements ICommand {
 
         UserService.update(user);
         if (sessionUser.getRole().getId() == 1) {
-            if (user.getRole().getId() == 1) {
-                request.setAttribute("user", user);
+            if (user.getRole().getId() == 1){
+                request.getSession().setAttribute("user", user);
             }
             page = new ToUserPage().execute(request, response);
         } else {
-            request.setAttribute("user", user);
+            request.getSession().setAttribute("user", user);
             page = new ToMainPage().execute(request, response);
         }
 

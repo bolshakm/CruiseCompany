@@ -70,6 +70,7 @@ public class PagesMapping {
         admin.add("updateUser");
         admin.add("logout");
         admin.add("searchCruise");
+        admin.add("toAdministratorPage");
 
         user.add("login");
         user.add("buyTicket");

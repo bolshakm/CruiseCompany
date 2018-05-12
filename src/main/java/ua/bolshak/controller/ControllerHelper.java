@@ -74,6 +74,7 @@ public class ControllerHelper {
         commands.put("addUser", new AddUserCommand());
         commands.put("toRegistrationPage", new ToRegistrationPage());
         commands.put("searchCruise", new SearchCruiseCommand());
+        commands.put("toAdministratorPage", new ToAdministratorPage());
     }
 
     public static ControllerHelper getInstance() {

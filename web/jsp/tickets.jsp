@@ -83,6 +83,7 @@
                     <caption>Ticket Type</caption>
                     <tr>
                         <th>Name</th>
+                        <th>Price</th>
                         <th>Actions</th>
                     </tr>
                     <c:if test="${TicketType == null}">
@@ -90,8 +91,9 @@
                             <form action="${pageContext.request.contextPath}/CruiseCompany" method="post">
                                 <td>
                                     <input type="hidden" name="command" value="addTicketType">
-                                    <input type="text" name="TicketTypeName">
+                                    <input type="text" size="15" name="TicketTypeName">
                                 </td>
+                                <td><input type="text" size="10" name="pricePerTicket"></td>
                                 <td>
                                     <input type="submit" name="Add" value="Add">
                                 </td>
@@ -105,6 +107,7 @@
                                     <input type="hidden" name="command" value="updateTicketType">
                                     <input type="hidden" name="idTicketType" value="${TicketType.id}">
                                     <input type="text" name="TicketTypeName" value="${TicketType.name}">
+                                <td><input type="number" name="pricePerTicket" value="${TicketType.price}"></td>
                                 </td>
                                 <td>
                                     <input type="submit" name="Update" value="Update">
@@ -115,6 +118,7 @@
                     <c:forEach var="TicketType" items="${TicketTypes}">
                         <tr>
                             <td>${TicketType.name}</td>
+                            <td>${TicketType.price}</td>
                             <td><a href="/CruiseCompany?command=toUpdateTicketType&idTicketType=${TicketType.id}"><button>Update</button></a>
                                 <a href="/CruiseCompany?command=deleteTicketType&idTicketType=${TicketType.id}"><button>Delete</button></a></td>
                         </tr>

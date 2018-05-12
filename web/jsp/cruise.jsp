@@ -45,7 +45,7 @@
         <td valign="top">
             <table border="1" bgcolor="#7fffd4">
                 <caption>Cruises</caption>
-                <tr align="right"><a href="/CruiseCompany?command=toCruiseCard"><button>Add</button></a></tr>
+                <tr align="right"><td colspan="10"><a href="/CruiseCompany?command=toCruiseCard"><button>Add</button></a></tr></td>
                 <tr>
                     <th>Name</th>
                     <th>From</th>
@@ -56,7 +56,7 @@
                     <th>Routes</th>
                     <th>Actions</th>
                 </tr>
-                <c:forEach var="Cruise" items="${Cruises}">
+                <c:forEach var="Cruise" items="${Cruises}" begin="${begin}" end="${end}">
                     <tr>
                         <td>${Cruise.name}</td>
                         <td>${Cruise.from}</td>
@@ -69,6 +69,12 @@
                             <a href="/CruiseCompany?command=deleteCruise&idCruise=${Cruise.id}"><button>Delete</button></a></td>
                     </tr>
                 </c:forEach>
+                <tr align="right"><td colspan="10">
+                    <c:forEach var="pageNumber" items="${pageNumbers}">
+                        <a href="CruiseCompany?command=toAdministratorPage&pageNumber=${pageNumber}">${pageNumber}</a>
+                    </c:forEach>
+                </td>
+                </tr>
             </table>
         </td>
         <td width="10"></td>

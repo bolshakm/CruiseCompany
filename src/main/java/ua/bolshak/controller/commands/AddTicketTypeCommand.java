@@ -13,7 +13,9 @@ public class AddTicketTypeCommand implements ICommand {
     public String execute(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException {
         TicketType ticketType = new TicketType();
         String name = request.getParameter("TicketTypeName");
+        String price = request.getParameter("pricePerTicket");
         ticketType.setName(name);
+        ticketType.setPrice(Double.parseDouble(price));
         TicketTypeService.add(ticketType);
         return new ToTicketsPageCommand().execute(request, response);
     }
