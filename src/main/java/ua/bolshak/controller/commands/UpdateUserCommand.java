@@ -8,13 +8,15 @@ import ua.bolshak.model.service.UserService;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 import java.io.IOException;
 
 public class UpdateUserCommand implements ICommand {
     @Override
     public String execute(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException {
         String page;
-        User sessionUser = (User) request.getSession().getAttribute("user");
+        HttpSession session = request.getSession();
+        User sessionUser = (User) session.getAttribute("user");
         User user = UserService.findById(Integer.parseInt(request.getParameter("idUser")));
         String login = request.getParameter("login");
         String password = request.getParameter("password");
@@ -30,9 +32,6 @@ public class UpdateUserCommand implements ICommand {
         }
         if (lastName != null) {
             user.setLastName(lastName);
-        }
-        if (money != null) {
-            user.setMoney(Double.parseDouble(money));
         }
         if (idRole != null) {
             user.setRole(RoleService.findById(Integer.parseInt(idRole)));
@@ -68,18 +67,23 @@ public class UpdateUserCommand implements ICommand {
                 return new ToUserCardCommand().execute(request, response);
             }
         }
-
         UserService.update(user);
         if (sessionUser.getRole().getId() == 1) {
-            if (user.getRole().getId() == 1){
-                request.getSession().setAttribute("user", user);
+            if (money != null) {
+                double moneyForTransfer = Double.parseDouble(money);
+                if (sessionUser.getMoney() >= moneyForTransfer) {
+                    UserService.transferMoneyFromAdministrator(user, moneyForTransfer);
+                    session.setAttribute("user", UserService.findById(1));
+                } else {
+                    request.setAttribute("ErrorMassage", "Not enough money!");
+                    return new ToUserCardCommand().execute(request, response);
+                }
             }
             page = new ToUserPage().execute(request, response);
         } else {
             request.getSession().setAttribute("user", user);
             page = new ToMainPage().execute(request, response);
         }
-
         return page;
     }
 }

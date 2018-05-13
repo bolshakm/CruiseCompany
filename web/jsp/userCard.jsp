@@ -47,7 +47,7 @@
         <td>Last name</td>
         <td><input type="text" name="lastName" value="${lastName}"/></td>
     </tr>
-        <c:if test="${user.role.id == 1}">
+        <c:if test="${user.role.id == 1 && user.role.id != idUser}">
             <tr>
                 <td>Money</td>
                 <td><input type="number" name="money" value="${money}"></td>
@@ -97,6 +97,5 @@
     </tr>
     </form>
 </table>
-<p align="center">${ErrorMassage}</p>
 </body>
 </html>

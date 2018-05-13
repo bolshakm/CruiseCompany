@@ -89,6 +89,10 @@ public class UserService {
         return DaoFactory.getUserDao().findByLogin(login);
     }
 
+    public static void transferMoneyFromAdministrator(User user, double money){
+        DaoFactory.getUserDao().transferMoneyFromUser(user, money);
+    }
+
     public static void add(User user){
         DaoFactory.getUserDao().add(user);
     }

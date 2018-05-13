@@ -1,6 +1,7 @@
 package ua.bolshak.model.dao.daoImpl;
 
 import org.apache.log4j.Logger;
+import ua.bolshak.exception.NotEnoughMoneyException;
 import ua.bolshak.model.MysqlConnectionPool;
 import ua.bolshak.model.dao.idao.UserIDao;
 import ua.bolshak.model.dao.util.ColumnName;
@@ -223,6 +224,86 @@ public class UserDao implements UserIDao{
         }
         return user;
     }
+
+    public void transferMoneyFromUser(User user, double money){
+        Connection connection = null;
+        PreparedStatement checkUserMoney = null;
+        PreparedStatement checkAdminMoney = null;
+        PreparedStatement rsFrom = null;
+        PreparedStatement rsTo = null;
+        try {
+            connection = MysqlConnectionPool.getConnection();
+            connection.setAutoCommit(false);
+            double usersMoney = 0;
+            double adminsMoney = 0;
+            checkUserMoney = connection.prepareStatement(SqlQuery.CHECK_USERS_MONEY);
+            checkUserMoney.setInt(1, user.getId());
+            try(ResultSet resultSet = checkUserMoney.executeQuery()){
+                while (resultSet.next()) {
+                    usersMoney = resultSet.getDouble(ColumnName.MONEY);
+                }
+            }
+            checkAdminMoney = connection.prepareStatement(SqlQuery.CHECK_ADMIN_MONEY);
+            checkAdminMoney.setInt(1, 1);
+            try(ResultSet resultSet = checkAdminMoney.executeQuery()){
+                while (resultSet.next()) {
+                    adminsMoney = resultSet.getDouble(ColumnName.MONEY);
+                }
+            }
+            if (adminsMoney < money){
+                throw new NotEnoughMoneyException("Administrator doesn't have enough money!");
+            } else {
+                adminsMoney -= money;
+                usersMoney += money;
+            }
+            rsFrom = connection.prepareStatement(SqlQuery.GET_MONEY);
+            rsFrom.setDouble(1, adminsMoney);
+            rsFrom.setInt(2, 1);
+            rsFrom.executeUpdate();
+            rsTo = connection.prepareStatement(SqlQuery.SET_MONEY);
+            rsTo.setDouble(1, usersMoney);
+            rsTo.setInt(2, user.getId());
+            rsTo.executeUpdate();
+            connection.commit();
+        } catch (NotEnoughMoneyException e) {
+            try {
+                connection.rollback();
+            } catch (SQLException rollBackException) {
+                LOGGER.error(rollBackException.getMessage());
+            }
+            LOGGER.error(e.getMessage());
+        } catch (SQLException e) {
+            try {
+                if (connection != null) {
+                    connection.rollback();
+                }
+            } catch (SQLException rollBackException) {
+                LOGGER.error(rollBackException.getMessage());
+            }
+            LOGGER.error(e.getMessage());
+        } finally {
+            try {
+                if (connection != null) {
+                    connection.close();
+                }
+                if (checkUserMoney != null) {
+                    checkUserMoney.close();
+                }
+                if (checkAdminMoney != null) {
+                    checkAdminMoney.close();
+                }
+                if (rsTo != null) {
+                    rsTo.close();
+                }
+                if (rsFrom != null) {
+                    rsFrom.close();
+                }
+            } catch (SQLException e) {
+                LOGGER.error(e.getMessage());
+            }
+        }
+    }
+
 
     @Override
     public void add(User user) {

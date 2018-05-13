@@ -68,7 +68,12 @@
                         </c:if>
                     </tr>
                 </c:forEach>
+                <c:if test="${user.role.id == 1}">
                 <tr align="right"><td colspan="10">
+                    </c:if>
+                        <c:if test="${user.role.id != 1}">
+                <tr align="right"><td colspan="11">
+                    </c:if>
                     <c:forEach var="pageNumber" items="${pageNumbers}">
                         <a href="CruiseCompany?command=toTicketsPage&pageNumber=${pageNumber}">${pageNumber}</a>
                     </c:forEach>

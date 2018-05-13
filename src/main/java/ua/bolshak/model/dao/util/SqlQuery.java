@@ -130,8 +130,8 @@ public interface SqlQuery {
     String ADD_TICKET = "INSERT INTO tickets (users_id_user, name, last_name, ticket_types_id_ticket_type, cruises_id_cruise, price) VALUES (?, ?, ?, ?, ?, ?)";
     String CHECK_USERS_MONEY = "select users.money from users where id_user = ?";
     String CHECK_ADMIN_MONEY = "select users.money from users where id_user = ?";
-    String GET_MONEY_PER_TICKET = "update users set money = ? where id_user = ?";
-    String SET_MONEY_PER_TICKET = "update users set money = ? where id_user = ?";
+    String GET_MONEY = "update users set money = ? where id_user = ?";
+    String SET_MONEY = "update users set money = ? where id_user = ?";
     String UPDATE_TICKET = "UPDATE tickets SET users_id_user = ?, name = ?, last_name = ?, ticket_types_id_ticket_type = ?, cruises_id_cruise = ?, price = ? WHERE id_ticket = ?";
     String DELETE_TICKET_HAS_EXCURSIONS = "delete from tickets_has_excursions where tickets_id_ticket = ?";
     String ADD_TICKET_HAS_EXCURSIONS = "INSERT INTO tickets_has_excursions (excursions_id_excursion, tickets_id_ticket) VALUES (?, ?)";

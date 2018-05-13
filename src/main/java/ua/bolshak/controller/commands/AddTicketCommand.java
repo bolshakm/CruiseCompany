@@ -26,8 +26,14 @@ public class AddTicketCommand implements ICommand {
         ticket.setTicketType(TicketTypeService.findById(Integer.parseInt(ticketTypeId)));
         ticket.setCruise(CruiseService.findById(Integer.parseInt(cruiseId)));
         ticket.setExcursions(ExcursionService.getListById(selectedExcursions));
-        TicketService.buy(ticket);
-        user = UserService.findByLogin(user.getLogin());
+        if (user.getMoney() >= TicketService.checkPrice(ticket).getPrice()) {
+            System.out.println(user.getMoney());
+            System.out.println(ticket.getPrice());
+            TicketService.buy(ticket);
+        } else {
+            request.setAttribute("ErrorMassage", "Not enough money");
+        }
+        user = UserService.findById(user.getId());
         request.getSession().setAttribute("user", user);
         return new ToMainPage().execute(request, response);
     }

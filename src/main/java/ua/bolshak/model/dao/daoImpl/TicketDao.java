@@ -2,6 +2,7 @@ package ua.bolshak.model.dao.daoImpl;
 
 
 import org.apache.log4j.Logger;
+import ua.bolshak.exception.NotEnoughMoneyException;
 import ua.bolshak.model.MysqlConnectionPool;
 import ua.bolshak.model.dao.idao.TicketIDao;
 import ua.bolshak.model.dao.util.ColumnName;
@@ -331,22 +332,28 @@ public class TicketDao implements TicketIDao{
                 }
             }
             if (usersMoney < ticket.getPrice()){
-                // add own exception
-                throw new SQLException("Not enough money");
+                throw new NotEnoughMoneyException("User doesn't have enough money!");
             } else {
                 usersMoney -= ticket.getPrice();
                 adminsMoney += ticket.getPrice();
             }
-            rsFrom = connection.prepareStatement(SqlQuery.GET_MONEY_PER_TICKET);
+            rsFrom = connection.prepareStatement(SqlQuery.GET_MONEY);
             rsFrom.setDouble(1, usersMoney);
             rsFrom.setInt(2, ticket.getUser().getId());
             rsFrom.executeUpdate();
-            rsTo = connection.prepareStatement(SqlQuery.SET_MONEY_PER_TICKET);
+            rsTo = connection.prepareStatement(SqlQuery.SET_MONEY);
             rsTo.setDouble(1, adminsMoney);
             rsTo.setInt(2, 1);
             rsTo.executeUpdate();
             connection.commit();
             add(ticket);
+        } catch (NotEnoughMoneyException e) {
+            try {
+                connection.rollback();
+            } catch (SQLException rollBackException) {
+                LOGGER.error(rollBackException.getMessage());
+            }
+            LOGGER.error(e.getMessage());
         } catch (SQLException e) {
             try {
                 if (connection != null) {
@@ -376,7 +383,6 @@ public class TicketDao implements TicketIDao{
             } catch (SQLException e) {
                 LOGGER.error(e.getMessage());
             }
-
         }
     }
 }
