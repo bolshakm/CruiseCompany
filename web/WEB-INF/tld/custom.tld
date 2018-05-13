@@ -10,7 +10,7 @@
     <uri>customtag</uri>
     <tag>
         <name>customtag</name>
-        <tag-class>tag.PaginationTag</tag-class>
+        <tag-class>ua.bolshak.tag.CustomTag</tag-class>
         <body-content>empty</body-content>
     </tag>
 

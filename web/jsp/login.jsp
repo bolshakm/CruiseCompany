@@ -37,5 +37,6 @@
     <br/>
 </form>
 <p align="center"> ${ErrorMassage}</p>
+<p align="center"><ctg:customtag/></p>
 </body>
 </html>
