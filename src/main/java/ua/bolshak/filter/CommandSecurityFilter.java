@@ -11,7 +11,7 @@ import java.util.List;
 
 @WebFilter(urlPatterns = {"/CruiseCompany"})
 public class CommandSecurityFilter implements Filter {
-//    private static RequestParam rb = RequestParam.getInstance();
+//    private static RequestParams rb = RequestParams.getInstance();
 //    private static final String COMMAND = rb.getProperty("command");
 //    private static final String USER = rb.getProperty("user");
     private static final String NULL = "null";

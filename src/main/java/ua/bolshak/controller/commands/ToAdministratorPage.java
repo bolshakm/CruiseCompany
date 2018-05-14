@@ -4,6 +4,7 @@ import ua.bolshak.model.entity.Cruise;
 import ua.bolshak.model.service.CruiseService;
 import ua.bolshak.model.service.CruiseStatusService;
 import ua.bolshak.model.service.RouteService;
+import ua.bolshak.properties.RequestParams;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -11,19 +12,28 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class ToAdministratorPage implements ICommand {
+    private static RequestParams params = RequestParams.getInstance();
+    private static final String CRUISES = params.getProperty("Cruises");
+    private static final String CRUISE_STATUS = params.getProperty("CruiseStatuses");
+    private static final String ROUTES = params.getProperty("Routes");
+    private static final String PAGE_NUMBER = params.getProperty("pageNumber");
+    private static final String BEGIN = params.getProperty("begin");
+    private static final String END = params.getProperty("end");
+
+
     @Override
     public String execute(HttpServletRequest request, HttpServletResponse response) {
         String page = "/jsp/administrator.jsp";
         List<Cruise> cruises = CruiseService.findAll();
-        request.setAttribute("Cruises", cruises);
-        request.setAttribute("CruiseStatuses", CruiseStatusService.findAll());
-        request.setAttribute("Routes", RouteService.findAll());
+        request.setAttribute(CRUISES, cruises);
+        request.setAttribute(CRUISE_STATUS, CruiseStatusService.findAll());
+        request.setAttribute(ROUTES, RouteService.findAll());
         addPagination(request, 5, cruises.size());
         return page;
     }
 
     private void addPagination(HttpServletRequest request, int countOnTheOnePage, int listSize) {
-        String pageNumber = request.getParameter("pageNumber");
+        String pageNumber = request.getParameter(PAGE_NUMBER);
         int intPageNumber = 1;
         if (pageNumber != null) {
             intPageNumber = Integer.parseInt(pageNumber);
@@ -76,8 +86,8 @@ public class ToAdministratorPage implements ICommand {
                 }
             }
         }
-        request.setAttribute("begin", begin);
-        request.setAttribute("end", end);
-        request.setAttribute("pageNumbers", pageNumbers);
+        request.setAttribute(BEGIN, begin);
+        request.setAttribute(END, end);
+        request.setAttribute(PAGE_NUMBER, pageNumbers);
     }
 }

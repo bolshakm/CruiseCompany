@@ -6,6 +6,7 @@ import ua.bolshak.model.service.BonusService;
 import ua.bolshak.model.service.ShipService;
 import ua.bolshak.model.service.ShipTypeService;
 import ua.bolshak.model.service.TicketTypeService;
+import ua.bolshak.properties.RequestParams;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
@@ -14,16 +15,25 @@ import java.io.IOException;
 import java.util.List;
 
 public class AddShipCommand implements ICommand {
+    private static RequestParams params = RequestParams.getInstance();
+    private static final String NAME = params.getProperty("name");
+    private static final String SHIP_NUMBER = params.getProperty("shipNumber");
+    private static final String NUMBER_OF_SEATS = params.getProperty("numberOfSeats");
+    private static final String PRICE_PER_SEATS = params.getProperty("pricePerSeat");
+    private static final String ID_SHIP_TYPE = params.getProperty("idShipType");
+    private static final String SELECTED_BONUSES = params.getProperty("selectedBonuses");
+    private static final String SELECTED_TICKET_TYPE = params.getProperty("selectedTicketTypes");
+
     @Override
     public String execute(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException {
         Ship ship = new Ship();
-        String name = request.getParameter("name");
-        String shipNumber = request.getParameter("shipNumber");
-        String numberOfSeats = request.getParameter("numberOfSeats");
-        String pricePerSeat = request.getParameter("pricePerSeat");
-        String idShipType = request.getParameter("idShipType");
-        String[] idSelectedBonuses = request.getParameterValues("selectedBonuses");
-        String[] idSelectedTicketTypes = request.getParameterValues("selectedTicketTypes");
+        String name = request.getParameter(NAME);
+        String shipNumber = request.getParameter(SHIP_NUMBER);
+        String numberOfSeats = request.getParameter(NUMBER_OF_SEATS);
+        String pricePerSeat = request.getParameter(PRICE_PER_SEATS);
+        String idShipType = request.getParameter(ID_SHIP_TYPE);
+        String[] idSelectedBonuses = request.getParameterValues(SELECTED_BONUSES);
+        String[] idSelectedTicketTypes = request.getParameterValues(SELECTED_TICKET_TYPE);
         ship.setName(name);
         ship.setNumber(shipNumber);
         ship.setNumberOfSeats(Integer.parseInt(numberOfSeats));
