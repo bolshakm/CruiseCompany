@@ -4,6 +4,7 @@ import ua.bolshak.model.entity.User;
 import ua.bolshak.model.service.TicketService;
 import ua.bolshak.model.service.UserService;
 import ua.bolshak.properties.RequestParams;
+import ua.bolshak.properties.TextResources;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
@@ -12,6 +13,8 @@ import java.io.IOException;
 
 public class DeleteUserCommand implements ICommand{
     private static RequestParams params = RequestParams.getInstance();
+    private static TextResources text = TextResources.getInstance();
+    private static final String USER_HAS_ACTIVE_TICKET = text.getProperty("user.has.active.ticket");
     private static final String ERROR_MASSAGE = params.getProperty("ErrorMassage");
     private static final String ID_USER = params.getProperty("idUser");
 
@@ -22,7 +25,7 @@ public class DeleteUserCommand implements ICommand{
             if (!TicketService.checkActiveTicketByUser(user)) {
                 UserService.delete(user);
             } else {
-                request.setAttribute(ERROR_MASSAGE, "The user has active tickets");
+                request.setAttribute(ERROR_MASSAGE, USER_HAS_ACTIVE_TICKET);
             }
         } else {
             UserService.delete(user);

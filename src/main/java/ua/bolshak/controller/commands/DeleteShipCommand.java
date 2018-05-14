@@ -4,6 +4,7 @@ import ua.bolshak.model.entity.Ship;
 import ua.bolshak.model.service.CruiseService;
 import ua.bolshak.model.service.ShipService;
 import ua.bolshak.properties.RequestParams;
+import ua.bolshak.properties.TextResources;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
@@ -12,6 +13,8 @@ import java.io.IOException;
 
 public class DeleteShipCommand implements ICommand {
     private static RequestParams params = RequestParams.getInstance();
+    private static TextResources text = TextResources.getInstance();
+    private static final String SHIP_HAS_ACTIVE_CRUISE = text.getProperty("ship.has.active.cruise");
     private static final String ERROR_MASSAGE = params.getProperty("ErrorMassage");
     private static final String ID_SHIP = params.getProperty("idShip");
 
@@ -21,7 +24,7 @@ public class DeleteShipCommand implements ICommand {
         if (!CruiseService.checkActive(ship.getCruises())) {
             ShipService.delete(ship);
         } else {
-            request.setAttribute(ERROR_MASSAGE, "The ship has active cruise!");
+            request.setAttribute(ERROR_MASSAGE, SHIP_HAS_ACTIVE_CRUISE);
         }
         return new ToShipsPageCommand().execute(request, response);
     }

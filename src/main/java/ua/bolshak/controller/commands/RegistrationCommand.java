@@ -5,6 +5,7 @@ import ua.bolshak.model.service.RoleService;
 import ua.bolshak.model.service.ShipService;
 import ua.bolshak.model.service.UserService;
 import ua.bolshak.properties.RequestParams;
+import ua.bolshak.properties.TextResources;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
@@ -13,6 +14,10 @@ import java.io.IOException;
 
 public class RegistrationCommand implements ICommand{
     private static RequestParams params = RequestParams.getInstance();
+    private static TextResources text = TextResources.getInstance();
+    private static final String WRONG_LOGIN = text.getProperty("wrong.login");
+    private static final String WRONG_PASSWORD = text.getProperty("wrong.password");
+    private static final String WRONG_EMAIL = text.getProperty("wrong.email");
     private static final String LOGIN = params.getProperty("login");
     private static final String PASSWORD = params.getProperty("password");
     private static final String PASSWORD_CONFIRM = params.getProperty("passwordConfirm");
@@ -39,7 +44,7 @@ public class RegistrationCommand implements ICommand{
         user.setRole(RoleService.findById(2));
         user.setShip(ShipService.getEmptyShip());
         if (!password.equals(passwordConfirm)){
-            request.setAttribute(ERROR_MASSAGE, "Wrong password");
+            request.setAttribute(ERROR_MASSAGE, WRONG_PASSWORD);
             request.setAttribute(LOGIN, user.getLogin());
             request.setAttribute(PASSWORD_CONFIRM, user.getPassword());
             request.setAttribute(NAME, user.getName());
@@ -48,7 +53,7 @@ public class RegistrationCommand implements ICommand{
             return new ToRegistrationPage().execute(request, response);
         }
         if (UserService.findByLogin(login) != null){
-            request.setAttribute(ERROR_MASSAGE, "Login is not available!");
+            request.setAttribute(ERROR_MASSAGE, WRONG_LOGIN);
             request.setAttribute(PASSWORD, user.getPassword());
             request.setAttribute(PASSWORD_CONFIRM, user.getPassword());
             request.setAttribute(NAME, user.getName());
@@ -57,7 +62,7 @@ public class RegistrationCommand implements ICommand{
             return new ToRegistrationPage().execute(request, response);
         }
         if (UserService.findByEmail(email) != null){
-            request.setAttribute(ERROR_MASSAGE, "Email is not available!");
+            request.setAttribute(ERROR_MASSAGE, WRONG_EMAIL);
             request.setAttribute(LOGIN, user.getLogin());
             request.setAttribute(PASSWORD, user.getPassword());
             request.setAttribute(PASSWORD_CONFIRM, user.getPassword());

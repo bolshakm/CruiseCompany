@@ -4,6 +4,7 @@ import ua.bolshak.model.entity.Role;
 import ua.bolshak.model.service.RoleService;
 import ua.bolshak.model.service.UserService;
 import ua.bolshak.properties.RequestParams;
+import ua.bolshak.properties.TextResources;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
@@ -12,6 +13,8 @@ import java.io.IOException;
 
 public class DeleteRoleCommand implements ICommand {
     private static RequestParams params = RequestParams.getInstance();
+    private static TextResources text = TextResources.getInstance();
+    private static final String ROLE_HAS_USERS = text.getProperty("role.has.users");
     private static final String ERROR_MASSAGE = params.getProperty("ErrorMassage");
     private static final String ID_ROLE = params.getProperty("idRole");
 
@@ -21,7 +24,7 @@ public class DeleteRoleCommand implements ICommand {
         if (UserService.findAllByRole(role).isEmpty()) {
             RoleService.delete(role);
         } else {
-            request.setAttribute(ERROR_MASSAGE, "The role has users and can not be deleted!");
+            request.setAttribute(ERROR_MASSAGE, ROLE_HAS_USERS);
         }
         return new ToUserPage().execute(request, response);
     }

@@ -5,6 +5,7 @@ import ua.bolshak.model.service.RoleService;
 import ua.bolshak.model.service.ShipService;
 import ua.bolshak.model.service.UserService;
 import ua.bolshak.properties.RequestParams;
+import ua.bolshak.properties.TextResources;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
@@ -14,6 +15,11 @@ import java.io.IOException;
 
 public class UpdateUserCommand implements ICommand {
     private static RequestParams params = RequestParams.getInstance();
+    private static TextResources text = TextResources.getInstance();
+    private static final String WRONG_PASSWORD = text.getProperty("wrong.password");
+    private static final String WRONG_LOGIN = text.getProperty("wrong.login");
+    private static final String WRONG_EMAIL = text.getProperty("wrong.email");
+    private static final String NOT_ENOUGH_MONEY = text.getProperty("not.enough.money");
     private static final String USER = params.getProperty("user");
     private static final String ID_USER = params.getProperty("idUser");
     private static final String LOGIN = params.getProperty("login");
@@ -59,7 +65,7 @@ public class UpdateUserCommand implements ICommand {
             if (password != null && passwordConfirm != null && !password.equals("") && !passwordConfirm.equals("") && password.equals(passwordConfirm)) {
                 user.setPassword(password);
             } else {
-                request.setAttribute(ERROR_MASSAGE, "Wrong password");
+                request.setAttribute(ERROR_MASSAGE, WRONG_PASSWORD);
                 request.setAttribute(ID_USER, user.getId());
                 return new ToUserCardCommand().execute(request, response);
             }
@@ -69,7 +75,7 @@ public class UpdateUserCommand implements ICommand {
             if (UserService.findByLogin(login) == null) {
                 user.setLogin(login);
             } else {
-                request.setAttribute(ERROR_MASSAGE, "Wrong login");
+                request.setAttribute(ERROR_MASSAGE,  WRONG_LOGIN);
                 request.setAttribute(ID_USER, user.getId());
                 return new ToUserCardCommand().execute(request, response);
             }
@@ -78,7 +84,7 @@ public class UpdateUserCommand implements ICommand {
             if (UserService.findByEmail(email) == null) {
                 user.setEmail(email);
             } else {
-                request.setAttribute(ERROR_MASSAGE, "Wrong email");
+                request.setAttribute(ERROR_MASSAGE, WRONG_EMAIL);
                 request.setAttribute(ID_USER, user.getId());
                 return new ToUserCardCommand().execute(request, response);
             }
@@ -91,7 +97,7 @@ public class UpdateUserCommand implements ICommand {
                     UserService.transferMoneyFromAdministrator(user, moneyForTransfer);
                     session.setAttribute(USER, UserService.findById(1));
                 } else {
-                    request.setAttribute(ERROR_MASSAGE, "Not enough money!");
+                    request.setAttribute(ERROR_MASSAGE, NOT_ENOUGH_MONEY);
                     return new ToUserCardCommand().execute(request, response);
                 }
             }

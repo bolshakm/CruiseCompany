@@ -1,10 +1,10 @@
 package ua.bolshak.controller.commands;
 
 import ua.bolshak.model.entity.Ticket;
-import ua.bolshak.model.entity.TicketType;
 import ua.bolshak.model.entity.User;
 import ua.bolshak.model.service.*;
 import ua.bolshak.properties.RequestParams;
+import ua.bolshak.properties.TextResources;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
@@ -13,6 +13,7 @@ import java.io.IOException;
 
 public class AddTicketCommand implements ICommand {
     private static RequestParams params = RequestParams.getInstance();
+    private static TextResources text = TextResources.getInstance();
     private static final String NAME = params.getProperty("name");
     private static final String LAST_NAME = params.getProperty("lastName");
     private static final String ID_CRUISE = params.getProperty("idCruise");
@@ -20,6 +21,7 @@ public class AddTicketCommand implements ICommand {
     private static final String SELECTED_EXCURSIONS = params.getProperty("selectedExcursions");
     private static final String ERROR_MASSAGE = params.getProperty("ErrorMassage");
     private static final String USER = params.getProperty("user");
+    private static final String NOT_ENOUGH_MONEY = text.getProperty("not.enough.money");
 
     @Override
     public String execute(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException {
@@ -37,11 +39,9 @@ public class AddTicketCommand implements ICommand {
         ticket.setCruise(CruiseService.findById(Integer.parseInt(cruiseId)));
         ticket.setExcursions(ExcursionService.getListById(selectedExcursions));
         if (user.getMoney() >= TicketService.checkPrice(ticket).getPrice()) {
-            System.out.println(user.getMoney());
-            System.out.println(ticket.getPrice());
             TicketService.buy(ticket);
         } else {
-            request.setAttribute(ERROR_MASSAGE, "Not enough money");
+            request.setAttribute(ERROR_MASSAGE, NOT_ENOUGH_MONEY);
         }
         user = UserService.findById(user.getId());
         request.getSession().setAttribute(USER, user);

@@ -5,6 +5,7 @@ import ua.bolshak.model.entity.User;
 import ua.bolshak.model.service.TicketService;
 import ua.bolshak.model.service.TicketTypeService;
 import ua.bolshak.properties.RequestParams;
+import ua.bolshak.properties.TextResources;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
@@ -15,6 +16,8 @@ import java.util.List;
 
 public class ToTicketsPageCommand implements ICommand {
     private static RequestParams params = RequestParams.getInstance();
+    private static TextResources text = TextResources.getInstance();
+    private static final String TICKET_NOT_FOUND = text.getProperty("ticket.not.found");
     private static final String USER = params.getProperty("user");
     private static final String TICKETS = params.getProperty("Tickets");
     private static final String TICKET_TYPES = params.getProperty("TicketTypes");
@@ -41,7 +44,7 @@ public class ToTicketsPageCommand implements ICommand {
                 if (tickets != null) {
                     request.setAttribute(TICKETS, tickets);
                 } else {
-                    request.setAttribute(ERROR_MASSAGE, "Tickets not found!");
+                    request.setAttribute(ERROR_MASSAGE, TICKET_NOT_FOUND);
                 }
                 break;
             case 3:
@@ -49,7 +52,7 @@ public class ToTicketsPageCommand implements ICommand {
                 if (tickets != null) {
                     request.setAttribute(TICKETS, tickets);
                 } else {
-                    request.setAttribute(ERROR_MASSAGE, "Tickets not found!");
+                    request.setAttribute(ERROR_MASSAGE, TICKET_NOT_FOUND);
                 }
                 break;
         }
