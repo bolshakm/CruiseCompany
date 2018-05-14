@@ -50,43 +50,42 @@ public class RegistrationCommand implements ICommand{
         String name = request.getParameter(NAME);
         String lastName = request.getParameter(LAST_NAME);
         String email = request.getParameter(EMAIL);
-        if (loginPattern.matcher(login).matches()) {
-            if (UserService.findByLogin(login) == null) {
-                user.setLogin(login);
-            } else {
-                return redirectToRegistrationPageWithErrorMassage(request, response, WRONG_LOGIN, user);
-            }
-        } else {
+        user.setLogin(login);
+        user.setPassword(password);
+        user.setName(name);
+        user.setLastName(lastName);
+        user.setEmail(email);
+        if (!loginPattern.matcher(login).matches()) {
+            user.setLogin(null);
             return redirectToRegistrationPageWithErrorMassage(request, response, WRONG_INPUT, user);
         }
-        if (passwordPattern.matcher(PASSWORD_REGEX).matches()) {
-            if (password.equals(passwordConfirm)) {
-                user.setPassword(password);
-            } else {
-                return redirectToRegistrationPageWithErrorMassage(request, response, WRONG_PASSWORD, user);
-            }
-        } else {
-            return redirectToRegistrationPageWithErrorMassage(request, response, WRONG_INPUT, user);
-
+        if (UserService.findByLogin(login) != null) {
+            user.setLogin(null);
+            return redirectToRegistrationPageWithErrorMassage(request, response, WRONG_LOGIN, user);
         }
-        if (namePattern.matcher(NAME_REGEX).matches()) {
-            user.setName(name);
-        } else {
+        if (!passwordPattern.matcher(password).matches() || !passwordPattern.matcher(passwordConfirm).matches()) {
+            user.setPassword(null);
             return redirectToRegistrationPageWithErrorMassage(request, response, WRONG_INPUT, user);
         }
-        if (lastNamePattern.matcher(LAST_NAME_REGEX).matches()) {
-            user.setLastName(lastName);
-        } else {
+        if (!password.equals(passwordConfirm)){
+            user.setPassword(null);
+            return redirectToRegistrationPageWithErrorMassage(request, response, WRONG_PASSWORD, user);
+        }
+        if (!namePattern.matcher(name).matches()) {
+            user.setName(null);
             return redirectToRegistrationPageWithErrorMassage(request, response, WRONG_INPUT, user);
         }
-        if (emailPattern.matcher(EMAIL_REGEX).matches()) {
-            if (UserService.findByEmail(email) == null) {
-                user.setEmail(email);
-            } else {
-                return redirectToRegistrationPageWithErrorMassage(request, response, WRONG_EMAIL, user);
-            }
-        } else {
+        if (!lastNamePattern.matcher(lastName).matches()) {
+            user.setLastName(null);
             return redirectToRegistrationPageWithErrorMassage(request, response, WRONG_INPUT, user);
+        }
+        if (!emailPattern.matcher(email).matches()) {
+            user.setEmail(null);
+            return redirectToRegistrationPageWithErrorMassage(request, response, WRONG_INPUT, user);
+        }
+        if (UserService.findByEmail(email) != null) {
+            user.setEmail(null);
+            return redirectToRegistrationPageWithErrorMassage(request, response, WRONG_EMAIL, user);
         }
         user.setRole(RoleService.findById(2));
         user.setShip(ShipService.getEmptyShip());
@@ -97,6 +96,7 @@ public class RegistrationCommand implements ICommand{
 
     private String redirectToRegistrationPageWithErrorMassage(HttpServletRequest request,HttpServletResponse response, String errorMassage, User user) throws IOException, ServletException {
         request.setAttribute(LOGIN, user.getLogin());
+        request.setAttribute(PASSWORD, user.getPassword());
         request.setAttribute(PASSWORD_CONFIRM, user.getPassword());
         request.setAttribute(NAME, user.getName());
         request.setAttribute(LAST_NAME, user.getLastName());
