@@ -31,9 +31,6 @@ public class RegistrationCommand implements ICommand{
         String name = request.getParameter(NAME);
         String lastName = request.getParameter(LAST_NAME);
         String email = request.getParameter(EMAIL);
-        if (!password.equals(passwordConfirm)){
-            request.setAttribute(ERROR_MASSAGE, "Wrong password");
-        }
         user.setLogin(login);
         user.setPassword(password);
         user.setName(name);
@@ -41,6 +38,33 @@ public class RegistrationCommand implements ICommand{
         user.setEmail(email);
         user.setRole(RoleService.findById(2));
         user.setShip(ShipService.getEmptyShip());
+        if (!password.equals(passwordConfirm)){
+            request.setAttribute(ERROR_MASSAGE, "Wrong password");
+            request.setAttribute(LOGIN, user.getLogin());
+            request.setAttribute(PASSWORD_CONFIRM, user.getPassword());
+            request.setAttribute(NAME, user.getName());
+            request.setAttribute(LAST_NAME, user.getLastName());
+            request.setAttribute(EMAIL, user.getEmail());
+            return new ToRegistrationPage().execute(request, response);
+        }
+        if (UserService.findByLogin(login) != null){
+            request.setAttribute(ERROR_MASSAGE, "Login is not available!");
+            request.setAttribute(PASSWORD, user.getPassword());
+            request.setAttribute(PASSWORD_CONFIRM, user.getPassword());
+            request.setAttribute(NAME, user.getName());
+            request.setAttribute(LAST_NAME, user.getLastName());
+            request.setAttribute(EMAIL, user.getEmail());
+            return new ToRegistrationPage().execute(request, response);
+        }
+        if (UserService.findByEmail(email) != null){
+            request.setAttribute(ERROR_MASSAGE, "Email is not available!");
+            request.setAttribute(LOGIN, user.getLogin());
+            request.setAttribute(PASSWORD, user.getPassword());
+            request.setAttribute(PASSWORD_CONFIRM, user.getPassword());
+            request.setAttribute(NAME, user.getName());
+            request.setAttribute(LAST_NAME, user.getLastName());
+            return new ToRegistrationPage().execute(request, response);
+        }
         UserService.add(user);
         request.getSession().setAttribute(USER, user);
         return new ToMainPage().execute(request, response);

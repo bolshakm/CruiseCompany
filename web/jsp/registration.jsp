@@ -16,6 +16,8 @@
     <title>Registration</title>
 </head>
 <body>
+<p align="center">We are glad that you decided to join us!</p><br/>
+<p align="center">${ErrorMassage}</p>
 <c:if test="${user != null}">
     <c:import url="header.jsp"/>
 </c:if>
@@ -28,7 +30,7 @@
     </c:if>
     <table align="center" bgcolor="yellow" border="1">
         <tr><td>Login</td><td><input type="text" name="login" value="${login}"></td></tr>
-        <tr><td>Password</td><td><input type="password" name="password"></td></tr>
+        <tr><td>Password</td><td><input type="password" name="password" value="${password}"/></td></tr>
         <tr><td>Confirm password</td><td><input type="password" name="passwordConfirm" value="${password}"/></td></tr>
         <tr><td>Name</td><td><input type="text" name="name" value="${name}"></td></tr>
         <tr><td>Last name</td><td><input type="text" name="lastName" value="${lastName}"></td></tr>
