@@ -10,7 +10,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
-public class DeleteCruiseStatus implements ICommand {
+public class DeleteCruiseStatusCommand implements ICommand {
     private static RequestParams params = RequestParams.getInstance();
     private static TextResources text = TextResources.getInstance();
     private static final String CRUISE_STATUS_IS_USED = text.getProperty("cruise.status.is.used");
@@ -20,7 +20,7 @@ public class DeleteCruiseStatus implements ICommand {
     @Override
     public String execute(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException {
         CruiseStatus cruiseStatus = CruiseStatusService.findById(Integer.parseInt(request.getParameter(CRUISE_STATUS_ID)));
-        if (!cruiseStatus.getCruises().isEmpty()){
+        if (cruiseStatus.getCruises().isEmpty()){
             CruiseStatusService.delete(cruiseStatus);
         } else {
             request.setAttribute(ERROR_MASSAGE, CRUISE_STATUS_IS_USED);

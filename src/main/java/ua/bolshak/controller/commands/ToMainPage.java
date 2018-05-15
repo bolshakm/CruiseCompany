@@ -12,16 +12,15 @@ import java.io.IOException;
 public class ToMainPage implements ICommand{
     private static RequestParams params = RequestParams.getInstance();
     private static final String USER = params.getProperty("user");
-    private static final String CRUISES = params.getProperty("Cruises");
 
     @Override
     public String execute(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException {
-        String page = "/jsp/main.jsp";
+        String page;
         User user = (User) request.getSession().getAttribute(USER);
         switch (user.getRole().getId()){
             case 1: page = new ToAdministratorPage().execute(request, response);
             break;
-            case 2: request.setAttribute(CRUISES, CruiseService.findAll());
+            case 2: page = new ToCruisesPage().execute(request, response);
             break;
             case 3: page = new ToShipAdministratorPageCommand().execute(request, response);
             break;

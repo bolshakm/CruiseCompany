@@ -45,7 +45,9 @@
         <td valign="top">
             <table border="1" bgcolor="#7fffd4">
                 <caption>Cruises</caption>
+                <c:if test="${user.role.id == 1}">
                 <tr align="right"><td colspan="10"><a href="/CruiseCompany?command=toCruiseCard"><button>Add</button></a></tr></td>
+                </c:if>
                 <tr>
                     <th>Name</th>
                     <th>From</th>
@@ -65,13 +67,18 @@
                         <td>${Cruise.status.name}</td>
                         <td>${fn:length(Cruise.tickets)}/${Cruise.ship.numberOfSeats}</td>
                         <td>${Cruise.route.name}</td>
+                        <c:if test="${user.role.id == 1}">
                         <td><a href="/CruiseCompany?command=toUpdateCruise&idCruise=${Cruise.id}"><button>Update</button></a>
                             <a href="/CruiseCompany?command=deleteCruise&idCruise=${Cruise.id}"><button>Delete</button></a></td>
+                        </c:if>
+                        <c:if test="${user.role.id == 2}">
+                            <td><a href="/CruiseCompany?command=buyTicket&idCruise=${Cruise.id}"><button>Buy</button></a> </td>
+                        </c:if>
                     </tr>
                 </c:forEach>
                 <tr align="right"><td colspan="10">
                     <c:forEach var="pageNumber" items="${pageNumbers}">
-                        <a href="CruiseCompany?command=toAdministratorPage&pageNumber=${pageNumber}">${pageNumber}</a>
+                        <a href="CruiseCompany?command=toCruisePage&pageNumber=${pageNumber}">${pageNumber}</a>
                     </c:forEach>
                 </td>
                 </tr>
@@ -97,8 +104,8 @@
                         <c:if test="${SelectedCruiseStatus != null}">
                             <form action="/CruiseCompany" method="post">
                                 <input type="hidden" name="command" value="updateCruiseStatus">
-                                <input type="hidden" name="cruiseStatusId" value="${cruiseStatusId}">
-                                <td><input type="text" name="CruiseStatusName" value="${SelectedCruiseStatus}"></td>
+                                <input type="hidden" name="cruiseStatusId" value="${SelectedCruiseStatus.id}">
+                                <td><input type="text" name="CruiseStatusName" value="${SelectedCruiseStatus.name}"></td>
                                 <td><input type="submit" name="action" value="update">
                             </form>
                         </c:if>

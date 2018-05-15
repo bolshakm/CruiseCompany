@@ -23,6 +23,7 @@ public class ToTicketsPageCommand implements ICommand {
     private static final String TICKET_TYPES = params.getProperty("TicketTypes");
     private static final String ERROR_MASSAGE = params.getProperty("ErrorMassage");
     private static final String PAGE_NUMBER = params.getProperty("pageNumber");
+    private static final String PAGE_NUMBERS = params.getProperty("pageNumbers");
     private static final String BEGIN = params.getProperty("begin");
     private static final String END = params.getProperty("end");
 
@@ -119,6 +120,6 @@ public class ToTicketsPageCommand implements ICommand {
         }
         request.setAttribute(BEGIN, begin);
         request.setAttribute(END, end);
-        request.setAttribute(PAGE_NUMBER, pageNumbers);
+        request.setAttribute(PAGE_NUMBERS, pageNumbers);
     }
 }
