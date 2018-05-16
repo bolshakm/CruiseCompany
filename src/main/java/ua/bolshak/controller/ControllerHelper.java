@@ -20,9 +20,9 @@ public class ControllerHelper {
         commands.put("toPortsPage", new ToPortsPage());
         commands.put("toUsersPage", new ToUserPage());
         commands.put("toTicketsPage", new ToTicketsPageCommand());
-        commands.put("addCruiseStatus", new AddCruiseStatus());
+        commands.put("addCruiseStatus", new AddCruiseStatusCommand());
         commands.put("deleteCruiseStatus", new DeleteCruiseStatusCommand());
-        commands.put("updateCruiseStatus", new UpdateCruiseStatus());
+        commands.put("updateCruiseStatus", new UpdateCruiseStatusCommand());
         commands.put("addShipType", new AddShipTypeCommand());
         commands.put("deleteShipType", new DeleteShipTypeCommand());
         commands.put("updateShipType", new UpdateShipType());

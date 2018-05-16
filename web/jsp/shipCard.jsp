@@ -18,36 +18,36 @@
     <caption>Ship Card</caption>
     <tr>
         <form action="${pageContext.request.contextPath}/CruiseCompany" method="post">
-            <c:if test="${idShip == null}"><input type="hidden" name="command" value="addShip"/></c:if>
-                <c:if test="${idShip != null}"><input type="hidden" name="command" value="updateShip"/></c:if>
-                <input type="hidden" name="idShip" value="${idShip}">
+            <c:if test="${Ship.id == null || Ship.id == 0}"><input type="hidden" name="command" value="addShip"/></c:if>
+                <c:if test="${Ship.id != null && Ship.id != 0}"><input type="hidden" name="command" value="updateShip"/></c:if>
+                <input type="hidden" name="idShip" value="${Ship.id}">
 
     <td>Name</td>
-    <td><input type="text" name="name" value="${name}"/></td>
+    <td><input type="text" name="name" value="${Ship.name}"/></td>
     </tr>
     <tr>
         <td>Number</td>
-        <td><input type="text" name="shipNumber" value="${shipNumber}"/></td>
+        <td><input type="text" name="shipNumber" value="${Ship.number}"/></td>
     </tr>
     <tr>
         <td>Number of seats</td>
-        <td><input type="number" name="numberOfSeats" value="${numberOfSeats}"/></td>
+        <td><input type="number" name="numberOfSeats" value="${Ship.numberOfSeats}"/></td>
     </tr>
     <tr>
         <td>Price per seat</td>
-        <td><input type="number" name="pricePerSeat" value="${pricePerSeat}"/></td>
+        <td><input type="text" name="pricePerSeat" value="${Ship.pricePerSeat}"/></td>
     </tr>
     <tr>
         <td>Ship type</td>
         <td><select name="idShipType">
-            <c:if test="${idShip == null}">
+            <c:if test="${Ship.id == null || Ship.id == 0}">
                 <option disabled selected>Select ship type</option>
             </c:if>
             <c:forEach var="ShipType" items="${ShipTypes}">
-                <c:if test="${ShipType.id == idShipType}">
+                <c:if test="${ShipType.id == Ship.type.id}">
                     <option selected value="${ShipType.id}">${ShipType.name}</option>
                 </c:if>
-                <c:if test="${ShipType.id != idShipType}">
+                <c:if test="${ShipType.id != Ship.type.id}">
                     <option value="${ShipType.id}">${ShipType.name}</option>
                 </c:if>
             </c:forEach>
@@ -57,10 +57,10 @@
         <td>Ticket types</td>
         <td>
             <c:forEach var="TicketType" items="${TicketTypes}">
-                <c:if test="${fn:contains(selectedTicketTypes, TicketType)}">
+                <c:if test="${fn:contains(Ship.ticketTypes, TicketType)}">
                     <input type="checkbox" checked name="selectedTicketTypes" value="${TicketType.id}">${TicketType.name}<br/>
                 </c:if>
-                <c:if test="${!fn:contains(selectedTicketTypes, TicketType)}">
+                <c:if test="${!fn:contains(Ship.ticketTypes, TicketType)}">
                     <input type="checkbox" name="selectedTicketTypes" value="${TicketType.id}">${TicketType.name}<br/>
                 </c:if>
             </c:forEach>
@@ -70,17 +70,17 @@
         <td>Bonuses</td>
         <td>
             <c:forEach var="Bonus" items="${Bonuses}">
-                <c:if test="${fn:contains(selectedBonuses, Bonus)}">
+                <c:if test="${fn:contains(Ship.bonuses, Bonus)}">
                     <input type="checkbox" checked name="selectedBonuses" value="${Bonus.id}">${Bonus.name}<br/>
                 </c:if>
-                <c:if test="${!fn:contains(selectedBonuses, Bonus)}">
+                <c:if test="${!fn:contains(Ship.bonuses, Bonus)}">
                     <input type="checkbox" name="selectedBonuses" value="${Bonus.id}">${Bonus.name}<br/>
                 </c:if>
             </c:forEach>
         </td>
     </tr>
-    <tr><td></td><td><c:if test="${idShip == null}"><input type="submit" value="Add"></c:if>
-        <c:if test="${idShip != null}"><input type="submit" value="Update"></c:if></td></tr>
+    <tr><td></td><td><c:if test="${Ship.id == null || Ship.id == 0}"><input type="submit" value="Add"></c:if>
+        <c:if test="${Ship.id != null && Ship.id != 0}"><input type="submit" value="Update"></c:if></td></tr>
     </form>
     </tr>
 </table>

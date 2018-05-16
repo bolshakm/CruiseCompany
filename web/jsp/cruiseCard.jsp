@@ -17,34 +17,34 @@
 <table align="center" bgcolor="#fff0f5" border="1px ">
     <caption>Cruise Card</caption>
         <form action="${pageContext.request.contextPath}/CruiseCompany" method="post">
-            <c:if test="${idCruise == null}"><input type="hidden" name="command" value="addCruise"/></c:if>
-            <c:if test="${idCruise != null}"><input type="hidden" name="command" value="updateCruise"/></c:if>
+            <c:if test="${Cruise.id == null || Cruise.id ==0}"><input type="hidden" name="command" value="addCruise"/></c:if>
+            <c:if test="${Cruise.id != null && Cruise.id != 0}"><input type="hidden" name="command" value="updateCruise"/></c:if>
             <tr>
-            <input type="hidden" name="idCruise" value="${idCruise}">
+            <input type="hidden" name="idCruise" value="${Cruise.id}">
 
             <td>Name</td>
-            <td><input type="text" name="name" value="${name}"/></td>
+            <td><input type="text" name="name" value="${Cruise.name}"/></td>
     </tr>
     <tr>
         <td>From</td>
-        <td><input type="date" name="from" value="${from}"/></td>
+        <td><input type="date" name="from" value="${Cruise.from}"/></td>
     </tr>
     <tr>
         <td>To</td>
-        <td><input type="date" name="to" value="${to}"/></td>
+        <td><input type="date" name="to" value="${Cruise.to}"/></td>
     </tr>
     <tr>
         <td>Ship </td>
         <td>
             <select name="ShipId">
-            <c:if test="${idCruise == null}">
+            <c:if test="${Cruise.id == null || Cruise.id == 0}">
                 <option disabled selected>Select ship</option>
             </c:if>
             <c:forEach var="Ship" items="${Ships}">
-                <c:if test="${Ship.id == idShip}">
+                <c:if test="${Ship.id == Cruise.ship.id}">
                     <option selected value="${Ship.id}">${Ship.name}</option>
                 </c:if>
-                <c:if test="${Ship.id != idShip}">
+                <c:if test="${Ship.id != Cruise.ship.id}">
                     <option value="${Ship.id}">${Ship.name}</option>
                 </c:if>
             </c:forEach>
@@ -53,18 +53,18 @@
     <tr>
         <td>Cruise status</td>
         <td><select name="CruiseStatusId">
-            <c:if test="${idCruise == null}">
+            <c:if test="${Cruise.id == null || Cruise.id == 0}">
                 <option disabled selected>Select cruise status</option>
             </c:if>
-            <c:if test="${idCruise != null}">
+            <c:if test="${Cruise.id != null && Cruise.id != 0}">
                 <option disabled>Select cruise status</option>
             </c:if>
 
             <c:forEach var="CruiseStatus" items="${CruiseStatuses}">
-                <c:if test="${CruiseStatus.id == idCruiseStatus}">
+                <c:if test="${CruiseStatus.id == Cruise.status.id}">
                     <option selected value="${CruiseStatus.id}">${CruiseStatus.name}</option>
                 </c:if>
-                <c:if test="${CruiseStatus.id != idCruiseStatus}">
+                <c:if test="${CruiseStatus.id != Cruise.status.id}">
                     <option value="${CruiseStatus.id}">${CruiseStatus.name}</option>
                 </c:if>
             </c:forEach>
@@ -74,14 +74,14 @@
                 <td>Routes </td>
                 <td>
                     <select name="RouteId">
-                        <c:if test="${idRoute == null}">
+                        <c:if test="${Cruise.route.id == null}">
                             <option disabled selected>Select route</option>
                         </c:if>
                         <c:forEach var="Route" items="${Routes}">
-                            <c:if test="${Route.id == idRoute}">
+                            <c:if test="${Route.id == Cruise.route.id}">
                                 <option selected value="${Route.id}">${Route.name}</option>
                             </c:if>
-                            <c:if test="${Route.id != idRoute}">
+                            <c:if test="${Route.id != Cruise.route.id}">
                                 <option value="${Route.id}">${Route.name}</option>
                             </c:if>
                         </c:forEach>
@@ -89,8 +89,8 @@
             </tr>
     <tr>
         <td></td>
-        <td><c:if test="${idCruise == null}"><input type="submit" value="Add"></c:if>
-            <c:if test="${idCruise != null}"><input type="submit" value="Update"></c:if></td>
+        <td><c:if test="${Cruise.id == null || Cruise.id == 0}"><input type="submit" value="Add"></c:if>
+            <c:if test="${Cruise.id != null && Cruise.id != 0}"><input type="submit" value="Update"></c:if></td>
     </tr>
     </form>
 </table>

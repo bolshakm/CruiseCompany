@@ -68,7 +68,7 @@ public class CruiseService {
         boolean result = false;
         Date now = new Date();
         if (now.getTime() < cruise.getTo().getTime()) {
-            result = true;
+            result = !cruise.getTickets().isEmpty();
         }
         return result;
     }

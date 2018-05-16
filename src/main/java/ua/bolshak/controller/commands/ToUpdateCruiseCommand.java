@@ -12,29 +12,18 @@ import java.io.IOException;
 public class ToUpdateCruiseCommand implements ICommand {
     private static RequestParams params = RequestParams.getInstance();
     private static final String ID_CRUISE = params.getProperty("idCruise");
-    private static final String NAME = params.getProperty("name");
-    private static final String FROM = params.getProperty("from");
-    private static final String TO = params.getProperty("to");
-    private static final String ID_SHIP = params.getProperty("idShip");
     private static final String SHIPS = params.getProperty("Ships");
-    private static final String ID_CRUISE_STATUS = params.getProperty("idCruiseStatus");
+    private static final String CRUISE = params.getProperty("Cruise");
     private static final String CRUISE_STATUS = params.getProperty("CruiseStatuses");
-    private static final String ID_ROUTE = params.getProperty("idRoute");
     private static final String ROUTES = params.getProperty("Routes");
 
 
     @Override
     public String execute(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException {
         Cruise cruise = CruiseService.findById(Integer.parseInt(request.getParameter(ID_CRUISE)));
-        request.setAttribute(ID_CRUISE, cruise.getId());
-        request.setAttribute(NAME, cruise.getName());
-        request.setAttribute(FROM, cruise.getFrom());
-        request.setAttribute(TO, cruise.getTo());
-        request.setAttribute(ID_SHIP, cruise.getShip().getId());
+        request.setAttribute(CRUISE, cruise);
         request.setAttribute(SHIPS, ShipService.findAll());
-        request.setAttribute(ID_CRUISE_STATUS, cruise.getStatus().getId());
         request.setAttribute(CRUISE_STATUS, CruiseStatusService.findAll());
-        request.setAttribute(ID_ROUTE, cruise.getRoute().getId());
         request.setAttribute(ROUTES, RouteService.findAll());
         return "/jsp/cruiseCard.jsp";
     }
