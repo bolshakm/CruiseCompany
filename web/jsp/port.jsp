@@ -28,7 +28,7 @@
                     <c:if test="${user.role.id == 1}">
                 </tr>
                 <c:if test="${ExcursionName == null}">
-                    <form action="/CruiseCompany" method="post">
+                    <form action="CruiseCompany" method="post">
                         <input type="hidden" name="command" value="addExcursion">
                         <tr>
                             <td><input type="text" name="name"></td>
@@ -92,28 +92,28 @@
                         <th>Country</th>
                         <th>Actions</th>
                     </tr>
-                    <c:if test="${PortName == null}">
+                    <c:if test="${Port == null || Port.id == 0}">
                         <tr>
                             <form action="/CruiseCompany" method="post">
                                 <td><input type="hidden" name="command" value="addPort">
-                                    <input type="text" name="PortName"></td>
-                                <td><input type="text" name="CityName"></td>
-                                <td><input type="text" name="CountryName"></td>
+                                    <input type="text" name="PortName" value="${Port.name}"></td>
+                                <td><input type="text" name="CityName" value="${Port.city}"></td>
+                                <td><input type="text" name="CountryName" value="${Port.country}"></td>
                                 <td>
                                     <input type="submit" name="Add" value="Add">
                                 </td>
                             </form>
                         </tr>
                     </c:if>
-                    <c:if test="${PortName != null}">
+                    <c:if test="${Port != null && Port.id != 0}">
                         <tr>
                             <form action="/CruiseCompany" method="post">
                                 <td>
                                     <input type="hidden" name="command" value="updatePort">
-                                    <input type="hidden" name="idPort" value="${idPort}">
-                                    <input type="text" name="PortName" value="${PortName}"></td>
-                                <td><input type="text" name="CityName" value="${CityName}"></td>
-                                <td><input type="text" name="CountryName" value="${CountryName}"></td>
+                                    <input type="hidden" name="idPort" value="${Port.id}">
+                                    <input type="text" name="PortName" value="${Port.name}"></td>
+                                <td><input type="text" name="CityName" value="${Port.city}"></td>
+                                <td><input type="text" name="CountryName" value="${Port.country}"></td>
                                 </td>
                                 <td>
                                     <input type="submit" name="Update" value="Update">
@@ -136,41 +136,5 @@
         </c:if>
     </tr>
 </table>
-<%--<table align="center"><tr><td>--%>
-    <%--<table border="1">--%>
-        <%--<caption>Routes</caption>--%>
-        <%--<c:if test="${user.role.id ==1}">--%>
-        <%--<tr><a href="/CruiseCompany?command=toRouteCard"><button>Add</button></a></tr>--%>
-        <%--</c:if>--%>
-        <%--<tr>--%>
-            <%--<th>Name</th>--%>
-            <%--<th>Cruises</th>--%>
-            <%--<th>Ports</th>--%>
-            <%--<c:if test="${user.role.id == 1}">--%>
-                <%--<th>Actions</th>--%>
-            <%--</c:if>--%>
-        <%--</tr>--%>
-        <%--<c:forEach var="Route" items="${Routes}">--%>
-            <%--<tr>--%>
-                <%--<td>${Route.name}</td>--%>
-                <%--<td><c:forEach var="RouteHasPort" items="${Route.cruises}">--%>
-                    <%--${RouteHasPort.name}<br/>--%>
-                <%--</c:forEach></td>--%>
-                <%--<td><c:forEach var="RouteHasCruise" items="${Route.ports}">--%>
-                    <%--${RouteHasCruise.name}<br/>--%>
-                <%--</c:forEach></td>--%>
-                <%--<c:if test="${user.role.id == 1}">--%>
-                    <%--<td>--%>
-                        <%--<a href="${pageContext.request.contextPath}/CruiseCompany?command=toUpdateRoute&idRoute=${Route.id}">--%>
-                            <%--<button>Update</button>--%>
-                        <%--</a>--%>
-                        <%--<a href="${pageContext.request.contextPath}/CruiseCompany?command=deleteRoute&idRoute=${Route.id}">--%>
-                            <%--<button>Delete</button>--%>
-                        <%--</a></td>--%>
-                <%--</c:if>--%>
-            <%--</tr>--%>
-        <%--</c:forEach>--%>
-    <%--</table>--%>
-<%--</td></tr></table>--%>
 </body>
 </html>
