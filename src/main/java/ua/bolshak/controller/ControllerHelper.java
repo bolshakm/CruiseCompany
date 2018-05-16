@@ -25,7 +25,7 @@ public class ControllerHelper {
         commands.put("updateCruiseStatus", new UpdateCruiseStatusCommand());
         commands.put("addShipType", new AddShipTypeCommand());
         commands.put("deleteShipType", new DeleteShipTypeCommand());
-        commands.put("updateShipType", new UpdateShipType());
+        commands.put("updateShipType", new UpdateShipTypeCommand());
         commands.put("addBonus", new AddBonusCommand());
         commands.put("deleteBonus", new DeleteBonusCommand());
         commands.put("updateBonus", new UpdateBonusCommand());

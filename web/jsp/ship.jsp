@@ -96,7 +96,7 @@
                     <th>Name</th>
                     <th>Actions</th>
                 </tr>
-                <c:if test="${ShipTypeName == null}">
+                <c:if test="${ShipType == null}">
                 <tr>
                     <form action="/CruiseCompany" method="post">
                         <td>
@@ -109,13 +109,13 @@
                     </form>
                 </tr>
                 </c:if>
-                <c:if test="${ShipTypeName != null}">
+                <c:if test="${ShipType != null}">
                     <tr>
                         <form action="/CruiseCompany" method="post">
                             <td>
                                 <input type="hidden" name="command" value="updateShipType">
-                                <input type="hidden" name="ShipTypeId" value="${ShipTypeId}">
-                                <input type="text" name="ShipTypeName" value="${ShipTypeName}">
+                                <input type="hidden" name="ShipTypeId" value="${ShipType.Id}">
+                                <input type="text" name="ShipTypeName" value="${ShipType.Name}">
                             </td>
                             <td>
                                 <input type="submit" name="Update" value="Update">
