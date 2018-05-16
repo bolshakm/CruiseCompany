@@ -114,8 +114,8 @@
                         <form action="/CruiseCompany" method="post">
                             <td>
                                 <input type="hidden" name="command" value="updateShipType">
-                                <input type="hidden" name="ShipTypeId" value="${ShipType.Id}">
-                                <input type="text" name="ShipTypeName" value="${ShipType.Name}">
+                                <input type="hidden" name="ShipTypeId" value="${ShipType.id}">
+                                <input type="text" name="ShipTypeName" value="${ShipType.name}">
                             </td>
                             <td>
                                 <input type="submit" name="Update" value="Update">
@@ -139,7 +139,7 @@
                     <th>Name</th>
                     <th>Actions</th>
                 </tr>
-                <c:if test="${BonusName == null}">
+                <c:if test="${Bonus == null}">
                     <tr>
                         <form action="/CruiseCompany" method="post">
                             <td>
@@ -152,13 +152,13 @@
                         </form>
                     </tr>
                 </c:if>
-                <c:if test="${BonusName != null}">
+                <c:if test="${Bonus != null}">
                     <tr>
                         <form action="/CruiseCompany" method="post">
                             <td>
                                 <input type="hidden" name="command" value="updateBonus">
-                                <input type="hidden" name="idBonus" value="${idBonus}">
-                                <input type="text" name="BonusName" value="${BonusName}">
+                                <input type="hidden" name="idBonus" value="${Bonus.id}">
+                                <input type="text" name="BonusName" value="${Bonus.name}">
                             </td>
                             <td>
                                 <input type="submit" name="Update" value="Update">

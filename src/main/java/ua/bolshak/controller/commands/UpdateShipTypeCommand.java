@@ -36,6 +36,7 @@ public class UpdateShipTypeCommand implements ICommand {
                 shipType.setName(name);
                 ShipTypeService.update(shipType);
             } else {
+                request.setAttribute(SHIP_TYPE, shipType);
                 request.setAttribute(ERROR_MASSAGE, WRONG_INPUT);
             }
         }

@@ -74,6 +74,9 @@ public class ShipService {
 
 
     public static void delete(Ship ship){
+        for (Cruise cruise : ship.getCruises()) {
+            CruiseService.delete(cruise);
+        }
         DaoFactory.getShipDao().delete(ship);
     }
 

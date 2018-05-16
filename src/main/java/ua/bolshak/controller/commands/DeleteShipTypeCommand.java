@@ -20,7 +20,7 @@ public class DeleteShipTypeCommand implements ICommand {
     @Override
     public String execute(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException {
         ShipType shipType = ShipTypeService.findById(Integer.parseInt(request.getParameter(SHIP_TYPE_ID)));
-        if (!shipType.getShips().isEmpty()) {
+        if (shipType.getShips().isEmpty()) {
             ShipTypeService.delete(shipType);
         } else {
             request.setAttribute(ERROR_MASSAGE, SHIP_TYPE_IS_USED);
