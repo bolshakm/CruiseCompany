@@ -22,7 +22,6 @@ public class AddShipCommand implements ICommand {
     private static TextResources text = TextResources.getInstance();
     private static RegExResources regEx = RegExResources.getInstance();
     private static final String WRONG_INPUT = text.getProperty("wrong.input");
-    private static final String WRONG_SHIP_TYPE = text.getProperty("select.ship.type");
     private static final String NAME_REGEX = regEx.getProperty("ship.name.regexp");
     private static final String COUNT_OF_SEATS_REGEX = regEx.getProperty("ship.count.of.seats.regexp");
     private static final String PRICE = regEx.getProperty("price.regexp");
@@ -36,6 +35,7 @@ public class AddShipCommand implements ICommand {
     private static final String SELECTED_BONUSES = params.getProperty("selectedBonuses");
     private static final String SELECTED_TICKET_TYPE = params.getProperty("selectedTicketTypes");
     private static final String ERROR_MASSAGE = params.getProperty("ErrorMassage");
+    private static final String EMPTY_STRING = params.getProperty("empty.string");
 
     @Override
     public String execute(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException {
@@ -51,59 +51,55 @@ public class AddShipCommand implements ICommand {
         String idShipType = request.getParameter(ID_SHIP_TYPE);
         String[] idSelectedBonuses = request.getParameterValues(SELECTED_BONUSES);
         String[] idSelectedTicketTypes = request.getParameterValues(SELECTED_TICKET_TYPE);
-        ship.setName(name);
-        ship.setNumber(shipNumber);
-        if (countOfSeatsPattern.matcher(numberOfSeats).matches()) {
+        boolean wrongInput = false;
+        if (namePattern.matcher(name).matches()) {
+            ship.setName(name);
+        } else {
+            ship.setName(null);
+            wrongInput = true;
+        }
+        if (numberPattern.matcher(shipNumber).matches()) {
+            ship.setNumber(shipNumber);
+        } else {
+            ship.setNumber(null);
+            wrongInput = true;
+        }
+        if (countOfSeatsPattern.matcher(numberOfSeats).matches() && Integer.parseInt(numberOfSeats) > 0) {
             ship.setNumberOfSeats(Integer.parseInt(numberOfSeats));
         } else {
             ship.setNumberOfSeats(0);
+            wrongInput = true;
         }
-        if (pricePattern.matcher(pricePerSeat).matches()) {
+        if (!pricePerSeat.equals(EMPTY_STRING) && pricePattern.matcher(pricePerSeat).matches() && Double.parseDouble(pricePerSeat) > 0) {
             ship.setPricePerSeat(Double.parseDouble(pricePerSeat));
         } else {
             ship.setPricePerSeat(0);
+            wrongInput = true;
         }
-        if (idShipType != null){
+        if (idShipType != null) {
             ship.setType(ShipTypeService.findById(Integer.parseInt(idShipType)));
         } else {
             ship.setType(null);
+            wrongInput = true;
         }
         List<Bonus> bonuses = BonusService.getListBonuses(idSelectedBonuses);
-        if (!namePattern.matcher(name).matches()){
-            request.setAttribute(ERROR_MASSAGE, WRONG_INPUT);
-            request.setAttribute(SHIP, ship);
-            return new ToShipCardCommand().execute(request, response);
-        }
-        if (!numberPattern.matcher(shipNumber).matches()){
-            ship.setNumber(null);
-            request.setAttribute(ERROR_MASSAGE, WRONG_INPUT);
-            request.setAttribute(SHIP, ship);
-            return new ToShipCardCommand().execute(request, response);
-        }
-        if (ship.getNumberOfSeats() <= 0){
-            ship.setNumberOfSeats(0);
-            request.setAttribute(ERROR_MASSAGE, WRONG_INPUT);
-            request.setAttribute(SHIP, ship);
-            return new ToShipCardCommand().execute(request, response);
-        }
-        if (ship.getPricePerSeat() <= 0){
-            ship.setPricePerSeat(0);
-            request.setAttribute(ERROR_MASSAGE, WRONG_INPUT);
-            request.setAttribute(SHIP, ship);
-            return new ToShipCardCommand().execute(request, response);
-        }
-        if (ship.getType() == null){
-            request.setAttribute(ERROR_MASSAGE, WRONG_SHIP_TYPE);
-            request.setAttribute(SHIP, ship);
-            return new ToShipCardCommand().execute(request, response);
-        }
-        if (bonuses.isEmpty()){
+        if (bonuses.isEmpty()) {
             ship.setBonuses(BonusService.getListWithEmptyBonus());
         } else {
             ship.setBonuses(bonuses);
         }
-        ship.setTicketTypes(TicketTypeService.getListTicketTypes(idSelectedTicketTypes));
-        ShipService.add(ship);
+        if (idSelectedTicketTypes != null) {
+            ship.setTicketTypes(TicketTypeService.getListTicketTypes(idSelectedTicketTypes));
+        } else {
+            ship.setTicketTypes(TicketTypeService.getListWithStandardTicketTypes());
+        }
+        if (wrongInput) {
+            request.setAttribute(ERROR_MASSAGE, WRONG_INPUT);
+            request.setAttribute(SHIP, ship);
+            return new ToShipCardCommand().execute(request, response);
+        } else {
+            ShipService.add(ship);
+        }
         return new ToShipsPageCommand().execute(request, response);
     }
 }

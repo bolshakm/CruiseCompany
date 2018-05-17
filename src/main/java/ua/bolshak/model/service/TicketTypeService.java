@@ -45,7 +45,7 @@ public class TicketTypeService {
         return ticketTypes;
     }
 
-    public static List<TicketType> getListWhithStandartTicketTypes(){
+    public static List<TicketType> getListWithStandardTicketTypes(){
         List<TicketType> ticketTypes = new ArrayList<>();
         ticketTypes.add(findById(1));
         return ticketTypes;

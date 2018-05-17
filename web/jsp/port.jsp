@@ -27,41 +27,45 @@
                     </c:if>
                     <c:if test="${user.role.id == 1}">
                 </tr>
-                <c:if test="${ExcursionName == null}">
+                <c:if test="${Excursion == null || Excursion.id == 0}">
                     <form action="CruiseCompany" method="post">
                         <input type="hidden" name="command" value="addExcursion">
                         <tr>
-                            <td><input type="text" name="name"></td>
+                            <td><input type="text" name="name" value="${Excursion.name}"></td>
                             <td><select name="idPort">
                                 <option disabled selected>Select Port</option>
                                 <c:forEach var="Port" items="${Ports}">
-                                    <option value="${Port.id}">${Port.name}</option>
+                                    <c:if test="${Port.id == Excursion.port.id}">
+                                        <option selected value="${Port.id}">${Port.name}</option>
+                                    </c:if>
+                                    <c:if test="${Port.id != Excursion.port.id}">
+                                        <option value="${Port.id}">${Port.name}</option>
+                                    </c:if>
                                 </c:forEach>
                             </select></td>
-                            <td><input type="number" name="price"></td>
+                            <td><input type="number" name="price" value="${Excursion.price}"></td>
                             <td><input type="submit" name="Add" value="Add"></td>
                         </tr>
                     </form>
                 </c:if>
-                <c:if test="${ExcursionName != null}">
-                    <form action="/CruiseCompany" method="post">
+                <c:if test="${Excursion != null && Excursion.id != 0}">
+                    <form action="CruiseCompany" method="post">
                         <input type="hidden" name="command" value="updateExcursion">
-                        <input type="hidden" name="idExcursion" value="${idExcursion}">
+                        <input type="hidden" name="idExcursion" value="${Excursion.id}">
                         <tr>
-                            <td><input type="text" name="name" value="${ExcursionName}"></td>
+                            <td><input type="text" name="name" value="${Excursion.name}"></td>
                             <td><select name="idPort">
                                 <option disabled>Select Port</option>
                                 <c:forEach var="Port" items="${Ports}">
-                                    <c:if test="${Port.id == PortId}">
+                                    <c:if test="${Port.id == Excursion.port.id}">
                                         <option selected value="${Port.id}">${Port.name}</option>
                                     </c:if>
-                                    <c:if test="${Port.id != PortId}">
+                                    <c:if test="${Port.id != Excursion.port.id}">
                                         <option value="${Port.id}">${Port.name}</option>
                                     </c:if>
-
                                 </c:forEach>
                             </select></td>
-                            <td><input type="number" name="price" value="${price}"></td>
+                            <td><input type="number" name="price" value="${Excursion.price}"></td>
                             <td><input type="submit" name="Update" value="Update"></td>
                         </tr>
                     </form>
