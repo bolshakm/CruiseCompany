@@ -18,7 +18,7 @@
     <title>Login</title>
 </head>
 <body>
-<form action="${pageContext.request.contextPath}/CruiseCompany" method="post">
+<form action="CruiseCompany" method="post">
     <input type="hidden" name="command" value="login"/>
     <table align="center">
         <tr>

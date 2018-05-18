@@ -16,7 +16,7 @@
 <c:import url="header.jsp"/>
 <table align="center" bgcolor="#fff0f5" border="1px ">
     <caption>Cruise Card</caption>
-        <form action="${pageContext.request.contextPath}/CruiseCompany" method="post">
+        <form action="CruiseCompany" method="post">
             <c:if test="${Cruise.id == null || Cruise.id ==0}"><input type="hidden" name="command" value="addCruise"/></c:if>
             <c:if test="${Cruise.id != null && Cruise.id != 0}"><input type="hidden" name="command" value="updateCruise"/></c:if>
             <tr>

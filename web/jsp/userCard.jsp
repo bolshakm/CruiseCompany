@@ -15,7 +15,7 @@
     <c:import url="header.jsp"/>
 <table align="center" bgcolor="#fff0f5" border="1px ">
     <caption>User Card</caption>
-    <form action="${pageContext.request.contextPath}/CruiseCompany" method="post">
+    <form action="CruiseCompany" method="post">
     <tr>
         <c:if test="${User == null || User.id == 0}">
             <input type="hidden" name="command" value="addUser"/>

@@ -78,8 +78,8 @@
                         <td>${Excursion.price}</td>
                         <c:if test="${user.role.id == 1}">
                             <td>
-                                <a href="${pageContext.request.contextPath}/CruiseCompany?command=updateExcursion&idExcursion=${Excursion.id}"><button>Update</button></a>
-                                <a href="${pageContext.request.contextPath}/CruiseCompany?command=deleteExcursion&idExcursion=${Excursion.id}"><button>Delete</button></a></td>
+                                <a href="CruiseCompany?command=updateExcursion&idExcursion=${Excursion.id}"><button>Update</button></a>
+                                <a href="CruiseCompany?command=deleteExcursion&idExcursion=${Excursion.id}"><button>Delete</button></a></td>
                         </c:if>
                     </tr>
                 </c:forEach>
@@ -98,7 +98,7 @@
                     </tr>
                     <c:if test="${Port == null || Port.id == 0}">
                         <tr>
-                            <form action="/CruiseCompany" method="post">
+                            <form action="CruiseCompany" method="post">
                                 <td><input type="hidden" name="command" value="addPort">
                                     <input type="text" name="PortName" value="${Port.name}"></td>
                                 <td><input type="text" name="CityName" value="${Port.city}"></td>
@@ -111,7 +111,7 @@
                     </c:if>
                     <c:if test="${Port != null && Port.id != 0}">
                         <tr>
-                            <form action="/CruiseCompany" method="post">
+                            <form action="CruiseCompany" method="post">
                                 <td>
                                     <input type="hidden" name="command" value="updatePort">
                                     <input type="hidden" name="idPort" value="${Port.id}">
@@ -131,8 +131,8 @@
                             <td>${Port.city}</td>
                             <td>${Port.country}</td>
                             <td>
-                                <a href="${pageContext.request.contextPath}/CruiseCompany?command=updatePort&idPort=${Port.id}"><button>Update</button></a>
-                                <a href="${pageContext.request.contextPath}/CruiseCompany?command=deletePort&idPort=${Port.id}"><button>Delete</button></a></td>
+                                <a href="CruiseCompany?command=updatePort&idPort=${Port.id}"><button>Update</button></a>
+                                <a href="CruiseCompany?command=deletePort&idPort=${Port.id}"><button>Delete</button></a></td>
                         </tr>
                     </c:forEach>
                 </table>

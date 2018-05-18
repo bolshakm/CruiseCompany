@@ -17,7 +17,7 @@
         <th>Routes</th>
         <th>Actions</th>
     </tr>
-    <form action="/CruiseCompany" method="post">
+    <form action="CruiseCompany" method="post">
         <input type="hidden" name="command" value="searchCruise">
         <tr>
             <td><input type="text" name="name"></td>
@@ -46,7 +46,7 @@
             <table border="1" bgcolor="#7fffd4">
                 <caption>Cruises</caption>
                 <c:if test="${user.role.id == 1}">
-                <tr align="right"><td colspan="10"><a href="/CruiseCompany?command=toCruiseCard"><button>Add</button></a></tr></td>
+                <tr align="right"><td colspan="10"><a href="CruiseCompany?command=toCruiseCard"><button>Add</button></a></tr></td>
                 </c:if>
                 <tr>
                     <th>Name</th>
@@ -95,14 +95,14 @@
                     </tr>
                     <tr>
                         <c:if test="${SelectedCruiseStatus == null}">
-                            <form action="/CruiseCompany" method="post">
+                            <form action="CruiseCompany" method="post">
                                 <input type="hidden" name="command" value="addCruiseStatus">
                                 <td><input type="text" name="CruiseStatusName"></td>
                                 <td><input type="submit" name="action" value="Add">
                             </form>
                         </c:if>
                         <c:if test="${SelectedCruiseStatus != null}">
-                            <form action="/CruiseCompany" method="post">
+                            <form action="CruiseCompany" method="post">
                                 <input type="hidden" name="command" value="updateCruiseStatus">
                                 <input type="hidden" name="cruiseStatusId" value="${SelectedCruiseStatus.id}">
                                 <td><input type="text" name="CruiseStatusName" value="${SelectedCruiseStatus.name}"></td>
@@ -114,8 +114,8 @@
                     <c:forEach var="CruiseStatus" items="${CruiseStatuses}">
                         <tr>
                             <td>${CruiseStatus.name}</td>
-                            <td><a href="/CruiseCompany?command=updateCruiseStatus&cruiseStatusId=${CruiseStatus.id}"><button>Update</button></a>
-                                <a href="/CruiseCompany?command=deleteCruiseStatus&cruiseStatusId=${CruiseStatus.id}"><button>Delete</button></a>
+                            <td><a href="CruiseCompany?command=updateCruiseStatus&cruiseStatusId=${CruiseStatus.id}"><button>Update</button></a>
+                                <a href="CruiseCompany?command=deleteCruiseStatus&cruiseStatusId=${CruiseStatus.id}"><button>Delete</button></a>
                             </td>
                         </tr>
                     </c:forEach>

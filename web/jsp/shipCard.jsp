@@ -17,7 +17,7 @@
 <table align="center" bgcolor="#fff0f5" border="1px ">
     <caption>Ship Card</caption>
     <tr>
-        <form action="${pageContext.request.contextPath}/CruiseCompany" method="post">
+        <form action="CruiseCompany" method="post">
             <c:if test="${Ship.id == null || Ship.id == 0}"><input type="hidden" name="command" value="addShip"/></c:if>
                 <c:if test="${Ship.id != null && Ship.id != 0}"><input type="hidden" name="command" value="updateShip"/></c:if>
                 <input type="hidden" name="idShip" value="${Ship.id}">

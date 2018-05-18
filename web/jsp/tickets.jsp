@@ -61,9 +61,9 @@
                         <c:if test="${user.role.id == 1 || user.role.id == 2}">
                             <td>
                                 <c:if test="${user.role.id == 1}">
-                                    <a href="/CruiseCompany?command=toUpdateTicket&idTicket=${Ticket.id}"><button>Update</button></a>
+                                    <a href="CruiseCompany?command=toUpdateTicket&idTicket=${Ticket.id}"><button>Update</button></a>
                                 </c:if>
-                                <a href="/CruiseCompany?command=deleteTicket&idTicket=${Ticket.id}"><button>Delete</button></a>
+                                <a href="CruiseCompany?command=deleteTicket&idTicket=${Ticket.id}"><button>Delete</button></a>
                             </td>
                         </c:if>
                     </tr>
@@ -93,7 +93,7 @@
                     </tr>
                     <c:if test="${TicketType == null || TicketType.id == 0}">
                         <tr>
-                            <form action="${pageContext.request.contextPath}/CruiseCompany" method="post">
+                            <form action="CruiseCompany" method="post">
                                 <td>
                                     <input type="hidden" name="command" value="addTicketType">
                                     <input type="text" size="15" name="TicketTypeName" value="${TicketType.name}">
@@ -107,7 +107,7 @@
                     </c:if>
                     <c:if test="${TicketType != null && TicketType.id != 0}">
                         <tr>
-                            <form action="${pageContext.request.contextPath}/CruiseCompany" method="post">
+                            <form action="CruiseCompany" method="post">
                                 <td>
                                     <input type="hidden" name="command" value="updateTicketType">
                                     <input type="hidden" name="idTicketType" value="${TicketType.id}">
@@ -124,8 +124,8 @@
                         <tr>
                             <td>${TicketType.name}</td>
                             <td>${TicketType.price}</td>
-                            <td><a href="/CruiseCompany?command=toUpdateTicketType&idTicketType=${TicketType.id}"><button>Update</button></a>
-                                <a href="/CruiseCompany?command=deleteTicketType&idTicketType=${TicketType.id}"><button>Delete</button></a></td>
+                            <td><a href="CruiseCompany?command=toUpdateTicketType&idTicketType=${TicketType.id}"><button>Update</button></a>
+                                <a href="CruiseCompany?command=deleteTicketType&idTicketType=${TicketType.id}"><button>Delete</button></a></td>
                         </tr>
                     </c:forEach>
                 </table>

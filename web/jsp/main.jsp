@@ -39,7 +39,7 @@
             <td>${Cruise.status.name}</td>
             <td>${fn:length(Cruise.tickets)}/${Cruise.ship.numberOfSeats}</td>
             <td>${Cruise.route.name}</td>
-            <td><a href="/CruiseCompany?command=buyTicket&idCruise=${Cruise.id}"><button>Buy</button></a> </td>
+            <td><a href="CruiseCompany?command=buyTicket&idCruise=${Cruise.id}"><button>Buy</button></a> </td>
         </tr>
     </c:forEach>
 </table>

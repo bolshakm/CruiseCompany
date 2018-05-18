@@ -21,7 +21,7 @@
             <table border="1">
                 <caption>Ships</caption>
                 <c:if test="${user.role.id == 1}">
-                    <tr align="right"><a href="/CruiseCompany?command=toShipCard"><button>Add</button></a></tr>
+                    <tr align="right"><a href="CruiseCompany?command=toShipCard"><button>Add</button></a></tr>
                 </c:if>
                 <tr>
                     <th>Name</th>
@@ -58,7 +58,7 @@
                         </td>
                         <c:if test="${user.role.id == 3}">
                         <td><c:forEach var="ticketType" items="${Ship.ticketTypes}">
-                            <a href="/CruiseCompany?command=toSetBonusesForShipByTicketType&idTicketType=${ticketType.id}&idShip=${Ship.id}"><button>Bonuses</button></a><br/>
+                            <a href="CruiseCompany?command=toSetBonusesForShipByTicketType&idTicketType=${ticketType.id}&idShip=${Ship.id}"><button>Bonuses</button></a><br/>
                         </c:forEach>
                         </td>
                         </c:if>
@@ -72,7 +72,7 @@
                         </c:if>
                         <c:if test="${!empty Ship.cruises}">
                         <td><c:forEach var="cruise" items="${Ship.cruises}">
-                            <c:if test="${user.role.id == 2}"><a href="/CruiseCompany?command=buyTicket&idCruise=${cruise.id}">${cruise.name}</a><br/></c:if>
+                            <c:if test="${user.role.id == 2}"><a href="CruiseCompany?command=buyTicket&idCruise=${cruise.id}">${cruise.name}</a><br/></c:if>
                             <c:if test="${user.role.id != 2}">${cruise.name}<br/></c:if>
 
                         </c:forEach></td>
@@ -80,8 +80,8 @@
                         <c:if test="${empty Ship.cruises}"><td>Empty</td></c:if>
 
                         <c:if test="${user.role.id == 1}">
-                        <td><a href="/CruiseCompany?command=toUpdateShipCard&idShip=${Ship.id}"><button>Update</button></a>
-                            <a href="/CruiseCompany?command=deleteShip&idShip=${Ship.id}"><button>Delete</button></a></td>
+                        <td><a href="CruiseCompany?command=toUpdateShipCard&idShip=${Ship.id}"><button>Update</button></a>
+                            <a href="CruiseCompany?command=deleteShip&idShip=${Ship.id}"><button>Delete</button></a></td>
                         </c:if>
                         </c:forEach>
                     </tr>
@@ -98,7 +98,7 @@
                 </tr>
                 <c:if test="${ShipType == null}">
                 <tr>
-                    <form action="/CruiseCompany" method="post">
+                    <form action="CruiseCompany" method="post">
                         <td>
                         <input type="hidden" name="command" value="addShipType">
                         <input type="text" name="ShipTypeName">
@@ -111,7 +111,7 @@
                 </c:if>
                 <c:if test="${ShipType != null}">
                     <tr>
-                        <form action="/CruiseCompany" method="post">
+                        <form action="CruiseCompany" method="post">
                             <td>
                                 <input type="hidden" name="command" value="updateShipType">
                                 <input type="hidden" name="ShipTypeId" value="${ShipType.id}">
@@ -126,8 +126,8 @@
                 <c:forEach var="ShipType" items="${ShipTypes}">
                     <tr>
                         <td>${ShipType.name}</td>
-                        <td><a href="/CruiseCompany?command=updateShipType&ShipTypeId=${ShipType.id}"><button>Update</button></a>
-                        <a href="/CruiseCompany?command=deleteShipType&ShipTypeId=${ShipType.id}"><button>Delete</button></a>
+                        <td><a href="CruiseCompany?command=updateShipType&ShipTypeId=${ShipType.id}"><button>Update</button></a>
+                        <a href="CruiseCompany?command=deleteShipType&ShipTypeId=${ShipType.id}"><button>Delete</button></a>
                         </td>
                     </tr>
                 </c:forEach>
@@ -141,7 +141,7 @@
                 </tr>
                 <c:if test="${Bonus == null}">
                     <tr>
-                        <form action="/CruiseCompany" method="post">
+                        <form action="CruiseCompany" method="post">
                             <td>
                                 <input type="hidden" name="command" value="addBonus">
                                 <input type="text" name="BonusName">
@@ -154,7 +154,7 @@
                 </c:if>
                 <c:if test="${Bonus != null}">
                     <tr>
-                        <form action="/CruiseCompany" method="post">
+                        <form action="CruiseCompany" method="post">
                             <td>
                                 <input type="hidden" name="command" value="updateBonus">
                                 <input type="hidden" name="idBonus" value="${Bonus.id}">
@@ -169,8 +169,8 @@
                 <c:forEach var="Bonus" items="${Bonuses}">
                     <tr>
                         <td>${Bonus.name}</td>
-                        <td><a href="/CruiseCompany?command=updateBonus&idBonus=${Bonus.id}"><button>Update</button></a>
-                            <a href="/CruiseCompany?command=deleteBonus&idBonus=${Bonus.id}"><button>Delete</button></a> </td>
+                        <td><a href="CruiseCompany?command=updateBonus&idBonus=${Bonus.id}"><button>Update</button></a>
+                            <a href="CruiseCompany?command=deleteBonus&idBonus=${Bonus.id}"><button>Delete</button></a> </td>
                     </tr>
                 </c:forEach>
             </table>

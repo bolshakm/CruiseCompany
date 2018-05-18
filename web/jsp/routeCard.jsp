@@ -17,7 +17,7 @@
 <table align="center" bgcolor="#fff0f5" border="1px ">
     <caption>Route Card</caption>
     <tr>
-        <form action="${pageContext.request.contextPath}/CruiseCompany" method="post">
+        <form action="CruiseCompany" method="post">
             <c:if test="${Route.id == null || Route.id == 0}"><input type="hidden" name="command" value="addRoute"/></c:if>
             <c:if test="${Route.id != null && Route.id != 0}"><input type="hidden" name="command" value="updateRoute"/></c:if>
             <input type="hidden" name="idRoute" value="${Route.id}">

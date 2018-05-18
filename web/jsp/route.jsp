@@ -17,7 +17,7 @@
     <table border="1"  bgcolor="yellow">
         <caption>Routes</caption>
         <c:if test="${user.role.id ==1}">
-            <tr><a href="/CruiseCompany?command=toRouteCard"><button>Add</button></a></tr>
+            <tr><a href="CruiseCompany?command=toRouteCard"><button>Add</button></a></tr>
         </c:if>
         <tr>
             <th>Name</th>
@@ -38,8 +38,8 @@
                 </c:forEach></td>
                 <c:if test="${user.role.id == 1}">
                     <td>
-                        <a href="${pageContext.request.contextPath}/CruiseCompany?command=toUpdateRoute&idRoute=${Route.id}"><button>Update</button></a>
-                        <a href="${pageContext.request.contextPath}/CruiseCompany?command=deleteRoute&idRoute=${Route.id}"><button>Delete</button></a></td>
+                        <a href="CruiseCompany?command=toUpdateRoute&idRoute=${Route.id}"><button>Update</button></a>
+                        <a href="$CruiseCompany?command=deleteRoute&idRoute=${Route.id}"><button>Delete</button></a></td>
                 </c:if>
             </tr>
         </c:forEach>

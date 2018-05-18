@@ -41,8 +41,8 @@
                         <td>${User.role.name}</td>
                         <td>${User.ship.name}</td>
                         <c:if test="${user.role.id == 1}">
-                        <td><a href="/CruiseCompany?command=toUpdateUserCard&idUser=${User.id}"><button>Update</button></a>
-                            <a href="/CruiseCompany?command=deleteUser&idUser=${User.id}"><button>Delete</button></a></td>
+                        <td><a href="CruiseCompany?command=toUpdateUserCard&idUser=${User.id}"><button>Update</button></a>
+                            <a href="CruiseCompany?command=deleteUser&idUser=${User.id}"><button>Delete</button></a></td>
                         </c:if>
                     </tr>
                 </c:forEach>
@@ -59,7 +59,7 @@
                 </tr>
                 <c:if test="${Role == null || Role.id == 0}">
                     <tr>
-                        <form action="/CruiseCompany" method="post">
+                        <form action="CruiseCompany" method="post">
                             <td>
                                 <input type="hidden" name="command" value="addRole">
                                 <input type="text" name="RoleName">
@@ -72,7 +72,7 @@
                 </c:if>
                 <c:if test="${Role != null && Role.id != null}">
                     <tr>
-                        <form action="/CruiseCompany" method="post">
+                        <form action="CruiseCompany" method="post">
                             <td>
                                 <input type="hidden" name="command" value="updateRole">
                                 <input type="hidden" name="idRole" value="${Role.id}">
