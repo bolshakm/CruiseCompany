@@ -21,7 +21,7 @@ public class DeleteTicketTypeCommand implements ICommand {
     @Override
     public String execute(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException {
         TicketType ticketType = TicketTypeService.findById(Integer.parseInt(request.getParameter(ID_TICKET_TYPE)));
-        if (!ticketType.getTickets().isEmpty()){
+        if (ticketType.getTickets().isEmpty()){
             if (ticketType.getId() != 1) {
                 TicketTypeService.delete(ticketType);
             } else {

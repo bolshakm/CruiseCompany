@@ -91,28 +91,28 @@
                         <th>Price</th>
                         <th>Actions</th>
                     </tr>
-                    <c:if test="${TicketType == null}">
+                    <c:if test="${TicketType == null || TicketType.id == 0}">
                         <tr>
                             <form action="${pageContext.request.contextPath}/CruiseCompany" method="post">
                                 <td>
                                     <input type="hidden" name="command" value="addTicketType">
-                                    <input type="text" size="15" name="TicketTypeName">
+                                    <input type="text" size="15" name="TicketTypeName" value="${TicketType.name}">
                                 </td>
-                                <td><input type="text" size="10" name="pricePerTicket"></td>
+                                <td><input type="text" size="10" name="pricePerTicket" value="${TicketType.price}"></td>
                                 <td>
                                     <input type="submit" name="Add" value="Add">
                                 </td>
                             </form>
                         </tr>
                     </c:if>
-                    <c:if test="${TicketType != null}">
+                    <c:if test="${TicketType != null && TicketType.id != 0}">
                         <tr>
                             <form action="${pageContext.request.contextPath}/CruiseCompany" method="post">
                                 <td>
                                     <input type="hidden" name="command" value="updateTicketType">
                                     <input type="hidden" name="idTicketType" value="${TicketType.id}">
-                                    <input type="text" name="TicketTypeName" value="${TicketType.name}">
-                                <td><input type="number" name="pricePerTicket" value="${TicketType.price}"></td>
+                                    <input type="text" size="15" name="TicketTypeName" value="${TicketType.name}">
+                                <td><input type="text" size="10" name="pricePerTicket" value="${TicketType.price}"></td>
                                 </td>
                                 <td>
                                     <input type="submit" name="Update" value="Update">
