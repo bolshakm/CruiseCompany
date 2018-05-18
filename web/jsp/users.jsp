@@ -57,7 +57,7 @@
                     <th>Name</th>
                     <th>Actions</th>
                 </tr>
-                <c:if test="${RoleName == null}">
+                <c:if test="${Role == null || Role.id == 0}">
                     <tr>
                         <form action="/CruiseCompany" method="post">
                             <td>
@@ -70,13 +70,13 @@
                         </form>
                     </tr>
                 </c:if>
-                <c:if test="${RoleName != null}">
+                <c:if test="${Role != null && Role.id != null}">
                     <tr>
                         <form action="/CruiseCompany" method="post">
                             <td>
                                 <input type="hidden" name="command" value="updateRole">
-                                <input type="hidden" name="idRole" value="${idRole}">
-                                <input type="text" name="RoleName" value="${RoleName}">
+                                <input type="hidden" name="idRole" value="${Role.id}">
+                                <input type="text" name="RoleName" value="${Role.name}">
                             </td>
                             <td>
                                 <input type="submit" name="Update" value="Update">

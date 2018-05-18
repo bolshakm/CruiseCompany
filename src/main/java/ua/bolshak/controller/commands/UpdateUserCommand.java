@@ -142,8 +142,6 @@ public class UpdateUserCommand implements ICommand {
             request.setAttribute(USER, user);
             return new ToUpdateUserCardCommand().execute(request, response);
         }
-
-
         if (sessionUser.getRole().getId() == 1) {
             if (!money.equals(EMPTY_STRING) && moneyPattern.matcher(money).matches() && Double.parseDouble(money) > 0) {
                 double moneyForTransfer = Double.parseDouble(money);
