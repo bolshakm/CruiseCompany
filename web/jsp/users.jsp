@@ -18,7 +18,7 @@
         <td>
             <table border="1" bgcolor="#f0f8ff">
                 <c:if test="${user.role.id ==1}">
-                    <tr><a href="/CruiseCompany?command=toRegistrationPage"><button>Add</button></a></tr>
+                    <tr><a href="CruiseCompany?command=toUserCard"><button>Add</button></a></tr>
                 </c:if>
                 <caption>Users</caption>
                 <tr>

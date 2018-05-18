@@ -12,16 +12,13 @@ import java.io.IOException;
 public class ToUpdateRouteCommand implements ICommand {
     private static RequestParams params = RequestParams.getInstance();
     private static final String ID_ROUTE = params.getProperty("idRoute");
-    private static final String NAME = params.getProperty("name");
-    private static final String SELECTED_PORTS = params.getProperty("selectedPorts");
+    private static final String ROUTE = params.getProperty("Route");
 
     @Override
     public String execute(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException {
         String id = request.getParameter(ID_ROUTE);
         Route route = RouteService.findById(Integer.parseInt(id));
-        request.setAttribute(ID_ROUTE, route.getId());
-        request.setAttribute(NAME, route.getName());
-        request.setAttribute(SELECTED_PORTS, route.getPorts());
+        request.setAttribute(ROUTE, route);
         return new ToRouteCardCommand().execute(request, response);
     }
 }

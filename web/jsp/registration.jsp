@@ -29,12 +29,12 @@
         <input type="hidden" name="command" value="addUser">
     </c:if>
     <table align="center" bgcolor="yellow" border="1">
-        <tr><td>Login</td><td><input type="text" name="login" value="${login}"></td></tr>
-        <tr><td>Password</td><td><input type="password" name="password" value="${password}"/></td></tr>
-        <tr><td>Confirm password</td><td><input type="password" name="passwordConfirm" value="${password}"/></td></tr>
-        <tr><td>Name</td><td><input type="text" name="name" value="${name}"></td></tr>
-        <tr><td>Last name</td><td><input type="text" name="lastName" value="${lastName}"></td></tr>
-        <tr><td>Email</td><td><input type="text" name="email" value="${email}"></td></tr>
+        <tr><td>Login</td><td><input type="text" name="login" value="${User.login}"></td></tr>
+        <tr><td>Password</td><td><input type="password" name="password" value="${User.password}"/></td></tr>
+        <tr><td>Confirm password</td><td><input type="password" name="passwordConfirm" value="${User.password}"/></td></tr>
+        <tr><td>Name</td><td><input type="text" name="name" value="${User.name}"></td></tr>
+        <tr><td>Last name</td><td><input type="text" name="lastName" value="${User.lastName}"></td></tr>
+        <tr><td>Email</td><td><input type="text" name="email" value="${User.email}"></td></tr>
         <c:if test="${user.role.id == 1}">
             <tr>
                 <td>Role</td>

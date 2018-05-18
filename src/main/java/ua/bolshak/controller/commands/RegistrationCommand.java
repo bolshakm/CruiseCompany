@@ -27,6 +27,7 @@ public class RegistrationCommand implements ICommand{
     private static final String WRONG_LOGIN = text.getProperty("wrong.login");
     private static final String WRONG_PASSWORD = text.getProperty("wrong.password");
     private static final String WRONG_EMAIL = text.getProperty("wrong.email");
+    private static final String USER = params.getProperty("User");
     private static final String LOGIN = params.getProperty("login");
     private static final String PASSWORD = params.getProperty("password");
     private static final String PASSWORD_CONFIRM = params.getProperty("passwordConfirm");
@@ -34,7 +35,7 @@ public class RegistrationCommand implements ICommand{
     private static final String LAST_NAME = params.getProperty("lastName");
     private static final String EMAIL = params.getProperty("email");
     private static final String ERROR_MASSAGE = params.getProperty("ErrorMassage");
-    private static final String USER = params.getProperty("user");
+    private static final String SESSION_USER = params.getProperty("user");
 
     @Override
     public String execute(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException {
@@ -50,59 +51,70 @@ public class RegistrationCommand implements ICommand{
         String name = request.getParameter(NAME);
         String lastName = request.getParameter(LAST_NAME);
         String email = request.getParameter(EMAIL);
-        user.setLogin(login);
-        user.setPassword(password);
-        user.setName(name);
-        user.setLastName(lastName);
-        user.setEmail(email);
-        if (!loginPattern.matcher(login).matches()) {
-            user.setLogin(null);
-            return redirectToRegistrationPageWithErrorMassage(request, response, WRONG_INPUT, user);
-        }
-        if (UserService.findByLogin(login) != null) {
-            user.setLogin(null);
-            return redirectToRegistrationPageWithErrorMassage(request, response, WRONG_LOGIN, user);
-        }
-        if (!passwordPattern.matcher(password).matches() || !passwordPattern.matcher(passwordConfirm).matches()) {
-            user.setPassword(null);
-            return redirectToRegistrationPageWithErrorMassage(request, response, WRONG_INPUT, user);
-        }
-        if (!password.equals(passwordConfirm)){
-            user.setPassword(null);
-            return redirectToRegistrationPageWithErrorMassage(request, response, WRONG_PASSWORD, user);
-        }
-        if (!namePattern.matcher(name).matches()) {
-            user.setName(null);
-            return redirectToRegistrationPageWithErrorMassage(request, response, WRONG_INPUT, user);
-        }
-        if (!lastNamePattern.matcher(lastName).matches()) {
-            user.setLastName(null);
-            return redirectToRegistrationPageWithErrorMassage(request, response, WRONG_INPUT, user);
-        }
-        if (!emailPattern.matcher(email).matches()) {
-            user.setEmail(null);
-            return redirectToRegistrationPageWithErrorMassage(request, response, WRONG_INPUT, user);
-        }
-        if (UserService.findByEmail(email) != null) {
-            user.setEmail(null);
-            return redirectToRegistrationPageWithErrorMassage(request, response, WRONG_EMAIL, user);
-        }
         user.setRole(RoleService.findById(2));
         user.setShip(ShipService.getEmptyShip());
-        UserService.add(user);
-        request.getSession().setAttribute(USER, user);
+        boolean wrongInput = false;
+        String errorMassage = null;
+        if (loginPattern.matcher(login).matches()) {
+            if (UserService.findByLogin(login) == null) {
+                user.setLogin(login);
+            } else {
+                user.setLogin(null);
+                errorMassage = WRONG_LOGIN;
+                wrongInput = true;
+            }
+        } else {
+            user.setLogin(null);
+            wrongInput = true;
+        }
+        if (passwordPattern.matcher(password).matches() && passwordPattern.matcher(passwordConfirm).matches()) {
+            if (password.equals(passwordConfirm)){
+                user.setPassword(password);
+            } else {
+                user.setPassword(null);
+                errorMassage = WRONG_PASSWORD;
+                wrongInput = true;
+            }
+        } else {
+            user.setPassword(null);
+            wrongInput = true;
+        }
+        if (namePattern.matcher(name).matches()) {
+            user.setName(name);
+        } else {
+            user.setName(null);
+            wrongInput = true;
+        }
+        if (lastNamePattern.matcher(lastName).matches()) {
+            user.setLastName(lastName);
+        } else {
+            user.setLastName(null);
+            wrongInput = true;
+        }
+        if (emailPattern.matcher(email).matches()) {
+            user.setEmail(email);
+            if (UserService.findByEmail(email) == null) {
+                user.setEmail(email);
+            } else {
+                errorMassage = WRONG_EMAIL;
+                wrongInput = true;
+            }
+        } else {
+            user.setEmail(null);
+            wrongInput = true;
+        }
+        if (!wrongInput) {
+            UserService.add(user);
+            request.getSession().setAttribute(SESSION_USER, user);
+        } else {
+            if (errorMassage != null) {
+                request.setAttribute(ERROR_MASSAGE, errorMassage);
+            } else {
+                request.setAttribute(ERROR_MASSAGE, WRONG_INPUT);
+            }
+            request.setAttribute(USER, user);
+            return new ToRegistrationPage().execute(request, response);
+        }
         return new ToMainPage().execute(request, response);
     }
-
-    private String redirectToRegistrationPageWithErrorMassage(HttpServletRequest request,HttpServletResponse response, String errorMassage, User user) throws IOException, ServletException {
-        request.setAttribute(LOGIN, user.getLogin());
-        request.setAttribute(PASSWORD, user.getPassword());
-        request.setAttribute(PASSWORD_CONFIRM, user.getPassword());
-        request.setAttribute(NAME, user.getName());
-        request.setAttribute(LAST_NAME, user.getLastName());
-        request.setAttribute(EMAIL, user.getEmail());
-        request.setAttribute(ERROR_MASSAGE, errorMassage);
-        return new ToRegistrationPage().execute(request, response);
-    }
-
 }

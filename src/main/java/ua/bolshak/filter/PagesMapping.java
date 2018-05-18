@@ -52,7 +52,7 @@ public class PagesMapping {
         admin.add("toUpdateRoute");
         admin.add("updateRoute");
         admin.add("deleteRoute");
-        admin.add("toRegistrationPage");
+        admin.add("toUserCard");
         admin.add("addUser");
         admin.add("toUpdateUserCard");
         admin.add("deleteUser");

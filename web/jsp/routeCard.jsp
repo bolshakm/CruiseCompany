@@ -18,28 +18,28 @@
     <caption>Route Card</caption>
     <tr>
         <form action="${pageContext.request.contextPath}/CruiseCompany" method="post">
-            <c:if test="${idRoute == null}"><input type="hidden" name="command" value="addRoute"/></c:if>
-            <c:if test="${idRoute != null}"><input type="hidden" name="command" value="updateRoute"/></c:if>
-            <input type="hidden" name="idRoute" value="${idRoute}">
+            <c:if test="${Route.id == null || Route.id == 0}"><input type="hidden" name="command" value="addRoute"/></c:if>
+            <c:if test="${Route.id != null && Route.id != 0}"><input type="hidden" name="command" value="updateRoute"/></c:if>
+            <input type="hidden" name="idRoute" value="${Route.id}">
 
             <td>Name</td>
-            <td><input type="text" name="name" value="${name}"/></td>
+            <td><input type="text" name="name" value="${Route.name}"/></td>
     </tr>
     <tr>
         <td>Ports</td>
         <td>
             <c:forEach var="Port" items="${Ports}">
-                <c:if test="${fn:contains(selectedPorts, Port)}">
+                <c:if test="${fn:contains(Route.ports, Port)}">
                     <input type="checkbox" checked name="selectedPorts" value="${Port.id}">${Port.name}<br/>
                 </c:if>
-                <c:if test="${!fn:contains(selectedPorts, Port)}">
+                <c:if test="${!fn:contains(Route.ports, Port)}">
                     <input type="checkbox" name="selectedPorts" value="${Port.id}">${Port.name}<br/>
                 </c:if>
             </c:forEach>
         </td>
     </tr>
-    <tr><td></td><td><c:if test="${idRoute == null}"><input type="submit" value="Add"></c:if>
-        <c:if test="${idRoute != null}"><input type="submit" value="Update"></c:if></td></tr>
+    <tr><td></td><td><c:if test="${Route.id == null || Route.id == 0}"><input type="submit" value="Add"></c:if>
+        <c:if test="${Route.id != null && Route.id != 0}"><input type="submit" value="Update"></c:if></td></tr>
     </form>
     </tr>
 </table>
