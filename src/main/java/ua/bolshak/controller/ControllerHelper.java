@@ -58,7 +58,7 @@ public class ControllerHelper {
         commands.put("deleteUser", new DeleteUserCommand());
         commands.put("buyTicket", new ToAddTicketCardCommand());
         commands.put("addTicket", new AddTicketCommand());
-        commands.put("getPrice", new ToAddTicketCommand());
+        commands.put("getPrice", new ToGetPriceForTicketCommand());
         commands.put("toMainPage", new ToMainPage());
         commands.put("toStaffPage", new ToStaffPageCommand());
         commands.put("toRouteCard", new ToRouteCardCommand());
