@@ -15,72 +15,59 @@
 <body>
 <c:import url="header.jsp"/>
 <table align="center" bgcolor="#fff0f5" border="1px ">
-    <c:if test="${idTicket != null}">
-        <caption>Ticket #${idTicket}</caption>
+    <c:if test="${Ticket != null}">
+        <caption>Ticket #${Ticket.id}</caption>
     </c:if>
-    <form action="${pageContext.request.contextPath}/CruiseCompany" method="post">
-        <c:if test="${idTicket != null}">
+    <form action="CruiseCompany" method="post">
+        <c:if test="${Ticket != null && Ticket.id != 0}">
             <input type="hidden" name="command" value="updateTicket"/>
         </c:if>
-        <c:if test="${idTicket == null}">
-            <c:if test="${price == null}">
+        <c:if test="${Ticket == null || Ticket.id == 0}">
+            <c:if test="${Ticket.price == null}">
                 <input type="hidden" name="command" value="getPrice"/>
             </c:if>
-            <c:if test="${price != null}">
+            <c:if test="${Ticket.price != null}">
                 <input type="hidden" name="command" value="addTicket"/>
             </c:if>
         </c:if>
         <tr>
-            <input type="hidden" name="idTicket" value="${idTicket}">
+            <input type="hidden" name="idTicket" value="${Ticket.id}">
             <td>Login</td>
-            <td>${login}
-                <input type="hidden" name="login" value="${login}">
+            <td>${Ticket.user.login}
+                <input type="hidden" name="login" value="${Ticket.user.login}">
             </td>
         </tr>
         <tr>
             <td>Name</td>
             <td>
-                <c:if test="${price == null}">
-                    <input type="text" name="name" value="${name}"/>
+                <c:if test="${Ticket.price == null || user.role.id == 1}">
+                    <input type="text" name="name" value="${Ticket.name}"/>
                 </c:if>
-                <c:if test="${price != null}">
-                    ${name}
-                    <input type="hidden" name="name" value="${name}">
+                <c:if test="${Ticket.price != null && user.role.id != 1}">
+                    ${Ticket.name}
+                    <input type="hidden" name="name" value="${Ticket.name}">
                 </c:if>
             </td>
         </tr>
         <tr>
             <td>Last name</td>
             <td>
-                <c:if test="${price == null}">
-                    <input type="text" name="lastName" value="${lastName}"/>
+                <c:if test="${Ticket.price == null || user.role.id == 1}">
+                    <input type="text" name="lastName" value="${Ticket.lastName}"/>
                 </c:if>
-                <c:if test="${price != null}">
-                    ${lastName}
-                    <input type="hidden" name="lastName" value="${lastName}">
+                <c:if test="${Ticket.price != null && user.role.id != 1}">
+                    ${Ticket.lastName}
+                    <input type="hidden" name="lastName" value="${Ticket.lastName}">
                 </c:if>
             </td>
         </tr>
+<c:if test="${user.role.id != 1}">
         <tr>
             <td>Cruise</td>
-            <c:if test="${user.role.id == 1}">
-                <td>
-                    <select name="CruiseId">
-                        <c:forEach var="Cruise" items="${Cruises}">
-                            <c:if test="${Cruise.id == idCruise}">
-                                <option selected value="${Cruise.id}">${Cruise.name}</option>
-                            </c:if>
-                            <c:if test="${Cruise.id != idCruise}">
-                                <option value="${Cruise.id}">${Cruise.name}</option>
-                            </c:if>
-                        </c:forEach>
-                    </select></td>
-            </c:if>
-            <c:if test="${user.role.id != 1}">
                 <td>${cruise.name}</td>
                 <input type="hidden" name="idCruise" value="${cruise.id}">
-            </c:if>
         </tr>
+</c:if>
         <c:if test="${user.role.id != 1}">
         <tr>
             <td>Cruise from</td>
@@ -96,40 +83,40 @@
         <tr>
             <td>Ticket type</td>
             <td>
-                <c:if test="${price == null}">
+                <c:if test="${Ticket.price == null || user.role.id == 1}">
                     <select name="TicketTypeId">
                         <c:forEach var="TicketType" items="${TicketTypes}">
-                            <c:if test="${TicketType.id == idTicketType}">
+                            <c:if test="${TicketType.id == Ticket.ticketType.id}">
                                 <option selected value="${TicketType.id}">${TicketType.name}</option>
                             </c:if>
-                            <c:if test="${TicketType.id != idTicketType}">
+                            <c:if test="${TicketType.id != Ticket.ticketType.id}">
                                 <option value="${TicketType.id}">${TicketType.name}</option>
                             </c:if>
                         </c:forEach>
                     </select>
                 </c:if>
-                <c:if test="${price != null}">
-                    ${selectedTicketType.name}
-                    <input type="hidden" name="selectedTicketTypeId" value="${selectedTicketType.id}">
+                <c:if test="${Ticket.price != null && user.role.id != 1}">
+                    ${Ticket.ticketType.name}
+                    <input type="hidden" name="selectedTicketTypeId" value="${Ticket.ticketType.id}">
                 </c:if>
             </td>
         </tr>
         <tr>
             <td>Excursions</td>
             <td>
-                <c:if test="${price == null}">
+                <c:if test="${Ticket.price == null || user.role.id == 1}">
                     <c:forEach var="Excursion" items="${Excursions}">
-                        <c:if test="${fn:contains(selectedExcursions, Excursion)}">
+                        <c:if test="${fn:contains(Ticket.excursions, Excursion)}">
                     <input type="checkbox" checked name="selectedExcursions"
                            value="${Excursion.id}">${Excursion.name}<br/>
                 </c:if>
-                <c:if test="${!fn:contains(selectedExcursions, Excursion)}">
+                <c:if test="${!fn:contains(Ticket.excursions, Excursion)}">
                     <input type="checkbox" name="selectedExcursions" value="${Excursion.id}">${Excursion.name}
                     <br/>
                 </c:if>
                 </c:forEach>
                 </c:if>
-                <c:if test="${price != null}">
+                <c:if test="${Ticket.price != null && user.role.id != 1}">
                     <c:forEach var="Excursion" items="${Excursions}">
                         <input type="hidden" name="selectedExcursions" value="${Excursion.id}">${Excursion.name}<br/>
                     </c:forEach>
@@ -146,24 +133,24 @@
             </td>
         </tr>
         </c:if>
-        <c:if test="${price != null}">
+        <c:if test="${Ticket.price != null}">
 
         <tr>
             <td>Price</td>
-            <td>${price}</td>
+            <td>${Ticket.price}</td>
         </tr>
         </c:if>
         <tr>
             <td></td>
             <td>
-                <c:if test="${idTicket != null}">
+                <c:if test="${Ticket != null && Ticket.id != 0}">
                     <input type="submit" value="Update">
                 </c:if>
-                <c:if test="${idTicket == null}">
-                    <c:if test="${price == null}">
+                <c:if test="${Ticket == null || Ticket.id == 0}">
+                    <c:if test="${Ticket.price == null}">
                         <input type="submit" value="Get Price">
                     </c:if>
-                    <c:if test="${price != null}">
+                    <c:if test="${Ticket.price != null}">
                         <input type="submit" value="Buy">
                     </c:if>
                 </c:if></td>
