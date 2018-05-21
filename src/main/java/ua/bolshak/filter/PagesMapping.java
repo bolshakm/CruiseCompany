@@ -71,6 +71,18 @@ public class PagesMapping {
         admin.add("logout");
         admin.add("searchCruise");
         admin.add("toCruisePage");
+        admin.add("actionsForCruise");
+        admin.add("actionsForCruiseStatus");
+        admin.add("actionsForPort");
+        admin.add("actionsForExcursion");
+        admin.add("actionsForRoute");
+        admin.add("actionsForShip");
+        admin.add("actionsForShipType");
+        admin.add("actionsForBonuses");
+        admin.add("actionsForTicket");
+        admin.add("actionsForTicketType");
+        admin.add("actionsForUser");
+        admin.add("actionsForRole");
 
         user.add("login");
         user.add("buyTicket");

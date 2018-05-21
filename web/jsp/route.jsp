@@ -38,8 +38,13 @@
                 </c:forEach></td>
                 <c:if test="${user.role.id == 1}">
                     <td>
-                        <a href="CruiseCompany?command=toUpdateRoute&idRoute=${Route.id}"><button>Update</button></a>
-                        <a href="$CruiseCompany?command=deleteRoute&idRoute=${Route.id}"><button>Delete</button></a></td>
+                        <form action="CruiseCompany" method="post">
+                            <input type="hidden" name="command" value="actionsForRoute"/>
+                            <input type="hidden" name="idRoute" value="${Route.id}"/>
+                            <input type="submit" name="action" value="Update"/>
+                            <input type="submit" name="action" value="Delete"/>
+                        </form>
+                    </td>
                 </c:if>
             </tr>
         </c:forEach>

@@ -78,6 +78,18 @@ public class ControllerHelper {
         commands.put("toCruisePage", new ToCruisesPage());
         commands.put("toUserCard", new ToUserCardCommand());
         commands.put("toTicketCard", new ToTicketCardCommand());
+        commands.put("actionsForCruise", new ActionsForCruiseCommand());
+        commands.put("actionsForCruiseStatus", new ActionsForCruiseStatusCommand());
+        commands.put("actionsForPort", new ActionsForPortCommand());
+        commands.put("actionsForExcursion", new ActionsForExcursionsCommand());
+        commands.put("actionsForRoute", new ActionsForRouteCommand());
+        commands.put("actionsForShip", new ActionsForShipCommand());
+        commands.put("actionsForShipType", new ActionsForShipTypeCommand());
+        commands.put("actionsForBonuses", new ActionsForBonusesCommand());
+        commands.put("actionsForTicket", new ActionsForTicketCommand());
+        commands.put("actionsForTicketType", new ActionsForTicketTypeCommand());
+        commands.put("actionsForUser", new ActionsForUserCommand());
+        commands.put("actionsForRole", new ActionsForRoleCommand());
     }
 
     public static ControllerHelper getInstance() {

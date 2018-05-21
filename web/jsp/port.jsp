@@ -78,8 +78,13 @@
                         <td>${Excursion.price}</td>
                         <c:if test="${user.role.id == 1}">
                             <td>
-                                <a href="CruiseCompany?command=updateExcursion&idExcursion=${Excursion.id}"><button>Update</button></a>
-                                <a href="CruiseCompany?command=deleteExcursion&idExcursion=${Excursion.id}"><button>Delete</button></a></td>
+                                <form action="CruiseCompany" method="post">
+                                    <input type="hidden" name="command" value="actionsForExcursion"/>
+                                    <input type="hidden" name="idExcursion" value="${Excursion.id}"/>
+                                    <input type="submit" name="action" value="Update"/>
+                                    <input type="submit" name="action" value="Delete"/>
+                                </form>
+                            </td>
                         </c:if>
                     </tr>
                 </c:forEach>
@@ -131,8 +136,13 @@
                             <td>${Port.city}</td>
                             <td>${Port.country}</td>
                             <td>
-                                <a href="CruiseCompany?command=updatePort&idPort=${Port.id}"><button>Update</button></a>
-                                <a href="CruiseCompany?command=deletePort&idPort=${Port.id}"><button>Delete</button></a></td>
+                                <form action="CruiseCompany" method="post">
+                                    <input type="hidden" name="command" value="actionsForPort"/>
+                                    <input type="hidden" name="idPort" value="${Port.id}"/>
+                                    <input type="submit" name="action" value="Update"/>
+                                    <input type="submit" name="action" value="Delete"/>
+                                </form>
+                            </td>
                         </tr>
                     </c:forEach>
                 </table>

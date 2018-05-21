@@ -60,10 +60,14 @@
                         <td>${Ticket.price}</td>
                         <c:if test="${user.role.id == 1 || user.role.id == 2}">
                             <td>
-                                <c:if test="${user.role.id == 1}">
-                                    <a href="CruiseCompany?command=toUpdateTicket&idTicket=${Ticket.id}"><button>Update</button></a>
-                                </c:if>
-                                <a href="CruiseCompany?command=deleteTicket&idTicket=${Ticket.id}"><button>Delete</button></a>
+                                <form action="CruiseCompany" method="post">
+                                    <input type="hidden" name="command" value="actionsForTicket"/>
+                                    <input type="hidden" name="idTicket" value="${Ticket.id}"/>
+                                    <c:if test="${user.role.id == 1}">
+                                    <input type="submit" name="action" value="Update"/>
+                                    </c:if>
+                                    <input type="submit" name="action" value="Delete"/>
+                                </form>
                             </td>
                         </c:if>
                     </tr>
@@ -124,8 +128,14 @@
                         <tr>
                             <td>${TicketType.name}</td>
                             <td>${TicketType.price}</td>
-                            <td><a href="CruiseCompany?command=toUpdateTicketType&idTicketType=${TicketType.id}"><button>Update</button></a>
-                                <a href="CruiseCompany?command=deleteTicketType&idTicketType=${TicketType.id}"><button>Delete</button></a></td>
+                            <td>
+                                <form action="CruiseCompany" method="post">
+                                    <input type="hidden" name="command" value="actionsForTicketType"/>
+                                    <input type="hidden" name="idTicketType" value="${TicketType.id}"/>
+                                    <input type="submit" name="action" value="Update"/>
+                                    <input type="submit" name="action" value="Delete"/>
+                                </form>
+                            </td>
                         </tr>
                     </c:forEach>
                 </table>

@@ -98,7 +98,6 @@ public class AddCruiseCommand implements ICommand {
             request.setAttribute(ERROR_MASSAGE, WRONG_INPUT);
             return new ToCruiseCard().execute(request, response);
         }
-
         CruiseService.add(cruise);
         return new ToCruisesPage().execute(request, response);
     }

@@ -36,7 +36,7 @@ public class TicketService {
     public static boolean checkActiveTicker(Ticket ticket){
         boolean result = false;
         Date now = new Date();
-            java.sql.Date sqlDate = ticket.getCruise().getTo();
+            java.sql.Date sqlDate = ticket.getCruise().getFrom();
             if (now.getTime() < sqlDate.getTime()){
                 result = true;
             }

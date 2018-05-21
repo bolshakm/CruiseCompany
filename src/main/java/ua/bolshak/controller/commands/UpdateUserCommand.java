@@ -122,14 +122,20 @@ public class UpdateUserCommand implements ICommand {
         if (idRole != null) {
             user.setRole(RoleService.findById(Integer.parseInt(idRole)));
         } else {
-            user.setRole(null);
-            wrongInput = true;
+            if (user.getId() != sessionUser.getId()) {
+                System.out.println(123);
+                user.setRole(null);
+                wrongInput = true;
+            }
         }
         if (idShip != null) {
             user.setShip(ShipService.findById(Integer.parseInt(idShip)));
         } else {
-            user.setShip(null);
-            wrongInput = true;
+            if (user.getId() != sessionUser.getId()) {
+                System.out.println(321);
+                user.setShip(null);
+                wrongInput = true;
+            }
         }
         if (!wrongInput) {
             UserService.update(user);
@@ -142,7 +148,7 @@ public class UpdateUserCommand implements ICommand {
             request.setAttribute(USER, user);
             return new ToUpdateUserCardCommand().execute(request, response);
         }
-        if (sessionUser.getRole().getId() == 1) {
+        if (sessionUser.getRole().getId() == 1 && user.getId() != sessionUser.getId()) {
             if (!money.equals(EMPTY_STRING) && moneyPattern.matcher(money).matches() && Double.parseDouble(money) > 0) {
                 double moneyForTransfer = Double.parseDouble(money);
                 if (sessionUser.getMoney() >= moneyForTransfer) {

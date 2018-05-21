@@ -41,8 +41,14 @@
                         <td>${User.role.name}</td>
                         <td>${User.ship.name}</td>
                         <c:if test="${user.role.id == 1}">
-                        <td><a href="CruiseCompany?command=toUpdateUserCard&idUser=${User.id}"><button>Update</button></a>
-                            <a href="CruiseCompany?command=deleteUser&idUser=${User.id}"><button>Delete</button></a></td>
+                        <td>
+                            <form action="CruiseCompany" method="post">
+                                <input type="hidden" name="command" value="actionsForUser"/>
+                                <input type="hidden" name="idUser" value="${User.id}"/>
+                                <input type="submit" name="action" value="Update"/>
+                                <input type="submit" name="action" value="Delete"/>
+                            </form>
+                        </td>
                         </c:if>
                     </tr>
                 </c:forEach>
@@ -87,8 +93,14 @@
                 <c:forEach var="Role" items="${Roles}">
                     <tr>
                         <td>${Role.name}</td>
-                        <td><a href="CruiseCompany?command=updateRole&idRole=${Role.id}"><button>Update</button></a>
-                            <a href="CruiseCompany?command=deleteRole&idRole=${Role.id }"><button>Delete</button></a></td>
+                        <td>
+                            <form action="CruiseCompany" method="post">
+                                <input type="hidden" name="command" value="actionsForRole"/>
+                                <input type="hidden" name="idRole" value="${Role.id}"/>
+                                <input type="submit" name="action" value="Update"/>
+                                <input type="submit" name="action" value="Delete"/>
+                            </form>
+                        </td>
                     </tr>
                 </c:forEach>
             </table>

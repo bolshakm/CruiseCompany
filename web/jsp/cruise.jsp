@@ -68,8 +68,14 @@
                         <td>${fn:length(Cruise.tickets)}/${Cruise.ship.numberOfSeats}</td>
                         <td>${Cruise.route.name}</td>
                         <c:if test="${user.role.id == 1}">
-                        <td><a href="/CruiseCompany?command=toUpdateCruise&idCruise=${Cruise.id}"><button>Update</button></a>
-                            <a href="/CruiseCompany?command=deleteCruise&idCruise=${Cruise.id}"><button>Delete</button></a></td>
+                        <td>
+                            <form action="CruiseCompany" method="post">
+                                <input type="hidden" name="command" value="actionsForCruise"/>
+                                <input type="hidden" name="idCruise" value="${Cruise.id}"/>
+                                <input type="submit" name="action" value="Update"/>
+                                <input type="submit" name="action" value="Delete"/>
+                            </form>
+                        </td>
                         </c:if>
                         <c:if test="${user.role.id == 2}">
                             <td><a href="/CruiseCompany?command=buyTicket&idCruise=${Cruise.id}"><button>Buy</button></a> </td>
@@ -114,8 +120,13 @@
                     <c:forEach var="CruiseStatus" items="${CruiseStatuses}">
                         <tr>
                             <td>${CruiseStatus.name}</td>
-                            <td><a href="CruiseCompany?command=updateCruiseStatus&cruiseStatusId=${CruiseStatus.id}"><button>Update</button></a>
-                                <a href="CruiseCompany?command=deleteCruiseStatus&cruiseStatusId=${CruiseStatus.id}"><button>Delete</button></a>
+                            <td>
+                                <form action="CruiseCompany" method="post">
+                                    <input type="hidden" name="command" value="actionsForCruiseStatus"/>
+                                    <input type="hidden" name="cruiseStatusId" value="${CruiseStatus.id}"/>
+                                    <input type="submit" name="action" value="Update"/>
+                                    <input type="submit" name="action" value="Delete"/>
+                                </form>
                             </td>
                         </tr>
                     </c:forEach>
