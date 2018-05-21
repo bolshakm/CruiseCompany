@@ -17,12 +17,12 @@ public class AddBonusCommand implements ICommand {
     private static TextResources text = TextResources.getInstance();
     private static RegExResources regExResources = RegExResources.getInstance();
     private static final String BONUS_NAME = params.getProperty("BonusName");
-    private static final String WRONG_INPUT = text.getProperty("wrong.input");
     private static final String ERROR_MASSAGE = params.getProperty("ErrorMassage");
     private static final String BONUS_NAME_REGEX = regExResources.getProperty("bonus.name.regexp");
 
     @Override
     public String execute(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException {
+        String WRONG_INPUT = text.getProperty("wrong.input");
         Bonus bonus = new Bonus();
         Pattern namePattern = Pattern.compile(BONUS_NAME_REGEX);
         String name = request.getParameter(BONUS_NAME);

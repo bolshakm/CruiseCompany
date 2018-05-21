@@ -25,10 +25,6 @@ public class UpdateUserCommand implements ICommand {
     private static final String NAME_REGEX = regExResources.getProperty("name.regexp");
     private static final String LAST_NAME_REGEX = regExResources.getProperty("last.name.regexp");
     private static final String EMAIL_REGEX = regExResources.getProperty("email.regexp");
-    private static final String WRONG_INPUT = text.getProperty("wrong.input");
-    private static final String WRONG_LOGIN = text.getProperty("wrong.login");
-    private static final String WRONG_PASSWORD = text.getProperty("wrong.password");
-    private static final String WRONG_EMAIL = text.getProperty("wrong.email");
     private static final String USER = params.getProperty("User");
     private static final String LOGIN = params.getProperty("login");
     private static final String PASSWORD = params.getProperty("password");
@@ -39,7 +35,6 @@ public class UpdateUserCommand implements ICommand {
     private static final String ID_ROLE = params.getProperty("idRole");
     private static final String SESSION_USER = params.getProperty("user");
     private static final String ERROR_MASSAGE = params.getProperty("ErrorMassage");
-    private static final String NOT_ENOUGH_MONEY = text.getProperty("not.enough.money");
     private static final String ID_USER = params.getProperty("idUser");
     private static final String MONEY = params.getProperty("money");
     private static final String ID_SHIP = params.getProperty("idShip");
@@ -47,6 +42,11 @@ public class UpdateUserCommand implements ICommand {
 
     @Override
     public String execute(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException {
+        String NOT_ENOUGH_MONEY = text.getProperty("not.enough.money");
+        String WRONG_INPUT = text.getProperty("wrong.input");
+        String WRONG_LOGIN = text.getProperty("wrong.login");
+        String WRONG_PASSWORD = text.getProperty("wrong.password");
+        String WRONG_EMAIL = text.getProperty("wrong.email");
         String page;
         HttpSession session = request.getSession();
         User sessionUser = (User) session.getAttribute(SESSION_USER);

@@ -16,10 +16,10 @@ public class DeleteExcursionCommand implements ICommand {
     private static TextResources text = TextResources.getInstance();
     private static final String ID_EXCURSION = params.getProperty("idExcursion");
     private static final String ERROR_MASSAGE = params.getProperty("ErrorMassage");
-    private static final String EXCURSION_HAS_ACTIVE_TICKET = text.getProperty("excursion.has.active.ticket");
 
     @Override
     public String execute(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException {
+        String EXCURSION_HAS_ACTIVE_TICKET = text.getProperty("excursion.has.active.ticket");
         Excursion excursion = ExcursionService.findById(Integer.parseInt(request.getParameter(ID_EXCURSION)));
         if (!TicketService.checkActiveTicker(excursion.getTickets())) {
             ExcursionService.delete(excursion);

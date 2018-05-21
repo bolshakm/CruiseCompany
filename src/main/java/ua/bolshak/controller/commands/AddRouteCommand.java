@@ -17,14 +17,15 @@ public class AddRouteCommand implements ICommand {
     private static RequestParams params = RequestParams.getInstance();
     private static TextResources text = TextResources.getInstance();
     private static RegExResources regExResources = RegExResources.getInstance();
-    private static final String WRONG_INPUT = text.getProperty("wrong.input");
     private static final String ROUTE_NAME_REGEX = regExResources.getProperty("route.name.regexp");
     private static final String ERROR_MASSAGE = params.getProperty("ErrorMassage");
     private static final String NAME = params.getProperty("name");
     private static final String ROUTE = params.getProperty("Route");
     private static final String SELECTED_PORTS = params.getProperty("selectedPorts");
+
     @Override
     public String execute(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException {
+        String WRONG_INPUT = text.getProperty("wrong.input");
         Pattern namePattern = Pattern.compile(ROUTE_NAME_REGEX);
         Route route = new Route();
         String name = request.getParameter(NAME);

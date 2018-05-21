@@ -23,10 +23,6 @@ public class RegistrationCommand implements ICommand{
     private static final String NAME_REGEX = regExResources.getProperty("name.regexp");
     private static final String LAST_NAME_REGEX = regExResources.getProperty("last.name.regexp");
     private static final String EMAIL_REGEX = regExResources.getProperty("email.regexp");
-    private static final String WRONG_INPUT = text.getProperty("wrong.input");
-    private static final String WRONG_LOGIN = text.getProperty("wrong.login");
-    private static final String WRONG_PASSWORD = text.getProperty("wrong.password");
-    private static final String WRONG_EMAIL = text.getProperty("wrong.email");
     private static final String USER = params.getProperty("User");
     private static final String LOGIN = params.getProperty("login");
     private static final String PASSWORD = params.getProperty("password");
@@ -39,6 +35,10 @@ public class RegistrationCommand implements ICommand{
 
     @Override
     public String execute(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException {
+        String WRONG_INPUT = text.getProperty("wrong.input");
+        String WRONG_LOGIN = text.getProperty("wrong.login");
+        String WRONG_PASSWORD = text.getProperty("wrong.password");
+        String WRONG_EMAIL = text.getProperty("wrong.email");
         Pattern loginPattern = Pattern.compile(LOGIN_REGEX);
         Pattern passwordPattern = Pattern.compile(PASSWORD_REGEX);
         Pattern namePattern = Pattern.compile(NAME_REGEX);

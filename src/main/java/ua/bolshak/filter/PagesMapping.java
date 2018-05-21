@@ -83,6 +83,7 @@ public class PagesMapping {
         admin.add("actionsForTicketType");
         admin.add("actionsForUser");
         admin.add("actionsForRole");
+        admin.add("changeLanguage");
 
         user.add("login");
         user.add("buyTicket");
@@ -98,6 +99,7 @@ public class PagesMapping {
         user.add("toUpdateUserCard");
         user.add("updateUser");
         user.add("toCruisePage");
+        user.add("changeLanguage");
 
         shipAdministrator.add("login");
         shipAdministrator.add("toMainPage");
@@ -110,14 +112,16 @@ public class PagesMapping {
         shipAdministrator.add("toUpdateUser");
         shipAdministrator.add("updateUser");
         shipAdministrator.add("toCruisePage");
+        shipAdministrator.add("changeLanguage");
 
         stuff.add("login");
         stuff.add("logout");
         stuff.add("toUpdateUser");
+        stuff.add("changeLanguage");
         stuff.add("updateUser");
 
         unregister.add("login");
-//        unregister.add("changeLanguage");
+        unregister.add("changeLanguage");
         unregister.add("registration");
 
         PAGES_MAP.put(1, admin);

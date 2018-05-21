@@ -1,4 +1,5 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt" %>
 <%--
   Created by IntelliJ IDEA.
   User: bolsh
@@ -7,6 +8,9 @@
   To change this template use File | Settings | File Templates.
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<c:set var="language" value="${not empty sessionScope.language ? sessionScope.language : pageContext.request.locale}" scope="session" />
+<fmt:setLocale value="${language}" />
+<fmt:setBundle basename="text" />
 <html>
 <head>
     <title>Ports</title>
@@ -17,11 +21,11 @@
     <tr>
         <td valign="top">
             <table border="1" align="center">
-                <caption>Excursions</caption>
+                <caption><fmt:message key="excursions"/></caption>
                 <tr>
-                    <th>Name</th>
-                    <th>Port</th>
-                    <th>Price</th>
+                    <th><fmt:message key="name"/></th>
+                    <th><fmt:message key="port"/></th>
+                    <th><fmt:message key="price"/></th>
                     <c:if test="${user.role.id == 1}">
                         <th>Actions</th>
                     </c:if>
@@ -33,7 +37,7 @@
                         <tr>
                             <td><input type="text" name="name" value="${Excursion.name}"></td>
                             <td><select name="idPort">
-                                <option disabled selected>Select Port</option>
+                                <option disabled selected><fmt:message key="select.port"/></option>
                                 <c:forEach var="Port" items="${Ports}">
                                     <c:if test="${Port.id == Excursion.port.id}">
                                         <option selected value="${Port.id}">${Port.name}</option>
@@ -44,7 +48,7 @@
                                 </c:forEach>
                             </select></td>
                             <td><input type="number" name="price" value="${Excursion.price}"></td>
-                            <td><input type="submit" name="Add" value="Add"></td>
+                            <td><input type="submit" name="Add" value="<fmt:message key="add"/>"></td>
                         </tr>
                     </form>
                 </c:if>
@@ -66,7 +70,7 @@
                                 </c:forEach>
                             </select></td>
                             <td><input type="number" name="price" value="${Excursion.price}"></td>
-                            <td><input type="submit" name="Update" value="Update"></td>
+                            <td><input type="submit" name="Update" value="<fmt:message key="update"/>"></td>
                         </tr>
                     </form>
                 </c:if>
@@ -81,8 +85,8 @@
                                 <form action="CruiseCompany" method="post">
                                     <input type="hidden" name="command" value="actionsForExcursion"/>
                                     <input type="hidden" name="idExcursion" value="${Excursion.id}"/>
-                                    <input type="submit" name="action" value="Update"/>
-                                    <input type="submit" name="action" value="Delete"/>
+                                    <input type="submit" name="actionUpdate" value="<fmt:message key="update"/>"/>
+                                    <input type="submit" name="actionDelete" value="<fmt:message key="delete"/>"/>
                                 </form>
                             </td>
                         </c:if>
@@ -94,12 +98,12 @@
             <td width="50px"></td>
             <td valign="top">
                 <table border="1" align="center">
-                    <caption>Ports</caption>
+                    <caption><fmt:message key="ports"/></caption>
                     <tr>
-                        <th>Name</th>
-                        <th>City</th>
-                        <th>Country</th>
-                        <th>Actions</th>
+                        <th><fmt:message key="name"/></th>
+                        <th><fmt:message key="city"/></th>
+                        <th><fmt:message key="country"/></th>
+                        <th><fmt:message key="actions"/></th>
                     </tr>
                     <c:if test="${Port == null || Port.id == 0}">
                         <tr>
@@ -109,7 +113,7 @@
                                 <td><input type="text" name="CityName" value="${Port.city}"></td>
                                 <td><input type="text" name="CountryName" value="${Port.country}"></td>
                                 <td>
-                                    <input type="submit" name="Add" value="Add">
+                                    <input type="submit" name="Add" value="<fmt:message key="add"/>">
                                 </td>
                             </form>
                         </tr>
@@ -125,7 +129,7 @@
                                 <td><input type="text" name="CountryName" value="${Port.country}"></td>
                                 </td>
                                 <td>
-                                    <input type="submit" name="Update" value="Update">
+                                    <input type="submit" name="Update" value="<fmt:message key="update"/>">
                                 </td>
                             </form>
                         </tr>
@@ -139,8 +143,8 @@
                                 <form action="CruiseCompany" method="post">
                                     <input type="hidden" name="command" value="actionsForPort"/>
                                     <input type="hidden" name="idPort" value="${Port.id}"/>
-                                    <input type="submit" name="action" value="Update"/>
-                                    <input type="submit" name="action" value="Delete"/>
+                                    <input type="submit" name="actionUpdate" value="<fmt:message key="update"/>"/>
+                                    <input type="submit" name="actionDelete" value="<fmt:message key="delete"/>"/>
                                 </form>
                             </td>
                         </tr>

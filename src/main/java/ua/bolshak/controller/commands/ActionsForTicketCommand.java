@@ -9,18 +9,18 @@ import java.io.IOException;
 
 public class ActionsForTicketCommand implements ICommand {
     private static RequestParams params = RequestParams.getInstance();
-    private static final String ACTION = params.getProperty("action");
-    private static final String DELETE = params.getProperty("Delete");
-    private static final String UPDATE = params.getProperty("Update");
+    private static final String ACTION_UPDATE = params.getProperty("actionUpdate");
+    private static final String ACTION_DELETE = params.getProperty("actionDelete");
 
     @Override
     public String execute(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException {
         String page = null;
-        String action = request.getParameter(ACTION);
-        if (action.equals(UPDATE)){
+        String actionUpdate = request.getParameter(ACTION_UPDATE);
+        String actionDelete = request.getParameter(ACTION_DELETE);
+        if (actionUpdate != null){
             page = new ToUpdateTicketCommand().execute(request, response);
         }
-        if (action.equals(DELETE)){
+        if (actionDelete != null){
             page = new DeleteTicketCommand().execute(request, response);
         }
         return page;

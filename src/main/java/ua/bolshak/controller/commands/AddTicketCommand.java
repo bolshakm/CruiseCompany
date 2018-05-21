@@ -21,10 +21,10 @@ public class AddTicketCommand implements ICommand {
     private static final String SELECTED_EXCURSIONS = params.getProperty("selectedExcursions");
     private static final String ERROR_MASSAGE = params.getProperty("ErrorMassage");
     private static final String USER = params.getProperty("user");
-    private static final String NOT_ENOUGH_MONEY = text.getProperty("not.enough.money");
 
     @Override
     public String execute(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException {
+        String NOT_ENOUGH_MONEY = text.getProperty("not.enough.money");
         User user = (User) request.getSession().getAttribute(USER);
         String name = request.getParameter(NAME);
         String lastName = request.getParameter(LAST_NAME);

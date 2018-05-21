@@ -5,7 +5,6 @@ import ua.bolshak.model.entity.User;
 import ua.bolshak.model.service.TicketService;
 import ua.bolshak.model.service.UserService;
 import ua.bolshak.properties.RequestParams;
-import ua.bolshak.properties.TextResources;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
@@ -14,7 +13,6 @@ import java.io.IOException;
 
 public class DeleteTicketCommand implements ICommand {
     private static RequestParams params = RequestParams.getInstance();
-    private static TextResources text = TextResources.getInstance();
     private static final String USER = params.getProperty("user");
     private static final String ID_TICKET = params.getProperty("idTicket");
 

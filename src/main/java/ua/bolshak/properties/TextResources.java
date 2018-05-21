@@ -1,5 +1,6 @@
 package ua.bolshak.properties;
 
+import java.util.Locale;
 import java.util.ResourceBundle;
 
 public class TextResources {
@@ -19,7 +20,15 @@ public class TextResources {
         return instance;
     }
 
+    public void setUkrainianLocal(){
+        resource = ResourceBundle.getBundle(BUNDLE_NAME, new Locale("uk", "UA"));
+    }
+
+    public void setEnglishLocal(){
+        resource = ResourceBundle.getBundle(BUNDLE_NAME);
+    }
+
     public String getProperty(String key) {
-        return (String) resource.getObject(key);
+        return resource.getString(key);
     }
 }

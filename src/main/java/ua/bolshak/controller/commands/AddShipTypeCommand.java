@@ -19,10 +19,10 @@ public class AddShipTypeCommand implements ICommand {
     private static final String SHIP_TYPE_NAME = params.getProperty("ShipTypeName");
     private static final String ERROR_MASSAGE = params.getProperty("ErrorMassage");
     private static final String SHIP_TYPE_NAME_REGEX = regExResources.getProperty("ship.type.name.regexp");
-    private static final String WRONG_INPUT = text.getProperty("wrong.input");
 
     @Override
     public String execute(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException {
+        String WRONG_INPUT = text.getProperty("wrong.input");
         ShipType shipType = new ShipType();
         Pattern namePattern = Pattern.compile(SHIP_TYPE_NAME_REGEX);
         String name = request.getParameter(SHIP_TYPE_NAME);

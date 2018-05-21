@@ -90,10 +90,11 @@ public class ControllerHelper {
         commands.put("actionsForTicketType", new ActionsForTicketTypeCommand());
         commands.put("actionsForUser", new ActionsForUserCommand());
         commands.put("actionsForRole", new ActionsForRoleCommand());
+        commands.put("changeLanguage", new ChangeLanguageCommand());
     }
 
     public static ControllerHelper getInstance() {
-        if (instance == null){
+        if (instance == null) {
             instance = new ControllerHelper();
         }
         return instance;

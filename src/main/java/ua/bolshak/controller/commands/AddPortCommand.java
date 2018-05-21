@@ -16,7 +16,6 @@ public class AddPortCommand implements ICommand {
     private static RequestParams params = RequestParams.getInstance();
     private static TextResources text = TextResources.getInstance();
     private static RegExResources regExResources = RegExResources.getInstance();
-    private static final String WRONG_INPUT = text.getProperty("wrong.input");
     private static final String ERROR_MASSAGE = params.getProperty("ErrorMassage");
     private static final String PORT_NAME_REGEX = regExResources.getProperty("port.name.regexp");
     private static final String CITY_NAME_REGEX = regExResources.getProperty("city.name.regexp");
@@ -28,6 +27,7 @@ public class AddPortCommand implements ICommand {
 
     @Override
     public String execute(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException {
+        String WRONG_INPUT = text.getProperty("wrong.input");
         Port port = new Port();
         Pattern namePattern = Pattern.compile(PORT_NAME_REGEX);
         Pattern cityPatter = Pattern.compile(CITY_NAME_REGEX);

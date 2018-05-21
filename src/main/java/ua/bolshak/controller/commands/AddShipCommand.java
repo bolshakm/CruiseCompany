@@ -21,7 +21,6 @@ public class AddShipCommand implements ICommand {
     private static RequestParams params = RequestParams.getInstance();
     private static TextResources text = TextResources.getInstance();
     private static RegExResources regEx = RegExResources.getInstance();
-    private static final String WRONG_INPUT = text.getProperty("wrong.input");
     private static final String NAME_REGEX = regEx.getProperty("ship.name.regexp");
     private static final String COUNT_OF_SEATS_REGEX = regEx.getProperty("ship.count.of.seats.regexp");
     private static final String PRICE = regEx.getProperty("price.regexp");
@@ -39,6 +38,7 @@ public class AddShipCommand implements ICommand {
 
     @Override
     public String execute(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException {
+        String WRONG_INPUT = text.getProperty("wrong.input");
         Pattern namePattern = Pattern.compile(NAME_REGEX);
         Pattern numberPattern = Pattern.compile(NUMBER_REGEX);
         Pattern countOfSeatsPattern = Pattern.compile(COUNT_OF_SEATS_REGEX);

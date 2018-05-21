@@ -16,7 +16,6 @@ public class UpdateRoleCommand implements ICommand{
     private static RequestParams params = RequestParams.getInstance();
     private static TextResources text = TextResources.getInstance();
     private static RegExResources regExResources = RegExResources.getInstance();
-    private static final String WRONG_INPUT = text.getProperty("wrong.input");
     private static final String ERROR_MASSAGE = params.getProperty("ErrorMassage");
     private static final String ROLE_NAME_REGEX = regExResources.getProperty("role.name.regexp");
     private static final String ID_ROLE = params.getProperty("idRole");
@@ -26,6 +25,7 @@ public class UpdateRoleCommand implements ICommand{
 
     @Override
     public String execute(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException {
+        String WRONG_INPUT = text.getProperty("wrong.input");
         Pattern namePattern = Pattern.compile(ROLE_NAME_REGEX);
         Role role = RoleService.findById(Integer.parseInt(request.getParameter(ID_ROLE)));
         String name = request.getParameter(ROLE_NAME);

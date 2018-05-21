@@ -21,8 +21,6 @@ public class LoginCommand implements ICommand {
     private static RegExResources regEx = RegExResources.getInstance();
     private static final String LOGIN_REGEX = regEx.getProperty("login.regexp");
     private static final String PASSWORD_REGEX = regEx.getProperty("password.regexp");
-    private static final String WRONG_LOGIN_OR_PASSWORD = text.getProperty("wrong.login.or.password");
-    private static final String WRONG_INPUT= text.getProperty("wrong.input");
     private static final String BUTTON = params.getProperty("button");
     private static final String LOGIN = params.getProperty("Login");
     private static final String PASSWORD = params.getProperty("Password");
@@ -32,6 +30,9 @@ public class LoginCommand implements ICommand {
 
     @Override
     public String execute(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException {
+        String WRONG_LOGIN_OR_PASSWORD = text.getProperty("wrong.login.or.password");
+        String WRONG_INPUT = text.getProperty("wrong.input");
+
         HttpSession session = request.getSession();
         Pattern loginPattern = Pattern.compile(LOGIN_REGEX);
         Pattern passwordPattern = Pattern.compile(PASSWORD_REGEX);

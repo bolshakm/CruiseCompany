@@ -14,12 +14,12 @@ import java.io.IOException;
 public class DeleteShipCommand implements ICommand {
     private static RequestParams params = RequestParams.getInstance();
     private static TextResources text = TextResources.getInstance();
-    private static final String SHIP_HAS_ACTIVE_CRUISE = text.getProperty("ship.has.active.cruise");
     private static final String ERROR_MASSAGE = params.getProperty("ErrorMassage");
     private static final String ID_SHIP = params.getProperty("idShip");
 
     @Override
     public String execute(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException {
+        String SHIP_HAS_ACTIVE_CRUISE = text.getProperty("ship.has.active.cruise");
         Ship ship = ShipService.findById(Integer.parseInt(request.getParameter(ID_SHIP)));
         if (!CruiseService.checkActive(ship.getCruises())) {
             ShipService.delete(ship);

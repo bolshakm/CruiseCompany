@@ -1,4 +1,5 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt" %>
 <%--
   Created by IntelliJ IDEA.
   User: bolsh
@@ -7,14 +8,17 @@
   To change this template use File | Settings | File Templates.
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<c:set var="language" value="${not empty sessionScope.language ? sessionScope.language : pageContext.request.locale}" scope="session" />
+<fmt:setLocale value="${language}" />
+<fmt:setBundle basename="text" />
 <html>
 <head>
-    <title>User card</title>
+    <title><fmt:message key="user.card"/></title>
 </head>
 <body>
     <c:import url="header.jsp"/>
 <table align="center" bgcolor="#fff0f5" border="1px ">
-    <caption>User Card</caption>
+    <caption><fmt:message key="user.card"/></caption>
     <form action="CruiseCompany" method="post">
     <tr>
         <c:if test="${User == null || User.id == 0}">
@@ -25,45 +29,45 @@
         </c:if>
             <input type="hidden" name="idUser" value="${User.id}">
 
-        <td>Login</td>
+        <td><fmt:message key="login"/></td>
         <td><c:if test="${user.id != User.id && User.id != 0}">${User.login}<input type="hidden" name="login" value="${User.login}"></c:if>
             <c:if test="${user.id == User.id || User.id == null || User.id == 0}"><input type="text" name="login" value="${User.login}"></c:if></td>
     </tr>
         <c:if test="${user.id == User.id || User.id == null || User.id == 0}">
             <tr>
-                <td>Password</td>
+                <td><fmt:message key="password"/></td>
                 <td><input type="password" name="password" value="${User.password}"/></td>
             </tr>
             <tr>
-                <td>Confirm password</td>
+                <td><fmt:message key="confirm.password"/></td>
                 <td><input type="password" name="passwordConfirm" value="${User.password}"/></td>
             </tr>
         </c:if>
         <tr>
-            <td>Email</td>
+            <td><fmt:message key="email"/></td>
             <td><c:if test="${user.id != User.id && User.id != 0}">${User.email}<input type="hidden" name="email" value="${User.email}"></c:if>
                 <c:if test="${user.id == User.id  || User.id == null || User.id == 0}"><input type="text" name="email" value="${User.email}"></c:if></td>
         </tr>
         <tr>
-            <td>Name</td>
+            <td><fmt:message key="name"/></td>
             <td><input type="text" name="name" value="${User.name}"/></td>
         </tr>
     <tr>
-        <td>Last name</td>
+        <td><fmt:message key="last.name"/></td>
         <td><input type="text" name="lastName" value="${User.lastName}"/></td>
     </tr>
         <c:if test="${user.role.id == 1 && user.role.id != User.id && User != null && User.id != 0}">
             <tr>
-                <td>Money</td>
+                <td><fmt:message key="money"/></td>
                 <td><input type="text" name="money" value="${User.money}"></td>
             </tr>
         </c:if>
 <c:if test="${user.role.id == 1}">
     <tr>
-        <td>Role</td>
+        <td><fmt:message key="role"/></td>
     <c:if test="${User.role.id != 2 && User.role.id != 1}">
         <td><select name="idRole">
-            <option disabled selected>Select role</option>
+            <option disabled selected><fmt:message key="select.role"/></option>
             <c:forEach var="Role" items="${Roles}">
                 <c:if test="${Role.id == User.role.id}">
                     <option selected value="${Role.id}">${Role.name}</option>
@@ -83,10 +87,10 @@
     </tr>
     <c:if test="${User.role.id != 2 && User.role.id != 1}">
         <tr>
-            <td>Ship</td>
+            <td><fmt:message key="ship"/></td>
             <td>
             <select name="idShip">
-                <option disabled selected>Select ship</option>
+                <option disabled selected><fmt:message key="select.ship"/></option>
                 <c:forEach var="Ship" items="${Ships}">
                     <c:if test="${Ship.id == User.ship.id}">
                         <option selected value="${Ship.id}">${Ship.name}</option>
@@ -101,10 +105,10 @@
 </c:if>
     <tr><td></td><td>
         <c:if test="${User == null || User.id == 0}">
-            <input type="submit" name="action" value="Add">
+            <input type="submit" name="action" value="<fmt:message key="add"/>">
         </c:if>
         <c:if test="${User != null && User.id != 0}">
-            <input type="submit" name="action" value="Update">
+            <input type="submit" name="action" value="<fmt:message key="update"/>">
         </c:if>
     </tr>
     </form>

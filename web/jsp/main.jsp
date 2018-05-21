@@ -9,9 +9,9 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt" %>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
-<%--<c:set var="language" value="${not empty sessionScope.language ? sessionScope.language : pageContext.request.locale}" scope="session" />--%>
-<%--<fmt:setLocale value="${language}" />--%>
-<%--<fmt:setBundle basename="text" />--%>
+<c:set var="language" value="${not empty sessionScope.language ? sessionScope.language : pageContext.request.locale}" scope="session" />
+<fmt:setLocale value="${language}" />
+<fmt:setBundle basename="text" />
 <html>
 <head>
     <title>Welcome</title>
@@ -19,16 +19,16 @@
 <body>
 <c:import url="header.jsp"/>
 <table border="1" bgcolor="#7fffd4" align="center">
-    <caption>Cruises</caption>
+    <caption><fmt:message key="cruises"/></caption>
     <tr>
-        <th>Name</th>
-        <th>From</th>
-        <th>To</th>
-        <th>Ship number</th>
-        <th>Cruise status</th>
-        <th>Ticket/Seats</th>
-        <th>Routes</th>
-        <th>Actions</th>
+        <th><fmt:message key="name"/></th>
+        <th><fmt:message key="from"/></th>
+        <th><fmt:message key="to"/></th>
+        <th><fmt:message key="ship.number"/></th>
+        <th><fmt:message key="cruise.status"/></th>
+        <th><fmt:message key="ticket.seats"/></th>
+        <th><fmt:message key="route"/></th>
+        <th><fmt:message key="actions"/></th>
     </tr>
     <c:forEach var="Cruise" items="${Cruises}">
         <tr>
@@ -39,7 +39,7 @@
             <td>${Cruise.status.name}</td>
             <td>${fn:length(Cruise.tickets)}/${Cruise.ship.numberOfSeats}</td>
             <td>${Cruise.route.name}</td>
-            <td><a href="CruiseCompany?command=buyTicket&idCruise=${Cruise.id}"><button>Buy</button></a> </td>
+            <td><a href="CruiseCompany?command=buyTicket&idCruise=${Cruise.id}"><button><fmt:message key="buy"/></button></a> </td>
         </tr>
     </c:forEach>
 </table>

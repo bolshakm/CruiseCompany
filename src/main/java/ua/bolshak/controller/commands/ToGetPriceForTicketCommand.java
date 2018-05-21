@@ -17,7 +17,6 @@ public class ToGetPriceForTicketCommand implements ICommand {
     private static RequestParams params = RequestParams.getInstance();
     private static TextResources text = TextResources.getInstance();
     private static RegExResources regExResources = RegExResources.getInstance();
-    private static final String WRONG_INPUT = text.getProperty("wrong.input");
     private static final String ERROR_MASSAGE = params.getProperty("ErrorMassage");
     private static final String NAME_REGEX = regExResources.getProperty("name.regexp");
     private static final String LAST_NAME_REGEX = regExResources.getProperty("last.name.regexp");
@@ -33,6 +32,7 @@ public class ToGetPriceForTicketCommand implements ICommand {
 
     @Override
     public String execute(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException {
+        String WRONG_INPUT = text.getProperty("wrong.input");
         User user = (User) request.getSession().getAttribute(USER);
         Pattern namePattern = Pattern.compile(NAME_REGEX);
         Pattern lastNamePattern = Pattern.compile(LAST_NAME_REGEX);

@@ -17,7 +17,6 @@ import java.util.List;
 public class ToTicketsPageCommand implements ICommand {
     private static RequestParams params = RequestParams.getInstance();
     private static TextResources text = TextResources.getInstance();
-    private static final String TICKET_NOT_FOUND = text.getProperty("ticket.not.found");
     private static final String USER = params.getProperty("user");
     private static final String TICKETS = params.getProperty("Tickets");
     private static final String TICKET_TYPES = params.getProperty("TicketTypes");
@@ -29,6 +28,7 @@ public class ToTicketsPageCommand implements ICommand {
 
     @Override
     public String execute(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException {
+        String TICKET_NOT_FOUND = text.getProperty("ticket.not.found");
         String page = "/jsp/tickets.jsp";
         User user = (User) request.getSession().getAttribute(USER);
         List<Ticket> tickets = new ArrayList<>();

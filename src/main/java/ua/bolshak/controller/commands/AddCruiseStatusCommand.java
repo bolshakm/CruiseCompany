@@ -19,11 +19,11 @@ public class AddCruiseStatusCommand implements ICommand {
     private static final String CRUISE_STATUS_NAME_REGEX = regExResources.getProperty("cruise.status.name.regexp");
     private static final String CRUISE_STATUS_NAME = params.getProperty("CruiseStatusName");
     private static final String ERROR_MASSAGE = params.getProperty("ErrorMassage");
-    private static final String WRONG_INPUT = text.getProperty("wrong.input");
-
 
     @Override
     public String execute(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException {
+        String WRONG_INPUT = text.getProperty("wrong.input");
+
         CruiseStatus cruiseStatus = new CruiseStatus();
         Pattern namePattern = Pattern.compile(CRUISE_STATUS_NAME_REGEX);
         String name = request.getParameter(CRUISE_STATUS_NAME);

@@ -1,4 +1,5 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt" %>
 <%--
   Created by IntelliJ IDEA.
   User: bolsh
@@ -7,21 +8,24 @@
   To change this template use File | Settings | File Templates.
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<c:set var="language" value="${not empty sessionScope.language ? sessionScope.language : pageContext.request.locale}" scope="session" />
+<fmt:setLocale value="${language}" />
+<fmt:setBundle basename="text" />
 <html>
 <head>
-    <title>Staff Page</title>
+    <title><fmt:message key="staff.page"/></title>
 </head>
 <body>
 <c:import url="header.jsp"/>
 <table border="1" bgcolor="#fff0f5" align="center">
-    <caption>Cruises</caption>
+    <caption><fmt:message key="cruises"/></caption>
     <tr>
-        <th>Name</th>
-        <th>From</th>
-        <th>To</th>
-        <th>Ship number</th>
-        <th>Cruise status</th>
-        <th>Route</th>
+        <th><fmt:message key="name"/></th>
+        <th><fmt:message key="from"/></th>
+        <th><fmt:message key="to"/></th>
+        <th><fmt:message key="ship.number"/></th>
+        <th><fmt:message key="cruise.status"/></th>
+        <th><fmt:message key="route"/></th>
     </tr>
     <c:forEach var="Cruise" items="${Cruises}">
         <tr>

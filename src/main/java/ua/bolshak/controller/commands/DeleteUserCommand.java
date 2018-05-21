@@ -14,12 +14,12 @@ import java.io.IOException;
 public class DeleteUserCommand implements ICommand{
     private static RequestParams params = RequestParams.getInstance();
     private static TextResources text = TextResources.getInstance();
-    private static final String USER_HAS_ACTIVE_TICKET = text.getProperty("user.has.active.ticket");
     private static final String ERROR_MASSAGE = params.getProperty("ErrorMassage");
     private static final String ID_USER = params.getProperty("idUser");
 
     @Override
     public String execute(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException {
+        String USER_HAS_ACTIVE_TICKET = text.getProperty("user.has.active.ticket");
         User user = UserService.findById(Integer.parseInt(request.getParameter(ID_USER)));
         if (user.getRole().getId() == 2) {
             if (!TicketService.checkActiveTicketByUser(user)) {

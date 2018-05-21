@@ -14,12 +14,12 @@ import java.io.IOException;
 public class DeleteRoleCommand implements ICommand {
     private static RequestParams params = RequestParams.getInstance();
     private static TextResources text = TextResources.getInstance();
-    private static final String ROLE_HAS_USERS = text.getProperty("role.has.users");
     private static final String ERROR_MASSAGE = params.getProperty("ErrorMassage");
     private static final String ID_ROLE = params.getProperty("idRole");
 
     @Override
     public String execute(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException {
+        String ROLE_HAS_USERS = text.getProperty("role.has.users");
         Role role = RoleService.findById(Integer.parseInt(request.getParameter(ID_ROLE)));
         if (UserService.findAllByRole(role).isEmpty()) {
             RoleService.delete(role);

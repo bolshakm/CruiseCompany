@@ -18,7 +18,6 @@ public class UpdateShipTypeCommand implements ICommand {
     private static RegExResources regExResources = RegExResources.getInstance();
     private static final String ERROR_MASSAGE = params.getProperty("ErrorMassage");
     private static final String SHIP_TYPE_NAME_REGEX = regExResources.getProperty("ship.type.name.regexp");
-    private static final String WRONG_INPUT = text.getProperty("wrong.input");
     private static final String SHIP_TYPE_ID = params.getProperty("ShipTypeId");
     private static final String SHIP_TYPE_NAME = params.getProperty("ShipTypeName");
     private static final String SHIP_TYPE = params.getProperty("ShipType");
@@ -26,6 +25,7 @@ public class UpdateShipTypeCommand implements ICommand {
 
     @Override
     public String execute(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException {
+        String WRONG_INPUT = text.getProperty("wrong.input");
         Pattern namePattern = Pattern.compile(SHIP_TYPE_NAME_REGEX);
         ShipType shipType = ShipTypeService.findById(Integer.parseInt(request.getParameter(SHIP_TYPE_ID)));
         String name = request.getParameter(SHIP_TYPE_NAME);

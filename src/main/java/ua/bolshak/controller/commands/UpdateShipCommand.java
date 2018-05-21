@@ -22,7 +22,6 @@ public class UpdateShipCommand implements ICommand {
     private static RequestParams params = RequestParams.getInstance();
     private static TextResources text = TextResources.getInstance();
     private static RegExResources regEx = RegExResources.getInstance();
-    private static final String WRONG_INPUT = text.getProperty("wrong.input");
     private static final String NAME_REGEX = regEx.getProperty("ship.name.regexp");
     private static final String COUNT_OF_SEATS_REGEX = regEx.getProperty("ship.count.of.seats.regexp");
     private static final String PRICE = regEx.getProperty("price.regexp");
@@ -31,7 +30,6 @@ public class UpdateShipCommand implements ICommand {
     private static final String SHIP = params.getProperty("Ship");
     private static final String SHIP_NUMBER = params.getProperty("shipNumber");
     private static final String NUMBER_OF_SEATS = params.getProperty("numberOfSeats");
-    private static final String PRICE_PER_SEATS = params.getProperty("pricePerSeat");
     private static final String ID_SHIP_TYPE = params.getProperty("idShipType");
     private static final String SELECTED_BONUSES = params.getProperty("selectedBonuses");
     private static final String SELECTED_TICKET_TYPE = params.getProperty("selectedTicketTypes");
@@ -42,6 +40,7 @@ public class UpdateShipCommand implements ICommand {
 
     @Override
     public String execute(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException {
+        String WRONG_INPUT = text.getProperty("wrong.input");
         Ship ship = ShipService.findById(Integer.parseInt(request.getParameter(ID_SHIP)));
         Pattern namePattern = Pattern.compile(NAME_REGEX);
         Pattern numberPattern = Pattern.compile(NUMBER_REGEX);

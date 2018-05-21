@@ -10,23 +10,28 @@
   To change this template use File | Settings | File Templates.
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
-<%--<c:set var="language" value="${not empty sessionScope.language ? sessionScope.language : pageContext.request.locale}" scope="session" />--%>
-<%--<fmt:setLocale value="${language}" />--%>
-<%--<fmt:setBundle basename="text" />--%>
+<c:set var="language" value="${not empty sessionScope.language ? sessionScope.language : pageContext.request.locale}" scope="session" />
+<fmt:setLocale value="${language}" />
+<fmt:setBundle basename="text" />
+<%--<c:set var="page" value="/jsp/login.jsp" scope="session"/>--%>
 <html>
 <head>
     <title>Login</title>
 </head>
 <body>
+<p align="center">
+<a href="CruiseCompany?command=changeLanguage&lang=ua"><button>Укр</button></a>
+<a href="CruiseCompany?command=changeLanguage&lang=en"><button>Eng</button></a>
+</p>
 <form action="CruiseCompany" method="post">
     <input type="hidden" name="command" value="login"/>
     <table align="center">
         <tr>
-            <td>Login</td>
+            <td><fmt:message key="login"/></td>
             <td><input name="Login" value="${Login}"></td>
         </tr>
         <tr>
-            <td>Password</td>
+            <td><fmt:message key="password"/></td>
             <td><input type="password" name="Password" value="${Password}"></td>
         </tr>
         <tr>

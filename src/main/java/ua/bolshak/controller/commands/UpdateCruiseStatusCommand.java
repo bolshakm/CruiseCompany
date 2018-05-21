@@ -21,10 +21,10 @@ public class UpdateCruiseStatusCommand implements ICommand {
     private static final String SELECTED_CRUISE_STATUS = params.getProperty("SelectedCruiseStatus");
     private static final String CRUISE_STATUS_NAME_REGEX = regExResources.getProperty("cruise.status.name.regexp");
     private static final String ERROR_MASSAGE = params.getProperty("ErrorMassage");
-    private static final String WRONG_INPUT = text.getProperty("wrong.input");
 
     @Override
     public String execute(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException {
+        String WRONG_INPUT = text.getProperty("wrong.input");
         CruiseStatus cruiseStatus = CruiseStatusService.findById(Integer.parseInt(request.getParameter(CRUISE_STATUS_ID)));
         Pattern namePattern = Pattern.compile(CRUISE_STATUS_NAME_REGEX);
         String name = request.getParameter(CRUISE_STATUS_NAME);

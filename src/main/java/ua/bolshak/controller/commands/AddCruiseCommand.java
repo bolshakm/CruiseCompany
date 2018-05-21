@@ -29,11 +29,12 @@ public class AddCruiseCommand implements ICommand {
     private static final String CRUISE_STATUS_ID = params.getProperty("CruiseStatusId");
     private static final String ROUTE_ID = params.getProperty("RouteId");
     private static final String ERROR_MASSAGE = params.getProperty("ErrorMassage");
-    private static final String WRONG_INPUT = text.getProperty("wrong.input");
-    private static final String WRONG_DATE = text.getProperty("wrong.date");
+
 
     @Override
     public String execute(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException {
+        String WRONG_INPUT = text.getProperty("wrong.input");
+        String WRONG_DATE = text.getProperty("wrong.date");
         Cruise cruise = new Cruise();
         java.util.Date now = new java.util.Date();
         Pattern namePattern = Pattern.compile(CRUISE_NAME_REGEX);

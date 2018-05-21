@@ -16,7 +16,7 @@
     <title>Registration</title>
 </head>
 <body>
-<p align="center">We are glad that you decided to join us!</p><br/>
+<p align="center"><fmt:message key="glad.to.see.you"/></p><br/>
 <p align="center">${ErrorMassage}</p>
 <c:if test="${user != null}">
     <c:import url="header.jsp"/>
@@ -29,27 +29,27 @@
         <input type="hidden" name="command" value="addUser">
     </c:if>
     <table align="center" bgcolor="yellow" border="1">
-        <tr><td>Login</td><td><input type="text" name="login" value="${User.login}"></td></tr>
-        <tr><td>Password</td><td><input type="password" name="password" value="${User.password}"/></td></tr>
-        <tr><td>Confirm password</td><td><input type="password" name="passwordConfirm" value="${User.password}"/></td></tr>
-        <tr><td>Name</td><td><input type="text" name="name" value="${User.name}"></td></tr>
-        <tr><td>Last name</td><td><input type="text" name="lastName" value="${User.lastName}"></td></tr>
-        <tr><td>Email</td><td><input type="text" name="email" value="${User.email}"></td></tr>
+        <tr><td><fmt:message key="login"/></td><td><input type="text" name="login" value="${User.login}"></td></tr>
+        <tr><td><fmt:message key="password"/></td><td><input type="password" name="password" value="${User.password}"/></td></tr>
+        <tr><td><fmt:message key="confirm.password"/></td><td><input type="password" name="passwordConfirm" value="${User.password}"/></td></tr>
+        <tr><td><fmt:message key="name"/></td><td><input type="text" name="name" value="${User.name}"></td></tr>
+        <tr><td><fmt:message key="last.name"/></td><td><input type="text" name="lastName" value="${User.lastName}"></td></tr>
+        <tr><td><fmt:message key="email"/></td><td><input type="text" name="email" value="${User.email}"></td></tr>
         <c:if test="${user.role.id == 1}">
             <tr>
-                <td>Role</td>
+                <td><fmt:message key="role"/></td>
                 <td><select name="idRole">
-                    <option disabled selected>Select role</option>
+                    <option disabled selected><fmt:message key="select.role"/></option>
                     <c:forEach var="Role" items="${Roles}">
                             <option value="${Role.id}">${Role.name}</option>
                     </c:forEach>
                 </select></td>
             </tr>
             <tr>
-                <td>Ship </td>
+                <td><fmt:message key="ship"/></td>
                 <td>
                     <select name="idShip">
-                            <option disabled selected>Select ship</option>
+                            <option disabled selected><fmt:message key="select.ship"/></option>
                         <c:forEach var="Ship" items="${Ships}">
                                 <option value="${Ship.id}">${Ship.name}</option>
                         </c:forEach>
@@ -58,13 +58,12 @@
         </c:if>
         <tr><td></td><td>
             <c:if test="${user.role.id == 1}">
-                <input type="submit" value="Add" >
+                <input type="submit" value="<fmt:message key="add"/>" >
             </c:if>
             <c:if test="${user == null}">
-                <input type="submit" value="Registration" >
+                <input type="submit" value="<fmt:message key="registration"/>" >
             </c:if></td></tr>
     </table>
-
 </form>
 </body>
 </html>

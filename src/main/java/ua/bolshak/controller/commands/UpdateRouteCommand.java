@@ -17,7 +17,6 @@ public class UpdateRouteCommand implements ICommand {
     private static RequestParams params = RequestParams.getInstance();
     private static TextResources text = TextResources.getInstance();
     private static RegExResources regExResources = RegExResources.getInstance();
-    private static final String WRONG_INPUT = text.getProperty("wrong.input");
     private static final String ROUTE_NAME_REGEX = regExResources.getProperty("route.name.regexp");
     private static final String ROUTE = params.getProperty("Route");
     private static final String ERROR_MASSAGE = params.getProperty("ErrorMassage");
@@ -27,6 +26,7 @@ public class UpdateRouteCommand implements ICommand {
 
     @Override
     public String execute(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException {
+        String WRONG_INPUT = text.getProperty("wrong.input");
         Pattern namePattern = Pattern.compile(ROUTE_NAME_REGEX);
         String id = request.getParameter(ID_ROUTE);
         String name = request.getParameter(NAME);

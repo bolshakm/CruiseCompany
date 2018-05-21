@@ -14,12 +14,12 @@ import java.io.IOException;
 public class DeletePortCommand implements ICommand {
     private static RequestParams params = RequestParams.getInstance();
     private static TextResources text = TextResources.getInstance();
-    private static final String PORT_HAS_EXCURSION = text.getProperty("port.has.excursion");
     private static final String ERROR_MASSAGE = params.getProperty("ErrorMassage");
     private static final String ID_PORT = params.getProperty("idPort");
 
     @Override
     public String execute(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException {
+        String PORT_HAS_EXCURSION = text.getProperty("port.has.excursion");
         Port port = PortService.findById(Integer.parseInt(request.getParameter(ID_PORT)));
         if (!ExcursionService.checkActiveTicker(port.getExcursions())) {
             PortService.delete(port);

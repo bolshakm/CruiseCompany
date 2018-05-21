@@ -29,11 +29,12 @@ public class UpdateCruiseCommand implements ICommand {
     private static final String ID_CRUISE_STATUS = params.getProperty("idCruiseStatus");
     private static final String ID_ROUTE = params.getProperty("idRoute");
     private static final String ERROR_MASSAGE = params.getProperty("ErrorMassage");
-    private static final String WRONG_INPUT = text.getProperty("wrong.input");
-    private static final String WRONG_DATE = text.getProperty("wrong.date");
+    private static final String EMPTY = params.getProperty("empty.string");
 
     @Override
     public String execute(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException {
+        String WRONG_INPUT = text.getProperty("wrong.input");
+        String WRONG_DATE = text.getProperty("wrong.date");
         java.util.Date now = new java.util.Date();
         Pattern namePattern = Pattern.compile(NAME_REGEX);
         Cruise cruise = CruiseService.findById(Integer.parseInt(request.getParameter(ID_CRUISE)));
@@ -46,7 +47,7 @@ public class UpdateCruiseCommand implements ICommand {
         Date fromDate = null;
         Date toDate = null;
         boolean emptyInput = false;
-        if (!from.equals("") && !to.equals("")) {
+        if (!from.equals(EMPTY) && !to.equals(EMPTY)) {
             fromDate = Date.valueOf(from);
             toDate = Date.valueOf(to);
             if (now.getTime() > fromDate.getTime() || fromDate.getTime() > toDate.getTime()){

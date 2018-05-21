@@ -1,5 +1,6 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt" %>
 <%--
   Created by IntelliJ IDEA.
   User: bolsh
@@ -8,9 +9,12 @@
   To change this template use File | Settings | File Templates.
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<c:set var="language" value="${not empty sessionScope.language ? sessionScope.language : pageContext.request.locale}" scope="session" />
+<fmt:setLocale value="${language}" />
+<fmt:setBundle basename="text" />
 <html>
 <head>
-    <title>Tickets</title>
+    <title><fmt:message key="tickets"/></title>
 </head>
 <body>
 <c:import url="header.jsp"/>
@@ -19,22 +23,22 @@
     <tr>
         <td valign="top">
             <table border="1" bgcolor="#f5f5dc">
-                <caption>Tickets</caption>
+                <caption><fmt:message key="tickets"/></caption>
                 <tr>
-                    <th>Id</th>
-                    <th>Login</th>
-                    <th>Name</th>
-                    <th>Last name</th>
-                    <th>Cruise</th>
-                    <th>Cruise from</th>
-                    <th>Cruise to</th>
+                    <th><fmt:message key="id"/></th>
+                    <th><fmt:message key="login"/></th>
+                    <th><fmt:message key="name"/></th>
+                    <th><fmt:message key="last.name"/></th>
+                    <th><fmt:message key="cruise.name"/></th>
+                    <th><fmt:message key="cruise.from"/></th>
+                    <th><fmt:message key="cruise.to"/></th>
                     <c:if test="${user.role.id == 2}">
-                        <th>Bonuses</th>
+                        <th><fmt:message key="bonuses"/></th>
                     </c:if>
-                    <th>Ticket type</th>
-                    <th>Price</th>
+                    <th><fmt:message key="ticket.types"/></th>
+                    <th><fmt:message key="price"/></th>
                     <c:if test="${user.role.id == 1 || user.role.id == 2}">
-                        <th>Actions</th>
+                        <th><fmt:message key="actions"/></th>
                     </c:if>
                 </tr>
                 <c:forEach var="Ticket" items="${Tickets}" begin="${begin}" end="${end}">
@@ -53,7 +57,7 @@
                             </c:forEach> </td>
                             </c:if>
                             <c:if test="${empty Ticket.bonuses}">
-                                <td>Empty</td>
+                                <td><fmt:message key="empty"/></td>
                             </c:if>
                         </c:if>
                         <td>${Ticket.ticketType.name}</td>
@@ -64,9 +68,9 @@
                                     <input type="hidden" name="command" value="actionsForTicket"/>
                                     <input type="hidden" name="idTicket" value="${Ticket.id}"/>
                                     <c:if test="${user.role.id == 1}">
-                                    <input type="submit" name="action" value="Update"/>
+                                        <input type="submit" name="actionUpdate" value="<fmt:message key="update"/>"/>
                                     </c:if>
-                                    <input type="submit" name="action" value="Delete"/>
+                                    <input type="submit" name="actionDelete" value="<fmt:message key="delete"/>"/>
                                 </form>
                             </td>
                         </c:if>
@@ -89,11 +93,11 @@
         <c:if test="${user.role.id == 1}">
             <td valign="top">
                 <table border="1" bgcolor="#f0ffff">
-                    <caption>Ticket Type</caption>
+                    <caption><fmt:message key="ticket.types"/></caption>
                     <tr>
-                        <th>Name</th>
-                        <th>Price</th>
-                        <th>Actions</th>
+                        <th><fmt:message key="name"/></th>
+                        <th><fmt:message key="price"/></th>
+                        <th><fmt:message key="actions"/></th>
                     </tr>
                     <c:if test="${TicketType == null || TicketType.id == 0}">
                         <tr>
@@ -104,7 +108,7 @@
                                 </td>
                                 <td><input type="text" size="10" name="pricePerTicket" value="${TicketType.price}"></td>
                                 <td>
-                                    <input type="submit" name="Add" value="Add">
+                                    <input type="submit" name="Add" value="<fmt:message key="add"/>">
                                 </td>
                             </form>
                         </tr>
@@ -132,8 +136,8 @@
                                 <form action="CruiseCompany" method="post">
                                     <input type="hidden" name="command" value="actionsForTicketType"/>
                                     <input type="hidden" name="idTicketType" value="${TicketType.id}"/>
-                                    <input type="submit" name="action" value="Update"/>
-                                    <input type="submit" name="action" value="Delete"/>
+                                    <input type="submit" name="actionUpdate" value="<fmt:message key="update"/>"/>
+                                    <input type="submit" name="actionDelete" value="<fmt:message key="delete"/>"/>
                                 </form>
                             </td>
                         </tr>

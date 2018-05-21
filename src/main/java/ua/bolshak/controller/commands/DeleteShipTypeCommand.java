@@ -13,12 +13,12 @@ import java.io.IOException;
 public class DeleteShipTypeCommand implements ICommand {
     private static RequestParams params = RequestParams.getInstance();
     private static TextResources text = TextResources.getInstance();
-    private static final String SHIP_TYPE_IS_USED = text.getProperty("ship.type.is.used");
     private static final String ERROR_MASSAGE = params.getProperty("ErrorMassage");
     private static final String SHIP_TYPE_ID = params.getProperty("ShipTypeId");
 
     @Override
     public String execute(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException {
+        String SHIP_TYPE_IS_USED = text.getProperty("ship.type.is.used");
         ShipType shipType = ShipTypeService.findById(Integer.parseInt(request.getParameter(SHIP_TYPE_ID)));
         if (shipType.getShips().isEmpty()) {
             ShipTypeService.delete(shipType);

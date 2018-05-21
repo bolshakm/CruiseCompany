@@ -16,7 +16,6 @@ public class AddTicketTypeCommand implements ICommand {
     private static RequestParams params = RequestParams.getInstance();
     private static TextResources text = TextResources.getInstance();
     private static RegExResources regExResources = RegExResources.getInstance();
-    private static final String WRONG_INPUT = text.getProperty("wrong.input");
     private static final String ERROR_MASSAGE = params.getProperty("ErrorMassage");
     private static final String TICKET_TYPE_NAME_REGEX = regExResources.getProperty("ticket.type.name.regexp");
     private static final String PRICE_REGEX = regExResources.getProperty("price.regexp");
@@ -27,6 +26,7 @@ public class AddTicketTypeCommand implements ICommand {
 
     @Override
     public String execute(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException {
+        String WRONG_INPUT = text.getProperty("wrong.input");
         Pattern namePattern = Pattern.compile(TICKET_TYPE_NAME_REGEX);
         Pattern pricePattern = Pattern.compile(PRICE_REGEX);
         TicketType ticketType = new TicketType();
