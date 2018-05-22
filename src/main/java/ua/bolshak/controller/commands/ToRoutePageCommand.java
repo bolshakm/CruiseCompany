@@ -2,6 +2,7 @@ package ua.bolshak.controller.commands;
 
 import ua.bolshak.model.service.RouteService;
 import ua.bolshak.properties.RequestParams;
+import ua.bolshak.util.Page;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
@@ -14,6 +15,6 @@ public class ToRoutePageCommand implements ICommand {
     @Override
     public String execute(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException {
         request.setAttribute(ROUTES, RouteService.findAll());
-        return "/jsp/route.jsp";
+        return Page.ROUTE.getPage();
     }
 }

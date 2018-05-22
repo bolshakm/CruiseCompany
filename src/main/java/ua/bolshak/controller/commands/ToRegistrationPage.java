@@ -4,6 +4,7 @@ import ua.bolshak.model.entity.User;
 import ua.bolshak.model.service.RoleService;
 import ua.bolshak.model.service.ShipService;
 import ua.bolshak.properties.RequestParams;
+import ua.bolshak.util.Page;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
@@ -23,6 +24,6 @@ public class ToRegistrationPage implements ICommand {
             request.setAttribute(ROLES, RoleService.findAll());
             request.setAttribute(SHIPS, ShipService.findAll());
         }
-        return "/jsp/registration.jsp";
+        return Page.REGISTRATION.getPage();
     }
 }

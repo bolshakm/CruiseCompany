@@ -3,6 +3,7 @@ package ua.bolshak.controller.commands;
 import ua.bolshak.model.service.CruiseService;
 import ua.bolshak.model.service.TicketTypeService;
 import ua.bolshak.properties.RequestParams;
+import ua.bolshak.util.Page;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
@@ -18,6 +19,6 @@ public class ToTicketCardCommand implements ICommand {
     public String execute(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException {
         request.setAttribute(CRUISES, CruiseService.findAll());
         request.setAttribute(TICKET_TYPES, TicketTypeService.findAll());
-        return "/jsp/ticketCard.jsp";
+        return Page.TICKET_CARD.getPage();
     }
 }

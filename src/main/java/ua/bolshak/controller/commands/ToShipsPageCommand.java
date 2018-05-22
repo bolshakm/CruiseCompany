@@ -6,6 +6,7 @@ import ua.bolshak.model.service.BonusService;
 import ua.bolshak.model.service.ShipService;
 import ua.bolshak.model.service.ShipTypeService;
 import ua.bolshak.properties.RequestParams;
+import ua.bolshak.util.Page;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
@@ -23,7 +24,6 @@ public class ToShipsPageCommand implements ICommand {
 
     @Override
     public String execute(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException {
-        String page = "/jsp/ship.jsp";
         User user = (User) request.getSession().getAttribute(USER);
         if (user.getRole().getId() != 3){
             request.setAttribute(SHIP_TYPES, ShipTypeService.findAll());
@@ -34,6 +34,6 @@ public class ToShipsPageCommand implements ICommand {
             ships.add(ShipService.findByUser(user));
             request.setAttribute(SHIPS, ships);
         }
-        return page;
+        return Page.SHIP.getPage();
     }
 }

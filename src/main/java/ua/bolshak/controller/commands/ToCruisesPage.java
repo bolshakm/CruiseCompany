@@ -5,6 +5,7 @@ import ua.bolshak.model.service.CruiseService;
 import ua.bolshak.model.service.CruiseStatusService;
 import ua.bolshak.model.service.RouteService;
 import ua.bolshak.properties.RequestParams;
+import ua.bolshak.util.Page;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
@@ -30,7 +31,7 @@ public class ToCruisesPage implements ICommand {
         request.setAttribute(ROUTES, RouteService.findAll());
         request.setAttribute(CRUISE_STATUS, CruiseStatusService.findAll());
         addPagination(request, 5, cruises.size());
-        return "/jsp/cruise.jsp";
+        return Page.CRUISE.getPage();
     }
 
     private void addPagination(HttpServletRequest request, int countOnTheOnePage, int listSize) {

@@ -6,6 +6,7 @@ import ua.bolshak.model.service.TicketService;
 import ua.bolshak.model.service.TicketTypeService;
 import ua.bolshak.properties.RequestParams;
 import ua.bolshak.properties.TextResources;
+import ua.bolshak.util.Page;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
@@ -29,7 +30,6 @@ public class ToTicketsPageCommand implements ICommand {
     @Override
     public String execute(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException {
         String TICKET_NOT_FOUND = text.getProperty("ticket.not.found");
-        String page = "/jsp/tickets.jsp";
         User user = (User) request.getSession().getAttribute(USER);
         List<Ticket> tickets = new ArrayList<>();
         switch (user.getRole().getId()) {
@@ -60,7 +60,7 @@ public class ToTicketsPageCommand implements ICommand {
         if (tickets != null) {
             addPagination(request, 5, tickets.size());
         }
-        return page;
+        return Page.TICKETS.getPage();
     }
 
 

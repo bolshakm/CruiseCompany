@@ -2,6 +2,7 @@ package ua.bolshak.controller.commands;
 
 import ua.bolshak.model.service.PortService;
 import ua.bolshak.properties.RequestParams;
+import ua.bolshak.util.Page;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
@@ -13,6 +14,6 @@ public class ToRouteCardCommand implements ICommand {private static RequestParam
     @Override
     public String execute(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException {
         request.setAttribute(PORTS, PortService.findAll());
-        return "/jsp/routeCard.jsp";
+        return Page.ROUTE_CARD.getPage();
     }
 }

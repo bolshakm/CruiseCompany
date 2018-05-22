@@ -6,6 +6,7 @@ import ua.bolshak.model.service.UserService;
 import ua.bolshak.properties.RegExResources;
 import ua.bolshak.properties.RequestParams;
 import ua.bolshak.properties.TextResources;
+import ua.bolshak.util.Page;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
@@ -49,7 +50,7 @@ public class LoginCommand implements ICommand {
                     request.setAttribute(ERROR_MASSAGE, WRONG_LOGIN_OR_PASSWORD);
                     request.setAttribute(LOGIN, new String(login.getBytes("ISO-8859-1"),"cp1251"));
                     request.setAttribute(PASSWORD, password);
-                    return "/jsp/login.jsp";
+                    return Page.LOGIN.getPage();
                 }
                 session.setAttribute(USER, user);
                 if (user.getRole().equals(RoleService.findById(1))) {
@@ -64,7 +65,7 @@ public class LoginCommand implements ICommand {
                 page = new ToStaffPageCommand().execute(request, response);
             } else {
                 request.setAttribute(ERROR_MASSAGE, WRONG_INPUT);
-                return "/jsp/login.jsp";
+                return Page.LOGIN.getPage();
             }
         }
         if (actionPassword != null) {

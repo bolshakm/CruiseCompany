@@ -4,6 +4,7 @@ import ua.bolshak.model.entity.User;
 import ua.bolshak.model.service.RoleService;
 import ua.bolshak.model.service.UserService;
 import ua.bolshak.properties.RequestParams;
+import ua.bolshak.util.Page;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
@@ -18,7 +19,6 @@ public class ToUserPage implements ICommand {
 
     @Override
     public String execute(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException {
-        String page = "/jsp/users.jsp";
         User user = (User) request.getSession().getAttribute(USER);
         if (user.getRole().getId() == 3){
             request.setAttribute(USERS, UserService.findAllByShip(user.getShip()));
@@ -27,6 +27,6 @@ public class ToUserPage implements ICommand {
             request.setAttribute(USERS, UserService.findAll());
             request.setAttribute(ROLES, RoleService.findAllMutable());
         }
-        return page;
+        return Page.USERS.getPage();
     }
 }

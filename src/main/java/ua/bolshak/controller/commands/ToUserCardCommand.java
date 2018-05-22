@@ -5,6 +5,7 @@ import ua.bolshak.model.service.RoleService;
 import ua.bolshak.model.service.ShipService;
 import ua.bolshak.model.service.UserService;
 import ua.bolshak.properties.RequestParams;
+import ua.bolshak.util.Page;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
@@ -19,6 +20,6 @@ public class ToUserCardCommand implements ICommand{
     public String execute(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException {
         request.setAttribute(ROLES, RoleService.findAllWithoutUser());
         request.setAttribute(SHIPS, ShipService.findAll());
-        return "/jsp/userCard.jsp";
+        return Page.USER_CARD.getPage();
     }
 }

@@ -7,6 +7,7 @@ import ua.bolshak.model.service.CruiseService;
 import ua.bolshak.model.service.ExcursionService;
 import ua.bolshak.model.service.TicketTypeService;
 import ua.bolshak.properties.RequestParams;
+import ua.bolshak.util.Page;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
@@ -34,6 +35,6 @@ public class ToAddTicketCardCommand implements ICommand {
         request.setAttribute(TICKET, ticket);
         request.setAttribute(TICKET_TYPE, TicketTypeService.findAllByShip(cruise.getShip()));
         request.setAttribute(EXCURSIONS, ExcursionService.findAllByCruse(cruise));
-        return "/jsp/ticketCard.jsp";
+        return Page.TICKET_CARD.getPage();
     }
 }

@@ -4,6 +4,7 @@ import ua.bolshak.model.service.BonusService;
 import ua.bolshak.model.service.ShipTypeService;
 import ua.bolshak.model.service.TicketTypeService;
 import ua.bolshak.properties.RequestParams;
+import ua.bolshak.util.Page;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
@@ -21,6 +22,6 @@ public class ToShipCardCommand implements ICommand {
         request.setAttribute(SHIP_TYPES, ShipTypeService.findAll());
         request.setAttribute(BONUSES, BonusService.findAll());
         request.setAttribute(TICKET_TYPES, TicketTypeService.findAll());
-        return "/jsp/shipCard.jsp";
+        return Page.SHIP_CARD.getPage();
     }
 }

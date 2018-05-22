@@ -3,6 +3,7 @@ package ua.bolshak.controller.commands;
 import ua.bolshak.model.entity.User;
 import ua.bolshak.model.service.CruiseService;
 import ua.bolshak.properties.RequestParams;
+import ua.bolshak.util.Page;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
@@ -18,6 +19,6 @@ public class ToShipAdministratorPageCommand implements ICommand {
     public String execute(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException {
         User user = (User) request.getSession().getAttribute(USER);
         request.setAttribute(CRUISES, CruiseService.findAllByShip(user.getShip()));
-        return "/jsp/shipAdministrator.jsp";
+        return Page.SHIP_ADMINISTRATOR.getPage();
     }
 }

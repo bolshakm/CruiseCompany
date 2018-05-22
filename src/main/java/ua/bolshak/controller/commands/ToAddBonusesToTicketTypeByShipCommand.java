@@ -7,6 +7,7 @@ import ua.bolshak.model.service.BonusService;
 import ua.bolshak.model.service.ShipService;
 import ua.bolshak.model.service.TicketTypeService;
 import ua.bolshak.properties.RequestParams;
+import ua.bolshak.util.Page;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
@@ -25,7 +26,6 @@ public class ToAddBonusesToTicketTypeByShipCommand implements ICommand {
 
     @Override
     public String execute(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException {
-        String page = "/jsp/ticketTypeCard.jsp";
         String idShip = request.getParameter(ID_SHIP);
         String idTicketType = request.getParameter(ID_TICKET_TYPE);
         Ship ship = ShipService.findById(Integer.parseInt(idShip));
@@ -35,6 +35,6 @@ public class ToAddBonusesToTicketTypeByShipCommand implements ICommand {
         request.setAttribute(SHIP, ship);
         request.setAttribute(SELECTED_BONUSES,selectedBonuses);
         request.setAttribute(BONUSES, BonusService.findAllByShip(ship));
-        return page;
+        return Page.TICKET_TYPE_CARD.getPage();
     }
 }

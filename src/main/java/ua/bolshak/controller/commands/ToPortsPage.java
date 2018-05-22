@@ -4,6 +4,7 @@ import ua.bolshak.model.service.ExcursionService;
 import ua.bolshak.model.service.PortService;
 import ua.bolshak.model.service.RouteService;
 import ua.bolshak.properties.RequestParams;
+import ua.bolshak.util.Page;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
@@ -22,6 +23,6 @@ public class ToPortsPage implements ICommand {
         request.setAttribute(EXCURSIONS, ExcursionService.findAll());
         request.setAttribute(PORTS, PortService.findAll());
         request.setAttribute(ROUTES, RouteService.findAll());
-        return "/jsp/port.jsp";
+        return Page.PORT.getPage();
     }
 }

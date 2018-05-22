@@ -3,6 +3,7 @@ package ua.bolshak.controller.commands;
 import ua.bolshak.model.entity.Cruise;
 import ua.bolshak.model.service.*;
 import ua.bolshak.properties.RequestParams;
+import ua.bolshak.util.Page;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
@@ -25,6 +26,6 @@ public class ToUpdateCruiseCommand implements ICommand {
         request.setAttribute(SHIPS, ShipService.findAll());
         request.setAttribute(CRUISE_STATUS, CruiseStatusService.findAll());
         request.setAttribute(ROUTES, RouteService.findAll());
-        return "/jsp/cruiseCard.jsp";
+        return Page.CRUISE_CARD.getPage();
     }
 }
