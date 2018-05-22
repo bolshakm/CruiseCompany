@@ -100,6 +100,7 @@ public class PagesMapping {
         user.add("updateUser");
         user.add("toCruisePage");
         user.add("changeLanguage");
+        user.add("toUpdateUserCard");
 
         shipAdministrator.add("login");
         shipAdministrator.add("toMainPage");
@@ -113,12 +114,14 @@ public class PagesMapping {
         shipAdministrator.add("updateUser");
         shipAdministrator.add("toCruisePage");
         shipAdministrator.add("changeLanguage");
+        shipAdministrator.add("toUpdateUserCard");
 
         stuff.add("login");
         stuff.add("logout");
         stuff.add("toUpdateUser");
         stuff.add("changeLanguage");
         stuff.add("updateUser");
+        stuff.add("toUpdateUserCard");
 
         unregister.add("login");
         unregister.add("changeLanguage");

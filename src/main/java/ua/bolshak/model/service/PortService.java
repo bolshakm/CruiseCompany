@@ -1,15 +1,18 @@
 package ua.bolshak.model.service;
 
+import org.apache.log4j.Logger;
 import ua.bolshak.model.dao.DaoFactory;
 import ua.bolshak.model.entity.Cruise;
 import ua.bolshak.model.entity.Excursion;
 import ua.bolshak.model.entity.Port;
 import ua.bolshak.model.entity.Route;
 
+import java.io.UnsupportedEncodingException;
 import java.util.ArrayList;
 import java.util.List;
 
 public class PortService {
+    private static final Logger LOGGER = Logger.getLogger(BonusService.class);
 
     public static List<Port> findAll(){
         return getFull(DaoFactory.getPortDao().findAll());
@@ -37,6 +40,43 @@ public class PortService {
 
     public static Port findLazyByExcursion(Excursion excursion){
         return DaoFactory.getPortDao().findByExcursion(excursion);
+    }
+
+    public static Port getEncodingPort(Port port){
+        try {
+            if (port.getName() != null) {
+                port.setName(new String(port.getName().getBytes("ISO-8859-1"), "cp1251"));
+            }
+            if (port.getCity() != null){
+                port.setCity(new String(port.getCity().getBytes("ISO-8859-1"),"cp1251"));
+            }
+            if (port.getCountry() != null){
+                port.setCountry(new String(port.getCountry().getBytes("ISO-8859-1"),"cp1251"));
+            }
+            if (port.getCruises() != null){
+                port.setCruises(CruiseService.getEncodingCruise(port.getCruises()));
+            }
+            if (port.getRoutes() != null){
+                port.setRoutes(RouteService.getEncodingRoute(port.getRoutes()));
+            }
+            if (port.getExcursions() != null){
+                port.setExcursions(ExcursionService.getEncodingExcursion(port.getExcursions()));
+            }
+        } catch (UnsupportedEncodingException e) {
+            LOGGER.error(e);
+        }
+        return port;
+    }
+
+    public static List<Port> getEncodingPort(List<Port> ports){
+        List<Port> encodingPort = null;
+        if (ports != null){
+            encodingPort = new ArrayList<>();
+            for (Port port : ports) {
+                encodingPort.add(getEncodingPort(port));
+            }
+        }
+        return encodingPort;
     }
 
     public static List<Port> findAllLazyByRoute(Route route){

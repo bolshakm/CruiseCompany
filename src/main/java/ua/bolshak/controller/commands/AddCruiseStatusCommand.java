@@ -23,13 +23,12 @@ public class AddCruiseStatusCommand implements ICommand {
     @Override
     public String execute(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException {
         String WRONG_INPUT = text.getProperty("wrong.input");
-
         CruiseStatus cruiseStatus = new CruiseStatus();
         Pattern namePattern = Pattern.compile(CRUISE_STATUS_NAME_REGEX);
         String name = request.getParameter(CRUISE_STATUS_NAME);
         if (namePattern.matcher(name).matches()){
             cruiseStatus.setName(name);
-            CruiseStatusService.add(cruiseStatus);
+            CruiseStatusService.add(CruiseStatusService.getEncodingCruiseStatus(cruiseStatus));
         } else {
             request.setAttribute(ERROR_MASSAGE, WRONG_INPUT);
         }

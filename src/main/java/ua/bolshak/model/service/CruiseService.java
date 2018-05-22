@@ -1,13 +1,17 @@
 package ua.bolshak.model.service;
 
+import org.apache.log4j.Logger;
 import ua.bolshak.model.dao.DaoFactory;
 import ua.bolshak.model.entity.*;
 
+import java.io.UnsupportedEncodingException;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
 public class CruiseService {
+    private static final Logger LOGGER = Logger.getLogger(CruiseService.class);
+
 
     public static List<Cruise> findAll() {
         return getFull(DaoFactory.getCruiseDao().findAll());
@@ -62,6 +66,43 @@ public class CruiseService {
 
         }
         return cruises;
+    }
+
+    public static Cruise getEncodingCruise(Cruise cruise){
+        try {
+            if (cruise.getName() != null) {
+                cruise.setName(new String(cruise.getName().getBytes("ISO-8859-1"), "cp1251"));
+            }
+            if (cruise.getShip() != null){
+                cruise.setShip(ShipService.getEncodingShip(cruise.getShip()));
+            }
+            if (cruise.getRoute() != null){
+                cruise.setRoute(RouteService.getEncodingRoute(cruise.getRoute()));
+            }
+            if (cruise.getStatus() != null){
+                cruise.setStatus(CruiseStatusService.getEncodingCruiseStatus(cruise.getStatus()));
+            }
+            if (cruise.getTickets() != null){
+                cruise.setTickets(TicketService.getEncodingTicket(cruise.getTickets()));
+            }
+            if (cruise.getUsers() != null){
+                cruise.setUsers(UserService.getEncodingUser(cruise.getUsers()));
+            }
+        } catch (UnsupportedEncodingException e) {
+            LOGGER.error(e);
+        }
+        return cruise;
+    }
+
+    public static List<Cruise> getEncodingCruise(List<Cruise> cruises){
+        List<Cruise> encodingCruises = null;
+        if (cruises != null) {
+            encodingCruises = new ArrayList<>();
+            for (Cruise cruise : cruises) {
+                encodingCruises.add(getEncodingCruise(cruise));
+            }
+        }
+        return encodingCruises;
     }
 
     public static boolean checkActive(Cruise cruise) {

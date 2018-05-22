@@ -22,7 +22,6 @@ public class UpdateRoleCommand implements ICommand{
     private static final String ROLE_NAME = params.getProperty("RoleName");
     private static final String ROLE = params.getProperty("Role");
 
-
     @Override
     public String execute(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException {
         String WRONG_INPUT = text.getProperty("wrong.input");
@@ -34,9 +33,9 @@ public class UpdateRoleCommand implements ICommand{
         } else {
             if (namePattern.matcher(name).matches()) {
                 role.setName(name);
-                RoleService.update(role);
+                RoleService.update(RoleService.getEncodingRole(role));
             } else {
-                request.setAttribute(ROLE, role);
+                request.setAttribute(ROLE, RoleService.getEncodingRole(role));
                 request.setAttribute(ERROR_MASSAGE, WRONG_INPUT);
             }
         }

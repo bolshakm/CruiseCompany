@@ -28,7 +28,7 @@ public class AddBonusCommand implements ICommand {
         String name = request.getParameter(BONUS_NAME);
         if (namePattern.matcher(name).matches()) {
             bonus.setName(name);
-            BonusService.add(bonus);
+            BonusService.add(BonusService.getEncodingBonus(bonus));
         } else {
             request.setAttribute(ERROR_MASSAGE, WRONG_INPUT);
         }

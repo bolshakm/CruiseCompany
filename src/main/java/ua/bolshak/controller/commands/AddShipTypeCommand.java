@@ -28,7 +28,7 @@ public class AddShipTypeCommand implements ICommand {
         String name = request.getParameter(SHIP_TYPE_NAME);
         if (namePattern.matcher(name).matches()) {
             shipType.setName(name);
-            ShipTypeService.add(shipType);
+            ShipTypeService.add(ShipTypeService.getEncodingShipType(shipType));
         } else {
             request.setAttribute(ERROR_MASSAGE, WRONG_INPUT);
         }

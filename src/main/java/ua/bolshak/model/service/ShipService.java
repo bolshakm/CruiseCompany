@@ -1,12 +1,15 @@
 package ua.bolshak.model.service;
 
+import org.apache.log4j.Logger;
 import ua.bolshak.model.dao.DaoFactory;
 import ua.bolshak.model.entity.*;
 
+import java.io.UnsupportedEncodingException;
 import java.util.ArrayList;
 import java.util.List;
 
 public class ShipService {
+    private static final Logger LOGGER = Logger.getLogger(BonusService.class);
 
     public static List<Ship> findAll(){
         return  getFull(DaoFactory.getShipDao().findAll());
@@ -42,6 +45,44 @@ public class ShipService {
 
     public static Ship findByCruise(Cruise cruise){
         return  getFull(DaoFactory.getShipDao().findByCruise(cruise));
+    }
+
+    public static Ship getEncodingShip(Ship ship){
+        try {
+            if (ship.getName() != null) {
+                ship.setName(new String(ship.getName().getBytes("ISO-8859-1"), "cp1251"));
+            }
+            if (ship.getType() != null){
+                ship.setType(ShipTypeService.getEncodingShipType(ship.getType()));
+            }
+            if (ship.getCruises() != null){
+                ship.setCruises(CruiseService.getEncodingCruise(ship.getCruises()));
+            }
+            if (ship.getTicketTypes() != null){
+                ship.setTicketTypes(TicketTypeService.getEncodingTicketType(ship.getTicketTypes()));
+            }
+            if (ship.getBonuses() != null){
+                ship.setBonuses(BonusService.getEncodingBonus(ship.getBonuses()));
+            }
+            if (ship.getUsers() != null){
+                ship.setUsers(UserService.getEncodingUser(ship.getUsers()));
+            }
+        } catch (UnsupportedEncodingException e) {
+            LOGGER.error(e);
+        }
+        return ship;
+    }
+
+    public static List<Ship> getEncodingShip(List<Ship> ships){
+        List<Ship> encodingShip = null;
+        if (ships != null) {
+            encodingShip = new ArrayList<>();
+            for (Ship ship :
+                    ships) {
+                encodingShip.add(getEncodingShip(ship));
+            }
+        }
+        return encodingShip;
     }
 
     public static List<Ship> findAllLazyByShipType(ShipType shipType){

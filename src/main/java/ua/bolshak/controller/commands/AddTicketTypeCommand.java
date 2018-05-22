@@ -46,10 +46,10 @@ public class AddTicketTypeCommand implements ICommand {
             wrongInput = true;
         }
         if (!wrongInput) {
-            TicketTypeService.add(ticketType);
+            TicketTypeService.add(TicketTypeService.getEncodingTicketType(ticketType));
         } else {
             request.setAttribute(ERROR_MASSAGE, WRONG_INPUT);
-            request.setAttribute(TICKET_TYPE, ticketType);
+            request.setAttribute(TICKET_TYPE, TicketTypeService.getEncodingTicketType(ticketType));
         }
         return new ToTicketsPageCommand().execute(request, response);
     }

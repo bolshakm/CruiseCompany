@@ -55,9 +55,9 @@ public class AddPortCommand implements ICommand {
             wrongInput = true;
         }
         if (!wrongInput){
-            PortService.add(port);
+            PortService.add(PortService.getEncodingPort(port));
         } else {
-            request.setAttribute(PORT, port);
+            request.setAttribute(PORT, PortService.getEncodingPort(port));
             request.setAttribute(ERROR_MASSAGE, WRONG_INPUT);
         }
         return new ToPortsPage().execute(request, response);

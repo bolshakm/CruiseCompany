@@ -1,13 +1,16 @@
 package ua.bolshak.model.service;
 
+import org.apache.log4j.Logger;
 import ua.bolshak.model.dao.DaoFactory;
 import ua.bolshak.model.entity.*;
 
+import java.io.UnsupportedEncodingException;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
 public class ExcursionService {
+    private static final Logger LOGGER = Logger.getLogger(BonusService.class);
 
     public static List<Excursion> findAll(){
         return getFull(DaoFactory.getExcursionDao().findAll());
@@ -41,6 +44,31 @@ public class ExcursionService {
 
     public static List<Excursion> findAllLazyByTicket(Ticket ticket){
         return DaoFactory.getExcursionDao().findAllByTicket(ticket);
+    }
+
+    public static Excursion getEncodingExcirsion(Excursion excursion){
+        try {
+            if (excursion.getName() != null) {
+                excursion.setName(new String(excursion.getName().getBytes("ISO-8859-1"), "cp1251"));
+            }
+            if (excursion.getTickets() != null){
+                excursion.setTickets(TicketService.getEncodingTicket(excursion.getTickets()));
+            }
+        } catch (UnsupportedEncodingException e) {
+            LOGGER.error(e);
+        }
+        return excursion;
+    }
+
+    public static List<Excursion> getEncodingExcursion(List<Excursion> excursions){
+        List<Excursion> encodingExcursions = null;
+        if (excursions != null){
+            encodingExcursions = new ArrayList<>();
+            for (Excursion excursion : excursions) {
+                encodingExcursions.add(getEncodingExcirsion(excursion));
+            }
+        }
+        return encodingExcursions;
     }
 
     public static Excursion findById(int id){

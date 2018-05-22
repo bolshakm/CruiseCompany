@@ -53,9 +53,9 @@ public class UpdateTicketCommand implements ICommand {
         ticket.setTicketType(TicketTypeService.findById(Integer.parseInt(ticketTypeId)));
         ticket.setExcursions(ExcursionService.getListById(selectedExcursion));
         if (!wrongInput) {
-            TicketService.update(ticket);
+            TicketService.update(TicketService.getEncodingTicket(ticket));
         } else {
-            request.setAttribute(TICKET, ticket);
+            request.setAttribute(TICKET, TicketService.getEncodingTicket(ticket));
             request.setAttribute(EXCURSIONS, ExcursionService.findAllByCruse(CruiseService.getFull(ticket.getCruise())));
             request.setAttribute(ERROR_MASSAGE, WRONG_INPUT);
             return new ToTicketCardCommand().execute(request, response);

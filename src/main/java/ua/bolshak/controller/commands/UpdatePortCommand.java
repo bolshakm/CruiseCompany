@@ -59,9 +59,9 @@ public class UpdatePortCommand implements ICommand {
                 wrongInput = true;
             }
             if (!wrongInput){
-                PortService.update(port);
+                PortService.update(PortService.getEncodingPort(port));
             } else {
-                request.setAttribute(PORT, port);
+                request.setAttribute(PORT, PortService.getEncodingPort(port));
                 request.setAttribute(ERROR_MASSAGE, WRONG_INPUT);
             }
         }

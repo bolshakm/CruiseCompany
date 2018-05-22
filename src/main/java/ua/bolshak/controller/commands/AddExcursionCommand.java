@@ -55,9 +55,9 @@ public class AddExcursionCommand implements ICommand {
             wrongInput = true;
         }
         if (!wrongInput) {
-            ExcursionService.add(excursion);
+            ExcursionService.add(ExcursionService.getEncodingExcirsion(excursion));
         } else {
-            request.setAttribute(EXCURSION, excursion);
+            request.setAttribute(EXCURSION, ExcursionService.getEncodingExcirsion(excursion));
             request.setAttribute(ERROR_MASSAGE, WRONG_INPUT);
         }
         return new ToPortsPage().execute(request, response);

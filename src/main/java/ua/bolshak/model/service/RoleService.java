@@ -1,12 +1,15 @@
 package ua.bolshak.model.service;
 
+import org.apache.log4j.Logger;
 import ua.bolshak.model.dao.DaoFactory;
 import ua.bolshak.model.entity.Role;
 import ua.bolshak.model.entity.User;
 
+import java.io.UnsupportedEncodingException;
 import java.util.List;
 
 public class RoleService {
+    private static final Logger LOGGER = Logger.getLogger(BonusService.class);
 
     public static List<Role> findAll(){
         return getFull(DaoFactory.getRoleDao().findAll());
@@ -30,6 +33,20 @@ public class RoleService {
 
     public static Role findLazyByUser(User user){
         return DaoFactory.getRoleDao().findByUser(user);
+    }
+
+    public static Role getEncodingRole(Role role){
+        try {
+            if (role.getName() != null) {
+                role.setName(new String(role.getName().getBytes("ISO-8859-1"), "cp1251"));
+            }
+            if (role.getUsers() != null){
+                role.setUsers(UserService.getEncodingUser(role.getUsers()));
+            }
+        } catch (UnsupportedEncodingException e) {
+            LOGGER.error(e);
+        }
+        return role;
     }
 
     public static void add(Role role){

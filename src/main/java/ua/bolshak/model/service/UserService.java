@@ -1,12 +1,15 @@
 package ua.bolshak.model.service;
 
+import org.apache.log4j.Logger;
 import ua.bolshak.model.dao.DaoFactory;
 import ua.bolshak.model.entity.*;
 
+import java.io.UnsupportedEncodingException;
 import java.util.ArrayList;
 import java.util.List;
 
 public class UserService {
+    private static final Logger LOGGER = Logger.getLogger(UserService.class);
 
     public static List<User> findAll(){
         return getFull(DaoFactory.getUserDao().findAll());
@@ -40,6 +43,17 @@ public class UserService {
         return getFull(DaoFactory.getUserDao().findAllByCruiseAndTicketType(cruise, ticketType));
     }
 
+    public static List<User> getEncodingUser(List<User> users){
+        List<User> encodingUsers = null;
+        if (users != null) {
+            encodingUsers = new ArrayList<>();
+            for (User user : users) {
+                encodingUsers.add(getUserWithEncoding(user));
+            }
+        }
+        return encodingUsers;
+    }
+
     public static User findById(int id){
         return getFull(DaoFactory.getUserDao().findById(id));
     }
@@ -52,10 +66,35 @@ public class UserService {
         return getFull(DaoFactory.getUserDao().findByLogin(login));
     }
 
+    public static User getUserWithEncoding(User user ){
+        try {
+            if (user.getLogin() != null) {
+                user.setLogin(new String(user.getLogin().getBytes("ISO-8859-1"), "cp1251"));
+            }
+            if (user.getName() != null){
+                user.setName(new String(user.getName().getBytes("ISO-8859-1"), "cp1251"));
+            }
+            if (user.getLastName() != null){
+                user.setLastName(new String(user.getLastName().getBytes("ISO-8859-1"), "cp1251"));
+            }
+            if (user.getShip()!=null){
+                user.setShip(ShipService.getEncodingShip(user.getShip()));
+            }
+            if (user.getRole() != null){
+                user.setRole(RoleService.getEncodingRole(user.getRole()));
+            }
+            if (user.getTickets() != null){
+                user.setTickets(TicketService.getEncodingTicket(user.getTickets()));
+            }
+        } catch (UnsupportedEncodingException e) {
+            LOGGER.error(e);
+        }
+        return user;
+    }
+
     public static User findByEmail(String email){
         return getFull(DaoFactory.getUserDao().findByEmail(email));
     }
-
 
     public static List<User> findAllLazyByRole(Role role){
         return DaoFactory.getUserDao().findAllByRole(role);

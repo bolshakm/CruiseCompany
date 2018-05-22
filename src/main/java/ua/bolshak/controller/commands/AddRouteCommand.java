@@ -43,9 +43,9 @@ public class AddRouteCommand implements ICommand {
             wrongInput = true;
         }
         if (!wrongInput){
-            RouteService.add(route);
+            RouteService.add(RouteService.getEncodingRoute(route));
         } else {
-            request.setAttribute(ROUTE, route);
+            request.setAttribute(ROUTE, RouteService.getEncodingRoute(route));
             request.setAttribute(ERROR_MASSAGE, WRONG_INPUT);
             return new ToRouteCardCommand().execute(request, response);
         }

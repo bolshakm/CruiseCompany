@@ -33,10 +33,10 @@ public class UpdateCruiseStatusCommand implements ICommand {
         } else {
             if (namePattern.matcher(name).matches()){
                 cruiseStatus.setName(name);
-                CruiseStatusService.update(cruiseStatus);
+                CruiseStatusService.update(CruiseStatusService.getEncodingCruiseStatus(cruiseStatus));
             } else {
                 request.setAttribute(ERROR_MASSAGE, WRONG_INPUT);
-                request.setAttribute(SELECTED_CRUISE_STATUS, cruiseStatus);
+                request.setAttribute(SELECTED_CRUISE_STATUS, CruiseStatusService.getEncodingCruiseStatus(cruiseStatus));
             }
         }
         return new ToCruisesPage().execute(request, response);

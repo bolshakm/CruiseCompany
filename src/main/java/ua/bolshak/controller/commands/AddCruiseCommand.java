@@ -29,7 +29,7 @@ public class AddCruiseCommand implements ICommand {
     private static final String CRUISE_STATUS_ID = params.getProperty("CruiseStatusId");
     private static final String ROUTE_ID = params.getProperty("RouteId");
     private static final String ERROR_MASSAGE = params.getProperty("ErrorMassage");
-
+    private static final String EMPTY_STRING = params.getProperty("empty.string");
 
     @Override
     public String execute(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException {
@@ -78,7 +78,7 @@ public class AddCruiseCommand implements ICommand {
             cruise.setRoute(null);
             wrongInput = true;
         }
-        if (!from.equals("") && !to.equals("")) {
+        if (!from.equals(EMPTY_STRING) && !to.equals(EMPTY_STRING)) {
             fromDate = Date.valueOf(from);
             toDate = Date.valueOf(to);
             if (now.getTime() <= fromDate.getTime() || fromDate.getTime() <= toDate.getTime()){
@@ -87,7 +87,7 @@ public class AddCruiseCommand implements ICommand {
             } else {
                 cruise.setTo(null);
                 cruise.setTo(null);
-                request.setAttribute(CRUISE, cruise);
+                request.setAttribute(CRUISE, CruiseService.getEncodingCruise(cruise));
                 request.setAttribute(ERROR_MASSAGE, WRONG_DATE);
                 wrongInput = true;
             }
@@ -95,11 +95,11 @@ public class AddCruiseCommand implements ICommand {
             wrongInput = true;
         }
         if (wrongInput){
-            request.setAttribute(CRUISE, cruise);
+            request.setAttribute(CRUISE, CruiseService.getEncodingCruise(cruise));
             request.setAttribute(ERROR_MASSAGE, WRONG_INPUT);
             return new ToCruiseCard().execute(request, response);
         }
-        CruiseService.add(cruise);
+        CruiseService.add(CruiseService.getEncodingCruise(cruise));
         return new ToCruisesPage().execute(request, response);
     }
 }

@@ -95,10 +95,10 @@ public class AddShipCommand implements ICommand {
         }
         if (wrongInput) {
             request.setAttribute(ERROR_MASSAGE, WRONG_INPUT);
-            request.setAttribute(SHIP, ship);
+            request.setAttribute(SHIP, ShipService.getEncodingShip(ship));
             return new ToShipCardCommand().execute(request, response);
         } else {
-            ShipService.add(ship);
+            ShipService.add(ShipService.getEncodingShip(ship));
         }
         return new ToShipsPageCommand().execute(request, response);
     }

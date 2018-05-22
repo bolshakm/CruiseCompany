@@ -25,7 +25,7 @@ public class SearchCruiseCommand implements ICommand {
     private static final String CRUISE_STATUS_ID = params.getProperty("cruiseStatusId");
     private static final String ROUTES_ID = params.getProperty("routesId");
     private static final String CRUISES = params.getProperty("Cruises");
-
+    private static final String EMPTY = params.getProperty("empty.string");
 
     @Override
     public String execute(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException {
@@ -37,23 +37,23 @@ public class SearchCruiseCommand implements ICommand {
         String idCruiseStatus = request.getParameter(CRUISE_STATUS_ID);
         String routesId = request.getParameter(ROUTES_ID);
         Date fromDate = null;
-        if (from != null && !from.equals("")) {
+        if (from != null && !from.equals(EMPTY)) {
             fromDate = Date.valueOf(from);
         }
         Date toDate = null;
-        if (to != null && !to.equals("")) {
+        if (to != null && !to.equals(EMPTY)) {
             toDate = Date.valueOf(to);
         }
         Ship ship = null;
-        if (shipNumber != null && !shipNumber.equals("")) {
+        if (shipNumber != null && !shipNumber.equals(EMPTY)) {
             ship = ShipService.findByNumber(shipNumber);
         }
         CruiseStatus cruiseStatus = null;
-        if (idCruiseStatus != null && !idCruiseStatus.equals("")) {
+        if (idCruiseStatus != null && !idCruiseStatus.equals(EMPTY)) {
             cruiseStatus = CruiseStatusService.findById(Integer.parseInt(idCruiseStatus));
         }
         Route route = null;
-        if (routesId != null  && !routesId.equals("")) {
+        if (routesId != null  && !routesId.equals(EMPTY)) {
             route = RouteService.findById(Integer.parseInt(routesId));
         }
         Cruise cruise = new Cruise();
@@ -63,7 +63,7 @@ public class SearchCruiseCommand implements ICommand {
         cruise.setShip(ship);
         cruise.setStatus(cruiseStatus);
         cruise.setRoute(route);
-        request.setAttribute(CRUISES, CruiseService.searchCruise(cruise));
+        request.setAttribute(CRUISES, CruiseService.searchCruise(CruiseService.getEncodingCruise(cruise)));
         return page;
     }
 }

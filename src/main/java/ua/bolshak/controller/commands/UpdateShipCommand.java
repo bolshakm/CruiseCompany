@@ -53,12 +53,6 @@ public class UpdateShipCommand implements ICommand {
         String shipTypeId = request.getParameter(ID_SHIP_TYPE);
         String [] bonusesId = request.getParameterValues(SELECTED_BONUSES);
         String[] ticketTypesId = request.getParameterValues(SELECTED_TICKET_TYPE);
-//        ship.setName(name);
-//        ship.setNumber(number);
-//        ship.setNumberOfSeats(Integer.parseInt(numberOfSeats));
-//        ship.setPricePerSeat(Double.parseDouble(pricePerSeat));
-//        ship.setType(ShipTypeService.findById(Integer.parseInt(shipTypeId)));
-//        List<Bonus> bonuses = BonusService.getListBonuses(bonusesId);
         boolean wrongInput = false;
         if (namePattern.matcher(name).matches()) {
             ship.setName(name);
@@ -103,10 +97,10 @@ public class UpdateShipCommand implements ICommand {
         }
         if (wrongInput) {
             request.setAttribute(ERROR_MASSAGE, WRONG_INPUT);
-            request.setAttribute(SHIP, ship);
+            request.setAttribute(SHIP, ShipService.getEncodingShip(ship));
             return new ToShipCardCommand().execute(request, response);
         } else {
-            ShipService.update(ship);
+            ShipService.update(ShipService.getEncodingShip(ship));
         }
         return new ToShipsPageCommand().execute(request, response);
     }

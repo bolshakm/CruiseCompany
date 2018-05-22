@@ -1,13 +1,17 @@
 package ua.bolshak.model.service;
 
+import org.apache.log4j.Logger;
 import ua.bolshak.model.dao.DaoFactory;
 import ua.bolshak.model.entity.Cruise;
 import ua.bolshak.model.entity.Port;
 import ua.bolshak.model.entity.Route;
 
+import java.io.UnsupportedEncodingException;
+import java.util.ArrayList;
 import java.util.List;
 
 public class RouteService {
+    private static final Logger LOGGER = Logger.getLogger(BonusService.class);
 
     public static List<Route> findAll(){
         return getFull(DaoFactory.getRouteDaoImpl().findAll());
@@ -32,6 +36,34 @@ public class RouteService {
 
     public static Route findLazyByCruise(Cruise cruise){
         return DaoFactory.getRouteDaoImpl().findByCruise(cruise);
+    }
+
+    public static Route getEncodingRoute(Route route){
+        try {
+            if (route.getName() != null) {
+                route.setName(new String(route.getName().getBytes("ISO-8859-1"), "cp1251"));
+            }
+            if (route.getPorts() != null){
+                route.setPorts(PortService.getEncodingPort(route.getPorts()));
+            }
+            if (route.getCruises() != null){
+                route.setCruises(CruiseService.getEncodingCruise(route.getCruises()));
+            }
+        } catch (UnsupportedEncodingException e) {
+            LOGGER.error(e);
+        }
+        return route;
+    }
+
+    public static List<Route> getEncodingRoute(List<Route> routes){
+        List<Route> encodingRoutes = null;
+        if (routes != null){
+            encodingRoutes = new ArrayList<>();
+            for (Route route : routes) {
+                encodingRoutes.add(getEncodingRoute(route));
+            }
+        }
+        return encodingRoutes;
     }
 
     public static void add(Route route){

@@ -116,14 +116,14 @@ public class AddUserCommand implements  ICommand {
             wrongInput = true;
         }
         if (!wrongInput) {
-            UserService.add(user);
+            UserService.add(UserService.getUserWithEncoding(user));
         } else {
             if (errorMassage != null) {
                 request.setAttribute(ERROR_MASSAGE, errorMassage);
             } else {
                 request.setAttribute(ERROR_MASSAGE, WRONG_INPUT);
             }
-            request.setAttribute(USER, user);
+            request.setAttribute(USER, UserService.getUserWithEncoding(user));
             return new ToUserCardCommand().execute(request, response);
         }
         return new ToUserPage().execute(request, response);

@@ -21,33 +21,33 @@ public class LoginCommand implements ICommand {
     private static RegExResources regEx = RegExResources.getInstance();
     private static final String LOGIN_REGEX = regEx.getProperty("login.regexp");
     private static final String PASSWORD_REGEX = regEx.getProperty("password.regexp");
-    private static final String BUTTON = params.getProperty("button");
     private static final String LOGIN = params.getProperty("Login");
     private static final String PASSWORD = params.getProperty("Password");
     private static final String ERROR_MASSAGE = params.getProperty("ErrorMassage");
     private static final String USER = params.getProperty("user");
-    private static final String REGISTRATION = params.getProperty("Registration");
+    private static final String ACTION_LOGIN = params.getProperty("actionLogin");
+    private static final String ACTION_REGISTRATION = params.getProperty("actionRegistration");
 
     @Override
     public String execute(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException {
         String WRONG_LOGIN_OR_PASSWORD = text.getProperty("wrong.login.or.password");
         String WRONG_INPUT = text.getProperty("wrong.input");
-
         HttpSession session = request.getSession();
         Pattern loginPattern = Pattern.compile(LOGIN_REGEX);
         Pattern passwordPattern = Pattern.compile(PASSWORD_REGEX);
         String page = null;
-        String button = request.getParameter(BUTTON);
-        if (button.equals(LOGIN)) {
+        String actionLogin = request.getParameter(ACTION_LOGIN);
+        String actionPassword = request.getParameter(ACTION_REGISTRATION);
+        if (actionLogin != null) {
             String login = request.getParameter(LOGIN);
             String password = request.getParameter(PASSWORD);
             Matcher loginMatcher = loginPattern.matcher(login);
             Matcher passwordMatcher = passwordPattern.matcher(password);
             if (loginMatcher.matches() && passwordMatcher.matches()) {
-                User user = UserService.findByLogin(login);
+                User user = UserService.findByLogin(new String(login.getBytes("ISO-8859-1"),"cp1251"));
                 if (user == null || !user.getPassword().equals(password)) {
                     request.setAttribute(ERROR_MASSAGE, WRONG_LOGIN_OR_PASSWORD);
-                    request.setAttribute(LOGIN, login);
+                    request.setAttribute(LOGIN, new String(login.getBytes("ISO-8859-1"),"cp1251"));
                     request.setAttribute(PASSWORD, password);
                     return "/jsp/login.jsp";
                 }
@@ -67,7 +67,7 @@ public class LoginCommand implements ICommand {
                 return "/jsp/login.jsp";
             }
         }
-        if (button.equals(REGISTRATION)) {
+        if (actionPassword != null) {
             page = new ToRegistrationPage().execute(request, response);
         }
         return page;

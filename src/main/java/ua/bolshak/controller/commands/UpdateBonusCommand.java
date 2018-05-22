@@ -33,9 +33,9 @@ public class UpdateBonusCommand implements ICommand {
         } else {
             if (namePattern.matcher(name).matches()) {
                 bonus.setName(name);
-                BonusService.update(bonus);
+                BonusService.update(BonusService.getEncodingBonus(bonus));
             } else {
-                request.setAttribute(BONUS, bonus);
+                request.setAttribute(BONUS, BonusService.getEncodingBonus(bonus));
                 request.setAttribute(ERROR_MASSAGE, WRONG_INPUT);
             }
         }

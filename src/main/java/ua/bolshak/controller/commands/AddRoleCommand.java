@@ -28,7 +28,7 @@ public class AddRoleCommand implements ICommand {
         String name = request.getParameter(ROLE_NAME);
         if (namePattern.matcher(name).matches()) {
             role.setName(name);
-            RoleService.add(role);
+            RoleService.add(RoleService.getEncodingRole(role));
         } else {
             request.setAttribute(ERROR_MASSAGE, WRONG_INPUT);
         }

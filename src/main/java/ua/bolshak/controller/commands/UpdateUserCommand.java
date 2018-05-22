@@ -123,7 +123,6 @@ public class UpdateUserCommand implements ICommand {
             user.setRole(RoleService.findById(Integer.parseInt(idRole)));
         } else {
             if (user.getId() != sessionUser.getId()) {
-                System.out.println(123);
                 user.setRole(null);
                 wrongInput = true;
             }
@@ -132,20 +131,19 @@ public class UpdateUserCommand implements ICommand {
             user.setShip(ShipService.findById(Integer.parseInt(idShip)));
         } else {
             if (user.getId() != sessionUser.getId()) {
-                System.out.println(321);
                 user.setShip(null);
                 wrongInput = true;
             }
         }
         if (!wrongInput) {
-            UserService.update(user);
+            UserService.update(UserService.getUserWithEncoding(user));
         } else {
             if (errorMassage != null) {
                 request.setAttribute(ERROR_MASSAGE, errorMassage);
             } else {
                 request.setAttribute(ERROR_MASSAGE, WRONG_INPUT);
             }
-            request.setAttribute(USER, user);
+            request.setAttribute(USER, UserService.getUserWithEncoding(user));
             return new ToUpdateUserCardCommand().execute(request, response);
         }
         if (sessionUser.getRole().getId() == 1 && user.getId() != sessionUser.getId()) {

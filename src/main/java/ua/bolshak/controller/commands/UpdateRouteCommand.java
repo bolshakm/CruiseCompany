@@ -45,9 +45,9 @@ public class UpdateRouteCommand implements ICommand {
             wrongInput = true;
         }
         if (!wrongInput){
-            RouteService.update(route);
+            RouteService.update(RouteService.getEncodingRoute(route));
         } else {
-            request.setAttribute(ROUTE, route);
+            request.setAttribute(ROUTE, RouteService.getEncodingRoute(route));
             request.setAttribute(ERROR_MASSAGE, WRONG_INPUT);
             return new ToRouteCardCommand().execute(request, response);
         }

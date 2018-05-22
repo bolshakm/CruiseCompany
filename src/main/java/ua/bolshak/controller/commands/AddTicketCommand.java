@@ -39,7 +39,7 @@ public class AddTicketCommand implements ICommand {
         ticket.setCruise(CruiseService.findById(Integer.parseInt(cruiseId)));
         ticket.setExcursions(ExcursionService.getListById(selectedExcursions));
         if (user.getMoney() >= TicketService.checkPrice(ticket).getPrice()) {
-            TicketService.buy(ticket);
+            TicketService.buy(TicketService.getEncodingTicket(ticket));
         } else {
             request.setAttribute(ERROR_MASSAGE, NOT_ENOUGH_MONEY);
         }

@@ -104,7 +104,7 @@ public class RegistrationCommand implements ICommand{
             wrongInput = true;
         }
         if (!wrongInput) {
-            UserService.add(user);
+            UserService.add(UserService.getUserWithEncoding(user));
             request.getSession().setAttribute(SESSION_USER, user);
         } else {
             if (errorMassage != null) {
@@ -112,7 +112,7 @@ public class RegistrationCommand implements ICommand{
             } else {
                 request.setAttribute(ERROR_MASSAGE, WRONG_INPUT);
             }
-            request.setAttribute(USER, user);
+            request.setAttribute(USER, UserService.getUserWithEncoding(user));
             return new ToRegistrationPage().execute(request, response);
         }
         return new ToMainPage().execute(request, response);

@@ -122,7 +122,7 @@ public class UpdateCruiseCommand implements ICommand {
             request.setAttribute(ERROR_MASSAGE, WRONG_INPUT);
             return new ToCruiseCard().execute(request, response);
         }
-        CruiseService.update(cruise);
+        CruiseService.update(CruiseService.getEncodingCruise(cruise));
         return new ToCruisesPage().execute(request, response);
     }
 }

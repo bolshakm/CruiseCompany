@@ -1,6 +1,8 @@
 package ua.bolshak.controller.commands;
 
+import ua.bolshak.model.entity.Ticket;
 import ua.bolshak.model.entity.TicketType;
+import ua.bolshak.model.service.TicketService;
 import ua.bolshak.model.service.TicketTypeService;
 import ua.bolshak.properties.RegExResources;
 import ua.bolshak.properties.RequestParams;
@@ -47,10 +49,10 @@ public class UpdateTicketTypeCommand implements ICommand {
             wrongInput = true;
         }
         if (!wrongInput) {
-            TicketTypeService.update(ticketType);
+            TicketTypeService.update(TicketTypeService.getEncodingTicketType(ticketType));
         } else {
             request.setAttribute(ERROR_MASSAGE, WRONG_INPUT);
-            request.setAttribute(TICKET_TYPE, ticketType);
+            request.setAttribute(TICKET_TYPE, TicketTypeService.getEncodingTicketType(ticketType));
         }
         return new ToTicketsPageCommand().execute(request, response);
     }
