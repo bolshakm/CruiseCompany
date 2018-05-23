@@ -60,6 +60,6 @@ public class AddExcursionCommand implements ICommand {
             request.setAttribute(EXCURSION, ExcursionService.getEncodingExcirsion(excursion));
             request.setAttribute(ERROR_MASSAGE, WRONG_INPUT);
         }
-        return new ToPortsPage().execute(request, response);
+        return new ToPortsPageCommand().execute(request, response);
     }
 }

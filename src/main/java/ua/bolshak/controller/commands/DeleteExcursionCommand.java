@@ -26,6 +26,6 @@ public class DeleteExcursionCommand implements ICommand {
         } else {
             request.setAttribute(ERROR_MASSAGE, EXCURSION_HAS_ACTIVE_TICKET);
         }
-        return new ToPortsPage().execute(request, response);
+        return new ToPortsPageCommand().execute(request, response);
     }
 }

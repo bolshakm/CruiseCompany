@@ -1,6 +1,8 @@
 package ua.bolshak.controller.commands;
 
+import ua.bolshak.model.entity.Bonus;
 import ua.bolshak.model.entity.Ship;
+import ua.bolshak.model.entity.ShipType;
 import ua.bolshak.model.entity.User;
 import ua.bolshak.model.service.BonusService;
 import ua.bolshak.model.service.ShipService;
@@ -26,9 +28,15 @@ public class ToShipsPageCommand implements ICommand {
     public String execute(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException {
         User user = (User) request.getSession().getAttribute(USER);
         if (user.getRole().getId() != 3){
-            request.setAttribute(SHIP_TYPES, ShipTypeService.findAll());
-            request.setAttribute(BONUSES, BonusService.findAll());
-            request.setAttribute(SHIPS, ShipService.findAll());
+            List<Ship> ships = ShipService.findAll();
+            List<Bonus> bonuses = BonusService.findAll();
+            List<ShipType> shipTypes = ShipTypeService.findAll();
+            request.setAttribute(SHIP_TYPES, shipTypes);
+            request.setAttribute(BONUSES, bonuses);
+            request.setAttribute(SHIPS, ships);
+            new PaginationCommand().addPagination(request, 5, ships.size(), SHIPS);
+            new PaginationCommand().addPagination(request, 5, bonuses.size(), BONUSES);
+            new PaginationCommand().addPagination(request, 5, shipTypes.size(), SHIP_TYPES);
         } else {
             List<Ship> ships = new ArrayList<>();
             ships.add(ShipService.findByUser(user));

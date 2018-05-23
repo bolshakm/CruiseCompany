@@ -1,6 +1,7 @@
 package ua.bolshak.controller.commands;
 
 import ua.bolshak.model.entity.Ticket;
+import ua.bolshak.model.entity.TicketType;
 import ua.bolshak.model.entity.User;
 import ua.bolshak.model.service.TicketService;
 import ua.bolshak.model.service.TicketTypeService;
@@ -22,10 +23,6 @@ public class ToTicketsPageCommand implements ICommand {
     private static final String TICKETS = params.getProperty("Tickets");
     private static final String TICKET_TYPES = params.getProperty("TicketTypes");
     private static final String ERROR_MASSAGE = params.getProperty("ErrorMassage");
-    private static final String PAGE_NUMBER = params.getProperty("pageNumber");
-    private static final String PAGE_NUMBERS = params.getProperty("pageNumbers");
-    private static final String BEGIN = params.getProperty("begin");
-    private static final String END = params.getProperty("end");
 
     @Override
     public String execute(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException {
@@ -38,7 +35,9 @@ public class ToTicketsPageCommand implements ICommand {
                 if (tickets != null) {
                     request.setAttribute(TICKETS, tickets);
                 }
-                request.setAttribute(TICKET_TYPES, TicketTypeService.findAll());
+                List<TicketType> ticketTypes = TicketTypeService.findAll();
+                request.setAttribute(TICKET_TYPES, ticketTypes);
+                new PaginationCommand().addPagination(request, 5, ticketTypes.size(), TICKET_TYPES);
                 break;
             case 2:
                 tickets = TicketService.findAllByUser(user);
@@ -58,68 +57,8 @@ public class ToTicketsPageCommand implements ICommand {
                 break;
         }
         if (tickets != null) {
-            addPagination(request, 5, tickets.size());
+            new PaginationCommand().addPagination(request, 5, tickets.size(), TICKETS);
         }
         return Page.TICKETS.getPage();
-    }
-
-
-    private void addPagination(HttpServletRequest request, int countOnTheOnePage, int listSize) {
-        String pageNumber = request.getParameter(PAGE_NUMBER);
-        int intPageNumber = 1;
-        if (pageNumber != null) {
-            intPageNumber = Integer.parseInt(pageNumber);
-        }
-        int begin = countOnTheOnePage * intPageNumber - countOnTheOnePage;
-        int end = countOnTheOnePage * intPageNumber - 1;
-        List<Integer> pageNumbers = new ArrayList<>();
-        if (listSize / countOnTheOnePage >= 3) {
-            if (listSize % countOnTheOnePage == 0) {
-                if (intPageNumber == 1 || intPageNumber == 2) {
-                    for (int i = 1; i <= 3; i++) {
-                        pageNumbers.add(i);
-                    }
-                } else {
-                    if (intPageNumber == listSize / countOnTheOnePage || intPageNumber == listSize / countOnTheOnePage - 1) {
-                        for (int i = listSize / countOnTheOnePage - 2; i <= listSize / countOnTheOnePage; i++) {
-                            pageNumbers.add(i);
-                        }
-                    } else {
-                        for (int i = intPageNumber - 1; i <= intPageNumber + 1; i++) {
-                            pageNumbers.add(i + 1);
-                        }
-                    }
-                }
-            } else {
-                if (intPageNumber == 1 || intPageNumber == 2) {
-                    for (int i = 1; i <= 3; i++) {
-                        pageNumbers.add(i);
-                    }
-                } else {
-                    if (intPageNumber == listSize / countOnTheOnePage || intPageNumber == listSize / countOnTheOnePage + 1) {
-                        for (int i = listSize / countOnTheOnePage - 1; i <= listSize / countOnTheOnePage + 1; i++) {
-                            pageNumbers.add(i);
-                        }
-                    } else {
-                        for (int i = intPageNumber - 1; i <= intPageNumber + 1; i++) {
-                            pageNumbers.add(i + 1);
-                        }
-                    }
-                }
-            }
-        } else {
-            if (listSize % countOnTheOnePage == 0) {
-                for (int i = 1; i <= listSize / countOnTheOnePage; i++) {
-                    pageNumbers.add(i);
-                }
-            } else {
-                for (int i = 1; i <= listSize / countOnTheOnePage + 1; i++) {
-                    pageNumbers.add(i);
-                }
-            }
-        }
-        request.setAttribute(BEGIN, begin);
-        request.setAttribute(END, end);
-        request.setAttribute(PAGE_NUMBERS, pageNumbers);
     }
 }

@@ -2,9 +2,10 @@
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt" %>
 <%@ page contentType="text/html;charset=cp1251" language="java" %>
-<c:set var="language" value="${not empty sessionScope.language ? sessionScope.language : pageContext.request.locale}" scope="session" />
+<c:set var="language" value="${not empty sessionScope.language ? sessionScope.language : pageContext.request.locale}"
+       scope="session"/>
 <fmt:setLocale value="${language}"/>
-<fmt:setBundle basename="text" />
+<fmt:setBundle basename="text"/>
 <html>
 <head>
     <title><fmt:message key="cruises"/></title>
@@ -50,7 +51,12 @@
             <table border="1" bgcolor="#7fffd4">
                 <caption><fmt:message key="cruises"/></caption>
                 <c:if test="${user.role.id == 1}">
-                <tr align="right"><td colspan="10"><a href="CruiseCompany?command=toCruiseCard"><button><fmt:message key="add"/></button></a></tr></td>
+                    <tr align="right">
+                        <td colspan="10"><a href="CruiseCompany?command=toCruiseCard">
+                            <button><fmt:message key="add"/></button>
+                        </a>
+                    </tr>
+                    </td>
                 </c:if>
                 <tr>
                     <th><fmt:message key="name"/></th>
@@ -62,7 +68,7 @@
                     <th><fmt:message key="route"/></th>
                     <th><fmt:message key="actions"/></th>
                 </tr>
-                <c:forEach var="Cruise" items="${Cruises}" begin="${begin}" end="${end}">
+                <c:forEach var="Cruise" items="${Cruises}" begin="${beginCruises}" end="${endCruises}">
                     <tr>
                         <td>${Cruise.name}</td>
                         <td>${Cruise.from}</td>
@@ -72,26 +78,31 @@
                         <td>${fn:length(Cruise.tickets)}/${Cruise.ship.numberOfSeats}</td>
                         <td>${Cruise.route.name}</td>
                         <c:if test="${user.role.id == 1}">
-                        <td>
-                            <form action="CruiseCompany" method="post">
-                                <input type="hidden" name="command" value="actionsForCruise"/>
-                                <input type="hidden" name="idCruise" value="${Cruise.id}"/>
-                                <input type="submit" name="actionUpdate" value="<fmt:message key="update"/>"/>
-                                <input type="submit" name="actionDelete" value="<fmt:message key="delete"/>"/>
-                            </form>
-                        </td>
+                            <td>
+                                <form action="CruiseCompany" method="post">
+                                    <input type="hidden" name="command" value="actionsForCruise"/>
+                                    <input type="hidden" name="idCruise" value="${Cruise.id}"/>
+                                    <input type="submit" name="actionUpdate" value="<fmt:message key="update"/>"/>
+                                    <input type="submit" name="actionDelete" value="<fmt:message key="delete"/>"/>
+                                </form>
+                            </td>
                         </c:if>
                         <c:if test="${user.role.id == 2}">
-                            <td><a href="/CruiseCompany?command=buyTicket&idCruise=${Cruise.id}"><button><fmt:message key="buy"/></button></a> </td>
+                            <td><a href="/CruiseCompany?command=buyTicket&idCruise=${Cruise.id}">
+                                <button><fmt:message key="buy"/></button>
+                            </a></td>
                         </c:if>
                     </tr>
                 </c:forEach>
-                <tr align="right"><td colspan="10">
-                    <c:forEach var="pageNumber" items="${pageNumbers}">
-                        <a href="CruiseCompany?command=toCruisePage&pageNumber=${pageNumber}">${pageNumber}</a>
-                    </c:forEach>
-                </td>
-                </tr>
+                <c:if test="${fn:length(pageNumbersCruises)>1}">
+                    <tr align="right">
+                        <td colspan="10">
+                            <c:forEach var="pageNumber" items="${pageNumbersCruises}">
+                                <a href="CruiseCompany?command=toCruisePage&pageNumberCruises=${pageNumber}">${pageNumber}</a>
+                            </c:forEach>
+                        </td>
+                    </tr>
+                </c:if>
             </table>
         </td>
         <td width="10"></td>
@@ -115,13 +126,15 @@
                             <form action="CruiseCompany" method="post">
                                 <input type="hidden" name="command" value="updateCruiseStatus">
                                 <input type="hidden" name="cruiseStatusId" value="${SelectedCruiseStatus.id}">
-                                <td><input type="text" name="CruiseStatusName" value="${SelectedCruiseStatus.name}"></td>
+                                <td><input type="text" name="CruiseStatusName" value="${SelectedCruiseStatus.name}">
+                                </td>
                                 <td><input type="submit" name="action" value="<fmt:message key="update"/>">
                             </form>
                         </c:if>
                         </form>
                     </tr>
-                    <c:forEach var="CruiseStatus" items="${CruiseStatuses}">
+                    <c:forEach var="CruiseStatus" items="${CruiseStatuses}" begin="${beginCruiseStatuses}"
+                               end="${endCruiseStatuses}">
                         <tr>
                             <td>${CruiseStatus.name}</td>
                             <td>
@@ -134,6 +147,14 @@
                             </td>
                         </tr>
                     </c:forEach>
+                    <c:if test="${fn:length(pageNumbersCruiseStatuses)>1}">
+                        <tr align="right">
+                            <td colspan="2">
+                                <c:forEach var="pageNumber" items="${pageNumbersCruiseStatuses}">
+                                <a href="CruiseCompany?command=toCruisePage&pageNumberCruiseStatuses=${pageNumber}">${pageNumber}</a>
+                                </c:forEach>
+                        </tr>
+                    </c:if>
                 </table>
             </c:if>
         </td>

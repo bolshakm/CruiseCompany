@@ -26,6 +26,6 @@ public class DeleteRoleCommand implements ICommand {
         } else {
             request.setAttribute(ERROR_MASSAGE, ROLE_HAS_USERS);
         }
-        return new ToUserPage().execute(request, response);
+        return new ToUserPageCommand().execute(request, response);
     }
 }

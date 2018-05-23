@@ -39,6 +39,6 @@ public class UpdateRoleCommand implements ICommand{
                 request.setAttribute(ERROR_MASSAGE, WRONG_INPUT);
             }
         }
-        return new ToUserPage().execute(request, response);
+        return new ToUserPageCommand().execute(request, response);
     }
 }

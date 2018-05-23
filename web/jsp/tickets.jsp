@@ -41,7 +41,7 @@
                         <th><fmt:message key="actions"/></th>
                     </c:if>
                 </tr>
-                <c:forEach var="Ticket" items="${Tickets}" begin="${begin}" end="${end}">
+                <c:forEach var="Ticket" items="${Tickets}" begin="${beginTickets}" end="${endTickets}">
                     <tr>
                         <td>${Ticket.id}</td>
                         <td>${Ticket.user.login}</td>
@@ -76,15 +76,15 @@
                         </c:if>
                     </tr>
                 </c:forEach>
-                <c:if test="${user.role.id == 1}">
-                <tr align="right"><td colspan="10">
-                    </c:if>
-                        <c:if test="${user.role.id != 1}">
-                <tr align="right"><td colspan="11">
-                    </c:if>
-                    <c:forEach var="pageNumber" items="${pageNumbers}">
-                        <a href="CruiseCompany?command=toTicketsPage&pageNumber=${pageNumber}">${pageNumber}</a>
-                    </c:forEach>
+                <c:if test="${fn:length(pageNumbersTickets)>1}">
+                    <tr align="right">
+                        <td colspan="11">
+                            <c:forEach var="pageNumber" items="${pageNumbersTickets}">
+                                <a href="CruiseCompany?command=toTicketsPage&pageNumberTickets=${pageNumber}">${pageNumber}</a>
+                            </c:forEach>
+                        </td>
+                    </tr>
+                </c:if>
                 </td>
                 </tr>
             </table>
@@ -128,7 +128,7 @@
                             </form>
                         </tr>
                     </c:if>
-                    <c:forEach var="TicketType" items="${TicketTypes}">
+                    <c:forEach var="TicketType" items="${TicketTypes}" begin="${beginTicketTypes}" end="${endTicketTypes}">
                         <tr>
                             <td>${TicketType.name}</td>
                             <td>${TicketType.price}</td>
@@ -142,6 +142,15 @@
                             </td>
                         </tr>
                     </c:forEach>
+                    <c:if test="${fn:length(pageNumbersTicketTypes)>1}">
+                        <tr align="right">
+                            <td colspan="10">
+                                <c:forEach var="pageNumber" items="${pageNumbersTicketTypes}">
+                                    <a href="CruiseCompany?command=toTicketsPage&pageNumberTicketTypes=${pageNumber}">${pageNumber}</a>
+                                </c:forEach>
+                            </td>
+                        </tr>
+                    </c:if>
                 </table>
             </td>
         </c:if>

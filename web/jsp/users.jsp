@@ -1,5 +1,6 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt" %>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 <%--
   Created by IntelliJ IDEA.
   User: bolsh
@@ -36,7 +37,7 @@
                     <th><fmt:message key="actions"/></th>
                     </c:if>
                 </tr>
-                <c:forEach var="User" items="${Users}">
+                <c:forEach var="User" items="${Users}" begin="${beginUsers}" end="${endUsers}">
                     <tr>
                         <td>${User.login}</td>
                         <td>${User.name}</td>
@@ -56,6 +57,15 @@
                         </c:if>
                     </tr>
                 </c:forEach>
+                <c:if test="${fn:length(pageNumbersUsers)>1}">
+                    <tr align="right">
+                        <td colspan="10">
+                            <c:forEach var="pageNumber" items="${pageNumbersUsers}">
+                                <a href="CruiseCompany?command=toUsersPage&pageNumberUsers=${pageNumber}">${pageNumber}</a>
+                            </c:forEach>
+                        </td>
+                    </tr>
+                </c:if>
             </table>
         </td>
         <c:if test="${user.role.id == 1}">
@@ -94,7 +104,7 @@
                         </form>
                     </tr>
                 </c:if>
-                <c:forEach var="Role" items="${Roles}">
+                <c:forEach var="Role" items="${Roles}" begin="${beginRoles}" end="${endRoles}">
                     <tr>
                         <td>${Role.name}</td>
                         <td>
@@ -107,6 +117,15 @@
                         </td>
                     </tr>
                 </c:forEach>
+                <c:if test="${fn:length(pageNumbersRoles)>1}">
+                    <tr align="right">
+                        <td colspan="10">
+                            <c:forEach var="pageNumber" items="${pageNumbersRoles}">
+                                <a href="CruiseCompany?command=toUsersPage&pageNumberRoles=${pageNumber}">${pageNumber}</a>
+                            </c:forEach>
+                        </td>
+                    </tr>
+                </c:if>
             </table>
         </td>
         </c:if>

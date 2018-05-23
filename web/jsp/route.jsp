@@ -1,5 +1,6 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt" %>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 <%--
   Created by IntelliJ IDEA.
   User: bolsh
@@ -31,7 +32,7 @@
                 <th><fmt:message key="actions"/></th>
             </c:if>
         </tr>
-        <c:forEach var="Route" items="${Routes}">
+        <c:forEach var="Route" items="${Routes}" begin="${beginRoutes}" end="${endRoutes}">
             <tr>
                 <td>${Route.name}</td>
                 <td><c:forEach var="RouteHasPort" items="${Route.cruises}">
@@ -52,6 +53,15 @@
                 </c:if>
             </tr>
         </c:forEach>
+        <c:if test="${fn:length(pageNumbersRoutes)>1}">
+            <tr align="right">
+                <td colspan="10">
+                    <c:forEach var="pageNumber" items="${pageNumbersRoutes}">
+                        <a href="CruiseCompany?command=toRoutePage&pageNumberRoutes=${pageNumber}">${pageNumber}</a>
+                    </c:forEach>
+                </td>
+            </tr>
+        </c:if>
     </table></td></tr>
 </table>
 </body>

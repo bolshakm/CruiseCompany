@@ -8,7 +8,7 @@
   Time: 02:03
   To change this template use File | Settings | File Templates.
 --%>
-<%@ page contentType="text/html;charset=cp1251" language="java" %>
+<%@ page contentType="text/html;charset=cp1251" language="java" isErrorPage="true" %>
 <c:set var="language" value="${not empty sessionScope.language ? sessionScope.language : pageContext.request.locale}" scope="session" />
 <fmt:setLocale value="${language}" />
 <fmt:setBundle basename="text" />

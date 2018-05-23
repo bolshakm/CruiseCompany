@@ -30,6 +30,6 @@ public class DeleteUserCommand implements ICommand{
         } else {
             UserService.delete(user);
         }
-        return new ToUserPage().execute(request, response);
+        return new ToUserPageCommand().execute(request, response);
     }
 }

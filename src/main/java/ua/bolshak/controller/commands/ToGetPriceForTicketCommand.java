@@ -65,7 +65,7 @@ public class ToGetPriceForTicketCommand implements ICommand {
         List<Bonus> bonuses = BonusService.findAllByShipAndTicketType(CruiseService.getFull(cruise).getShip(), ticketType);
         request.setAttribute(BONUSES, bonuses);
         if (!wrongInput) {
-            ticket = TicketService.checkPrice(ticket);
+            ticket = TicketService.checkPrice(TicketService.getEncodingTicket(ticket));
         } else {
             ticket.setExcursions(null);
             request.setAttribute(EXCURSIONS, ExcursionService.findAllByCruse(cruise));

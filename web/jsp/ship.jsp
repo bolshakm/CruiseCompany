@@ -49,7 +49,7 @@
                         <th><fmt:message key="actions"/></th>
                     </c:if>
                 </tr>
-                <c:forEach var="Ship" items="${Ships}">
+                <c:forEach var="Ship" items="${Ships}" begin="${beginShips}" end="${endShips}">
                 <tr>
                     <td>${Ship.name}</td>
                     <td>${Ship.number}</td>
@@ -100,6 +100,15 @@
                     </c:if>
                     </c:forEach>
                 </tr>
+                <c:if test="${fn:length(pageNumbersShips)>1}">
+                    <tr align="right">
+                        <td colspan="10">
+                            <c:forEach var="pageNumber" items="${pageNumbersShips}">
+                                <a href="CruiseCompany?command=toShipsPage&pageNumberShips=${pageNumber}">${pageNumber}</a>
+                            </c:forEach>
+                        </td>
+                    </tr>
+                </c:if>
             </table>
         </td>
         <c:if test="${user.role.id == 1}">
@@ -138,7 +147,7 @@
                             </form>
                         </tr>
                     </c:if>
-                    <c:forEach var="ShipType" items="${ShipTypes}">
+                    <c:forEach var="ShipType" items="${ShipTypes}" begin="${beginShipTypes}" end="${endShipTypes}">
                         <tr>
                             <td>${ShipType.name}</td>
                             <td>
@@ -151,6 +160,15 @@
                             </td>
                         </tr>
                     </c:forEach>
+                    <c:if test="${fn:length(pageNumbersShipTypes)>1}">
+                        <tr align="right">
+                            <td colspan="10">
+                                <c:forEach var="pageNumber" items="${pageNumbersShipTypes}">
+                                    <a href="CruiseCompany?command=toShipsPage&pageNumberShipTypes=${pageNumber}">${pageNumber}</a>
+                                </c:forEach>
+                            </td>
+                        </tr>
+                    </c:if>
                 </table>
                 <br/>
                 <table border="1" bgcolor="#deb887">
@@ -186,7 +204,7 @@
                             </form>
                         </tr>
                     </c:if>
-                    <c:forEach var="Bonus" items="${Bonuses}">
+                    <c:forEach var="Bonus" items="${Bonuses}" begin="${beginBonuses}" end="${endBonuses}">
                         <tr>
                             <td>${Bonus.name}</td>
                             <td>
@@ -199,6 +217,15 @@
                             </td>
                         </tr>
                     </c:forEach>
+                    <c:if test="${fn:length(pageNumbersBonuses)>1}">
+                        <tr align="right">
+                            <td colspan="10">
+                                <c:forEach var="pageNumber" items="${pageNumbersBonuses}">
+                                    <a href="CruiseCompany?command=toShipsPage&pageNumberBonuses=${pageNumber}">${pageNumber}</a>
+                                </c:forEach>
+                            </td>
+                        </tr>
+                    </c:if>
                 </table>
             </td>
         </c:if>

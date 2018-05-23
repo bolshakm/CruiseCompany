@@ -65,6 +65,6 @@ public class UpdatePortCommand implements ICommand {
                 request.setAttribute(ERROR_MASSAGE, WRONG_INPUT);
             }
         }
-        return new ToPortsPage().execute(request, response);
+        return new ToPortsPageCommand().execute(request, response);
     }
 }

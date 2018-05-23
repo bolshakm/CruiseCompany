@@ -26,6 +26,6 @@ public class DeletePortCommand implements ICommand {
         } else {
             request.setAttribute(ERROR_MASSAGE, PORT_HAS_EXCURSION);
         }
-        return new ToPortsPage().execute(request, response);
+        return new ToPortsPageCommand().execute(request, response);
     }
 }

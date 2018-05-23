@@ -1,5 +1,6 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt" %>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 <%--
   Created by IntelliJ IDEA.
   User: bolsh
@@ -75,7 +76,7 @@
                     </form>
                 </c:if>
                 </c:if>
-                <c:forEach var="Excursion" items="${Excursions}">
+                <c:forEach var="Excursion" items="${Excursions}" begin="${beginExcursions}" end="${endExcursions}">
                     <tr>
                         <td>${Excursion.name}</td>
                         <td>${Excursion.port.name}</td>
@@ -92,6 +93,15 @@
                         </c:if>
                     </tr>
                 </c:forEach>
+                <c:if test="${fn:length(pageNumbersExcursions)>1}">
+                    <tr align="right">
+                        <td colspan="10">
+                            <c:forEach var="pageNumber" items="${pageNumbersExcursions}">
+                                <a href="CruiseCompany?command=toPortsPage&pageNumberExcursions=${pageNumber}">${pageNumber}</a>
+                            </c:forEach>
+                        </td>
+                    </tr>
+                </c:if>
             </table>
         </td>
         <c:if test="${user.role.id == 1}">
@@ -134,7 +144,7 @@
                             </form>
                         </tr>
                     </c:if>
-                    <c:forEach var="Port" items="${Ports}">
+                    <c:forEach var="Port" items="${Ports}" begin="${beginPorts}" end="${endPorts}">
                         <tr>
                             <td>${Port.name}</td>
                             <td>${Port.city}</td>
@@ -149,6 +159,15 @@
                             </td>
                         </tr>
                     </c:forEach>
+                    <c:if test="${fn:length(pageNumbersPorts)>1}">
+                        <tr align="right">
+                            <td colspan="10">
+                                <c:forEach var="pageNumber" items="${pageNumbersPorts}">
+                                    <a href="CruiseCompany?command=toPortsPage&pageNumberPorts=${pageNumber}">${pageNumber}</a>
+                                </c:forEach>
+                            </td>
+                        </tr>
+                    </c:if>
                 </table>
             </td>
         </c:if>

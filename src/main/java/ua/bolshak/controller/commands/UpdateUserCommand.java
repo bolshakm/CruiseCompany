@@ -157,7 +157,7 @@ public class UpdateUserCommand implements ICommand {
                     return new ToUpdateUserCardCommand().execute(request, response);
                 }
             }
-            page = new ToUserPage().execute(request, response);
+            page = new ToUserPageCommand().execute(request, response);
         } else {
             request.getSession().setAttribute(SESSION_USER, user);
             page = new ToMainPage().execute(request, response);

@@ -1,5 +1,7 @@
 package ua.bolshak.controller.commands;
 
+import ua.bolshak.model.entity.Excursion;
+import ua.bolshak.model.entity.Port;
 import ua.bolshak.model.service.ExcursionService;
 import ua.bolshak.model.service.PortService;
 import ua.bolshak.model.service.RouteService;
@@ -10,8 +12,9 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
+import java.util.List;
 
-public class ToPortsPage implements ICommand {
+public class ToPortsPageCommand implements ICommand {
     private static RequestParams params = RequestParams.getInstance();
     private static final String EXCURSIONS = params.getProperty("Excursions");
     private static final String PORTS = params.getProperty("Ports");
@@ -20,9 +23,13 @@ public class ToPortsPage implements ICommand {
 
     @Override
     public String execute(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException {
-        request.setAttribute(EXCURSIONS, ExcursionService.findAll());
-        request.setAttribute(PORTS, PortService.findAll());
+        List<Excursion> excursions = ExcursionService.findAll();
+        List<Port> ports = PortService.findAll();
+        request.setAttribute(EXCURSIONS, excursions);
+        request.setAttribute(PORTS, ports);
         request.setAttribute(ROUTES, RouteService.findAll());
+        new PaginationCommand().addPagination(request, 5, excursions.size(), EXCURSIONS);
+        new PaginationCommand().addPagination(request, 5, ports.size(), PORTS);
         return Page.PORT.getPage();
     }
 }
