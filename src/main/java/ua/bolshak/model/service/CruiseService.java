@@ -5,9 +5,7 @@ import ua.bolshak.model.dao.DaoFactory;
 import ua.bolshak.model.entity.*;
 
 import java.io.UnsupportedEncodingException;
-import java.util.ArrayList;
-import java.util.Date;
-import java.util.List;
+import java.util.*;
 
 public class CruiseService {
     private static final Logger LOGGER = Logger.getLogger(CruiseService.class);
@@ -54,6 +52,23 @@ public class CruiseService {
             cruises.addAll(getFull(findAllByShip(ship)));
         }
         return cruises;
+    }
+
+    public static HashMap<String, Double> getMapAllCruiseComesMoney(){
+        List<Cruise> cruises = CruiseService.findAll();
+        HashMap<String, Double> cruisesMoney= new HashMap<>();
+        for (Cruise cruise : cruises) {
+            cruisesMoney.put(cruise.getName(), CruiseService.countOfMoneyByCruise(cruise));
+        }
+        return cruisesMoney;
+    }
+
+    public static double countOfMoneyByCruise(Cruise cruise){
+        double count = 0;
+        for (Ticket ticket : cruise.getTickets()) {
+            count += ticket.getPrice();
+        }
+        return count;
     }
 
     public static List<Cruise> searchCruise(Cruise cruiseWithSearchingParameter) {

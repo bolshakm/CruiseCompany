@@ -84,6 +84,7 @@ public class PagesMapping {
         admin.add("actionsForUser");
         admin.add("actionsForRole");
         admin.add("changeLanguage");
+        admin.add("toStatisticPage");
 
         user.add("login");
         user.add("buyTicket");

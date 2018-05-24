@@ -91,6 +91,7 @@ public class ControllerHelper {
         commands.put("actionsForUser", new ActionsForUserCommand());
         commands.put("actionsForRole", new ActionsForRoleCommand());
         commands.put("changeLanguage", new ChangeLanguageCommand());
+        commands.put("toStatisticPage", new ToStatisticPageCommand());
     }
 
     public static ControllerHelper getInstance() {

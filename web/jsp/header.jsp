@@ -33,6 +33,9 @@
         </c:if>
         <a href="CruiseCompany?command=toTicketsPage"><button><fmt:message key="tickets"/></button></a>
     </c:if>
+    <c:if test="${user.role.id == 1}">
+        <a href="CruiseCompany?command=toStatisticPage"><button><fmt:message key="statistic"/></button></a>
+    </c:if>
 </p>
 <br/>
 <p align="center">${ErrorMassage}</p>

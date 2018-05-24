@@ -6,7 +6,7 @@ public enum Page {
     ROUTE("/jsp/route.jsp"), ROUTE_CARD("/jsp/routeCard.jsp"), SHIP("/jsp/ship.jsp"),
     SHIP_ADMINISTRATOR("/jsp/shipAdministrator.jsp"), SHIP_CARD("/jsp/shipCard.jsp"), STUFF("/jsp/stuffPage.jsp"),
     TICKET_CARD("/jsp/ticketCard.jsp"), TICKETS("/jsp/tickets.jsp"), TICKET_TYPE_CARD("/jsp/ticketTypeCard.jsp"),
-    USER_CARD("/jsp/userCard.jsp"), USERS("/jsp/users.jsp"), INDEX(("/index.jsp"));
+    USER_CARD("/jsp/userCard.jsp"), USERS("/jsp/users.jsp"), INDEX("/index.jsp"), STATISTIC("/jsp/statistic.jsp");
 
     private String page;
 
