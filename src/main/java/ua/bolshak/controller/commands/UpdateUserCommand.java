@@ -64,6 +64,7 @@ public class UpdateUserCommand implements ICommand {
         String name = request.getParameter(NAME);
         String lastName = request.getParameter(LAST_NAME);
         String money = request.getParameter(MONEY);
+        System.out.println(money);
         String idRole = request.getParameter(ID_ROLE);
         String idShip = request.getParameter(ID_SHIP);
         boolean wrongInput = false;
@@ -146,6 +147,7 @@ public class UpdateUserCommand implements ICommand {
             request.setAttribute(USER, UserService.getUserWithEncoding(user));
             return new ToUpdateUserCardCommand().execute(request, response);
         }
+        System.out.println(money);
         if (sessionUser.getRole().getId() == 1 && user.getId() != sessionUser.getId()) {
             if (!money.equals(EMPTY_STRING) && moneyPattern.matcher(money).matches() && Double.parseDouble(money) > 0) {
                 double moneyForTransfer = Double.parseDouble(money);

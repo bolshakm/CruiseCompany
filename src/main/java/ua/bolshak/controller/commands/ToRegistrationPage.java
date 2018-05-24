@@ -20,6 +20,7 @@ public class ToRegistrationPage implements ICommand {
     @Override
     public String execute(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException {
         User user = (User) request.getSession().getAttribute(USER);
+        request.getSession().invalidate();
         if (user != null){
             request.setAttribute(ROLES, RoleService.findAll());
             request.setAttribute(SHIPS, ShipService.findAll());
