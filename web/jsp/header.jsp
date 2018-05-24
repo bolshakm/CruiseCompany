@@ -1,9 +1,11 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt" %>
+<%@ taglib prefix="myteg" uri="titletag" %>
 <%@ page contentType="text/html;charset=cp1251" language="java" %>
 <c:set var="language" value="${not empty sessionScope.language ? sessionScope.language : pageContext.request.locale}" scope="session" />
 <fmt:setLocale value="${language}" />
 <fmt:setBundle basename="text" />
+<p align="center"><myteg:title><fmt:message key="welcome"/>, ${user.name}</myteg:title></p>
 <table align="right">
     <tr><td><fmt:message key="money"/>:</td>
         <td>${user.money}</td><td width="100px"></td></tr>
