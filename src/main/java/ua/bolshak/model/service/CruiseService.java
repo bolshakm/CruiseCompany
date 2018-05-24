@@ -12,10 +12,31 @@ import java.util.List;
 public class CruiseService {
     private static final Logger LOGGER = Logger.getLogger(CruiseService.class);
 
-
     public static List<Cruise> findAll() {
         return getFull(DaoFactory.getCruiseDao().findAll());
     }
+
+    public static List<Cruise> findAllActuale() {
+        List<Cruise> cruises = new ArrayList<>();
+        Date now = new Date();
+        for (Cruise cruise : findAll()) {
+            if (cruise.getTo().getTime() >= now.getTime()){
+                cruises.add(cruise);
+            }
+        }
+        return cruises;
+    }
+
+    public static List<Cruise> findAllFuture() {
+        List<Cruise> cruises = new ArrayList<>();
+        Date now = new Date();
+        for (Cruise cruise : findAll()) {
+            if (cruise.getFrom().getTime() >= now.getTime()){
+                cruises.add(cruise);
+            }
+        }
+        return cruises;    }
+
 
     public static List<Cruise> findAllByStatus(CruiseStatus cruiseStatus) {
         return getFull(DaoFactory.getCruiseDao().findAllByStatus(cruiseStatus));

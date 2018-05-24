@@ -23,6 +23,40 @@ public class TicketService {
         return tickets;
     }
 
+    public static List<Ticket> findAllActualWithFullCruise() {
+        List<Ticket> tickets = new ArrayList<>();
+        Date now = new Date();
+        for (Ticket ticket : getFull(DaoFactory.getTicketDao().findAll())) {
+            ticket.setCruise(CruiseService.getFull(ticket.getCruise()));
+            if (ticket.getCruise().getFrom().getTime() >= now.getTime()) {
+                tickets.add(ticket);
+            }
+        }
+        return tickets;
+    }
+
+    public static List<Ticket> findAllActualByUser(User user) {
+        List<Ticket> tickets = new ArrayList<>();
+        Date now = new Date();
+        for (Ticket ticket : getFull(DaoFactory.getTicketDao().findAllByUser(user))) {
+            if (ticket.getCruise().getFrom().getTime() >= now.getTime()){
+                tickets.add(ticket);
+            }
+        }
+        return tickets;
+    }
+
+    public static List<Ticket> findAllActual() {
+        List<Ticket> tickets = new ArrayList<>();
+        Date now = new Date();
+        for (Ticket ticket : getFull(DaoFactory.getTicketDao().findAll())) {
+            if (ticket.getCruise().getFrom().getTime() >= now.getTime()){
+                tickets.add(ticket);
+            }
+        }
+        return tickets;
+    }
+
     public static boolean checkActiveTicketByUser(User user) {
         boolean result = false;
         Date now = new Date();
@@ -115,21 +149,6 @@ public class TicketService {
             }
             if (ticket.getLastName() != null) {
                 ticket.setLastName(new String(ticket.getLastName().getBytes("ISO-8859-1"), "cp1251"));
-            }
-            if (ticket.getUser() != null) {
-                ticket.setUser(UserService.getUserWithEncoding(ticket.getUser()));
-            }
-            if (ticket.getCruise() != null){
-                ticket.setCruise(CruiseService.getEncodingCruise(ticket.getCruise()));
-            }
-            if (ticket.getTicketType() != null){
-                ticket.setTicketType(TicketTypeService.getEncodingTicketType(ticket.getTicketType()));
-            }
-            if (ticket.getExcursions() != null){
-                ticket.setExcursions(ExcursionService.getEncodingExcursion(ticket.getExcursions()));
-            }
-            if (ticket.getBonuses() != null){
-                ticket.setBonuses(BonusService.getEncodingBonus(ticket.getBonuses()));
             }
         } catch (UnsupportedEncodingException e) {
             LOGGER.error(e);

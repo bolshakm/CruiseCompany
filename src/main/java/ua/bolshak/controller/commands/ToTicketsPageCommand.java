@@ -31,7 +31,7 @@ public class ToTicketsPageCommand implements ICommand {
         List<Ticket> tickets = new ArrayList<>();
         switch (user.getRole().getId()) {
             case 1:
-                tickets = TicketService.findAllWithFullCruise();
+                tickets = TicketService.findAllActualWithFullCruise();
                 if (tickets != null) {
                     request.setAttribute(TICKETS, tickets);
                 }
@@ -40,7 +40,7 @@ public class ToTicketsPageCommand implements ICommand {
                 new PaginationCommand().addPagination(request, 5, ticketTypes.size(), TICKET_TYPES);
                 break;
             case 2:
-                tickets = TicketService.findAllByUser(user);
+                tickets = TicketService.findAllActualByUser(user);
                 if (tickets != null) {
                     request.setAttribute(TICKETS, tickets);
                 } else {

@@ -1,13 +1,6 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt" %>
-<%--
-  Created by IntelliJ IDEA.
-  User: bolsh
-  Date: 31.03.2018
-  Time: 17:06
-  To change this template use File | Settings | File Templates.
---%>
 <%@ page contentType="text/html;charset=cp1251" language="java" %>
 <c:set var="language" value="${not empty sessionScope.language ? sessionScope.language : pageContext.request.locale}" scope="session" />
 <fmt:setLocale value="${language}" />

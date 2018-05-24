@@ -1,6 +1,7 @@
 package ua.bolshak.controller.commands;
 
 import ua.bolshak.model.entity.Cruise;
+import ua.bolshak.model.entity.User;
 import ua.bolshak.model.service.CruiseService;
 import ua.bolshak.model.service.CruiseStatusService;
 import ua.bolshak.model.service.RouteService;
@@ -21,14 +22,19 @@ public class ToCruisesPage implements ICommand {
 
     @Override
     public String execute(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException {
-        List<Cruise> cruises = CruiseService.findAll();
+        User user = (User) request.getSession().getAttribute("user");
+        List<Cruise> cruises;
+        if (user.getRole().getId() == 2) {
+            cruises = CruiseService.findAllActuale();
+        } else {
+            cruises = CruiseService.findAll();
+        }
         request.setAttribute(CRUISES, cruises);
         request.setAttribute(ROUTES, RouteService.findAll());
         request.setAttribute(CRUISE_STATUS, CruiseStatusService.findAll());
 
         new PaginationCommand().addPagination(request, 5, cruises.size(), CRUISES);
         new PaginationCommand().addPagination(request, 3, CruiseStatusService.findAll().size(), CRUISE_STATUS);
-//        addPagination(request, 5, cruises.size());
         return Page.CRUISE.getPage();
     }
 }

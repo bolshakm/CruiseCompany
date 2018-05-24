@@ -64,7 +64,6 @@ public class UpdateUserCommand implements ICommand {
         String name = request.getParameter(NAME);
         String lastName = request.getParameter(LAST_NAME);
         String money = request.getParameter(MONEY);
-        System.out.println(money);
         String idRole = request.getParameter(ID_ROLE);
         String idShip = request.getParameter(ID_SHIP);
         boolean wrongInput = false;
@@ -120,20 +119,25 @@ public class UpdateUserCommand implements ICommand {
             user.setEmail(null);
             wrongInput = true;
         }
-        if (idRole != null) {
-            user.setRole(RoleService.findById(Integer.parseInt(idRole)));
-        } else {
-            if (user.getId() != sessionUser.getId()) {
-                user.setRole(null);
-                wrongInput = true;
+        if (user.getRole().getId() != 2) {
+            if (idRole != null) {
+                user.setRole(RoleService.findById(Integer.parseInt(idRole)));
+            } else {
+                if (user.getId() != sessionUser.getId()) {
+                    System.out.println("test1");
+
+                    user.setRole(null);
+                    wrongInput = true;
+                }
             }
-        }
-        if (idShip != null) {
-            user.setShip(ShipService.findById(Integer.parseInt(idShip)));
-        } else {
-            if (user.getId() != sessionUser.getId()) {
-                user.setShip(null);
-                wrongInput = true;
+            if (idShip != null) {
+                user.setShip(ShipService.findById(Integer.parseInt(idShip)));
+            } else {
+                if (user.getId() != sessionUser.getId()) {
+                    System.out.println("test2");
+                    user.setShip(null);
+                    wrongInput = true;
+                }
             }
         }
         if (!wrongInput) {
@@ -147,7 +151,6 @@ public class UpdateUserCommand implements ICommand {
             request.setAttribute(USER, UserService.getUserWithEncoding(user));
             return new ToUpdateUserCardCommand().execute(request, response);
         }
-        System.out.println(money);
         if (sessionUser.getRole().getId() == 1 && user.getId() != sessionUser.getId()) {
             if (!money.equals(EMPTY_STRING) && moneyPattern.matcher(money).matches() && Double.parseDouble(money) > 0) {
                 double moneyForTransfer = Double.parseDouble(money);
