@@ -17,6 +17,7 @@
 <html>
 <head>
     <title>Login</title>
+    <link rel="stylesheet" href="css/style.css">
 </head>
 <body>
 <p align="center">
@@ -25,7 +26,9 @@
 </p>
 <form action="CruiseCompany" method="post">
     <input type="hidden" name="command" value="login"/>
+    <div class="table-login">
     <table align="center">
+        <div class="header"><fmt:message key="login"/></div>
         <tr>
             <td><fmt:message key="login"/></td>
             <td><input name="Login" value="${Login}"></td>
@@ -39,6 +42,7 @@
             <td><input type="submit" name="actionRegistration" value="<fmt:message key="registration"/>"></td>
         </tr>
     </table>
+    </div>
     <br/>
 </form>
 <p align="center"> ${ErrorMassage}</p>

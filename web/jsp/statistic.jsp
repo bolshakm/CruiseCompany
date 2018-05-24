@@ -11,11 +11,14 @@
 <html>
 <head>
     <title>Statistic</title>
+    <link rel="stylesheet" href="css/style.css">
 </head>
 <body>
 <c:import url="header.jsp"/>
+<div class="table-statistic">
 <statistic:table-statistic rows="${CruiseComesMoney.size}" head="Cruise comes money">
     ${CruiseComesMoney.statistic}
 </statistic:table-statistic>
+</div>
 </body>
 </html>

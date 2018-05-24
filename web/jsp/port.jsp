@@ -15,14 +15,13 @@
 <html>
 <head>
     <title>Ports</title>
+    <link rel="stylesheet" href="css/style.css">
 </head>
 <body>
 <c:import url="header.jsp"/>
-<table align="center">
-    <tr>
-        <td valign="top">
+<div class="table-port">
             <table border="1" align="center">
-                <caption><fmt:message key="excursions"/></caption>
+                <div class="header"><fmt:message key="excursions"/></div>
                 <tr>
                     <th><fmt:message key="name"/></th>
                     <th><fmt:message key="port"/></th>
@@ -103,12 +102,11 @@
                     </tr>
                 </c:if>
             </table>
-        </td>
+</div>
         <c:if test="${user.role.id == 1}">
-            <td width="50px"></td>
-            <td valign="top">
-                <table border="1" align="center">
-                    <caption><fmt:message key="ports"/></caption>
+<div class="table-excursion">
+<table border="1" align="center">
+                    <div class="header"><fmt:message key="ports"/></div>
                     <tr>
                         <th><fmt:message key="name"/></th>
                         <th><fmt:message key="city"/></th>
@@ -169,9 +167,7 @@
                         </tr>
                     </c:if>
                 </table>
-            </td>
         </c:if>
-    </tr>
-</table>
+</div>
 </body>
 </html>

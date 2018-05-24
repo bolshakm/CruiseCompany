@@ -14,12 +14,14 @@
 <html>
 <head>
     <title><fmt:message key="user.card"/></title>
+    <link rel="stylesheet" href="css/style.css">
 </head>
 <body>
     <c:import url="header.jsp"/>
-<table align="center" bgcolor="#fff0f5" border="1px ">
-    <caption><fmt:message key="user.card"/></caption>
-    <form action="CruiseCompany" method="post">
+    <div class="table-users-card">
+    <table align="center" border="1px ">
+        <div class="header"><fmt:message key="user.card"/></div>
+        <form action="CruiseCompany" method="post">
     <tr>
         <c:if test="${User == null || User.id == 0}">
             <input type="hidden" name="command" value="addUser"/>
@@ -113,5 +115,6 @@
     </tr>
     </form>
 </table>
+    </div>
 </body>
 </html>

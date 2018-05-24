@@ -15,13 +15,15 @@
 <html>
 <head>
     <title><fmt:message key="ticket.type.card"/></title>
+    <link rel="stylesheet" href="css/style.css">
 </head>
 <body>
 <c:import url="header.jsp"/>
 <form action="CruiseCompany" method="post">
     <input type="hidden" name="command" value="editBonuses">
-<table align="center" bgcolor="#fff0f5" border="1px ">
-    <caption><fmt:message key="ticket.type.card"/></caption>
+    <div class="table-ticket-type-card">
+    <table align="center" border="1px ">
+        <div class="header"><fmt:message key="ticket.type.card"/></div>
         <tr>
             <td><fmt:message key="ship.number"/></td>
             <td>${Ship.number}</td>
@@ -53,6 +55,7 @@
     <tr><td></td><c:if test="${empty Bonuses}"><td><input type="submit" value="<fmt:message key="back"/>"></td></c:if>
         <c:if test="${!empty Bonuses}"><td><input type="submit" value="<fmt:message key="edit"/>"></td></c:if></tr>
 </table>
+    </div>
 </form>
 </body>
 </html>

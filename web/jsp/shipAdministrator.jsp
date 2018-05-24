@@ -15,11 +15,13 @@
 <html>
 <head>
     <title><fmt:message key="ship.administrator"/></title>
+    <link rel="stylesheet" href="css/style.css">
 </head>
 <body>
 <c:import url="header.jsp"/>
-<table border="1" bgcolor="#7fffd4" align="center">
-    <caption><fmt:message key="cruises"/></caption>
+<div class="table-cruises">
+<table border="1" align="center">
+    <div class="header"><fmt:message key="cruises"/></div>
     <tr>
         <th><fmt:message key="cruise.name"/></th>
         <th><fmt:message key="from"/></th>
@@ -39,5 +41,6 @@
         </tr>
     </c:forEach>
 </table>
+</div>
 </body>
 </html>

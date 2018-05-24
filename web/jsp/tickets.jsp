@@ -15,15 +15,14 @@
 <html>
 <head>
     <title><fmt:message key="tickets"/></title>
+    <link rel="stylesheet" href="css/style.css">
 </head>
 <body>
 <c:import url="header.jsp"/>
 <p align="center">${InfoMassage}</p>
-<table align="center">
-    <tr>
-        <td valign="top">
-            <table border="1" bgcolor="#f5f5dc">
-                <caption><fmt:message key="tickets"/></caption>
+<div class="table-ticket">
+            <table border="1" align="center">
+                <div class="header"><fmt:message key="tickets"/></div>
                 <tr>
                     <th><fmt:message key="id"/></th>
                     <th><fmt:message key="login"/></th>
@@ -85,16 +84,13 @@
                         </td>
                     </tr>
                 </c:if>
-                </td>
-                </tr>
             </table>
-        </td>
-        <td width="10"></td>
+</div>
         <c:if test="${user.role.id == 1}">
-            <td valign="top">
-                <table border="1" bgcolor="#f0ffff">
-                    <caption><fmt:message key="ticket.types"/></caption>
-                    <tr>
+<div class="table-ticket-type">
+<table border="1" bgcolor="#f0ffff">
+    <div class="header"><fmt:message key="ticket.types"/></div>
+    <tr>
                         <th><fmt:message key="name"/></th>
                         <th><fmt:message key="price"/></th>
                         <th><fmt:message key="actions"/></th>
@@ -152,9 +148,7 @@
                         </tr>
                     </c:if>
                 </table>
-            </td>
+</div>
         </c:if>
-    </tr>
-</table>
 </body>
 </html>

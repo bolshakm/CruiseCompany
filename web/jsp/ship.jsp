@@ -16,14 +16,13 @@
 <html>
 <head>
     <title><fmt:message key="ships"/></title>
+    <link rel="stylesheet" href="css/style.css">
 </head>
 <body>
 <c:import url="header.jsp"/>
-<table align="center">
-    <tr>
-        <td valign="top">
+<div class="table-ships">
             <table border="1">
-                <caption><fmt:message key="ships"/></caption>
+                <div class="header"><fmt:message key="ships"/></div>
                 <c:if test="${user.role.id == 1}">
                     <tr align="right"><a href="CruiseCompany?command=toShipCard">
                         <button><fmt:message key="add"/></button>
@@ -110,13 +109,13 @@
                     </tr>
                 </c:if>
             </table>
-        </td>
+</div>
         <c:if test="${user.role.id == 1}">
-            <td width="10"></td>
-            <td valign="top">
-                <table border="1" bgcolor="#f0ffff">
-                    <caption><fmt:message key="ship.type"/></caption>
-                    <tr>
+<div class="table-ship-type">
+<table border="1">
+    <div class="header"><fmt:message key="ship.type"/></div>
+
+    <tr>
                         <th><fmt:message key="name"/></th>
                         <th><fmt:message key="actions"/></th>
                     </tr>
@@ -170,9 +169,10 @@
                         </tr>
                     </c:if>
                 </table>
-                <br/>
-                <table border="1" bgcolor="#deb887">
-                    <caption><fmt:message key="bonuses"/></caption>
+</div>
+<div class="table-bonuses">
+<table border="1">
+    <div class="header"><fmt:message key="bonuses"/></div>
                     <tr>
                         <th><fmt:message key="name"/></th>
                         <th><fmt:message key="actions"/></th>
@@ -227,9 +227,7 @@
                         </tr>
                     </c:if>
                 </table>
-            </td>
         </c:if>
-    </tr>
-</table>
+</div>
 </body>
 </html>

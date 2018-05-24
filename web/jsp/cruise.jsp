@@ -9,6 +9,7 @@
 <html>
 <head>
     <title><fmt:message key="cruises"/></title>
+    <link rel="stylesheet" href="css/style.css">
 </head>
 <body>
 <c:import url="header.jsp"/>
@@ -45,11 +46,9 @@
         </tr>
     </form>
 </table>
-<table align="center">
-    <tr>
-        <td valign="top">
-            <table border="1" bgcolor="#7fffd4">
-                <caption><fmt:message key="cruises"/></caption>
+            <div class="table-cruises">
+            <table border="1">
+                    <div class="header"><fmt:message key="cruises"/></div>
                 <c:if test="${user.role.id == 1}">
                     <tr align="right">
                         <td colspan="10"><a href="CruiseCompany?command=toCruiseCard">
@@ -103,13 +102,12 @@
                         </td>
                     </tr>
                 </c:if>
-            </table>
-        </td>
-        <td width="10"></td>
-        <td valign="top">
+            </table border="1">
+            </div>
             <c:if test="${user.role.id == 1}">
-                <table border="1" bgcolor="#f0ffff">
-                    <caption><fmt:message key="cruise.status"/></caption>
+<div class="table-cruise-status">
+                <table border="1">
+                    <div class="header"><fmt:message key="cruise.status"/></div>
                     <tr>
                         <th><fmt:message key="name"/></th>
                         <th><fmt:message key="actions"/></th>
@@ -156,9 +154,7 @@
                         </tr>
                     </c:if>
                 </table>
+</div>
             </c:if>
-        </td>
-    </tr>
-</table>
 </body>
 </html>

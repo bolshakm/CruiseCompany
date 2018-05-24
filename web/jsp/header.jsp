@@ -6,12 +6,14 @@
 <fmt:setLocale value="${language}" />
 <fmt:setBundle basename="text" />
 <p align="center"><myteg:title><fmt:message key="welcome"/>, ${user.name}</myteg:title></p>
-<table align="right">
+<div class="table-money">
+<table border="1">
     <tr><td><fmt:message key="money"/>:</td>
-        <td>${user.money}</td><td width="100px"></td></tr>
+        <td>${user.money}</td></tr>
     <tr><td><a href="CruiseCompany?command=toUpdateUserCard&idUser=${user.id}">${user.login}</a></td>
         <td><a href="CruiseCompany?command=logout"><fmt:message key="logout"/></a></td></tr>
 </table>
+</div>
 <p align="center">
     <c:if test="${user.role.id ==1 || user.role.id == 2 || user.role.id == 3}">
         <a href="CruiseCompany?command=toMainPage"><button><fmt:message key="cruises"/></button></a>

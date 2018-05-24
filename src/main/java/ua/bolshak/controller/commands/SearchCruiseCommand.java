@@ -1,9 +1,6 @@
 package ua.bolshak.controller.commands;
 
-import ua.bolshak.model.entity.Cruise;
-import ua.bolshak.model.entity.CruiseStatus;
-import ua.bolshak.model.entity.Route;
-import ua.bolshak.model.entity.Ship;
+import ua.bolshak.model.entity.*;
 import ua.bolshak.model.service.CruiseService;
 import ua.bolshak.model.service.CruiseStatusService;
 import ua.bolshak.model.service.RouteService;
@@ -46,7 +43,8 @@ public class SearchCruiseCommand implements ICommand {
         }
         Ship ship = null;
         if (shipNumber != null && !shipNumber.equals(EMPTY)) {
-            ship = ShipService.findByNumber(shipNumber);
+            ship = new Ship();
+            ship.setNumber(shipNumber);
         }
         CruiseStatus cruiseStatus = null;
         if (idCruiseStatus != null && !idCruiseStatus.equals(EMPTY)) {
@@ -63,7 +61,7 @@ public class SearchCruiseCommand implements ICommand {
         cruise.setShip(ship);
         cruise.setStatus(cruiseStatus);
         cruise.setRoute(route);
-        request.setAttribute(CRUISES, CruiseService.searchCruise(CruiseService.getEncodingCruise(cruise)));
+        request.setAttribute(CRUISES, CruiseService.searchCruise(cruise));
         return page;
     }
 }

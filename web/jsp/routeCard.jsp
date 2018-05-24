@@ -15,11 +15,13 @@
 <html>
 <head>
     <title><fmt:message key="route.card"/></title>
+    <link rel="stylesheet" href="css/style.css">
 </head>
 <body>
 <c:import url="header.jsp"/>
+<div class="table-route-card">
 <table align="center" bgcolor="#fff0f5" border="1px ">
-    <caption><fmt:message key="route.card"/></caption>
+    <div class="header"><fmt:message key="cruises"/></div>
     <tr>
         <form action="CruiseCompany" method="post">
             <c:if test="${Route.id == null || Route.id == 0}"><input type="hidden" name="command" value="addRoute"/></c:if>
@@ -47,5 +49,6 @@
     </form>
     </tr>
 </table>
+</div>
 </body>
 </html>

@@ -1,6 +1,6 @@
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt" %>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%--
   Created by IntelliJ IDEA.
   User: bolsh
@@ -15,12 +15,13 @@
 <html>
 <head>
     <title><fmt:message key="routes"/></title>
+    <link rel="stylesheet" href="css/style.css">
 </head>
 <body>
 <c:import url="header.jsp"/>
-<table align="center"><tr><td>
-    <table border="1"  bgcolor="yellow">
-        <caption><fmt:message key="routes"/></caption>
+<div class="table-routes">
+    <table border="1">
+        <div class="header"><fmt:message key="routes"/></div>
         <c:if test="${user.role.id ==1}">
             <tr><a href="CruiseCompany?command=toRouteCard"><button><fmt:message key="add"/></button></a></tr>
         </c:if>
@@ -62,7 +63,7 @@
                 </td>
             </tr>
         </c:if>
-    </table></td></tr>
-</table>
+    </table>
+</div>
 </body>
 </html>

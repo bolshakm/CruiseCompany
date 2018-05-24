@@ -15,13 +15,15 @@
 <html>
 <head>
     <title><fmt:message key="ship.card"/></title>
+    <link rel="stylesheet" href="css/style.css">
 </head>
 <body>
 <c:import url="header.jsp"/>
-<table align="center" bgcolor="#fff0f5" border="1px ">
-    <caption><fmt:message key="ship.card"/></caption>
-    <tr>
+<div class="table-ship-card">
+<table align="center" border="1px ">
+    <div class="header"><fmt:message key="ship.card"/></div>
         <form action="CruiseCompany" method="post">
+            <tr>
             <c:if test="${Ship.id == null || Ship.id == 0}"><input type="hidden" name="command" value="addShip"/></c:if>
                 <c:if test="${Ship.id != null && Ship.id != 0}"><input type="hidden" name="command" value="updateShip"/></c:if>
                 <input type="hidden" name="idShip" value="${Ship.id}">
@@ -86,7 +88,7 @@
     <tr><td></td><td><c:if test="${Ship.id == null || Ship.id == 0}"><input type="submit" value="<fmt:message key="add"/>"></c:if>
         <c:if test="${Ship.id != null && Ship.id != 0}"><input type="submit" value="<fmt:message key="update"/>"></c:if></td></tr>
     </form>
-    </tr>
 </table>
+</div>
 </body>
 </html>

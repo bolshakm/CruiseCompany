@@ -13,7 +13,8 @@
 <fmt:setBundle basename="text" />
 <html>
 <head>
-    <title>Registration</title>
+    <title><fmt:message key="registration"/></title>
+    <link rel="stylesheet" href="css/style.css">
 </head>
 <body>
 <p align="center"><fmt:message key="glad.to.see.you"/></p><br/>
@@ -28,7 +29,9 @@
     <c:if test="${user.role.id == 1}">
         <input type="hidden" name="command" value="addUser">
     </c:if>
+    <div class="table-registration">
     <table align="center" bgcolor="yellow" border="1">
+        <div class="header"><fmt:message key="registration"/></div>
         <tr><td><fmt:message key="login"/></td><td><input type="text" name="login" value="${User.login}"></td></tr>
         <tr><td><fmt:message key="password"/></td><td><input type="password" name="password" value="${User.password}"/></td></tr>
         <tr><td><fmt:message key="confirm.password"/></td><td><input type="password" name="passwordConfirm" value="${User.password}"/></td></tr>
@@ -64,6 +67,7 @@
                 <input type="submit" value="<fmt:message key="registration"/>" >
             </c:if></td></tr>
     </table>
+    </div>
 </form>
 </body>
 </html>

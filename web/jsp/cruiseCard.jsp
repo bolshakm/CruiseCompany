@@ -7,13 +7,17 @@
 <fmt:setBundle basename="text" />
 <html>
 <head>
-    <title><fmt:message key="cruise.status"/></title>
+    <title><fmt:message key="cruise.card"/></title>
+    <link rel="stylesheet" href="css/style.css">
+
 </head>
 <body>
 <c:import url="header.jsp"/>
-<table align="center" bgcolor="#fff0f5" border="1px ">
-    <caption>Cruise Card</caption>
-        <form action="CruiseCompany" method="post">
+<div class="table-cruises-card">
+<table align="center" border="1px ">
+    <div class="header"><fmt:message key="cruise.card"/></div>
+
+    <form action="CruiseCompany" method="post">
             <c:if test="${Cruise.id == null || Cruise.id ==0}"><input type="hidden" name="command" value="addCruise"/></c:if>
             <c:if test="${Cruise.id != null && Cruise.id != 0}"><input type="hidden" name="command" value="updateCruise"/></c:if>
             <tr>
@@ -92,5 +96,6 @@
     </tr>
     </form>
 </table>
+</div>
 </body>
 </html>

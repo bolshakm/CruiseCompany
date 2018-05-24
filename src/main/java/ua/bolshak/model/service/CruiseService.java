@@ -90,7 +90,7 @@ public class CruiseService {
                 resultTo = cruiseWithSearchingParameter.getTo().getTime() >= cruise.getTo().getTime();
             }
             if (cruiseWithSearchingParameter.getShip() != null ){
-                resultShip = cruiseWithSearchingParameter.getShip().equals(cruise.getShip());
+                resultShip = cruise.getShip().getNumber().contains(cruiseWithSearchingParameter.getShip().getNumber());
             }
             if (cruiseWithSearchingParameter.getStatus() != null ) {
                 resultStatus = cruiseWithSearchingParameter.getStatus().equals(cruise.getStatus());
