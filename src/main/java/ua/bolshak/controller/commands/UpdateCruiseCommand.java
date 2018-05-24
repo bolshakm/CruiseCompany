@@ -30,6 +30,8 @@ public class UpdateCruiseCommand implements ICommand {
     private static final String ID_ROUTE = params.getProperty("idRoute");
     private static final String ERROR_MASSAGE = params.getProperty("ErrorMassage");
     private static final String EMPTY = params.getProperty("empty.string");
+    private static final String ACTION_UPDATE = params.getProperty("actionUpdate");
+    private static final String ACTION_DELETE = params.getProperty("actionDelete");
 
     @Override
     public String execute(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException {
@@ -44,6 +46,8 @@ public class UpdateCruiseCommand implements ICommand {
         String idShip = request.getParameter(SHIP_ID);
         String idCruiseStatus =request.getParameter(CRUISE_STATUS_ID);
         String idRoute = request.getParameter(ROUTE_ID);
+        String actionUpdate = request.getParameter(ACTION_UPDATE);
+        String actionDelete = request.getParameter(ACTION_DELETE);
         Date fromDate = null;
         Date toDate = null;
         boolean emptyInput = false;
@@ -62,7 +66,7 @@ public class UpdateCruiseCommand implements ICommand {
                     request.setAttribute(ID_ROUTE, cruise.getRoute().getId());
                 }
                 request.setAttribute(ERROR_MASSAGE, WRONG_DATE);
-                return new ToCruiseCard().execute(request, response);
+                return new ToUpdateCruiseCommand().execute(request, response);
             }
         } else {
             emptyInput = true;
@@ -105,7 +109,7 @@ public class UpdateCruiseCommand implements ICommand {
                 request.setAttribute(ID_ROUTE, cruise.getRoute().getId());
             }
             request.setAttribute(ERROR_MASSAGE, WRONG_INPUT);
-            return new ToCruiseCard().execute(request, response);
+            return new ToUpdateCruiseCommand().execute(request, response);
         }
         if (!namePattern.matcher(name).matches()) {
             request.setAttribute(FROM, cruise.getFrom());
@@ -120,9 +124,15 @@ public class UpdateCruiseCommand implements ICommand {
                 request.setAttribute(ID_ROUTE, cruise.getRoute().getId());
             }
             request.setAttribute(ERROR_MASSAGE, WRONG_INPUT);
-            return new ToCruiseCard().execute(request, response);
+            return new ToUpdateCruiseCommand().execute(request, response);
         }
-        CruiseService.update(CruiseService.getEncodingCruise(cruise));
+        if (actionUpdate != null) {
+            CruiseService.update(CruiseService.getEncodingCruise(cruise));
+        }
+        if (actionDelete != null){
+            TicketService.deleteTicketByCruise(cruise);
+            CruiseService.update(CruiseService.getEncodingCruise(cruise));
+        }
         return new ToCruisesPage().execute(request, response);
     }
 }

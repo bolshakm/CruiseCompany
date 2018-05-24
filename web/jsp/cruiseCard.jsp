@@ -87,7 +87,8 @@
     <tr>
         <td></td>
         <td><c:if test="${Cruise.id == null || Cruise.id == 0}"><input type="submit" value="<fmt:message key="add"/>"></c:if>
-            <c:if test="${Cruise.id != null && Cruise.id != 0}"><input type="submit" value="<fmt:message key="update"/>"></c:if></td>
+            <c:if test="${Cruise.id != null && Cruise.id != 0}"><input type="submit" name="actionUpdate" value="<fmt:message key="update"/>">
+                <input type="submit" name="actionDelete" value="<fmt:message key="new"/>"></c:if></td>
     </tr>
     </form>
 </table>

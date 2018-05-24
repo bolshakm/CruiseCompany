@@ -85,7 +85,7 @@ public class TicketService {
         Date now = new Date();
         for (Ticket ticket : tickets) {
             java.sql.Date sqlDate = getFull(ticket).getCruise().getTo();
-            if (now.getTime() < sqlDate.getTime()) {
+            if (now.getTime() < sqlDate.getTime() ) {
                 result = true;
             }
         }
@@ -239,6 +239,13 @@ public class TicketService {
     public static void updateTicketHasBonuses(List<Ticket> tickets) {
         for (Ticket ticket : tickets) {
             DaoFactory.getTicketDao().updateBonuses(ticket);
+        }
+    }
+
+    public static void deleteTicketByCruise(Cruise cruise){
+        for (Ticket ticket :
+                findAllByCruise(cruise)) {
+            delete(ticket);
         }
     }
 

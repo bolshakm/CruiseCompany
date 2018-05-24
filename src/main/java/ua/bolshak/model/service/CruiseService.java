@@ -16,11 +16,13 @@ public class CruiseService {
         return getFull(DaoFactory.getCruiseDao().findAll());
     }
 
-    public static List<Cruise> findAllActuale() {
+    public static List<Cruise> findAllActual() {
         List<Cruise> cruises = new ArrayList<>();
         Date now = new Date();
         for (Cruise cruise : findAll()) {
-            if (cruise.getTo().getTime() >= now.getTime()){
+            List<Ticket> tickets = cruise.getTickets();
+            int countOfSeats = cruise.getShip().getNumberOfSeats();
+            if (cruise.getTo().getTime() >= now.getTime() && tickets.size() < countOfSeats){
                 cruises.add(cruise);
             }
         }

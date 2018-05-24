@@ -31,6 +31,7 @@ public interface SqlQuery {
     String ADD_CRUISE = "INSERT INTO cruises (cruise_name, cruise_from, cruise_to, ships_id_ship, cruise_statuses_id_cruise_status, routes_id_route) VALUES ( ?, ?, ?, ?, ?, ?)";
     String UPDATE_CRUISE = "UPDATE cruises SET cruise_name = ?, cruise_from = ?, cruise_to = ?, ships_id_ship = ?, cruise_statuses_id_cruise_status = ?, routes_id_route = ? WHERE id_cruise = ?;";
     String DELETE_CRUISE = "DELETE FROM cruises WHERE id_cruise = ?";
+    String CHECK_COUNT_OF_TICKET = "select * from tickets where cruises_id_cruise = ?";
     //cruisesStatus table
     String FIND_ALL_CRUISE_STATUSES = "SELECT * FROM cruise_statuses";
     String FIND_CRUISE_STATUS_BY_ID = "SELECT * FROM cruise_statuses WHERE id_cruise_status = ?";
@@ -82,6 +83,7 @@ public interface SqlQuery {
     String DELETE_ALL_SHIP_HAS_TICKET_TYPES_HAS_BONUSES = "delete from ship_has_ticket_types_has_bonuses where ships_id_ship = ?";
     String ADD_BONUS_FOR_SHIP ="INSERT INTO bonuses_has_ships (ships_id_ship, bonuses_id_bonus) VALUES (?, ?)";
     String ADD_TICKET_TYPE_FOR_SHIP = "INSERT INTO ship_has_ticket_types_has_bonuses (ticket_types_id_ticket_type, bonuses_id_bonus, ships_id_ship) VALUES (?, 1, ?)";
+    String CHECK_SHIP_HAS_SEATS = "select * from ships where id_ship = ?";
     //shipTypes table
     String FIND_ALL_SHIP_TYPES = "SELECT * FROM ship_types where id_ship_type > 1";
     String FIND_SHIP_TYPE_BY_ID = "SELECT * FROM ship_types WHERE id_ship_type = ?";

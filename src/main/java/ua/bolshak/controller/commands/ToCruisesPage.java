@@ -25,7 +25,7 @@ public class ToCruisesPage implements ICommand {
         User user = (User) request.getSession().getAttribute("user");
         List<Cruise> cruises;
         if (user.getRole().getId() == 2) {
-            cruises = CruiseService.findAllActuale();
+            cruises = CruiseService.findAllActual();
         } else {
             cruises = CruiseService.findAll();
         }
