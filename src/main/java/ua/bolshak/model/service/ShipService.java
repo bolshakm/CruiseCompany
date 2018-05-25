@@ -5,6 +5,7 @@ import ua.bolshak.model.dao.DaoFactory;
 import ua.bolshak.model.entity.*;
 
 import java.io.UnsupportedEncodingException;
+import java.sql.Date;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -145,5 +146,15 @@ public class ShipService {
             }
         }
         return ships;
+    }
+
+    public static long shipLastCruiseDateTime(Ship ship){
+        long lastDate = 0;
+        for (Cruise cruise : ship.getCruises()) {
+            if (cruise.getFrom().getTime() > lastDate){
+                lastDate = cruise.getFrom().getTime();
+            }
+        }
+        return lastDate;
     }
 }

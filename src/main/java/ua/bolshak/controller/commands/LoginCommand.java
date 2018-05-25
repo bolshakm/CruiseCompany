@@ -38,10 +38,10 @@ public class LoginCommand implements ICommand {
         Pattern passwordPattern = Pattern.compile(PASSWORD_REGEX);
         String page = null;
         String actionLogin = request.getParameter(ACTION_LOGIN);
-        String actionPassword = request.getParameter(ACTION_REGISTRATION);
+        String actionRegistration = request.getParameter(ACTION_REGISTRATION);
+        String login = request.getParameter(LOGIN);
+        String password = request.getParameter(PASSWORD);
         if (actionLogin != null) {
-            String login = request.getParameter(LOGIN);
-            String password = request.getParameter(PASSWORD);
             Matcher loginMatcher = loginPattern.matcher(login);
             Matcher passwordMatcher = passwordPattern.matcher(password);
             if (loginMatcher.matches() && passwordMatcher.matches()) {
@@ -68,7 +68,7 @@ public class LoginCommand implements ICommand {
                 return Page.LOGIN.getPage();
             }
         }
-        if (actionPassword != null) {
+        if (actionRegistration != null) {
             page = new ToRegistrationPage().execute(request, response);
         }
         return page;

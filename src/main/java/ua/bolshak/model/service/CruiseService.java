@@ -20,7 +20,7 @@ public class CruiseService {
         for (Cruise cruise : findAll()) {
             List<Ticket> tickets = cruise.getTickets();
             int countOfSeats = cruise.getShip().getNumberOfSeats();
-            if (cruise.getTo().getTime() >= now.getTime() && tickets.size() < countOfSeats){
+            if (cruise.getTo().getTime() >= now.getTime() && tickets.size() < countOfSeats) {
                 cruises.add(cruise);
             }
         }
@@ -31,11 +31,12 @@ public class CruiseService {
         List<Cruise> cruises = new ArrayList<>();
         Date now = new Date();
         for (Cruise cruise : findAll()) {
-            if (cruise.getFrom().getTime() >= now.getTime()){
+            if (cruise.getFrom().getTime() >= now.getTime()) {
                 cruises.add(cruise);
             }
         }
-        return cruises;    }
+        return cruises;
+    }
 
 
     public static List<Cruise> findAllByStatus(CruiseStatus cruiseStatus) {
@@ -46,6 +47,17 @@ public class CruiseService {
         return getFull(DaoFactory.getCruiseDao().findAllByShip(ship));
     }
 
+    public static List<Cruise> findAllActualByShip(Ship ship) {
+        List<Cruise> cruises = new ArrayList<>();
+        Date now = new Date();
+        for (Cruise cruise : getFull(DaoFactory.getCruiseDao().findAllByShip(ship))) {
+            if (cruise.getTo().getTime() >= now.getTime()) {
+                cruises.add(cruise);
+            }
+        }
+        return cruises;
+    }
+
     public static List<Cruise> findAllByShips(List<Ship> ships) {
         List<Cruise> cruises = new ArrayList<>();
         for (Ship ship : ships) {
@@ -54,16 +66,16 @@ public class CruiseService {
         return cruises;
     }
 
-    public static HashMap<String, Double> getMapAllCruiseComesMoney(){
+    public static HashMap<String, Double> getMapAllCruiseComesMoney() {
         List<Cruise> cruises = CruiseService.findAll();
-        HashMap<String, Double> cruisesMoney= new HashMap<>();
+        HashMap<String, Double> cruisesMoney = new HashMap<>();
         for (Cruise cruise : cruises) {
             cruisesMoney.put(cruise.getName(), CruiseService.countOfMoneyByCruise(cruise));
         }
         return cruisesMoney;
     }
 
-    public static double countOfMoneyByCruise(Cruise cruise){
+    public static double countOfMoneyByCruise(Cruise cruise) {
         double count = 0;
         for (Ticket ticket : cruise.getTickets()) {
             count += ticket.getPrice();
@@ -80,25 +92,25 @@ public class CruiseService {
             boolean resultShip = true;
             boolean resultStatus = true;
             boolean resultRoute = true;
-            if (cruiseWithSearchingParameter.getName() != null ) {
+            if (cruiseWithSearchingParameter.getName() != null) {
                 resultName = cruise.getName().toLowerCase().contains(cruiseWithSearchingParameter.getName().toLowerCase());
             }
-            if (cruiseWithSearchingParameter.getFrom() != null ) {
+            if (cruiseWithSearchingParameter.getFrom() != null) {
                 resultFrom = cruiseWithSearchingParameter.getFrom().getTime() <= cruise.getFrom().getTime();
             }
-            if (cruiseWithSearchingParameter.getTo() != null ) {
+            if (cruiseWithSearchingParameter.getTo() != null) {
                 resultTo = cruiseWithSearchingParameter.getTo().getTime() >= cruise.getTo().getTime();
             }
-            if (cruiseWithSearchingParameter.getShip() != null ){
+            if (cruiseWithSearchingParameter.getShip() != null) {
                 resultShip = cruise.getShip().getNumber().contains(cruiseWithSearchingParameter.getShip().getNumber());
             }
-            if (cruiseWithSearchingParameter.getStatus() != null ) {
+            if (cruiseWithSearchingParameter.getStatus() != null) {
                 resultStatus = cruiseWithSearchingParameter.getStatus().equals(cruise.getStatus());
             }
-            if (cruiseWithSearchingParameter.getRoute() != null ){
+            if (cruiseWithSearchingParameter.getRoute() != null) {
                 resultRoute = cruiseWithSearchingParameter.getRoute().equals(cruise.getRoute());
             }
-            if (resultName && resultFrom && resultTo && resultShip && resultStatus && resultRoute){
+            if (resultName && resultFrom && resultTo && resultShip && resultStatus && resultRoute) {
                 cruises.add(cruise);
             }
 
@@ -106,24 +118,24 @@ public class CruiseService {
         return cruises;
     }
 
-    public static Cruise getEncodingCruise(Cruise cruise){
+    public static Cruise getEncodingCruise(Cruise cruise) {
         try {
             if (cruise.getName() != null) {
                 cruise.setName(new String(cruise.getName().getBytes("ISO-8859-1"), "cp1251"));
             }
-            if (cruise.getShip() != null){
+            if (cruise.getShip() != null) {
                 cruise.setShip(ShipService.getEncodingShip(cruise.getShip()));
             }
-            if (cruise.getRoute() != null){
+            if (cruise.getRoute() != null) {
                 cruise.setRoute(RouteService.getEncodingRoute(cruise.getRoute()));
             }
-            if (cruise.getStatus() != null){
+            if (cruise.getStatus() != null) {
                 cruise.setStatus(CruiseStatusService.getEncodingCruiseStatus(cruise.getStatus()));
             }
-            if (cruise.getTickets() != null){
+            if (cruise.getTickets() != null) {
                 cruise.setTickets(TicketService.getEncodingTicket(cruise.getTickets()));
             }
-            if (cruise.getUsers() != null){
+            if (cruise.getUsers() != null) {
                 cruise.setUsers(UserService.getEncodingUser(cruise.getUsers()));
             }
         } catch (UnsupportedEncodingException e) {
@@ -132,7 +144,7 @@ public class CruiseService {
         return cruise;
     }
 
-    public static List<Cruise> getEncodingCruise(List<Cruise> cruises){
+    public static List<Cruise> getEncodingCruise(List<Cruise> cruises) {
         List<Cruise> encodingCruises = null;
         if (cruises != null) {
             encodingCruises = new ArrayList<>();

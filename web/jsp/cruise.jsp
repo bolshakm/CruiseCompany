@@ -58,9 +58,9 @@
                     </td>
                 </c:if>
                 <tr>
-                    <th><fmt:message key="name"/></th>
-                    <th><fmt:message key="from"/></th>
-                    <th><fmt:message key="to"/></th>
+                    <th><a href="CruiseCompany?command=toCruisePage&&sorting=name"><fmt:message key="name"/></a></th>
+                    <th><a href="CruiseCompany?command=toCruisePage&&sorting=from"><fmt:message key="from"/></a></th>
+                    <th><a href="CruiseCompany?command=toCruisePage&&sorting=to"><fmt:message key="to"/></a></th>
                     <th><fmt:message key="ship.number"/></th>
                     <th><fmt:message key="cruise.status"/></th>
                     <th><fmt:message key="ticket.seats"/></th>

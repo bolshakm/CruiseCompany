@@ -16,7 +16,7 @@ public class ToStaffPageCommand implements ICommand {
     @Override
     public String execute(HttpServletRequest request, HttpServletResponse response){
         User user = (User) request.getSession().getAttribute(USER);
-        request.setAttribute(CRUISES, CruiseService.findAllByShip(user.getShip()));
+        request.setAttribute(CRUISES, CruiseService.findAllActualByShip(user.getShip()));
         return Page.STUFF.getPage();
     }
 }
