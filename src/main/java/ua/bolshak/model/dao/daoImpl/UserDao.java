@@ -105,47 +105,11 @@ public class UserDao implements UserIDao{
     }
 
     @Override
-    public List<User> findAllByCruiseAndRole(Cruise cruise, Role role) {
-        List<User> users = new ArrayList<>();
-        try(Connection connection = MysqlConnectionPool.getConnection();
-            PreparedStatement preparedStatement = connection.prepareStatement(SqlQuery.FIND_ALL_USERS_BY_CRUISE_AND_ROLE)){
-            preparedStatement.setInt(1, cruise.getId());
-            preparedStatement.setInt(2, role.getId());
-            try(ResultSet resultSet = preparedStatement.executeQuery()){
-                while (resultSet.next()) {
-                    users.add(initialization(resultSet));
-                }
-            }
-        } catch (SQLException e) {
-            LOGGER.error(e);
-        }
-        return users;
-    }
-
-    @Override
     public List<User> findAllByTicketType(TicketType ticketType) {
         List<User> users = new ArrayList<>();
         try(Connection connection = MysqlConnectionPool.getConnection();
             PreparedStatement preparedStatement = connection.prepareStatement(SqlQuery.FIND_ALL_USERS_BY_TICKET)){
             preparedStatement.setInt(1, ticketType.getId());
-            try(ResultSet resultSet = preparedStatement.executeQuery()){
-                while (resultSet.next()) {
-                    users.add(initialization(resultSet));
-                }
-            }
-        } catch (SQLException e) {
-            LOGGER.error(e);
-        }
-        return users;
-    }
-
-    @Override
-    public List<User> findAllByCruiseAndTicketType(Cruise cruise, TicketType ticketType) {
-        List<User> users = new ArrayList<>();
-        try(Connection connection = MysqlConnectionPool.getConnection();
-            PreparedStatement preparedStatement = connection.prepareStatement(SqlQuery.FIND_ALL_USERS_BY_CRUISE_AND_TICKET_TYPE)){
-            preparedStatement.setInt(1, ticketType.getId());
-            preparedStatement.setInt(2, cruise.getId());
             try(ResultSet resultSet = preparedStatement.executeQuery()){
                 while (resultSet.next()) {
                     users.add(initialization(resultSet));

@@ -102,22 +102,6 @@ public class CruiseDao implements CruiseIDao{
         return cruises;
     }
 
-    @Override
-    public List<Cruise> findAllByUser(User user) {
-        List<Cruise> cruises = new ArrayList<>();
-        try(Connection connection = MysqlConnectionPool.getConnection();
-            PreparedStatement preparedStatement = connection.prepareStatement(SqlQuery.FIND_ALL_CRUISES_BY_USER)){
-            preparedStatement.setInt(1, user.getId());
-            try(ResultSet resultSet = preparedStatement.executeQuery()){
-                while (resultSet.next()) {
-                    cruises.add(initialization(resultSet));
-                }
-            }
-        } catch (SQLException e) {
-            LOGGER.error(e);
-        }
-        return cruises;
-    }
 
     @Override
     public Cruise findByTicket(Ticket ticket) {
@@ -142,23 +126,6 @@ public class CruiseDao implements CruiseIDao{
         try(Connection connection = MysqlConnectionPool.getConnection();
             PreparedStatement preparedStatement = connection.prepareStatement(SqlQuery.FIND_CRUISE_BY_ID)){
             preparedStatement.setInt(1, id);
-            try(ResultSet resultSet = preparedStatement.executeQuery()){
-                while (resultSet.next()) {
-                    cruise = initialization(resultSet);
-                }
-            }
-        } catch (SQLException e) {
-            LOGGER.error(e);
-        }
-        return cruise;
-    }
-
-    @Override
-    public Cruise findByName(String name) {
-        Cruise cruise = null;
-        try(Connection connection = MysqlConnectionPool.getConnection();
-            PreparedStatement preparedStatement = connection.prepareStatement(SqlQuery.FIND_CRUISE_BY_NAME)){
-            preparedStatement.setString(1, name);
             try(ResultSet resultSet = preparedStatement.executeQuery()){
                 while (resultSet.next()) {
                     cruise = initialization(resultSet);

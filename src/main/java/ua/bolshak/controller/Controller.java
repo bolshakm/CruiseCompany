@@ -30,8 +30,7 @@ public class Controller extends HttpServlet{
     }
 
     protected void processRequest(HttpServletRequest request, HttpServletResponse response) {
-        String page = null;
-        System.out.println(request.getParameter("command"));
+        String page;
         ICommand command = controllerHelper.getCommand(request);
         try {
             page = command.execute(request, response);
