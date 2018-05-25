@@ -103,6 +103,7 @@ class PagesMapping {
         user.add("changeLanguage");
         user.add("toUpdateUserCard");
         user.add("actionsForTicket");
+        user.add("searchCruise");
 
         shipAdministrator.add("login");
         shipAdministrator.add("toMainPage");
