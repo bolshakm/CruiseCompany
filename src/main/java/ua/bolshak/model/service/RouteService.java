@@ -17,24 +17,16 @@ public class RouteService {
         return getFull(DaoFactory.getRouteDaoImpl().findAll());
     }
 
-    public static List<Route> findAllByPort(Port port){
-        return getFull(DaoFactory.getRouteDaoImpl().findAllByPort(port));
-    }
-
     public static Route findById (int id){
         return getFull(DaoFactory.getRouteDaoImpl().findById(id));
     }
 
-    public static Route findByCruise(Cruise cruise){
-        return getFull(DaoFactory.getRouteDaoImpl().findByCruise(cruise));
-    }
-
-    public static List<Route> findAllLazyByPort(Port port){
+    static List<Route> findAllLazyByPort(Port port){
         return DaoFactory.getRouteDaoImpl().findAllByPort(port);
     }
 
 
-    public static Route findLazyByCruise(Cruise cruise){
+    static Route findLazyByCruise(Cruise cruise){
         return DaoFactory.getRouteDaoImpl().findByCruise(cruise);
     }
 
@@ -55,7 +47,7 @@ public class RouteService {
         return route;
     }
 
-    public static List<Route> getEncodingRoute(List<Route> routes){
+    static List<Route> getEncodingRoute(List<Route> routes){
         List<Route> encodingRoutes = null;
         if (routes != null){
             encodingRoutes = new ArrayList<>();

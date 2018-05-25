@@ -6,7 +6,6 @@ import ua.bolshak.model.entity.*;
 
 import java.io.UnsupportedEncodingException;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 
 public class ExcursionService {
@@ -34,19 +33,15 @@ public class ExcursionService {
         return excursions;
     }
 
-    public static List<Excursion> findAllByTicket(Ticket ticket){
-        return getFull(DaoFactory.getExcursionDao().findAllByTicket(ticket));
-    }
-
-    public static List<Excursion> findAllLazyByPort(Port port){
+    static List<Excursion> findAllLazyByPort(Port port){
         return DaoFactory.getExcursionDao().findAllByPort(port);
     }
 
-    public static List<Excursion> findAllLazyByTicket(Ticket ticket){
+    static List<Excursion> findAllLazyByTicket(Ticket ticket){
         return DaoFactory.getExcursionDao().findAllByTicket(ticket);
     }
 
-    public static Excursion getEncodingExcirsion(Excursion excursion){
+    public static Excursion getEncodingExcursion(Excursion excursion){
         try {
             if (excursion.getName() != null) {
                 excursion.setName(new String(excursion.getName().getBytes("ISO-8859-1"), "cp1251"));
@@ -65,7 +60,7 @@ public class ExcursionService {
         if (excursions != null){
             encodingExcursions = new ArrayList<>();
             for (Excursion excursion : excursions) {
-                encodingExcursions.add(getEncodingExcirsion(excursion));
+                encodingExcursions.add(getEncodingExcursion(excursion));
             }
         }
         return encodingExcursions;

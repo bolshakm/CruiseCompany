@@ -16,18 +16,6 @@ public class BonusService {
         return getFull(DaoFactory.getBonusDao().findAll());
     }
 
-    public static List<Bonus> findAllByTicket(Ticket ticket) {
-        return getFull(DaoFactory.getBonusDao().findAllByTicket(ticket));
-    }
-
-    public static List<Bonus> getListById(String[] selectedId) {
-        List<Bonus> bonuses = new ArrayList<>();
-        for (String id : selectedId) {
-            bonuses.add(findById(Integer.parseInt(id)));
-        }
-        return bonuses;
-    }
-
     public static List<Bonus> getListWithEmptyBonus() {
         List<Bonus> bonuses = new ArrayList<>();
         bonuses.add(findById(1));
@@ -78,11 +66,11 @@ public class BonusService {
         return encodingBonuses;
     }
 
-    public static List<Bonus> findAllLazyByTicket(Ticket ticket) {
+    static List<Bonus> findAllLazyByTicket(Ticket ticket) {
         return DaoFactory.getBonusDao().findAllByTicket(ticket);
     }
 
-    public static List<Bonus> findAllLazyByShip(Ship ship) {
+    static List<Bonus> findAllLazyByShip(Ship ship) {
         return DaoFactory.getBonusDao().findAllByShip(ship);
     }
 

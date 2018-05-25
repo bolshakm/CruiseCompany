@@ -1,8 +1,5 @@
 package ua.bolshak.controller.commands;
 
-import org.apache.commons.mail.*;
-import org.apache.log4j.Logger;
-import ua.bolshak.model.entity.Excursion;
 import ua.bolshak.model.entity.Ticket;
 import ua.bolshak.model.entity.User;
 import ua.bolshak.model.service.*;

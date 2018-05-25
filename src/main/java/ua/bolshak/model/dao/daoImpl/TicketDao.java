@@ -122,23 +122,6 @@ public class TicketDao implements TicketIDao {
         return tickets;
     }
 
-    public List<Ticket> findAllByTicketTypeAndCruise(TicketType ticketType, Cruise cruise) {
-        List<Ticket> tickets = new ArrayList<>();
-        try (Connection connection = MysqlConnectionPool.getConnection();
-             PreparedStatement preparedStatement = connection.prepareStatement(SqlQuery.FIND_ALL_TICKETS_BY_TICKET_TYPES_AND_CRUISE)) {
-            preparedStatement.setInt(1, ticketType.getId());
-            preparedStatement.setInt(2, cruise.getId());
-            try (ResultSet resultSet = preparedStatement.executeQuery()) {
-                while (resultSet.next()) {
-                    tickets.add(initialization(resultSet));
-                }
-            }
-        } catch (SQLException e) {
-            LOGGER.error(e);
-        }
-        return tickets;
-    }
-
     @Override
     public List<Ticket> findAllByExcursion(Excursion excursion) {
         List<Ticket> tickets = new ArrayList<>();
@@ -205,31 +188,6 @@ public class TicketDao implements TicketIDao {
             if (ticket.getExcursions() != null) {
                 addExcursions(ticket);
             }
-        } catch (SQLException e) {
-            LOGGER.error(e.getMessage());
-        }
-    }
-
-    public void addBonuses(Ticket ticket) {
-        try (Connection connection = MysqlConnectionPool.getConnection();
-             PreparedStatement psForAddBonuses = connection.prepareStatement(SqlQuery.ADD_TICKET_HAS_BONUSES)) {
-            List<Bonus> bonuses = BonusService.findAllByShipAndTicketType(CruiseService.getFull(ticket.getCruise()).getShip(), ticket.getTicketType());
-            for (Bonus bonus : bonuses) {
-                psForAddBonuses.setInt(1, ticket.getId());
-                psForAddBonuses.setInt(2, bonus.getId());
-                psForAddBonuses.addBatch();
-            }
-            psForAddBonuses.executeBatch();
-        } catch (SQLException e) {
-            LOGGER.error(e.getMessage());
-        }
-    }
-
-    public void deleteBonuses(Ticket ticket) {
-        try (Connection connection = MysqlConnectionPool.getConnection();
-             PreparedStatement psForDeleteBonuses = connection.prepareStatement(SqlQuery.DELETE_TICKETS_BONUSES)) {
-            psForDeleteBonuses.setInt(1, ticket.getId());
-            psForDeleteBonuses.executeUpdate();
         } catch (SQLException e) {
             LOGGER.error(e.getMessage());
         }
@@ -416,6 +374,31 @@ public class TicketDao implements TicketIDao {
             } catch (SQLException e) {
                 LOGGER.error(e.getMessage());
             }
+        }
+    }
+
+    private void addBonuses(Ticket ticket) {
+        try (Connection connection = MysqlConnectionPool.getConnection();
+             PreparedStatement psForAddBonuses = connection.prepareStatement(SqlQuery.ADD_TICKET_HAS_BONUSES)) {
+            List<Bonus> bonuses = BonusService.findAllByShipAndTicketType(CruiseService.getFull(ticket.getCruise()).getShip(), ticket.getTicketType());
+            for (Bonus bonus : bonuses) {
+                psForAddBonuses.setInt(1, ticket.getId());
+                psForAddBonuses.setInt(2, bonus.getId());
+                psForAddBonuses.addBatch();
+            }
+            psForAddBonuses.executeBatch();
+        } catch (SQLException e) {
+            LOGGER.error(e.getMessage());
+        }
+    }
+
+    private void deleteBonuses(Ticket ticket) {
+        try (Connection connection = MysqlConnectionPool.getConnection();
+             PreparedStatement psForDeleteBonuses = connection.prepareStatement(SqlQuery.DELETE_TICKETS_BONUSES)) {
+            psForDeleteBonuses.setInt(1, ticket.getId());
+            psForDeleteBonuses.executeUpdate();
+        } catch (SQLException e) {
+            LOGGER.error(e.getMessage());
         }
     }
 }

@@ -2,7 +2,6 @@ package ua.bolshak.model.service;
 
 import org.apache.log4j.Logger;
 import ua.bolshak.model.dao.DaoFactory;
-import ua.bolshak.model.entity.Bonus;
 import ua.bolshak.model.entity.Ship;
 import ua.bolshak.model.entity.Ticket;
 import ua.bolshak.model.entity.TicketType;
@@ -26,11 +25,7 @@ public class TicketTypeService {
         return getFull(DaoFactory.getTicketTypeDao().findById(id));
     }
 
-    public static TicketType findByTicket(Ticket ticket) {
-        return getFull(DaoFactory.getTicketTypeDao().findByTicket(ticket));
-    }
-
-    public static TicketType findLazyByTicket(Ticket ticket) {
+    static TicketType findLazyByTicket(Ticket ticket) {
         return DaoFactory.getTicketTypeDao().findByTicket(ticket);
     }
 
@@ -55,7 +50,7 @@ public class TicketTypeService {
         return ticketType;
     }
 
-    public static List<TicketType> getEncodingTicketType(List<TicketType> ticketTypes){
+    static List<TicketType> getEncodingTicketType(List<TicketType> ticketTypes){
         List<TicketType> encodingTicketType = null;
         if (ticketTypes != null){
             encodingTicketType = new ArrayList<>();
@@ -66,7 +61,7 @@ public class TicketTypeService {
         return encodingTicketType;
     }
 
-    public static List<TicketType> findAllLazyByShip(Ship ship){
+    static List<TicketType> findAllLazyByShip(Ship ship){
         return DaoFactory.getTicketTypeDao().findAllByShip(ship);
     }
 

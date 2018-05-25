@@ -5,8 +5,8 @@ import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 
-public class PagesMapping {
-    public static Map<Integer, List<String>> PAGES_MAP;
+class PagesMapping {
+    static Map<Integer, List<String>> PAGES_MAP;
     static {
         PAGES_MAP = new LinkedHashMap<>();
         List<String> admin = new ArrayList<>();

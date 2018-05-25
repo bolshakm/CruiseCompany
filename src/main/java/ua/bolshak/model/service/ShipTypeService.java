@@ -19,11 +19,7 @@ public class ShipTypeService {
         return getFull(DaoFactory.getShipTypeDao().findById(id));
     }
 
-    public static ShipType findByShip(Ship ship){
-        return getFull(DaoFactory.getShipTypeDao().findByShip(ship));
-    }
-
-    public static ShipType findLazyByShip(Ship ship){
+    static ShipType findLazyByShip(Ship ship){
         return DaoFactory.getShipTypeDao().findByShip(ship);
     }
 

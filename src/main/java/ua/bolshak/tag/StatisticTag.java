@@ -6,7 +6,6 @@ import javax.servlet.jsp.JspWriter;
 import javax.servlet.jsp.tagext.TagSupport;
 import java.io.IOException;
 
-@SuppressWarnings("serial")
 public class StatisticTag extends TagSupport {
     private String head;
     private int rows;

@@ -1,8 +1,6 @@
 package ua.bolshak.controller.commands;
 
-import ua.bolshak.model.entity.Ticket;
 import ua.bolshak.model.entity.TicketType;
-import ua.bolshak.model.service.TicketService;
 import ua.bolshak.model.service.TicketTypeService;
 import ua.bolshak.properties.RegExResources;
 import ua.bolshak.properties.RequestParams;

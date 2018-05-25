@@ -19,31 +19,13 @@ public class UserService {
         return getFull(DaoFactory.getUserDao().findAllByRole(role));
     }
 
-    public static List<User> findAllByCruise(Cruise cruise){
-        return getFull(DaoFactory.getUserDao().findAllByCruise(cruise));
-    }
 
     public static List<User> findAllByShip(Ship ship){
         return getFull(DaoFactory.getUserDao().findAllByShip(ship));
     }
 
-    public static List<User> findByShip (Ship ship){
-        return DaoFactory.getUserDao().findAllByShip(ship);
-    }
 
-    public static List<User> findAllByCruiseAndRole(Cruise cruise, Role role){
-        return getFull(DaoFactory.getUserDao().findAllByCruiseAndRole(cruise, role));
-    }
-
-    public static List<User> findAllTicketType(TicketType ticketType){
-        return getFull(DaoFactory.getUserDao().findAllByTicketType(ticketType));
-    }
-
-    public static List<User> findAllByCruiseAndTicketType(Cruise cruise, TicketType ticketType){
-        return getFull(DaoFactory.getUserDao().findAllByCruiseAndTicketType(cruise, ticketType));
-    }
-
-    public static List<User> getEncodingUser(List<User> users){
+    static List<User> getEncodingUser(List<User> users){
         List<User> encodingUsers = null;
         if (users != null) {
             encodingUsers = new ArrayList<>();
@@ -56,10 +38,6 @@ public class UserService {
 
     public static User findById(int id){
         return getFull(DaoFactory.getUserDao().findById(id));
-    }
-
-    public static User findByTicket(Ticket ticket){
-        return getFull(DaoFactory.getUserDao().findByTicket(ticket));
     }
 
     public static User findByLogin(String login){
@@ -96,37 +74,27 @@ public class UserService {
         return getFull(DaoFactory.getUserDao().findByEmail(email));
     }
 
-    public static List<User> findAllLazyByRole(Role role){
+    static List<User> findAllLazyByRole(Role role){
         return DaoFactory.getUserDao().findAllByRole(role);
     }
 
-    public static List<User> findAllLazyByCruise(Cruise cruise){
+    static List<User> findAllLazyByCruise(Cruise cruise){
         return DaoFactory.getUserDao().findAllByCruise(cruise);
     }
 
-    public static List<User> findAllLazyByShip(Ship ship){
+    static List<User> findAllLazyByShip(Ship ship){
         return DaoFactory.getUserDao().findAllByShip(ship);
     }
 
-    public static List<User> findAllLazyByCruiseAndRole(Cruise cruise, Role role){
-        return DaoFactory.getUserDao().findAllByCruiseAndRole(cruise, role);
-    }
 
-    public static List<User> findAllLazyTicketType(TicketType ticketType){
+    static List<User> findAllLazyTicketType(TicketType ticketType){
         return DaoFactory.getUserDao().findAllByTicketType(ticketType);
     }
 
-    public static List<User> findAllLazyByCruiseAndTicketType(Cruise cruise, TicketType ticketType){
-        return DaoFactory.getUserDao().findAllByCruiseAndTicketType(cruise, ticketType);
-    }
-
-    public static User findLazyByTicket(Ticket ticket){
+    static User findLazyByTicket(Ticket ticket){
         return DaoFactory.getUserDao().findByTicket(ticket);
     }
 
-    public static User findLazyByLogin(String login){
-        return DaoFactory.getUserDao().findByLogin(login);
-    }
 
     public static void transferMoneyFromAdministrator(User user, double money){
         DaoFactory.getUserDao().transferMoneyFromUser(user, money);

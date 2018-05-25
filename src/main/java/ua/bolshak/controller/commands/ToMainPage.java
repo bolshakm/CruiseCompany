@@ -1,7 +1,6 @@
 package ua.bolshak.controller.commands;
 
 import ua.bolshak.model.entity.User;
-import ua.bolshak.model.service.CruiseService;
 import ua.bolshak.properties.RequestParams;
 
 import javax.servlet.ServletException;

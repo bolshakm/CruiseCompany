@@ -27,11 +27,7 @@ public class RoleService {
         return getFull(DaoFactory.getRoleDao().findById(id));
     }
 
-    public static Role findByUser(User user){
-        return getFull(DaoFactory.getRoleDao().findByUser(user));
-    }
-
-    public static Role findLazyByUser(User user){
+    static Role findLazyByUser(User user){
         return DaoFactory.getRoleDao().findByUser(user);
     }
 

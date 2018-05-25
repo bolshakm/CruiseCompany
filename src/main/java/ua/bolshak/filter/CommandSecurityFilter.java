@@ -1,6 +1,7 @@
 package ua.bolshak.filter;
 
 import ua.bolshak.model.entity.User;
+import ua.bolshak.properties.RequestParams;
 
 import javax.servlet.*;
 import javax.servlet.annotation.WebFilter;
@@ -11,9 +12,9 @@ import java.util.List;
 
 @WebFilter(urlPatterns = {"/CruiseCompany"})
 public class CommandSecurityFilter implements Filter {
-//    private static RequestParams rb = RequestParams.getInstance();
-//    private static final String COMMAND = rb.getProperty("command");
-//    private static final String USER = rb.getProperty("user");
+    private static RequestParams params = RequestParams.getInstance();
+        private static final String COMMAND = params.getProperty("command");
+    private static final String USER = params.getProperty("user");
     private static final String NULL = "null";
 
     @Override
@@ -25,8 +26,8 @@ public class CommandSecurityFilter implements Filter {
     public void doFilter(ServletRequest servletRequest, ServletResponse servletResponse, FilterChain filterChain) throws IOException, ServletException {
         HttpServletRequest request = (HttpServletRequest) servletRequest;
         HttpServletResponse response = (HttpServletResponse) servletResponse;
-        User user = (User) request.getSession().getAttribute("user");
-        String command = request.getParameter("command");
+        User user = (User) request.getSession().getAttribute(USER);
+        String command = request.getParameter(COMMAND);
         int key = 0;
         if (user == null) {
             key = 5;

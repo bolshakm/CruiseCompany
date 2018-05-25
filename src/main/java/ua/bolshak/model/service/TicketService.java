@@ -14,15 +14,6 @@ public class TicketService {
         return getFull(DaoFactory.getTicketDao().findAll());
     }
 
-    public static List<Ticket> findAllWithFullCruise() {
-        List<Ticket> tickets = new ArrayList<>();
-        for (Ticket ticket : getFull(DaoFactory.getTicketDao().findAll())) {
-            ticket.setCruise(CruiseService.getFull(ticket.getCruise()));
-            tickets.add(ticket);
-        }
-        return tickets;
-    }
-
     public static List<Ticket> findAllActualWithFullCruise() {
         List<Ticket> tickets = new ArrayList<>();
         Date now = new Date();
@@ -39,18 +30,7 @@ public class TicketService {
         List<Ticket> tickets = new ArrayList<>();
         Date now = new Date();
         for (Ticket ticket : getFull(DaoFactory.getTicketDao().findAllByUser(user))) {
-            if (ticket.getCruise().getFrom().getTime() >= now.getTime()){
-                tickets.add(ticket);
-            }
-        }
-        return tickets;
-    }
-
-    public static List<Ticket> findAllActual() {
-        List<Ticket> tickets = new ArrayList<>();
-        Date now = new Date();
-        for (Ticket ticket : getFull(DaoFactory.getTicketDao().findAll())) {
-            if (ticket.getCruise().getFrom().getTime() >= now.getTime()){
+            if (ticket.getCruise().getFrom().getTime() >= now.getTime()) {
                 tickets.add(ticket);
             }
         }
@@ -85,14 +65,14 @@ public class TicketService {
         Date now = new Date();
         for (Ticket ticket : tickets) {
             java.sql.Date sqlDate = getFull(ticket).getCruise().getTo();
-            if (now.getTime() < sqlDate.getTime() ) {
+            if (now.getTime() < sqlDate.getTime()) {
                 result = true;
             }
         }
         return result;
     }
 
-    public static List<Ticket> findAllByUser(User user) {
+    private static List<Ticket> findAllByUser(User user) {
         return getFull(DaoFactory.getTicketDao().findAllByUser(user));
     }
 
@@ -104,24 +84,8 @@ public class TicketService {
         return tickets;
     }
 
-    public static List<Ticket> findAllByBonus(Bonus bonus) {
-        return getFull(DaoFactory.getTicketDao().findAllByBonus(bonus));
-    }
-
-    public static List<Ticket> findAllByCruise(Cruise cruise) {
+    private static List<Ticket> findAllByCruise(Cruise cruise) {
         return getFull(DaoFactory.getTicketDao().findAllByCruise(cruise));
-    }
-
-    public static List<Ticket> findAllByTicketTypeAndCruise(TicketType ticketType, Cruise cruise) {
-        return getFull(DaoFactory.getTicketDao().findAllByTicketTypeAndCruise(ticketType, cruise));
-    }
-
-    public static List<Ticket> findAllByTicketType(TicketType ticketType) {
-        return getFull(DaoFactory.getTicketDao().findAllByTicketType(ticketType));
-    }
-
-    public static List<Ticket> findAllByExcursion(Excursion excursion) {
-        return getFull(DaoFactory.getTicketDao().findAllByExcursion(excursion));
     }
 
     public static Ticket checkPrice(Ticket ticket) {
@@ -156,7 +120,7 @@ public class TicketService {
         return ticket;
     }
 
-    public static List<Ticket> getEncodingTicket(List<Ticket> tickets) {
+    static List<Ticket> getEncodingTicket(List<Ticket> tickets) {
         List<Ticket> encodingTicket = null;
         if (tickets != null) {
             encodingTicket = new ArrayList<>();
@@ -167,23 +131,23 @@ public class TicketService {
         return encodingTicket;
     }
 
-    public static List<Ticket> findAllLazyByUser(User user) {
+    static List<Ticket> findAllLazyByUser(User user) {
         return DaoFactory.getTicketDao().findAllByUser(user);
     }
 
-    public static List<Ticket> findAllLazyByCruise(Cruise cruise) {
+    static List<Ticket> findAllLazyByCruise(Cruise cruise) {
         return DaoFactory.getTicketDao().findAllByCruise(cruise);
     }
 
-    public static List<Ticket> findAllLazyByBonus(Bonus bonus) {
+    static List<Ticket> findAllLazyByBonus(Bonus bonus) {
         return DaoFactory.getTicketDao().findAllByBonus(bonus);
     }
 
-    public static List<Ticket> findAllLazyByTicketType(TicketType ticketType) {
+    static List<Ticket> findAllLazyByTicketType(TicketType ticketType) {
         return DaoFactory.getTicketDao().findAllByTicketType(ticketType);
     }
 
-    public static List<Ticket> findAllLazyByExcursion(Excursion excursion) {
+    static List<Ticket> findAllLazyByExcursion(Excursion excursion) {
         return DaoFactory.getTicketDao().findAllByExcursion(excursion);
     }
 
@@ -228,29 +192,15 @@ public class TicketService {
         return tickets;
     }
 
-    public static void AddTicketHasBonuses(Ticket ticket) {
-        DaoFactory.getTicketDao().addBonuses(ticket);
-    }
-
-    public static void updateTicketHasBonuses(Ticket ticket) {
+    static void updateTicketHasBonuses(Ticket ticket) {
         DaoFactory.getTicketDao().updateBonuses(ticket);
     }
 
-    public static void updateTicketHasBonuses(List<Ticket> tickets) {
-        for (Ticket ticket : tickets) {
-            DaoFactory.getTicketDao().updateBonuses(ticket);
-        }
-    }
-
-    public static void deleteTicketByCruise(Cruise cruise){
+    public static void deleteTicketByCruise(Cruise cruise) {
         for (Ticket ticket :
                 findAllByCruise(cruise)) {
             delete(ticket);
         }
-    }
-
-    public static void deleteTicketHasBonuses(Ticket ticket) {
-        DaoFactory.getTicketDao().deleteBonuses(ticket);
     }
 
 }

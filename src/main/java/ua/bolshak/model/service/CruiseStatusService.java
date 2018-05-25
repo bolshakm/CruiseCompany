@@ -19,11 +19,7 @@ public class CruiseStatusService {
         return getFull(DaoFactory.getCruiseStatusDao().findById(id));
     }
 
-    public static CruiseStatus findByCruise(Cruise cruise){
-        return getFull(DaoFactory.getCruiseStatusDao().findByCruise(cruise));
-    }
-
-    public static CruiseStatus findLazyByCruise(Cruise cruise){
+    static CruiseStatus findLazyByCruise(Cruise cruise){
         return DaoFactory.getCruiseStatusDao().findByCruise(cruise);
     }
 

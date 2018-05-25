@@ -59,9 +59,9 @@ public class UpdateExcursionCommand implements ICommand {
                 wrongInput = true;
             }
             if (!wrongInput) {
-                ExcursionService.update(ExcursionService.getEncodingExcirsion(excursion));
+                ExcursionService.update(ExcursionService.getEncodingExcursion(excursion));
             } else {
-                request.setAttribute(EXCURSION, ExcursionService.getEncodingExcirsion(excursion));
+                request.setAttribute(EXCURSION, ExcursionService.getEncodingExcursion(excursion));
                 request.setAttribute(ERROR_MASSAGE, WRONG_INPUT);
             }
         }

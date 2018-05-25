@@ -1,9 +1,7 @@
 package ua.bolshak.controller.commands;
 
-import ua.bolshak.model.entity.User;
 import ua.bolshak.model.service.RoleService;
 import ua.bolshak.model.service.ShipService;
-import ua.bolshak.model.service.UserService;
 import ua.bolshak.properties.RequestParams;
 import ua.bolshak.util.Page;
 

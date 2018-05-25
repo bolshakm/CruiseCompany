@@ -17,22 +17,6 @@ public class MysqlConnectionPool {
     private MysqlConnectionPool() {
     }
 
-//  delete!!!!
-public static Connection getJDBCConnection() throws SQLException {
-    Connection connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/сruise_company","root", "root");
-
-
-//    try {
-//        Context context = (Context) new InitialContext().lookup("java:comp/env");
-//        DataSource dataSource = (DataSource) context.lookup("jdbc/сruise_company");
-//        connection = dataSource.getConnection();
-//    } catch (NamingException e) {
-//        LOGGER.error(e.getMessage());
-//    }
-    return connection;
-}
-//  delete!!!!
-
     public static Connection getConnection() throws SQLException {
         Connection connection = null;
 

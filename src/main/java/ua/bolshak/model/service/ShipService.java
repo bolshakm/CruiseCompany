@@ -5,7 +5,6 @@ import ua.bolshak.model.dao.DaoFactory;
 import ua.bolshak.model.entity.*;
 
 import java.io.UnsupportedEncodingException;
-import java.sql.Date;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -14,18 +13,6 @@ public class ShipService {
 
     public static List<Ship> findAll(){
         return  getFull(DaoFactory.getShipDao().findAll());
-    }
-
-    public static List<Ship> findAllByShipType(ShipType shipType){
-        return getFull(DaoFactory.getShipDao().findAllByShipType(shipType));
-    }
-
-    public static List<Ship> findAllByTicketType(TicketType ticketType ){
-        return getFull(DaoFactory.getShipDao().findAllByTicketType(ticketType));
-    }
-
-    public static List<Ship> findAllByBonus(Bonus bonus){
-        return  getFull(DaoFactory.getShipDao().findAllByBonus(bonus));
     }
 
     public static Ship findByUser(User user){
@@ -38,14 +25,6 @@ public class ShipService {
 
     public static Ship findById(int id){
         return  getFull(DaoFactory.getShipDao().findById(id));
-    }
-
-    public static Ship findByNumber(String number){
-        return  getFull(DaoFactory.getShipDao().findByNumber(number));
-    }
-
-    public static Ship findByCruise(Cruise cruise){
-        return  getFull(DaoFactory.getShipDao().findByCruise(cruise));
     }
 
     public static Ship getEncodingShip(Ship ship){
@@ -74,7 +53,7 @@ public class ShipService {
         return ship;
     }
 
-    public static List<Ship> getEncodingShip(List<Ship> ships){
+    static List<Ship> getEncodingShip(List<Ship> ships){
         List<Ship> encodingShip = null;
         if (ships != null) {
             encodingShip = new ArrayList<>();
@@ -86,23 +65,23 @@ public class ShipService {
         return encodingShip;
     }
 
-    public static List<Ship> findAllLazyByShipType(ShipType shipType){
+    static List<Ship> findAllLazyByShipType(ShipType shipType){
         return DaoFactory.getShipDao().findAllByShipType(shipType);
     }
 
-    public static Ship findLazyByUser(User user){
+    static Ship findLazyByUser(User user){
         return  DaoFactory.getShipDao().findByUser(user);
     }
 
-    public static List<Ship> findAllLazyByTicketType(TicketType ticketType ){
+    static List<Ship> findAllLazyByTicketType(TicketType ticketType){
         return DaoFactory.getShipDao().findAllByTicketType(ticketType);
     }
 
-    public static List<Ship> findAllLazyByBonus(Bonus bonus){
+    static List<Ship> findAllLazyByBonus(Bonus bonus){
         return DaoFactory.getShipDao().findAllByBonus(bonus);
     }
 
-    public static Ship findLazyByCruise(Cruise cruise){
+    static Ship findLazyByCruise(Cruise cruise){
         return DaoFactory.getShipDao().findByCruise(cruise);
     }
 
@@ -146,15 +125,5 @@ public class ShipService {
             }
         }
         return ships;
-    }
-
-    public static long shipLastCruiseDateTime(Ship ship){
-        long lastDate = 0;
-        for (Cruise cruise : ship.getCruises()) {
-            if (cruise.getFrom().getTime() > lastDate){
-                lastDate = cruise.getFrom().getTime();
-            }
-        }
-        return lastDate;
     }
 }

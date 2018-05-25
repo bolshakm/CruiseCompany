@@ -2,7 +2,6 @@ package ua.bolshak.model.service;
 
 import org.apache.log4j.Logger;
 import ua.bolshak.model.dao.DaoFactory;
-import ua.bolshak.model.entity.Cruise;
 import ua.bolshak.model.entity.Excursion;
 import ua.bolshak.model.entity.Port;
 import ua.bolshak.model.entity.Route;
@@ -18,27 +17,15 @@ public class PortService {
         return getFull(DaoFactory.getPortDao().findAll());
     }
 
-    public static List<Port> getListById(String[] idPorts){
-        List<Port> ports = new ArrayList<>();
-        for (String idPort : idPorts) {
-            ports.add(findById(Integer.parseInt(idPort)));
-        }
-        return ports;
-    }
-
     public static Port findById(int id){
         return getFull(DaoFactory.getPortDao().findById(id));
     }
 
-    public static List<Port> findAllByRoute(Route route){
+    static List<Port> findAllByRoute(Route route){
         return getFull(DaoFactory.getPortDao().findAllByRoute(route));
     }
 
-    public static Port findByExcursion(Excursion excursion){
-        return getFull(DaoFactory.getPortDao().findByExcursion(excursion));
-    }
-
-    public static Port findLazyByExcursion(Excursion excursion){
+    static Port findLazyByExcursion(Excursion excursion){
         return DaoFactory.getPortDao().findByExcursion(excursion);
     }
 
@@ -68,7 +55,7 @@ public class PortService {
         return port;
     }
 
-    public static List<Port> getEncodingPort(List<Port> ports){
+    static List<Port> getEncodingPort(List<Port> ports){
         List<Port> encodingPort = null;
         if (ports != null){
             encodingPort = new ArrayList<>();
@@ -79,7 +66,7 @@ public class PortService {
         return encodingPort;
     }
 
-    public static List<Port> findAllLazyByRoute(Route route){
+    static List<Port> findAllLazyByRoute(Route route){
         return DaoFactory.getPortDao().findAllByRoute(route);
     }
 
