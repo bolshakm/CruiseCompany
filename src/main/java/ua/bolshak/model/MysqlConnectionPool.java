@@ -23,7 +23,7 @@ public class MysqlConnectionPool {
 
         try {
             Context context = (Context) new InitialContext().lookup("java:comp/env");
-            DataSource dataSource = (DataSource) context.lookup("jdbc/сruise_company");
+            DataSource dataSource = (DataSource) context.lookup("jdbc/cruise_company");
             connection = dataSource.getConnection();
         } catch (NamingException e) {
             LOGGER.error(e.getMessage());
