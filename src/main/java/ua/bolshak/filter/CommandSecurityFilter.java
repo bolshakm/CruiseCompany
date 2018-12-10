@@ -46,8 +46,8 @@ public class CommandSecurityFilter implements Filter {
             }
         }
         command = command == null ? NULL : command;
-        List<String> availablePage = PagesMapping.PAGES_MAP.get(key);
-        if (!availablePage.contains(command)){
+        List<String> availableCommand = PagesMapping.PAGES_MAP.get(key);
+        if (!availableCommand.contains(command)){
             request.getRequestDispatcher("CruiseCompany?command=logout").forward(request,response);
         }
         filterChain.doFilter(request,response);

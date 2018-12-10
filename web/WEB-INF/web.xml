@@ -14,10 +14,10 @@
         <error-code>404</error-code>
         <location>/jsp/error.jsp</location>
     </error-page>
-    <!--<error-page>-->
-        <!--<error-code>500</error-code>-->
-        <!--<location>/jsp/error.jsp</location>-->
-    <!--</error-page>-->
+    <error-page>
+        <error-code>500</error-code>
+        <location>/jsp/error.jsp</location>
+    </error-page>
     <resource-ref>
         <description>DB Connection</description>
         <res-ref-name>jdbc/cruise_company</res-ref-name>
