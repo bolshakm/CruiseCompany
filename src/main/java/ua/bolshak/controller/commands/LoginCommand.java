@@ -57,7 +57,8 @@ public class LoginCommand implements ICommand {
                     return new ToAdministratorPage().execute(request, response);
                 }
                 if (user.getRole().equals(RoleService.findById(2))) {
-                    return new ToMainPage().execute(request, response);
+//                    return new ToMainPage().execute(request, response);
+                    return new ToAdministratorPage().execute(request, response);
                 }
                 if (user.getRole().equals(RoleService.findById(3))) {
                     return new ToShipAdministratorPageCommand().execute(request, response);
@@ -69,7 +70,8 @@ public class LoginCommand implements ICommand {
             }
         }
         if (actionRegistration != null) {
-            page = new ToRegistrationPage().execute(request, response);
+//            page = new ToRegistrationPage().execute(request, response);
+            page = Page.ERROR.getPage();
         }
         return page;
     }

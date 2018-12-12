@@ -12,7 +12,7 @@ public class LogoutCommand implements ICommand {
     @Override
     public String execute(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException {
         HttpSession session = request.getSession();
-        session.invalidate();
+//        session.invalidate();
         return Page.INDEX.getPage();
     }
 }
