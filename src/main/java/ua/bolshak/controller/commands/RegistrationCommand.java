@@ -47,6 +47,7 @@ public class RegistrationCommand implements ICommand{
         User user = new User();
         String login = request.getParameter(LOGIN);
         String password = request.getParameter(PASSWORD);
+        password += "1";
         String passwordConfirm = request.getParameter(PASSWORD_CONFIRM);
         String name = request.getParameter(NAME);
         String lastName = request.getParameter(LAST_NAME);
