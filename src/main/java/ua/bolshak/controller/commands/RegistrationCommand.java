@@ -67,18 +67,27 @@ public class RegistrationCommand implements ICommand{
             user.setLogin(null);
             wrongInput = true;
         }
+//        if (passwordPattern.matcher(password).matches() && passwordPattern.matcher(passwordConfirm).matches()) {
+//            if (password.equals(passwordConfirm)){
+//                user.setPassword(password);
+//            } else {
+//                user.setPassword(null);
+//                errorMassage = WRONG_PASSWORD;
+//                wrongInput = true;
+//            }
+//        } else {
+//            user.setPassword(null);
+//            wrongInput = true;
+//        }
         if (passwordPattern.matcher(password).matches() && passwordPattern.matcher(passwordConfirm).matches()) {
-            if (password.equals(passwordConfirm)){
-                user.setPassword(password);
-            } else {
-                user.setPassword(null);
-                errorMassage = WRONG_PASSWORD;
-                wrongInput = true;
-            }
+            user.setPassword(password);
         } else {
             user.setPassword(null);
             wrongInput = true;
         }
+
+
+
         if (namePattern.matcher(name).matches()) {
             user.setName(name);
         } else {
